@@ -228,6 +228,15 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
 .det-g .ok{color:var(--lime);font-weight:700}
 @media (max-width:820px){.rk-cols{grid-template-columns:1fr}}
 @media (max-width:420px){.rk .hv{display:none}}
+/* ===== Imágenes (PTC / PTR) ===== */
+.img-card{display:block;width:100%;padding:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;cursor:zoom-in;position:relative}
+.img-card img{display:block;width:100%;height:auto}
+.zoom{position:absolute;right:12px;bottom:12px;font:700 12px var(--body);color:#fff;background:rgba(10,20,48,.8);border-radius:999px;padding:7px 12px}
+.viewer{position:fixed;inset:0;z-index:20;background:rgba(5,10,25,.96)}
+.vscroll{position:absolute;inset:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:calc(56px + env(safe-area-inset-top,0px)) 12px 20px}
+.vscroll img{display:block;width:1300px;max-width:none;height:auto;min-width:100%;border-radius:10px;background:#fff}
+.vx{position:absolute;z-index:2;top:calc(10px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px))}
+@media (min-width:1340px){.vscroll img{width:auto;max-width:100%;min-width:0;margin:0 auto}}
 @media (max-width:900px){.filters{grid-template-columns:repeat(2,minmax(0,1fr))}.filters .q{grid-column:1/-1}.clear{grid-column:1/-1;padding:10px}}
 @media (max-width:560px){td.rs{max-width:150px}.sp{display:none}.vhead .btn-up{width:100%}}
 @media (max-width:820px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -278,7 +287,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
       <h3>EJECUCIÓN EN EL PDV</h3>
       <div class="tiles">
         <button class="tile" data-k="ptc" style="--c:var(--lime)"><span class="dot">$</span><span><span class="name">PTC</span><span class="sub">Precio al consumidor</span></span><span class="go">→</span></button>
-        <button class="tile" data-k="ptr" style="--c:var(--aqua)"><span class="dot">%</span><span><span class="name">PTR</span><span class="sub">Escalas al minorista</span></span><span class="go">→</span></button>
+        <button class="tile" data-k="ptr" style="--c:var(--aqua)"><span class="dot">%</span><span><span class="name">PTR</span><span class="sub">Escalas Drop bajo y Drop alto</span></span><span class="go">→</span></button>
       </div>
     </div>
 
@@ -291,7 +300,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 7 · 31/10</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 8 · 31/10</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -346,6 +355,34 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
         <input id="oKey" type="password" autocomplete="off">
         <button class="btn-in" id="oGo" type="button">PUBLICAR OBJETIVOS</button>
         <div class="msg" id="oMsg"></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="vImg" class="view" hidden>
+    <div class="vhead">
+      <button class="back" data-back>← Volver</button>
+      <div class="vtitle"><h1 id="iTitle">PTC</h1><p id="iUpd">Cargando…</p></div>
+      <button class="btn-up" id="iUpBtn">⬆ Cambiar imagen</button>
+    </div>
+    <div class="tabs" id="iTabs" role="tablist"></div>
+    <div id="iBody"><button class="img-card" id="iOpen" aria-label="Ver imagen en grande"><img id="iPic" alt=""><span class="zoom">🔍 Tocá para ver en grande</span></button></div>
+    <div class="empty" id="iEmpty" hidden></div>
+  </section>
+
+  <div class="viewer" id="iViewer" hidden><button class="x vx" id="iVClose" aria-label="Cerrar">×</button><div class="vscroll"><img id="iVPic" alt=""></div></div>
+
+  <div class="modal" id="mImg" hidden>
+    <div class="sheet" role="dialog" aria-labelledby="iUpTitle">
+      <div class="sheet-head"><h2 id="iUpTitle">Cambiar imagen</h2><button class="x" id="iUpClose" aria-label="Cerrar">×</button></div>
+      <div class="step">
+        <p class="hint">Elegí la imagen nueva (JPG o PNG). Reemplaza a la anterior para todos.</p>
+        <label class="fl" for="iFile">IMAGEN</label>
+        <input id="iFile" class="file" type="file" accept="image/*">
+        <label class="fl" for="iKey">CLAVE DE ADMINISTRADORA</label>
+        <input id="iKey" type="password" autocomplete="off">
+        <button class="btn-in" id="iGo" type="button">PUBLICAR IMAGEN</button>
+        <div class="msg" id="iMsg"></div>
       </div>
     </div>
   </div>
@@ -411,7 +448,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbwgGTcWaZ0z7hCpbqEnXl8d
 /* Links de los botones (encriptados). Para cambiarlos usá editor.html */
 const PAYLOAD = {"iter":150000,"salt":"oDf/SsVP4Iwz8g/d/hvV1Q==","iv":"/Z6HxyD+MiiynQMU","data":"hy6POKZ4ljvNBQ/zsByZCD3PXdYjPz5R4BH5JmCgFjVdRxAldoxJwRci3Pam/SKv3UjuUhgkAoP9HxcjSv4HVoszQZ5zS5OR9x+JmQFe9SRXLWqQJx3pFRMHf9VrGUKL/iOKyaVDdEAUUh9blZKVPE2770d3nK61DtqjqOrapf7w4MoHs3kxT93pDgvoacDF4rFwhoeTDcCpkhI="};
 /* Botones que ya tienen tablero adentro del portal */
-const INTERNAL = { grillas: "vGrillas", objetivos: "vObj" };
+const INTERNAL = { grillas: "vGrillas", objetivos: "vObj", ptc: "vImg", ptr: "vImg" };
 
 const $ = id => document.getElementById(id);
 const b64d = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
@@ -446,7 +483,7 @@ async function openData(p){
 
 /* ===== Navegación ===== */
 function go(view){
-  ["login","hub","vGrillas","vObj"].forEach(id => $(id).hidden = id !== view);
+  ["login","hub","vGrillas","vObj","vImg"].forEach(id => $(id).hidden = id !== view);
   scrollTo(0,0);
 }
 function toast(msg){ $("toast").textContent = msg; $("toast").hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => $("toast").hidden = true, 2600); }
@@ -470,7 +507,7 @@ document.querySelectorAll("[data-back]").forEach(b => b.addEventListener("click"
 
 document.querySelectorAll(".tile[data-k]").forEach(b => b.addEventListener("click", () => {
   const k = b.dataset.k;
-  if (INTERNAL[k]) { go(INTERNAL[k]); if (k === "grillas") loadGrillas(); if (k === "objetivos") loadObj(); return; }
+  if (INTERNAL[k]) { go(INTERNAL[k]); if (k === "grillas") loadGrillas(); if (k === "objetivos") loadObj(); if (k === "ptc" || k === "ptr") loadImg(k); return; }
   const url = LINKS[k];
   if (url && /^https?:\/\//i.test(url)) { window.open(url, "_blank", "noopener"); return; }
   toast(b.querySelector(".name").textContent + ": próximamente");
@@ -933,6 +970,74 @@ $("oGo").addEventListener("click", async () => {
     setTimeout(() => { $("mObj").hidden = true; $("oKey").value = ""; }, 1300);
   } catch(err) { m.className = "msg bad"; m.textContent = err.message || "Error al publicar"; }
   $("oGo").disabled = false;
+});
+
+/* ===== PTC / PTR: imágenes ===== */
+const IMG_VIEWS = {
+  ptc: {t:"PTC", slots:[{k:"img_ptc", n:"PTC sugerido"}]},
+  ptr: {t:"PTR", slots:[{k:"img_drop_bajo", n:"Drop bajo"}, {k:"img_drop_alto", n:"Drop alto"}]}
+};
+const IV = { view:null, slot:0, cache:{} };
+async function loadImg(view){
+  IV.view = view; IV.slot = 0;
+  const V = IMG_VIEWS[view];
+  $("iTitle").textContent = V.t;
+  $("iTabs").hidden = V.slots.length < 2;
+  showSlot();
+}
+async function showSlot(){
+  const V = IMG_VIEWS[IV.view], s = V.slots[IV.slot];
+  $("iTabs").innerHTML = V.slots.map((x,i) => `<button class="tab${i===IV.slot?" on":""}" data-i="${i}" role="tab">${esc(x.n)}</button>`).join("");
+  $("iUpTitle").textContent = "Cambiar imagen · " + V.t + (V.slots.length > 1 ? " " + s.n : "");
+  $("iUpd").textContent = "Cargando…"; $("iBody").hidden = true; $("iEmpty").hidden = true;
+  try {
+    let c = IV.cache[s.k];
+    if (!c) { const p = await apiGet(s.k); if (p && p.data) { c = {img:(await openData(p)).img, updated:p.updated}; IV.cache[s.k] = c; } }
+    if (V.slots[IV.slot] !== s) return;
+    if (!c) { $("iUpd").textContent = "Sin imagen todavía"; $("iEmpty").hidden = false; $("iEmpty").innerHTML = "Todavía no hay imagen cargada.<br>Tocá <b>⬆ Cambiar imagen</b> para subirla."; return; }
+    $("iPic").src = c.img; $("iPic").alt = V.t + " " + s.n; $("iVPic").src = c.img;
+    $("iUpd").textContent = "Actualizado " + fmtDate(c.updated); $("iBody").hidden = false;
+  } catch(e) { $("iUpd").textContent = "Error al cargar"; $("iEmpty").hidden = false; $("iEmpty").textContent = "No se pudo abrir la imagen. Revisá tu conexión y volvé a entrar."; }
+}
+$("iTabs").addEventListener("click", e => { const b = e.target.closest(".tab"); if (!b) return; IV.slot = +b.dataset.i; showSlot(); });
+$("iOpen").addEventListener("click", () => { $("iViewer").hidden = false; });
+$("iVClose").addEventListener("click", () => { $("iViewer").hidden = true; });
+$("iUpBtn").addEventListener("click", () => { $("mImg").hidden = false; $("iMsg").textContent = ""; });
+$("iUpClose").addEventListener("click", () => $("mImg").hidden = true);
+
+/* Achica la imagen (máx. 2400 px de ancho) y la pasa a JPG para que cargue rápido en el celu */
+function toDataUrl(file){
+  return new Promise((ok, bad) => {
+    const url = URL.createObjectURL(file), im = new Image();
+    im.onload = () => {
+      const sc = Math.min(1, 2400 / im.naturalWidth), c = document.createElement("canvas");
+      c.width = Math.round(im.naturalWidth * sc); c.height = Math.round(im.naturalHeight * sc);
+      const g = c.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0, 0, c.width, c.height); g.drawImage(im, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url); ok(c.toDataURL("image/jpeg", 0.88));
+    };
+    im.onerror = () => bad(new Error("No se pudo leer la imagen"));
+    im.src = url;
+  });
+}
+$("iGo").addEventListener("click", async () => {
+  const m = $("iMsg"), f = $("iFile").files[0], key = $("iKey").value, s = IMG_VIEWS[IV.view].slots[IV.slot];
+  m.className = "msg";
+  if (!f) { m.className = "msg bad"; m.textContent = "Elegí la imagen"; return; }
+  if (!key) { m.className = "msg bad"; m.textContent = "Escribí la clave de administradora"; return; }
+  $("iGo").disabled = true;
+  try {
+    m.textContent = "Preparando imagen…";
+    const img = await toDataUrl(f);
+    m.textContent = "Publicando…";
+    const updated = new Date().toISOString();
+    const res = await apiPut(s.k, key, Object.assign(await sealData({img}), {updated, name:f.name}));
+    if (!res.ok) throw new Error(res.error || "No se pudo guardar");
+    IV.cache[s.k] = {img, updated};
+    m.className = "msg ok"; m.textContent = "¡Listo! Imagen publicada";
+    showSlot();
+    setTimeout(() => { $("mImg").hidden = true; $("iKey").value = ""; $("iFile").value = ""; }, 1200);
+  } catch(err) { m.className = "msg bad"; m.textContent = err.message || "Error al publicar"; }
+  $("iGo").disabled = false;
 });
 </script>
 </body>
