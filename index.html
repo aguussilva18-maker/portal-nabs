@@ -184,6 +184,20 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
 .cn-k .t b{color:var(--ink)}
 .cn-sep{font:800 10px var(--display);letter-spacing:.14em;color:var(--muted);border-top:1px solid var(--line);padding-top:8px;margin-top:2px}
 .bar i.vol{background:linear-gradient(90deg,var(--sun),var(--tang))}
+.canales.one{grid-template-columns:280px minmax(0,1fr);align-items:start}
+.sup-cards{display:grid;gap:12px}
+.pt-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:rgba(10,20,48,.55)}
+.pt{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+.pt th{position:sticky;top:0;background:#14244f;font:700 10.5px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:10px 8px;white-space:nowrap;border-bottom:1px solid var(--line)}
+.pt th.v{color:var(--sun)}
+.pt td{padding:8px;border-bottom:1px solid rgba(255,255,255,.06);white-space:nowrap}
+.pt td.c1,.pt th.c1{position:sticky;left:0;background:#0f1d42;text-align:left;font-weight:800;z-index:1}
+.pt th.c1{background:#14244f;z-index:2}
+.pt .n{text-align:center}
+.pt .ao{display:block;font-size:12px;color:var(--muted)}.pt .ao b{color:var(--ink)}
+.pt .pc{display:inline-block;margin-top:3px;font:800 11.5px var(--body);padding:2px 7px;border-radius:999px}
+.pc.g{background:rgba(126,224,129,.2);color:var(--lime)}.pc.w{background:rgba(255,201,60,.2);color:var(--sun)}.pc.c{background:rgba(255,77,109,.2);color:#ff8fa3}
+@media (max-width:820px){.canales.one{grid-template-columns:1fr}}
 .rk-banner{text-align:center;border-radius:18px;padding:18px 14px;margin-bottom:14px;background:linear-gradient(110deg,#1b3b8f,#2a63c9 50%,#e2903b)}
 .rk-t{font:900 clamp(20px,4vw,28px) var(--display);letter-spacing:.25em}
 .rk-s{font-size:13px;font-weight:600;opacity:.9;margin-top:6px}
@@ -821,7 +835,7 @@ function promStats(p){
 function oRender(){
   const rows = O.obj.rows, rowsF = rows.filter(r => !O.sup || r.sup === O.sup), canales = CANALES.filter(c => rowsF.some(r => r.canal === c));
   // Tarjetas por canal
-  $("oCanales").innerHTML = canales.map(c => {
+  const cardsHtml = canales.map(c => {
     const rs = rowsF.filter(r => r.canal === c), keys = [...new Set(rs.flatMap(r => Object.keys(r.obj).filter(k => r.obj[k] > 0)))].sort((a,b) => (/aguas puras/i.test(a)) - (/aguas puras/i.test(b)));
     const tot = k => rs.reduce((s,r) => { const o = r.obj[k] || 0; return o > 0 ? [s[0] + o, s[1] + ((O.av.prom[r.prom.toUpperCase()] || {})[k] || 0)] : s; }, [0,0]);
     let sum = 0, pes = 0;
@@ -834,6 +848,23 @@ function oRender(){
     const cumpl = pes ? sum / pes : null;
     return `<div class="cn"><div class="cn-h"><b>${c}${O.sup ? `<small class="cn-sup">${esc(tc(O.sup))}</small>` : ""}</b>${cumpl != null ? `<span class="cn-c">${Math.round(cumpl)}%<small>cumplimiento focos</small></span>` : ""}</div>${focos}${vols ? `<div class="cn-sep">VOLUMEN</div>${vols}` : ""}</div>`;
   }).join("");
+
+  // Con un supervisor elegido: al lado, el detalle de cada promotor
+  let ptHtml = "";
+  if (O.sup) {
+    const keys = [...new Set(rowsF.flatMap(r => Object.keys(r.obj).filter(k => r.obj[k] > 0)))]
+      .sort((a,b) => (isVol(a) - isVol(b)) || ((/aguas puras/i.test(a)) - (/aguas puras/i.test(b))));
+    const list = rowsF.map(r => ({r, s:promStats(r), av:O.av.prom[r.prom.toUpperCase()] || {}})).sort((a,b) => (b.s.cumpl ?? -1) - (a.s.cumpl ?? -1));
+    const hasCumpl = list.some(x => x.s.cumpl != null);
+    ptHtml = `<div class="pt-wrap"><table class="pt"><thead><tr><th class="c1">Promotor</th>${hasCumpl ? `<th class="n">Focos</th>` : ""}${keys.map(k => `<th class="n${isVol(k) ? " v" : ""}">${esc(k.replace(" (HL)",""))}</th>`).join("")}</tr></thead><tbody>` +
+      list.map(x => `<tr><td class="c1">${esc(tc(x.r.prom))}</td>${hasCumpl ? `<td class="n">${x.s.cumpl != null ? `<span class="pill ${pctCls(x.s.cumpl)}">${x.s.cumpl.toFixed(0)}%</span>` : "–"}</td>` : ""}` +
+        keys.map(k => { const o = x.r.obj[k]; if (!(o > 0)) return `<td class="n">–</td>`;
+          const a = x.av[k] || 0, p = a / o * 100, vol = isVol(k), f = v => vol ? fmtN(Math.round(v)) : fmtN(v);
+          return `<td class="n${vol ? " v" : ""}"><span class="ao"><b>${f(a)}</b> / ${f(o)}</span><span class="pc ${pctCls(p)}">${Math.round(p)}%</span></td>`; }).join("") + `</tr>`).join("") +
+      `</tbody></table></div>`;
+  }
+  $("oCanales").className = "canales" + (O.sup ? " one" : "");
+  $("oCanales").innerHTML = O.sup ? `<div class="sup-cards">${cardsHtml}</div>${ptHtml}` : cardsHtml;
 
   // Chips de supervisor
   const sups = uniq(rows.map(r => r.sup));
