@@ -170,10 +170,11 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
 .resume b{color:var(--lime)}
 @media (max-width:560px){.cond{grid-template-columns:1fr 1fr}.cond input{grid-column:1/2}.fe-top{grid-template-columns:1fr auto}.fe-top .del{grid-column:1/-1}}
 /* ===== Objetivos ===== */
-.canales{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-bottom:22px}
+.canales{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:22px}
 .cn{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;gap:10px;align-content:start}
 .cn-h{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .cn-h b{font:900 18px var(--display)}
+.cn-sup{display:block;font:600 12px var(--body);color:var(--muted);margin-top:3px}
 .cn-c{font:900 26px var(--display);font-variant-numeric:tabular-nums}
 .cn-c small{display:block;font:600 11px var(--body);color:var(--muted);text-align:right}
 .cn-k{display:grid;gap:4px}
@@ -310,9 +311,9 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
       <button class="btn-up" id="oUpBtn">⬆ Cargar objetivos</button>
     </div>
     <div id="oBody">
+      <div class="chips" id="oChips"></div>
       <div class="canales" id="oCanales"></div>
       <div class="rk-banner"><div class="rk-t">🏆 RANKING 🏆</div><div class="rk-s">Cumplimiento de focos del mes — ¡vamos con todo, se puede llegar! 💪</div></div>
-      <div class="chips" id="oChips"></div>
       <div class="rk-cols" id="oRank"></div>
       <p class="count">🥇🥈🥉 podio de cada equipo · 🔥 tercio de arriba · 💪 tercio del medio · ⚡ con margen para crecer · Tocá un promotor para ver su detalle.</p>
     </div>
@@ -391,9 +392,9 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
 
 /* ===== CONFIG ===== */
 /* Pegá acá la URL de tu Apps Script (termina en /exec) */
-const API_URL = "https://script.google.com/macros/s/AKfycbwgGTcWaZ0z7hCpbqEnXl8djugSZwVDS_h_pr19qlq0M3sQI0SWC_8AKTMmeaUWqaEn/exec";
+const API_URL = "__API_URL__";
 /* Links de los botones (encriptados). Para cambiarlos usá editor.html */
-const PAYLOAD = {"iter":150000,"salt":"oDf/SsVP4Iwz8g/d/hvV1Q==","iv":"/Z6HxyD+MiiynQMU","data":"hy6POKZ4ljvNBQ/zsByZCD3PXdYjPz5R4BH5JmCgFjVdRxAldoxJwRci3Pam/SKv3UjuUhgkAoP9HxcjSv4HVoszQZ5zS5OR9x+JmQFe9SRXLWqQJx3pFRMHf9VrGUKL/iOKyaVDdEAUUh9blZKVPE2770d3nK61DtqjqOrapf7w4MoHs3kxT93pDgvoacDF4rFwhoeTDcCpkhI="};
+const PAYLOAD = {"iter":150000,"salt":"PHOFqKyZ+FDuFXUAHK6sqw==","iv":"/9qIasm21BzymIQg","data":"59nsFW1U6YkX0gHri6oRcQdH1sDcp0GTu/nT80n9quyyTnxZ5klFBvJbjlrXmkHqWQzPMJqrxzANTK2870T1sZhtY9+eq9/B/pjO54WOjadxcPkAPcdoyFrQQo35bQwYc1xQVHl7cslTTozzgVG+sA=="};
 /* Botones que ya tienen tablero adentro del portal */
 const INTERNAL = { grillas: "vGrillas", objetivos: "vObj" };
 
@@ -818,10 +819,10 @@ function promStats(p){
 }
 
 function oRender(){
-  const rows = O.obj.rows, canales = CANALES.filter(c => rows.some(r => r.canal === c));
+  const rows = O.obj.rows, rowsF = rows.filter(r => !O.sup || r.sup === O.sup), canales = CANALES.filter(c => rowsF.some(r => r.canal === c));
   // Tarjetas por canal
   $("oCanales").innerHTML = canales.map(c => {
-    const rs = rows.filter(r => r.canal === c), keys = [...new Set(rs.flatMap(r => Object.keys(r.obj).filter(k => r.obj[k] > 0)))].sort((a,b) => (/aguas puras/i.test(a)) - (/aguas puras/i.test(b)));
+    const rs = rowsF.filter(r => r.canal === c), keys = [...new Set(rs.flatMap(r => Object.keys(r.obj).filter(k => r.obj[k] > 0)))].sort((a,b) => (/aguas puras/i.test(a)) - (/aguas puras/i.test(b)));
     const tot = k => rs.reduce((s,r) => { const o = r.obj[k] || 0; return o > 0 ? [s[0] + o, s[1] + ((O.av.prom[r.prom.toUpperCase()] || {})[k] || 0)] : s; }, [0,0]);
     let sum = 0, pes = 0;
     const line = (k, vol) => { const [o, a] = tot(k), p = o ? a / o * 100 : 0, pc = Math.min(100, p);
@@ -831,15 +832,15 @@ function oRender(){
     const focos = keys.filter(k => !isVol(k)).map(k => line(k, false)).join("");
     const vols = keys.filter(isVol).map(k => line(k, true)).join("");
     const cumpl = pes ? sum / pes : null;
-    return `<div class="cn"><div class="cn-h"><b>${c}</b>${cumpl != null ? `<span class="cn-c">${Math.round(cumpl)}%<small>cumplimiento focos</small></span>` : ""}</div>${focos}${vols ? `<div class="cn-sep">VOLUMEN</div>${vols}` : ""}</div>`;
+    return `<div class="cn"><div class="cn-h"><b>${c}${O.sup ? `<small class="cn-sup">${esc(tc(O.sup))}</small>` : ""}</b>${cumpl != null ? `<span class="cn-c">${Math.round(cumpl)}%<small>cumplimiento focos</small></span>` : ""}</div>${focos}${vols ? `<div class="cn-sep">VOLUMEN</div>${vols}` : ""}</div>`;
   }).join("");
 
   // Chips de supervisor
-  const sups = uniq(rows.filter(r => r.canal === "K+T" || r.canal === "AS").map(r => r.sup));
+  const sups = uniq(rows.map(r => r.sup));
   $("oChips").innerHTML = [["", "Todos los supervisores"], ...sups.map(s => [s, tc(s)])].map(([v,l]) => `<button class="chip${O.sup===v?" on":""}" data-s="${esc(v)}">${esc(l)}</button>`).join("");
 
   // Ranking K+T y AS
-  $("oRank").innerHTML = ["K+T","AS"].filter(c => rows.some(r => r.canal === c)).map(c => {
+  $("oRank").innerHTML = ["K+T","AS"].filter(c => rowsF.some(r => r.canal === c)).map(c => {
     const list = rows.filter(r => r.canal === c).map(r => ({r, s:promStats(r)})).filter(x => x.s.cumpl != null)
       .sort((a,b) => b.s.cumpl - a.s.cumpl);
     const n = list.length;
