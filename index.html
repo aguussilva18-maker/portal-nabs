@@ -169,6 +169,50 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
 .resume{font-size:14px;line-height:1.6;background:rgba(255,255,255,.05);border-radius:12px;padding:12px 14px}
 .resume b{color:var(--lime)}
 @media (max-width:560px){.cond{grid-template-columns:1fr 1fr}.cond input{grid-column:1/2}.fe-top{grid-template-columns:1fr auto}.fe-top .del{grid-column:1/-1}}
+/* ===== Objetivos ===== */
+.canales{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-bottom:22px}
+.cn{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;gap:10px;align-content:start}
+.cn-h{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.cn-h b{font:900 18px var(--display)}
+.cn-c{font:900 26px var(--display);font-variant-numeric:tabular-nums}
+.cn-c small{display:block;font:600 11px var(--body);color:var(--muted);text-align:right}
+.cn-k{display:grid;gap:4px}
+.cn-k .t{display:flex;justify-content:space-between;gap:8px;font-size:13px}
+.cn-k .t span:first-child{font-weight:700}
+.cn-k .t span:last-child{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cn-k .t b{color:var(--ink)}
+.cn-sep{font:800 10px var(--display);letter-spacing:.14em;color:var(--muted);border-top:1px solid var(--line);padding-top:8px;margin-top:2px}
+.bar i.vol{background:linear-gradient(90deg,var(--sun),var(--tang))}
+.rk-banner{text-align:center;border-radius:18px;padding:18px 14px;margin-bottom:14px;background:linear-gradient(110deg,#1b3b8f,#2a63c9 50%,#e2903b)}
+.rk-t{font:900 clamp(20px,4vw,28px) var(--display);letter-spacing:.25em}
+.rk-s{font-size:13px;font-weight:600;opacity:.9;margin-top:6px}
+.rk-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.rk-col h3{font:800 13px var(--display);letter-spacing:.14em;color:var(--muted);margin:0 0 8px}
+.rk{width:100%;border-collapse:separate;border-spacing:0 5px;font-size:14px}
+.rk th{font:700 10px var(--body);letter-spacing:.08em;color:var(--muted);text-align:left;padding:0 8px;position:static;background:none;border:0}
+.rk th.n,.rk td.n{text-align:center}
+.rk td{padding:9px 8px;background:var(--glass);border:0;white-space:nowrap}
+.rk td:first-child{border-radius:12px 0 0 12px}.rk td:last-child{border-radius:0 12px 12px 0}
+.rk tr.p1 td{background:linear-gradient(90deg,rgba(255,201,60,.32),var(--glass) 80%)}
+.rk tr.p2 td{background:linear-gradient(90deg,rgba(210,220,235,.25),var(--glass) 80%)}
+.rk tr.p3 td{background:linear-gradient(90deg,rgba(230,150,90,.28),var(--glass) 80%)}
+.rk tr.row{cursor:pointer}
+.rk tr.row:hover td{background:rgba(255,255,255,.11)}
+.rk .pr{font-weight:800}
+.rk .sv{display:block;font-size:11px;color:var(--muted);font-weight:600}
+.pill{display:inline-block;font:800 13px var(--body);padding:4px 9px;border-radius:999px;font-variant-numeric:tabular-nums}
+.pill.g{background:rgba(126,224,129,.2);color:var(--lime)}.pill.w{background:rgba(255,201,60,.2);color:var(--sun)}.pill.c{background:rgba(255,77,109,.2);color:#ff8fa3}
+.vp{font:700 12px var(--body);color:var(--muted);font-variant-numeric:tabular-nums}
+.pos{display:inline-grid;place-items:center;min-width:28px;height:28px;border-radius:50%;font:800 13px var(--body);color:#0a1430}
+.medal{font-size:22px;line-height:1}
+.rk tr.det td{background:rgba(10,20,48,.75);padding:10px 12px;white-space:normal}
+.det-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.det-g div{background:rgba(255,255,255,.05);border-radius:10px;padding:8px 10px;font-size:12px;display:grid;gap:3px}
+.det-g b{font:800 12px var(--display);letter-spacing:.04em}
+.det-g .f{color:var(--sun);font-weight:700}
+.det-g .ok{color:var(--lime);font-weight:700}
+@media (max-width:820px){.rk-cols{grid-template-columns:1fr}}
+@media (max-width:420px){.rk .hv{display:none}}
 @media (max-width:900px){.filters{grid-template-columns:repeat(2,minmax(0,1fr))}.filters .q{grid-column:1/-1}.clear{grid-column:1/-1;padding:10px}}
 @media (max-width:560px){td.rs{max-width:150px}.sp{display:none}.vhead .btn-up{width:100%}}
 @media (max-width:820px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -259,6 +303,37 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
     <div class="empty" id="gEmpty" hidden></div>
   </section>
 
+  <section id="vObj" class="view" hidden>
+    <div class="vhead">
+      <button class="back" data-back>← Volver</button>
+      <div class="vtitle"><h1>Objetivos del mes</h1><p id="oUpd">Cargando…</p></div>
+      <button class="btn-up" id="oUpBtn">⬆ Cargar objetivos</button>
+    </div>
+    <div id="oBody">
+      <div class="canales" id="oCanales"></div>
+      <div class="rk-banner"><div class="rk-t">🏆 RANKING 🏆</div><div class="rk-s">Cumplimiento de focos del mes — ¡vamos con todo, se puede llegar! 💪</div></div>
+      <div class="chips" id="oChips"></div>
+      <div class="rk-cols" id="oRank"></div>
+      <p class="count">🥇🥈🥉 podio de cada equipo · 🔥 tercio de arriba · 💪 tercio del medio · ⚡ con margen para crecer · Tocá un promotor para ver su detalle.</p>
+    </div>
+    <div class="empty" id="oEmpty" hidden></div>
+  </section>
+
+  <div class="modal" id="mObj" hidden>
+    <div class="sheet" role="dialog" aria-labelledby="oUpTitle">
+      <div class="sheet-head"><h2 id="oUpTitle">Cargar objetivos del mes</h2><button class="x" id="oUpClose" aria-label="Cerrar">×</button></div>
+      <div class="step">
+        <p class="hint">Excel con dos hojas. <b>Objetivos</b>: Supervisor, Promotor, Canal y una columna por foco con el mismo nombre que en Grillas (CCC Black, Convivencia, TBD Gatorade…), más <b>Vol UNG (HL)</b> y <b>Vol Aguas (HL)</b>. Dejá vacío lo que no aplica a ese promotor. <b>Pesos</b>: KPI y Peso. El avance se calcula solo con la última base plana publicada en Grillas.</p>
+        <label class="fl" for="oFile">ARCHIVO DE OBJETIVOS</label>
+        <input id="oFile" class="file" type="file" accept=".xlsx,.xls">
+        <label class="fl" for="oKey">CLAVE DE ADMINISTRADORA</label>
+        <input id="oKey" type="password" autocomplete="off">
+        <button class="btn-in" id="oGo" type="button">PUBLICAR OBJETIVOS</button>
+        <div class="msg" id="oMsg"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal" id="mUp" hidden>
     <div class="sheet" role="dialog" aria-labelledby="upTitle">
       <div class="sheet-head"><h2 id="upTitle">Actualizar grillas</h2><button class="x" id="upClose" aria-label="Cerrar">×</button></div>
@@ -320,7 +395,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbwgGTcWaZ0z7hCpbqEnXl8d
 /* Links de los botones (encriptados). Para cambiarlos usá editor.html */
 const PAYLOAD = {"iter":150000,"salt":"oDf/SsVP4Iwz8g/d/hvV1Q==","iv":"/Z6HxyD+MiiynQMU","data":"hy6POKZ4ljvNBQ/zsByZCD3PXdYjPz5R4BH5JmCgFjVdRxAldoxJwRci3Pam/SKv3UjuUhgkAoP9HxcjSv4HVoszQZ5zS5OR9x+JmQFe9SRXLWqQJx3pFRMHf9VrGUKL/iOKyaVDdEAUUh9blZKVPE2770d3nK61DtqjqOrapf7w4MoHs3kxT93pDgvoacDF4rFwhoeTDcCpkhI="};
 /* Botones que ya tienen tablero adentro del portal */
-const INTERNAL = { grillas: "vGrillas" };
+const INTERNAL = { grillas: "vGrillas", objetivos: "vObj" };
 
 const $ = id => document.getElementById(id);
 const b64d = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
@@ -355,7 +430,7 @@ async function openData(p){
 
 /* ===== Navegación ===== */
 function go(view){
-  ["login","hub","vGrillas"].forEach(id => $(id).hidden = id !== view);
+  ["login","hub","vGrillas","vObj"].forEach(id => $(id).hidden = id !== view);
   scrollTo(0,0);
 }
 function toast(msg){ $("toast").textContent = msg; $("toast").hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => $("toast").hidden = true, 2600); }
@@ -379,7 +454,7 @@ document.querySelectorAll("[data-back]").forEach(b => b.addEventListener("click"
 
 document.querySelectorAll(".tile[data-k]").forEach(b => b.addEventListener("click", () => {
   const k = b.dataset.k;
-  if (INTERNAL[k]) { go(INTERNAL[k]); if (k === "grillas") loadGrillas(); return; }
+  if (INTERNAL[k]) { go(INTERNAL[k]); if (k === "grillas") loadGrillas(); if (k === "objetivos") loadObj(); return; }
   const url = LINKS[k];
   if (url && /^https?:\/\//i.test(url)) { window.open(url, "_blank", "noopener"); return; }
   toast(b.querySelector(".name").textContent + ": próximamente");
@@ -537,7 +612,7 @@ function parseBase(aoa){
     if (fdv && spv) { (spvCount[fdv] ||= {}); spvCount[fdv][spv] = (spvCount[fdv][spv] || 0) + 1; }
     if (!(Number(r[iBul]) > 0)) continue;          // sin rechazos ni devoluciones
     if (iFecha >= 0 && r[iFecha] instanceof Date && (!maxF || r[iFecha] > maxF)) maxF = r[iFecha];
-    rows.push({cli, r});
+    rows.push({cli, r, sv: fdv});
   }
   const spvOf = {};
   for (const [f, m] of Object.entries(spvCount)) spvOf[f] = Object.entries(m).sort((a,b) => b[1]-a[1])[0][0];
@@ -671,6 +746,21 @@ function buildGrillas(){
   return {v:2, venta:B.venta, focos:U.focos.map(f => ({n:f.n, tipo:f.tipo, canales:f.canales})), rows};
 }
 
+
+/* Avance por promotor (Sector de Venta): focos solo canal K+T y AS (como el tablero) + volumen HL */
+function buildAvances(){
+  const B = U.base, iCan = B.N.indexOf(norm("Canal Ajustado")), iHL = B.N.indexOf(norm("Cantidad Total en HL")), iU = B.N.indexOf(norm("Unidad de Negocio"));
+  const kpiRows = B.rows.filter(x => iCan < 0 || ["k+t","as"].includes(norm(x.r[iCan])));
+  const keyed = Object.assign({}, B, {rows: kpiRows.map(x => ({cli: x.sv + "\u0001" + x.cli, r: x.r}))});
+  const prom = {};
+  U.focos.forEach(f => { for (const [k, v] of evalFoco(f, keyed)) { const sv = k.split("\u0001")[0]; (prom[sv] ||= {}); prom[sv][f.n] = (prom[sv][f.n] || 0) + v; } });
+  if (iHL >= 0 && iU >= 0) for (const x of B.rows) {
+    const u = norm(x.r[iU]), k = u === "ung" ? "Vol UNG (HL)" : u === "aguas eco" ? "Vol Aguas (HL)" : null; if (!k) continue;
+    (prom[x.sv] ||= {}); prom[x.sv][k] = (prom[x.sv][k] || 0) + (Number(x.r[iHL]) || 0);
+  }
+  return {v:1, venta:B.venta, prom};
+}
+
 $("upGo").addEventListener("click", async () => {
   const m = $("upMsg"), key = $("upKey").value;
   m.className = "msg";
@@ -684,12 +774,132 @@ $("upGo").addEventListener("click", async () => {
     let res = await apiPut("grillas", key, Object.assign(await sealData(data), stamp));
     if (!res.ok) throw new Error(res.error || "No se pudo guardar");
     res = await apiPut("focos", key, Object.assign(await sealData(U.focos), stamp));
+    res = await apiPut("avances", key, Object.assign(await sealData(buildAvances()), stamp)); O.av = null;
     if (U.carteraNueva) { res = await apiPut("cartera", key, Object.assign(await sealData({rows:U.cartera}), stamp)); U.carteraNueva = false; }
     m.className = "msg ok"; m.textContent = `¡Listo! ${fmtN(data.rows.length)} clientes publicados para todos`;
     G.data = null; await loadGrillas(true);
     setTimeout(() => { $("mUp").hidden = true; $("upKey").value = ""; }, 1500);
   } catch(err) { m.className = "msg bad"; m.textContent = err.message || "Error al publicar"; }
   $("upGo").disabled = false;
+});
+
+/* ===== Objetivos del mes ===== */
+const VOLK = ["Vol UNG (HL)","Vol Aguas (HL)"];
+const O = { obj:null, av:null, sup:"" , open:null };
+const isVol = k => VOLK.includes(k);
+const pctCls = p => p >= 90 ? "g" : p >= 70 ? "w" : "c";
+function oEmpty(html){ $("oBody").hidden = true; $("oEmpty").hidden = false; $("oEmpty").innerHTML = html; }
+
+async function loadObj(force){
+  if (O.obj && O.av && !force) return;
+  $("oUpd").textContent = "Cargando…";
+  try {
+    const [po, pa] = await Promise.all([apiGet("objetivos"), apiGet("avances")]);
+    if (!po || !po.data) { $("oUpd").textContent = "Sin objetivos todavía"; oEmpty("Todavía no hay objetivos cargados.<br>Tocá <b>⬆ Cargar objetivos</b> y subí el Excel del mes."); return; }
+    if (!pa || !pa.data) { $("oUpd").textContent = "Falta la venta"; oEmpty("Los objetivos están cargados, pero falta la venta.<br>Publicá la base plana desde <b>Grillas → ⬆ Actualizar grillas</b>."); return; }
+    O.obj = await openData(po); O.av = await openData(pa);
+    $("oUpd").textContent = (O.av.venta ? "Venta al " + O.av.venta + " · " : "") + "Actualizado " + fmtDate(pa.updated);
+    $("oBody").hidden = false; $("oEmpty").hidden = true;
+    oRender();
+  } catch(e) { $("oUpd").textContent = "Error al cargar"; oEmpty("No se pudieron abrir los objetivos. Revisá tu conexión y volvé a entrar."); }
+}
+
+/* Cumplimiento de un promotor: promedio de los % (topeados en 100) ponderado por el peso de cada foco */
+function promStats(p){
+  const av = O.av.prom[p.prom.toUpperCase()] || {};
+  let sum = 0, pes = 0;
+  const kpis = Object.entries(p.obj).filter(([k,o]) => !isVol(k) && o > 0).map(([k,o]) => {
+    const a = av[k] || 0, pct = Math.min(100, a / o * 100), w = O.obj.pesos[k] ?? 1;
+    sum += pct * w; pes += w;
+    return {k, o, a, pct};
+  });
+  const vol = VOLK.filter(k => p.obj[k] > 0).map(k => ({k, o:p.obj[k], a:av[k] || 0, pct:(av[k] || 0) / p.obj[k] * 100}));
+  return {kpis, vol, cumpl: pes ? sum / pes : null};
+}
+
+function oRender(){
+  const rows = O.obj.rows, canales = CANALES.filter(c => rows.some(r => r.canal === c));
+  // Tarjetas por canal
+  $("oCanales").innerHTML = canales.map(c => {
+    const rs = rows.filter(r => r.canal === c), keys = [...new Set(rs.flatMap(r => Object.keys(r.obj).filter(k => r.obj[k] > 0)))].sort((a,b) => (/aguas puras/i.test(a)) - (/aguas puras/i.test(b)));
+    const tot = k => rs.reduce((s,r) => { const o = r.obj[k] || 0; return o > 0 ? [s[0] + o, s[1] + ((O.av.prom[r.prom.toUpperCase()] || {})[k] || 0)] : s; }, [0,0]);
+    let sum = 0, pes = 0;
+    const line = (k, vol) => { const [o, a] = tot(k), p = o ? a / o * 100 : 0, pc = Math.min(100, p);
+      if (!vol) { const w = O.obj.pesos[k] ?? 1; sum += pc * w; pes += w; }
+      const fmt = v => vol ? fmtN(Math.round(v)) + " HL" : fmtN(Math.round(v));
+      return `<div class="cn-k"><div class="t"><span>${esc(vol ? k.replace(" (HL)","") : k)}</span><span><b>${fmt(a)}</b> / ${fmt(o)} · <b>${Math.round(p)}%</b></span></div><div class="bar"><i class="${vol?"vol":""}" style="width:${pc}%"></i></div></div>`; };
+    const focos = keys.filter(k => !isVol(k)).map(k => line(k, false)).join("");
+    const vols = keys.filter(isVol).map(k => line(k, true)).join("");
+    const cumpl = pes ? sum / pes : null;
+    return `<div class="cn"><div class="cn-h"><b>${c}</b>${cumpl != null ? `<span class="cn-c">${Math.round(cumpl)}%<small>cumplimiento focos</small></span>` : ""}</div>${focos}${vols ? `<div class="cn-sep">VOLUMEN</div>${vols}` : ""}</div>`;
+  }).join("");
+
+  // Chips de supervisor
+  const sups = uniq(rows.filter(r => r.canal === "K+T" || r.canal === "AS").map(r => r.sup));
+  $("oChips").innerHTML = [["", "Todos los supervisores"], ...sups.map(s => [s, tc(s)])].map(([v,l]) => `<button class="chip${O.sup===v?" on":""}" data-s="${esc(v)}">${esc(l)}</button>`).join("");
+
+  // Ranking K+T y AS
+  $("oRank").innerHTML = ["K+T","AS"].filter(c => rows.some(r => r.canal === c)).map(c => {
+    const list = rows.filter(r => r.canal === c).map(r => ({r, s:promStats(r)})).filter(x => x.s.cumpl != null)
+      .sort((a,b) => b.s.cumpl - a.s.cumpl);
+    const n = list.length;
+    const body = list.map((x, i) => {
+      if (O.sup && x.r.sup !== O.sup) return "";
+      const frac = n > 1 ? i / (n - 1) : 0, tier = frac <= 1/3 ? "g" : frac <= 2/3 ? "w" : "c", em = {g:"🔥", w:"💪", c:"⚡"}[tier];
+      const pos = i < 3 ? `<span class="medal">${["🥇","🥈","🥉"][i]}</span>` : `<span class="pos" style="background:hsl(${Math.round(120 - 120*frac)},68%,70%)">${i+1}</span>`;
+      const vp = k => { const v = x.s.vol.find(z => z.k === k); return v ? Math.round(v.pct) + "%" : "–"; };
+      const id = c + "|" + x.r.prom, open = O.open === id;
+      const det = open ? `<tr class="det"><td colspan="5"><div class="det-g">${[...x.s.kpis, ...x.s.vol].map(k => { const vol = isVol(k.k), falta = Math.max(0, k.o - k.a);
+          return `<div><b>${esc(vol ? k.k.replace(" (HL)","") : k.k)}</b><span>${vol ? fmtN(Math.round(k.a)) + " / " + fmtN(Math.round(k.o)) + " HL" : fmtN(k.a) + " / " + fmtN(k.o)} · ${Math.round(k.a / k.o * 100)}%</span>${falta > 0 ? `<span class="f">Faltan ${vol ? fmtN(Math.ceil(falta)) + " HL" : fmtN(Math.ceil(falta)) + (k.k.startsWith("TBD") ? " SKUs" : " clientes")}</span>` : `<span class="ok">¡Cumplido!</span>`}</div>`; }).join("")}</div></td></tr>` : "";
+      return `<tr class="row${i < 3 ? " p" + (i+1) : ""}" data-id="${esc(id)}"><td><span class="pr">${esc(tc(x.r.prom))}</span><span class="sv">${esc(tc(x.r.sup))}</span></td>
+        <td class="n"><span class="pill ${tier}">${em} ${x.s.cumpl.toFixed(1)}%</span></td><td class="n hv"><span class="vp">${vp("Vol UNG (HL)")}</span></td><td class="n hv"><span class="vp">${vp("Vol Aguas (HL)")}</span></td><td class="n">${pos}</td></tr>${det}`;
+    }).join("");
+    return `<div class="rk-col"><h3>FDV ${c}</h3><table class="rk"><thead><tr><th>Promotor</th><th class="n">Focos</th><th class="n hv">Vol UNG</th><th class="n hv">Aguas</th><th class="n">Pos.</th></tr></thead><tbody>${body}</tbody></table></div>`;
+  }).join("");
+}
+$("oChips").addEventListener("click", e => { const b = e.target.closest(".chip"); if (!b) return; O.sup = b.dataset.s; oRender(); });
+$("oRank").addEventListener("click", e => { const t = e.target.closest("tr.row"); if (!t) return; O.open = O.open === t.dataset.id ? null : t.dataset.id; oRender(); });
+
+/* --- Carga de objetivos (Excel) --- */
+$("oUpBtn").addEventListener("click", () => { $("mObj").hidden = false; $("oMsg").textContent = ""; });
+$("oUpClose").addEventListener("click", () => $("mObj").hidden = true);
+function parseObjetivos(wb){
+  const sh = wb.SheetNames.find(n => norm(n) === "objetivos") || wb.SheetNames[0];
+  const aoa = XLSX.utils.sheet_to_json(wb.Sheets[sh], {header:1, defval:"", raw:true});
+  const hi = headerAt(aoa, "Promotor"); if (hi < 0) throw new Error("La hoja Objetivos no tiene la columna Promotor");
+  const H = aoa[hi].map(h => String(h).trim()), N = H.map(norm);
+  const iS = N.indexOf("supervisor"), iP = N.indexOf("promotor"), iC = N.indexOf("canal");
+  if (iS < 0 || iC < 0) throw new Error("Faltan las columnas Supervisor o Canal");
+  const kcols = H.map((h,i) => ({h, i})).filter(c => c.h && ![iS,iP,iC].includes(c.i));
+  const rows = [];
+  for (const r of aoa.slice(hi + 1)) {
+    const prom = String(r[iP]).trim(); if (!prom) continue;
+    const obj = {};
+    kcols.forEach(c => { const v = Number(String(r[c.i]).replace(",", ".")); if (String(r[c.i]).trim() !== "" && v > 0) obj[c.h] = v; });
+    rows.push({sup:String(r[iS]).trim().toUpperCase(), prom:prom.toUpperCase(), canal:String(r[iC]).trim().toUpperCase().replace("KT","K+T"), obj});
+  }
+  if (!rows.length) throw new Error("La hoja Objetivos está vacía");
+  const pesos = {}, ps = wb.SheetNames.find(n => norm(n) === "pesos");
+  if (ps) XLSX.utils.sheet_to_json(wb.Sheets[ps], {header:1, defval:""}).slice(1).forEach(r => { const v = Number(String(r[1]).replace(",", ".")); if (String(r[0]).trim() && v > 0) pesos[String(r[0]).trim()] = v; });
+  return {rows, pesos, kpis:kcols.map(c => c.h)};
+}
+$("oGo").addEventListener("click", async () => {
+  const m = $("oMsg"), f = $("oFile").files[0], key = $("oKey").value;
+  m.className = "msg";
+  if (!f) { m.className = "msg bad"; m.textContent = "Elegí el Excel de objetivos"; return; }
+  if (!key) { m.className = "msg bad"; m.textContent = "Escribí la clave de administradora"; return; }
+  $("oGo").disabled = true;
+  try {
+    m.textContent = "Leyendo objetivos…";
+    const data = parseObjetivos(XLSX.read(await f.arrayBuffer(), {type:"array"}));
+    m.textContent = `Publicando ${data.rows.length} promotores…`;
+    const res = await apiPut("objetivos", key, Object.assign(await sealData(data), {updated:new Date().toISOString(), name:f.name}));
+    if (!res.ok) throw new Error(res.error || "No se pudo guardar");
+    m.className = "msg ok"; m.textContent = "¡Listo! Objetivos publicados";
+    O.obj = null; await loadObj(true);
+    setTimeout(() => { $("mObj").hidden = true; $("oKey").value = ""; }, 1300);
+  } catch(err) { m.className = "msg bad"; m.textContent = err.message || "Error al publicar"; }
+  $("oGo").disabled = false;
 });
 </script>
 </body>
