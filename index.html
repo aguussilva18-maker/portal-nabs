@@ -129,6 +129,46 @@ td.fx.no{color:rgba(255,255,255,.18)}
 .btn-ghost{font:700 14px var(--body);color:var(--ink);background:none;border:1px solid var(--line);border-radius:14px;padding:13px;cursor:pointer;margin-top:12px}
 .msg{min-height:18px;font-size:13px;font-weight:600;text-align:center}
 .msg.ok{color:var(--lime)}.msg.bad{color:var(--heat)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;padding:4px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;width:fit-content;max-width:100%}
+.tab{font:800 13px var(--display);letter-spacing:.04em;color:var(--muted);background:none;border:0;border-radius:10px;padding:9px 16px;cursor:pointer}
+.tab b{font:600 12px var(--body);opacity:.7;margin-left:6px}
+.tab.on{background:var(--ink);color:var(--night)}
+td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
+/* Hoja de actualización */
+.modal{align-items:start;overflow-y:auto}
+.sheet{width:100%;max-width:760px;margin:24px auto;background:#101f47;border:1px solid var(--line);border-radius:22px;padding:22px;display:grid;gap:18px}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sheet-head h2{margin:0;font:900 20px var(--display)}
+.x{font:700 22px var(--body);color:var(--ink);background:var(--glass);border:1px solid var(--line);border-radius:50%;width:38px;height:38px;cursor:pointer}
+.step{display:grid;gap:8px;padding-top:14px;border-top:1px solid var(--line)}
+.step h3{margin:0 0 4px;font:800 14px var(--display);display:flex;align-items:center;gap:10px}
+.step h3 span{width:24px;height:24px;border-radius:50%;background:var(--fizz);color:var(--night);display:grid;place-items:center;font-size:12px}
+.fl{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--muted);margin-top:4px}
+.fl em{font-style:normal;letter-spacing:0;text-transform:none;font-weight:500}
+.sheet input[type=password],.sheet input[type=text]{font:600 15px var(--body);color:var(--ink);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+.hint{margin:0;font-size:13px;color:var(--muted);line-height:1.45}
+.fe{border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:10px;background:rgba(255,255,255,.04);margin-bottom:10px}
+.fe-top{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center}
+.fe-top input{font-weight:800!important}
+.fe-n{font:800 13px var(--body);color:var(--night);background:var(--lime);border-radius:999px;padding:6px 12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.fe-n.zero{background:var(--heat);color:#fff}
+.del{font:700 13px var(--body);color:var(--heat);background:none;border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer}
+.fe-opts{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.fe-opts select{font:600 13px var(--body);color:var(--ink);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:10px;padding:8px}
+.fe-opts select option,.cond select option{color:#0a1430}
+.ck{display:inline-flex;align-items:center;gap:5px;font:700 12px var(--body);background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:999px;padding:6px 10px;cursor:pointer}
+.ck input{accent-color:var(--fizz)}
+.grp{border-left:3px solid var(--fizz);padding:8px 0 8px 10px;display:grid;gap:6px}
+.grp-l{font:800 11px var(--display);letter-spacing:.1em;color:var(--muted)}
+.cond{display:grid;grid-template-columns:minmax(0,1fr) 110px minmax(0,1.3fr) 34px;gap:6px}
+.cond select,.cond input{font:600 13px var(--body);color:var(--ink);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:8px;padding:8px;width:100%}
+.mini{font:700 12px var(--body);color:var(--fizz);background:none;border:0;padding:4px 0;cursor:pointer;justify-self:start}
+.rm{font:700 16px var(--body);color:var(--muted);background:none;border:1px solid var(--line);border-radius:8px;cursor:pointer}
+.or{font:800 11px var(--display);letter-spacing:.14em;color:var(--sun);padding-left:4px}
+.add{margin-top:0}
+.resume{font-size:14px;line-height:1.6;background:rgba(255,255,255,.05);border-radius:12px;padding:12px 14px}
+.resume b{color:var(--lime)}
+@media (max-width:560px){.cond{grid-template-columns:1fr 1fr}.cond input{grid-column:1/2}.fe-top{grid-template-columns:1fr auto}.fe-top .del{grid-column:1/-1}}
 @media (max-width:900px){.filters{grid-template-columns:repeat(2,minmax(0,1fr))}.filters .q{grid-column:1/-1}.clear{grid-column:1/-1;padding:10px}}
 @media (max-width:560px){td.rs{max-width:150px}.sp{display:none}.vhead .btn-up{width:100%}}
 @media (max-width:820px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -198,9 +238,10 @@ td.fx.no{color:rgba(255,255,255,.18)}
     <div class="vhead">
       <button class="back" data-back>← Volver</button>
       <div class="vtitle"><h1>Grillas</h1><p id="gUpd">Cargando…</p></div>
-      <button class="btn-up" data-up="grillas">⬆ Subir planilla</button>
+      <button class="btn-up" id="gUpBtn">⬆ Actualizar grillas</button>
     </div>
     <div id="gBody">
+      <div class="tabs" id="gTabs" role="tablist"></div>
       <div class="chips" id="gChips"></div>
       <div class="filters">
         <select id="fSpv" aria-label="Supervisor"></select>
@@ -219,16 +260,35 @@ td.fx.no{color:rgba(255,255,255,.18)}
   </section>
 
   <div class="modal" id="mUp" hidden>
-    <form class="card" id="upForm" autocomplete="off">
-      <h2>Subir planilla de <span id="upName">grillas</span></h2>
-      <p>Elegí el Excel. La primera fila tiene que tener los títulos: Cliente, Razon social, Supervisor, FDV, Frecuencia y después una columna por foco con X.</p>
-      <label for="upFile">ARCHIVO EXCEL</label>
-      <input id="upFile" class="file" type="file" accept=".xlsx,.xls,.csv">
-      <label for="upKey">CLAVE DE ADMINISTRADORA</label>
-      <input id="upKey" type="password">
-      <div class="row2"><button type="button" class="btn-ghost" id="upCancel">Cancelar</button><button class="btn-in" id="upGo" type="submit">SUBIR</button></div>
-      <div class="msg" id="upMsg"></div>
-    </form>
+    <div class="sheet" role="dialog" aria-labelledby="upTitle">
+      <div class="sheet-head"><h2 id="upTitle">Actualizar grillas</h2><button class="x" id="upClose" aria-label="Cerrar">×</button></div>
+
+      <div class="step">
+        <h3><span>1</span> Archivos</h3>
+        <label class="fl" for="upBase">BASE PLANA (venta del mes)</label>
+        <input id="upBase" class="file" type="file" accept=".xlsx,.xls,.csv">
+        <label class="fl" for="upMae">MAESTRO DE CLIENTES <em id="maeHint">(opcional si no cambió)</em></label>
+        <input id="upMae" class="file" type="file" accept=".xlsx,.xls,.csv">
+        <button class="btn-in" id="upRead" type="button">LEER ARCHIVOS</button>
+        <div class="msg" id="readMsg"></div>
+      </div>
+
+      <div class="step" id="stFocos" hidden>
+        <h3><span>2</span> Focos del mes</h3>
+        <p class="hint">Revisá cada foco. Al lado del nombre ves cuántos clientes da con la base que subiste. Si el mes cambia, editá las condiciones, agregá o borrá focos.</p>
+        <div id="focoList"></div>
+        <button class="btn-ghost add" id="addFoco" type="button">+ Agregar foco</button>
+      </div>
+
+      <div class="step" id="stPub" hidden>
+        <h3><span>3</span> Publicar</h3>
+        <div class="resume" id="resume"></div>
+        <label class="fl" for="upKey">CLAVE DE ADMINISTRADORA</label>
+        <input id="upKey" type="password" autocomplete="off">
+        <button class="btn-in" id="upGo" type="button">PUBLICAR GRILLAS</button>
+        <div class="msg" id="upMsg"></div>
+      </div>
+    </div>
   </div>
 </main>
 <div class="toast" id="toast" hidden></div>
@@ -338,130 +398,297 @@ async function apiPut(k, admin, payload){
 
 /* ===== Grillas ===== */
 const FRECS = {"LU · JU":["LUN","JUE"], "MA · VI":["MAR","VIE"], "MI · SA":["MIE","SAB"]};
-const G = { data:null, mode:"todos", limit:200, rows:[] };
+const CANALES = ["K+T","AS","REF","MAY"];
+const G = { data:null, mode:"todos", limit:200, canal:"K+T" };
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const uniq = a => [...new Set(a.filter(Boolean))].sort((x,y) => x.localeCompare(y,"es"));
+const fmtN = n => Number(n).toLocaleString("es-AR");
+/* "ECEIZA KEVIN" → "Eceiza Kevin" (sin romper la ñ) */
+const tc = s => String(s ?? "").toLowerCase().split(" ").map(w => w ? w[0].toUpperCase() + w.slice(1) : w).join(" ");
 
 function fmtDate(iso){ try { const d = new Date(iso); return d.toLocaleDateString("es-AR",{day:"2-digit",month:"2-digit"}) + " " + d.toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"}); } catch(e){ return ""; } }
 function gEmpty(html){ $("gBody").hidden = true; $("gEmpty").hidden = false; $("gEmpty").innerHTML = html; }
 
 async function loadGrillas(force){
   if (G.data && !force) return;
-  if (!apiReady()){ $("gUpd").textContent = "Falta conectar el guardado"; gEmpty("Todavía no está conectado el Apps Script.<br>Pegá la URL en <b>API_URL</b> dentro de index.html."); return; }
+  if (!apiReady()){ $("gUpd").textContent = "Falta conectar el guardado"; gEmpty("Todavía no está conectado el Apps Script."); return; }
   $("gUpd").textContent = "Cargando…";
   try {
     const p = await apiGet("grillas");
-    if (!p || !p.data){ $("gUpd").textContent = "Sin datos todavía"; gEmpty("Todavía no hay ninguna grilla cargada.<br>Tocá <b>⬆ Subir planilla</b> para cargar la primera."); return; }
-    G.data = await openData(p);
-    $("gUpd").textContent = "Actualizado " + fmtDate(p.updated) + (p.name ? " · " + p.name : "");
+    if (!p || !p.data){ $("gUpd").textContent = "Sin datos todavía"; gEmpty("Todavía no hay grillas cargadas.<br>Tocá <b>⬆ Actualizar grillas</b> para cargar la base plana."); return; }
+    const d = await openData(p);
+    if (!d.v) { $("gUpd").textContent = "Formato anterior"; gEmpty("Las grillas cargadas son del formato anterior.<br>Tocá <b>⬆ Actualizar grillas</b> y subí la base plana."); return; }
+    G.data = d;
+    $("gUpd").textContent = (d.venta ? "Venta al " + d.venta + " · " : "") + "Actualizado " + fmtDate(p.updated);
     $("gBody").hidden = false; $("gEmpty").hidden = true;
+    const present = CANALES.filter(c => d.rows.some(r => r[5] === c));
+    if (!present.includes(G.canal)) G.canal = present[0] || "K+T";
     gSetup();
-  } catch(e){ $("gUpd").textContent = "Error al cargar"; gEmpty("No se pudo abrir la grilla. Revisá tu conexión y volvé a entrar.<br>Si cambiaste la contraseña del portal, hay que volver a subir la planilla."); }
+  } catch(e){ $("gUpd").textContent = "Error al cargar"; gEmpty("No se pudo abrir la grilla. Revisá tu conexión y volvé a entrar.<br>Si cambiaste la contraseña del portal, hay que volver a publicar las grillas."); }
 }
 
 function opts(sel, label, values, keep){
   const cur = keep ? sel.value : "";
-  sel.innerHTML = `<option value="">${label}</option>` + values.map(v => `<option>${esc(v)}</option>`).join("");
+  sel.innerHTML = `<option value="">${label}</option>` + values.map(v => `<option value="${esc(v)}">${esc(tc(v))}</option>`).join("");
   if (values.includes(cur)) sel.value = cur;
 }
-const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const uniq = a => [...new Set(a.filter(Boolean))].sort((x,y) => x.localeCompare(y,"es"));
+const canalRows = () => G.data.rows.filter(r => r[5] === G.canal);
+const canalFocos = () => G.data.focos.map((f,i) => ({...f, i})).filter(f => f.canales.includes(G.canal));
 
 function gSetup(){
   const D = G.data;
-  opts($("fSpv"), "Todos los supervisores", uniq(D.rows.map(r => r[2])));
-  opts($("fFdv"), "Todos los promotores", uniq(D.rows.map(r => r[3])));
+  const present = CANALES.filter(c => D.rows.some(r => r[5] === c));
+  $("gTabs").innerHTML = present.map(c => `<button class="tab${c===G.canal?" on":""}" data-c="${c}" role="tab">${c}<b>${fmtN(D.rows.filter(r=>r[5]===c).length)}</b></button>`).join("");
+  const rows = canalRows(), focos = canalFocos();
+  opts($("fSpv"), "Todos los supervisores", uniq(rows.map(r => r[2])));
+  opts($("fFdv"), "Todos los promotores", uniq(rows.map(r => r[3])));
   $("fDia").innerHTML = `<option value="">Todas las frecuencias</option>` + Object.keys(FRECS).map(d => `<option>${d}</option>`).join("");
-  $("fFoco").innerHTML = `<option value="">Todos los focos</option>` + D.focos.map((f,i) => `<option value="${i}">Sin ${esc(f)}</option>`).join("");
-  $("gHead").innerHTML = "<tr><th class='c1'>Cliente</th><th>Razón social</th><th class='sp'>Supervisor</th><th>Promotor</th><th>Frecuencia</th>" + D.focos.map(f => `<th class="fx">${esc(f)}</th>`).join("") + "</tr>";
+  $("fFoco").innerHTML = `<option value="">Todos los focos</option>` + focos.map(f => `<option value="${f.i}">Sin ${esc(f.n)}</option>`).join("");
+  $("gHead").innerHTML = "<tr><th class='c1'>Cliente</th><th>Razón social</th><th class='sp'>Supervisor</th><th>Promotor</th><th>Frecuencia</th>" + focos.map(f => `<th class="fx">${esc(f.n)}</th>`).join("") + "</tr>";
   gRender();
 }
 
 function gFilter(){
-  const D = G.data, spv = $("fSpv").value, fdv = $("fFdv").value, dia = $("fDia").value, foco = $("fFoco").value, q = $("fQ").value.trim().toLowerCase();
-  return D.rows.filter(r => (!spv || r[2] === spv) && (!fdv || r[3] === fdv) && (!dia || String(r[4]||"").toUpperCase().split(/[,\s]+/).some(x => FRECS[dia].includes(x)))
-    && (foco === "" || r[5][foco] !== "1")
+  const spv = $("fSpv").value, fdv = $("fFdv").value, dia = $("fDia").value, foco = $("fFoco").value, q = $("fQ").value.trim().toLowerCase();
+  return canalRows().filter(r => (!spv || r[2] === spv) && (!fdv || r[3] === fdv)
+    && (!dia || String(r[4]||"").toUpperCase().split(/[,\s]+/).some(x => FRECS[dia].includes(x)))
+    && (foco === "" || !r[7][foco])
     && (!q || String(r[0]).includes(q) || String(r[1]||"").toLowerCase().includes(q)));
 }
 
 function gRender(){
-  const D = G.data;
-  // promotores dependen del supervisor elegido
-  const spv = $("fSpv").value;
-  opts($("fFdv"), "Todos los promotores", uniq(D.rows.filter(r => !spv || r[2] === spv).map(r => r[3])), true);
-
+  const spv = $("fSpv").value, focos = canalFocos();
+  opts($("fFdv"), "Todos los promotores", uniq(canalRows().filter(r => !spv || r[2] === spv).map(r => r[3])), true);
   const base = gFilter();
-  const buyer = r => r[5].includes("1");
-  const nC = base.filter(buyer).length;
+  const nC = base.filter(r => r[6]).length;
   $("gChips").innerHTML = [["todos","Todos",base.length],["comp","Compradores",nC],["nocomp","No compradores",base.length - nC]]
-    .map(([m,l,n]) => `<button class="chip${G.mode===m?" on":""}" data-m="${m}">${l}<b>${n.toLocaleString("es-AR")}</b></button>`).join("");
+    .map(([m,l,n]) => `<button class="chip${G.mode===m?" on":""}" data-m="${m}">${l}<b>${fmtN(n)}</b></button>`).join("");
 
-  // avance por foco sobre la cartera filtrada
-  $("gFocos").innerHTML = D.focos.map((f,i) => {
-    const n = base.filter(r => r[5][i] === "1").length, pct = base.length ? Math.round(n * 100 / base.length) : 0;
-    return `<div class="foco"><span class="fn">${esc(f)}</span><span class="fv"><b>${pct}%</b><span>${n.toLocaleString("es-AR")} de ${base.length.toLocaleString("es-AR")}</span></span><div class="bar"><i style="width:${pct}%"></i></div><span class="falta">${base.length - n ? "Faltan " + (base.length - n).toLocaleString("es-AR") + " clientes" : "¡Cartera completa!"}</span></div>`;
+  $("gFocos").innerHTML = focos.map(f => {
+    const n = base.filter(r => r[7][f.i] > 0).length, pct = base.length ? Math.round(n * 100 / base.length) : 0;
+    if (f.tipo === "skus") {
+      const tot = base.reduce((s,r) => s + (r[7][f.i] || 0), 0);
+      return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${fmtN(tot)}</b><span>SKUs en ${fmtN(n)} clientes</span></span><div class="bar"><i style="width:${pct}%"></i></div><span class="falta">${base.length - n ? fmtN(base.length - n) + " clientes sin compra" : "¡Cartera completa!"}</span></div>`;
+    }
+    return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${pct}%</b><span>${fmtN(n)} de ${fmtN(base.length)}</span></span><div class="bar"><i style="width:${pct}%"></i></div><span class="falta">${base.length - n ? "Faltan " + fmtN(base.length - n) + " clientes" : "¡Cartera completa!"}</span></div>`;
   }).join("");
 
-  G.rows = G.mode === "comp" ? base.filter(buyer) : G.mode === "nocomp" ? base.filter(r => !buyer(r)) : base;
-  $("gCount").textContent = `${G.rows.length.toLocaleString("es-AR")} clientes`;
-  const show = G.rows.slice(0, G.limit);
-  $("gRows").innerHTML = show.length ? show.map(r => `<tr><td class="c1">${esc(r[0])}</td><td class="rs" title="${esc(r[1])}">${esc(r[1])}</td><td class="sp">${esc(r[2])}</td><td>${esc(r[3])}</td><td>${esc(r[4])}</td>` +
-      [...r[5]].map(x => x === "1" ? `<td class="fx ok">X</td>` : `<td class="fx no">·</td>`).join("") + "</tr>").join("")
-    : `<tr><td colspan="${5 + D.focos.length}" class="empty">No hay clientes con esos filtros.</td></tr>`;
-  $("gMore").hidden = G.rows.length <= G.limit;
+  const rows = G.mode === "comp" ? base.filter(r => r[6]) : G.mode === "nocomp" ? base.filter(r => !r[6]) : base;
+  $("gCount").textContent = `${fmtN(rows.length)} clientes`;
+  $("gRows").innerHTML = rows.length ? rows.slice(0, G.limit).map(r => `<tr><td class="c1">${esc(r[0])}</td><td class="rs" title="${esc(r[1])}">${esc(r[1])}</td><td class="sp">${esc(tc(r[2]))}</td><td>${esc(tc(r[3]))}</td><td>${esc(r[4])}</td>` +
+      focos.map(f => { const v = r[7][f.i]; return !v ? `<td class="fx no">·</td>` : f.tipo === "skus" ? `<td class="fx num">${v}</td>` : `<td class="fx ok">X</td>`; }).join("") + "</tr>").join("")
+    : `<tr><td colspan="${5 + focos.length}" class="empty">No hay clientes con esos filtros.</td></tr>`;
+  $("gMore").hidden = rows.length <= G.limit;
 }
 ["fSpv","fFdv","fDia","fFoco"].forEach(id => $(id).addEventListener("change", () => { G.limit = 200; gRender(); }));
 $("fQ").addEventListener("input", () => { G.limit = 200; gRender(); });
 $("gChips").addEventListener("click", e => { const b = e.target.closest(".chip"); if (!b) return; G.mode = b.dataset.m; G.limit = 200; gRender(); });
+$("gTabs").addEventListener("click", e => { const b = e.target.closest(".tab"); if (!b) return; G.canal = b.dataset.c; G.mode = "todos"; G.limit = 200; $("fQ").value = ""; gSetup(); });
 $("gMore").addEventListener("click", () => { G.limit += 300; gRender(); });
 $("fClear").addEventListener("click", () => { ["fSpv","fFdv","fDia","fFoco"].forEach(id => $(id).value = ""); $("fQ").value = ""; G.mode = "todos"; G.limit = 200; gRender(); });
 
-/* ===== Subir planilla ===== */
-let upKind = "grillas";
-document.querySelectorAll("[data-up]").forEach(b => b.addEventListener("click", () => {
-  upKind = b.dataset.up; $("upName").textContent = upKind; $("upMsg").textContent = ""; $("upMsg").className = "msg"; $("mUp").hidden = false;
-}));
-$("upCancel").addEventListener("click", () => $("mUp").hidden = true);
+/* ===== Actualizar grillas desde base plana ===== */
+/* Mesa → canal. Los promotores de la lista MESA_MANUAL se pasan a otra mesa (Ref sale de Lemos May). */
+const CANAL_MESA = {"AVILA EZEQUIEL":"K+T","ECEIZA KEVIN":"K+T","RIERA SALA DANIELA":"K+T","ARES PEDRO":"AS","REF":"REF","LEMOS MAY":"MAY"};
+const MESA_MANUAL = {"FERREYRA LEONARDO":"REF","FERREYRA TOBIAS":"REF","VEDIA ELIZABETH":"REF"};
+const ALL_CH = ["K+T","AS","REF","MAY"], KT_CH = ["K+T","REF","MAY"];
+const C = (col, op, val) => ({col, op, val});
+const FOCOS_DEFAULT = [
+  {n:"UNG", tipo:"clientes", canales:ALL_CH, grupos:[[C("Unidad de Negocio","=","UNG")]]},
+  {n:"CCC Black", tipo:"clientes", canales:KT_CH, grupos:[[C("Marca","=","PEPSI BLACK")],[C("Marca","=","PEPSI"),C("Calibre","contiene","2250")]]},
+  {n:"CCC H2OH", tipo:"clientes", canales:KT_CH, grupos:[[C("Marca","=","H2OH")]]},
+  {n:"CCC RB", tipo:"clientes", canales:KT_CH, grupos:[[C("Marca","=","RED BULL")]]},
+  {n:"Convivencia", tipo:"todos", canales:["AS"], grupos:[[C("Marca","contiene","PEPSI"),C("Calibre","contiene","1500")],[C("Marca","contiene","PEPSI"),C("Calibre","contiene","2000")]]},
+  {n:"TBD Gatorade", tipo:"skus", canales:["AS"], grupos:[[C("Marca","=","GATORADE")]]},
+  {n:"CCC Jagger", tipo:"clientes", canales:["AS"], grupos:[[C("Marca","contiene","JAGER")]]},
+  {n:"CCC Aguas Puras", tipo:"clientes", canales:ALL_CH, grupos:[[C("Unidad de Negocio","=","AGUAS ECO")]]}
+];
+const TIPOS = {clientes:"Clientes con compra (cualquier opción)", todos:"Tiene que comprar TODAS las opciones", skus:"Cantidad de SKUs distintos"};
 const norm = s => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g,"").trim().toLowerCase();
+const U = { base:null, cartera:null, focos:null };
 
-function parseGrilla(aoa){
-  const hi = aoa.findIndex(r => r.some(c => norm(c) === "cliente"));
-  if (hi < 0) throw new Error("No encontré la columna Cliente en la planilla");
-  const H = aoa[hi].map(norm);
-  const need = {cli:"cliente", rs:"razon social", spv:"supervisor", fdv:"fdv", frec:"frecuencia"};
-  const ix = {};
-  for (const [k,n] of Object.entries(need)) { ix[k] = H.indexOf(n); if (ix[k] < 0) throw new Error("Falta la columna " + n.replace(/^./, c => c.toUpperCase())); }
-  const used = new Set(Object.values(ix));
-  const fIx = H.map((h,i) => i).filter(i => !used.has(i) && H[i]);
-  const focos = fIx.map(i => String(aoa[hi][i]).trim());
-  const rows = [];
-  for (const r of aoa.slice(hi + 1)) {
-    const cli = r[ix.cli]; if (cli === undefined || cli === null || cli === "") continue;
-    rows.push([String(cli).replace(/\.0$/,""), r[ix.rs] ?? "", r[ix.spv] ?? "", r[ix.fdv] ?? "", r[ix.frec] ?? "",
-      fIx.map(i => String(r[i] ?? "").trim() ? "1" : "0").join("")]);
+$("gUpBtn").addEventListener("click", async () => {
+  $("mUp").hidden = false; $("readMsg").textContent = ""; $("upMsg").textContent = "";
+  if (!U.focos) {
+    try { const p = await apiGet("focos"); U.focos = p && p.data ? await openData(p) : null; } catch(e) {}
+    if (!U.focos) U.focos = JSON.parse(JSON.stringify(FOCOS_DEFAULT));
   }
-  if (!rows.length) throw new Error("La planilla no tiene clientes");
-  return {focos, rows};
+});
+$("upClose").addEventListener("click", () => $("mUp").hidden = true);
+
+async function readSheet(file){
+  const wb = XLSX.read(await file.arrayBuffer(), {type:"array", cellDates:true});
+  return XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header:1, defval:"", raw:true});
+}
+function headerAt(aoa, name){ return aoa.findIndex(r => r.some(c => norm(c) === norm(name))); }
+
+function parseBase(aoa){
+  const hi = headerAt(aoa, "Código Cliente");
+  if (hi < 0) throw new Error("La base plana no tiene la columna Código Cliente");
+  const H = aoa[hi].map(h => String(h).trim()), N = H.map(norm);
+  const need = n => { const i = N.indexOf(norm(n)); if (i < 0) throw new Error("A la base plana le falta la columna " + n); return i; };
+  const iCli = need("Código Cliente"), iSpv = need("Sector de Supervisión"), iFdv = need("Sector de Venta"), iBul = need("Cantidad Total en Bultos");
+  const iFecha = N.indexOf("fecha"), iProd = N.indexOf("codigo producto");
+  const rows = [], spvCount = {};
+  let maxF = null;
+  for (const r of aoa.slice(hi + 1)) {
+    const cli = String(r[iCli]).replace(/\.0$/,"").trim(); if (!cli) continue;
+    const fdv = String(r[iFdv]).trim().toUpperCase(), spv = String(r[iSpv]).trim().toUpperCase();
+    if (fdv && spv) { (spvCount[fdv] ||= {}); spvCount[fdv][spv] = (spvCount[fdv][spv] || 0) + 1; }
+    if (!(Number(r[iBul]) > 0)) continue;          // sin rechazos ni devoluciones
+    if (iFecha >= 0 && r[iFecha] instanceof Date && (!maxF || r[iFecha] > maxF)) maxF = r[iFecha];
+    rows.push({cli, r});
+  }
+  const spvOf = {};
+  for (const [f, m] of Object.entries(spvCount)) spvOf[f] = Object.entries(m).sort((a,b) => b[1]-a[1])[0][0];
+  const cols = H.map((h,i) => ({h, i})).filter(c => c.h && !/cantidad|importe|fecha|^año$|^mes$/i.test(c.h));
+  return {H, N, rows, spvOf, iProd, cols, venta: maxF ? maxF.toLocaleDateString("es-AR",{day:"2-digit",month:"2-digit"}) : ""};
 }
 
-$("upForm").addEventListener("submit", async e => {
-  e.preventDefault();
-  const m = $("upMsg"), f = $("upFile").files[0], key = $("upKey").value;
+function parseMaestro(aoa){
+  const hi = headerAt(aoa, "Cliente");
+  if (hi < 0) throw new Error("El maestro no tiene la columna Cliente");
+  const N = aoa[hi].map(norm);
+  const need = n => { const i = N.indexOf(norm(n)); if (i < 0) throw new Error("Al maestro le falta la columna " + n); return i; };
+  const iCli = need("Cliente"), iRs = need("Razon social"), iFdv = need("Fuerza de venta 1 Descripcion personal comercial"), iFrec = need("Fuerza de venta 1 Dias de visita");
+  const iAn = N.indexOf(norm("Fuerza de venta 1 Anulado"));
+  const out = [];
+  for (const r of aoa.slice(hi + 1)) {
+    const cli = String(r[iCli]).replace(/\.0$/,"").trim(), fdv = String(r[iFdv]).trim().toUpperCase();
+    if (!cli || !fdv || fdv === "VTA DEPOSITO") continue;
+    if (iAn >= 0 && norm(r[iAn]) === "yes") continue;
+    out.push([cli, String(r[iRs]).trim(), fdv, String(r[iFrec]).trim()]);
+  }
+  if (!out.length) throw new Error("El maestro no tiene clientes con promotor asignado");
+  return out;
+}
+
+/* Calcula un foco sobre la base: devuelve Map cliente → valor (1, o cantidad de SKUs) */
+function evalFoco(f, B){
+  const groups = f.grupos.map(g => g.filter(c => c.col && String(c.val).trim()).map(c => ({i: B.N.indexOf(norm(c.col)), op: c.op, v: norm(c.val)})))
+    .filter(g => g.length && g.every(c => c.i >= 0));
+  const res = new Map();
+  if (!groups.length) return res;
+  const ok = (r, g) => g.every(c => { const x = norm(r[c.i]); return c.op === "=" ? x === c.v : x.includes(c.v); });
+  if (f.tipo === "todos") {
+    const sets = groups.map(() => new Set());
+    for (const {cli, r} of B.rows) groups.forEach((g,k) => { if (ok(r, g)) sets[k].add(cli); });
+    for (const cli of sets[0]) if (sets.every(s => s.has(cli))) res.set(cli, 1);
+  } else if (f.tipo === "skus") {
+    const sk = new Map();
+    for (const {cli, r} of B.rows) if (groups.some(g => ok(r, g))) { (sk.get(cli) || sk.set(cli, new Set()).get(cli)).add(B.iProd >= 0 ? r[B.iProd] : JSON.stringify(r)); }
+    for (const [cli, s] of sk) res.set(cli, s.size);
+  } else {
+    for (const {cli, r} of B.rows) if (groups.some(g => ok(r, g))) res.set(cli, 1);
+  }
+  return res;
+}
+
+/* --- Editor de focos --- */
+function colOptions(sel){ return U.base.cols.map(c => `<option${norm(c.h)===norm(sel)?" selected":""}>${esc(c.h)}</option>`).join(""); }
+function dlFor(col){
+  const i = U.base.N.indexOf(norm(col)); if (i < 0) return "";
+  const id = "dl" + i;
+  if (!document.getElementById(id)) {
+    const vals = [...new Set(U.base.rows.map(x => String(x.r[i]).trim()).filter(Boolean))].sort().slice(0, 400);
+    const dl = document.createElement("datalist"); dl.id = id; dl.innerHTML = vals.map(v => `<option value="${esc(v)}">`).join(""); document.body.appendChild(dl);
+  }
+  return id;
+}
+function renderFocos(){
+  const counts = U.focos.map(f => evalFoco(f, U.base));
+  const cart = new Set(U.cartera.map(r => r[0]));
+  $("focoList").innerHTML = U.focos.map((f, fi) => {
+    const n = [...counts[fi].keys()].filter(c => cart.has(c)).length;
+    const sep = f.tipo === "todos" ? "Y ADEMÁS" : "O";
+    return `<div class="fe" data-f="${fi}">
+      <div class="fe-top"><input type="text" data-k="n" value="${esc(f.n)}" aria-label="Nombre del foco"><span class="fe-n${n?"":" zero"}">${fmtN(n)} clientes</span><button class="del" data-act="delF" type="button">Borrar</button></div>
+      <div class="fe-opts"><select data-k="tipo" aria-label="Cómo se cuenta">${Object.entries(TIPOS).map(([k,l]) => `<option value="${k}"${f.tipo===k?" selected":""}>${l}</option>`).join("")}</select>
+        ${ALL_CH.map(c => `<label class="ck"><input type="checkbox" data-k="canal" value="${c}"${f.canales.includes(c)?" checked":""}>${c}</label>`).join("")}</div>
+      ${f.grupos.map((g, gi) => `${gi ? `<div class="or">${sep}</div>` : ""}<div class="grp" data-g="${gi}"><span class="grp-l">OPCIÓN ${gi+1}</span>
+        ${g.map((c, ci) => `<div class="cond" data-c="${ci}"><select data-k="col" aria-label="Columna">${colOptions(c.col)}</select>
+          <select data-k="op" aria-label="Operador"><option value="="${c.op==="="?" selected":""}>es igual a</option><option value="contiene"${c.op==="contiene"?" selected":""}>contiene</option></select>
+          <input type="text" data-k="val" value="${esc(c.val)}" list="${dlFor(c.col)}" aria-label="Valor"><button class="rm" data-act="delC" type="button" aria-label="Quitar condición">×</button></div>`).join("")}
+        <button class="mini" data-act="addC" type="button">+ condición (y)</button></div>`).join("")}
+      <button class="mini" data-act="addG" type="button">+ otra opción (${sep.toLowerCase()})</button>
+    </div>`;
+  }).join("");
+  const byCanal = ALL_CH.map(c => `<b>${c}</b>: ${U.focos.filter(f => f.canales.includes(c)).map(f => esc(f.n)).join(", ") || "sin focos"}`).join("<br>");
+  $("resume").innerHTML = `Base plana: <b>${fmtN(U.base.rows.length)}</b> líneas de venta${U.base.venta ? " · venta al <b>" + U.base.venta + "</b>" : ""}<br>Cartera: <b>${fmtN(U.cartera.length)}</b> clientes<br>${byCanal}`;
+}
+function focoFromEl(el){ return U.focos[+el.closest(".fe").dataset.f]; }
+$("focoList").addEventListener("change", e => {
+  const el = e.target, f = focoFromEl(el), k = el.dataset.k; if (!f) return;
+  if (k === "n") f.n = el.value.trim() || f.n;
+  else if (k === "tipo") f.tipo = el.value;
+  else if (k === "canal") f.canales = [...el.closest(".fe").querySelectorAll('input[data-k=canal]:checked')].map(x => x.value);
+  else { const g = +el.closest(".grp").dataset.g, c = +el.closest(".cond").dataset.c; f.grupos[g][c][k] = el.value; }
+  renderFocos();
+});
+$("focoList").addEventListener("click", e => {
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const fi = +b.closest(".fe").dataset.f, f = U.focos[fi];
+  if (b.dataset.act === "delF") U.focos.splice(fi, 1);
+  if (b.dataset.act === "addG") f.grupos.push([C("Marca","=","")]);
+  if (b.dataset.act === "addC") f.grupos[+b.closest(".grp").dataset.g].push(C("Marca","=",""));
+  if (b.dataset.act === "delC") { const g = +b.closest(".grp").dataset.g; f.grupos[g].splice(+b.closest(".cond").dataset.c, 1); if (!f.grupos[g].length) f.grupos.splice(g, 1); if (!f.grupos.length) f.grupos.push([C("Marca","=","")]); }
+  renderFocos();
+});
+$("addFoco").addEventListener("click", () => { U.focos.push({n:"Nuevo foco", tipo:"clientes", canales:["K+T"], grupos:[[C("Marca","=","")]]}); renderFocos(); });
+
+$("upRead").addEventListener("click", async () => {
+  const m = $("readMsg"), fb = $("upBase").files[0], fm = $("upMae").files[0];
   m.className = "msg";
-  if (!apiReady()) { m.className = "msg bad"; m.textContent = "Falta pegar la URL del Apps Script en index.html"; return; }
-  if (!f) { m.className = "msg bad"; m.textContent = "Elegí el archivo Excel"; return; }
-  if (!key) { m.className = "msg bad"; m.textContent = "Escribí la clave de administradora"; return; }
-  $("upGo").disabled = true; m.textContent = "Leyendo planilla…";
+  if (!fb) { m.className = "msg bad"; m.textContent = "Elegí la base plana"; return; }
+  $("upRead").disabled = true;
   try {
-    const wb = XLSX.read(await f.arrayBuffer(), {type:"array"});
-    const aoa = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header:1, defval:"", raw:true});
-    const data = parseGrilla(aoa);
-    m.textContent = `Subiendo ${data.rows.length.toLocaleString("es-AR")} clientes…`;
-    const sealed = await sealData(data);
-    const res = await apiPut(upKind, key, Object.assign(sealed, {updated:new Date().toISOString(), name:f.name}));
+    m.textContent = "Leyendo base plana…";
+    U.base = parseBase(await readSheet(fb));
+    if (fm) { m.textContent = "Leyendo maestro…"; U.cartera = parseMaestro(await readSheet(fm)); U.carteraNueva = true; }
+    else {
+      m.textContent = "Buscando el último maestro guardado…";
+      const p = await apiGet("cartera");
+      if (!p || !p.data) throw new Error("No hay un maestro guardado todavía. Subí el maestro de clientes.");
+      U.cartera = (await openData(p)).rows; U.carteraNueva = false;
+    }
+    if (!U.focos) U.focos = JSON.parse(JSON.stringify(FOCOS_DEFAULT));
+    renderFocos();
+    $("stFocos").hidden = false; $("stPub").hidden = false;
+    m.className = "msg ok"; m.textContent = "Listo. Revisá los focos y publicá.";
+  } catch(err) { m.className = "msg bad"; m.textContent = err.message || "No se pudo leer el archivo"; }
+  $("upRead").disabled = false;
+});
+
+function buildGrillas(){
+  const B = U.base;
+  const vals = U.focos.map(f => evalFoco(f, B));
+  const compra = new Set(B.rows.map(x => x.cli));
+  const rows = U.cartera.map(([cli, rs, fdv, frec]) => {
+    const mesa = MESA_MANUAL[fdv] || B.spvOf[fdv] || "SIN MESA";
+    const canal = CANAL_MESA[mesa] || "OTROS";
+    return [cli, rs, mesa, fdv, frec, canal, compra.has(cli) ? 1 : 0, vals.map((m, i) => U.focos[i].canales.includes(canal) ? (m.get(cli) || 0) : 0)];
+  });
+  return {v:2, venta:B.venta, focos:U.focos.map(f => ({n:f.n, tipo:f.tipo, canales:f.canales})), rows};
+}
+
+$("upGo").addEventListener("click", async () => {
+  const m = $("upMsg"), key = $("upKey").value;
+  m.className = "msg";
+  if (!key) { m.className = "msg bad"; m.textContent = "Escribí la clave de administradora"; return; }
+  if (!U.focos.length) { m.className = "msg bad"; m.textContent = "Agregá al menos un foco"; return; }
+  $("upGo").disabled = true;
+  try {
+    m.textContent = "Armando grillas…";
+    const data = buildGrillas(), stamp = {updated:new Date().toISOString()};
+    m.textContent = "Publicando…";
+    let res = await apiPut("grillas", key, Object.assign(await sealData(data), stamp));
     if (!res.ok) throw new Error(res.error || "No se pudo guardar");
-    m.className = "msg ok"; m.textContent = "¡Listo! Grilla actualizada para todos";
+    res = await apiPut("focos", key, Object.assign(await sealData(U.focos), stamp));
+    if (U.carteraNueva) { res = await apiPut("cartera", key, Object.assign(await sealData({rows:U.cartera}), stamp)); U.carteraNueva = false; }
+    m.className = "msg ok"; m.textContent = `¡Listo! ${fmtN(data.rows.length)} clientes publicados para todos`;
     G.data = null; await loadGrillas(true);
-    setTimeout(() => { $("mUp").hidden = true; $("upFile").value = ""; $("upKey").value = ""; }, 1200);
-  } catch(err) { m.className = "msg bad"; m.textContent = err.message || "Error al subir"; }
+    setTimeout(() => { $("mUp").hidden = true; $("upKey").value = ""; }, 1500);
+  } catch(err) { m.className = "msg bad"; m.textContent = err.message || "Error al publicar"; }
   $("upGo").disabled = false;
 });
 </script>
