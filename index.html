@@ -205,7 +205,7 @@ td.fx.no{color:rgba(255,255,255,.18)}
       <div class="filters">
         <select id="fSpv" aria-label="Supervisor"></select>
         <select id="fFdv" aria-label="Promotor"></select>
-        <select id="fDia" aria-label="Día de visita"></select>
+        <select id="fDia" aria-label="Frecuencia de visita"></select>
         <select id="fFoco" aria-label="Foco faltante"></select>
         <input id="fQ" class="q" type="search" placeholder="Buscar por código o razón social…" aria-label="Buscar cliente">
         <button class="clear" id="fClear">Limpiar filtros</button>
@@ -337,7 +337,7 @@ async function apiPut(k, admin, payload){
 }
 
 /* ===== Grillas ===== */
-const DIAS = ["LUN","MAR","MIE","JUE","VIE","SAB"];
+const FRECS = {"LU · JU":["LUN","JUE"], "MA · VI":["MAR","VIE"], "MI · SA":["MIE","SAB"]};
 const G = { data:null, mode:"todos", limit:200, rows:[] };
 
 function fmtDate(iso){ try { const d = new Date(iso); return d.toLocaleDateString("es-AR",{day:"2-digit",month:"2-digit"}) + " " + d.toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"}); } catch(e){ return ""; } }
@@ -369,7 +369,7 @@ function gSetup(){
   const D = G.data;
   opts($("fSpv"), "Todos los supervisores", uniq(D.rows.map(r => r[2])));
   opts($("fFdv"), "Todos los promotores", uniq(D.rows.map(r => r[3])));
-  $("fDia").innerHTML = `<option value="">Todos los días</option>` + DIAS.map(d => `<option>${d}</option>`).join("");
+  $("fDia").innerHTML = `<option value="">Todas las frecuencias</option>` + Object.keys(FRECS).map(d => `<option>${d}</option>`).join("");
   $("fFoco").innerHTML = `<option value="">Todos los focos</option>` + D.focos.map((f,i) => `<option value="${i}">Sin ${esc(f)}</option>`).join("");
   $("gHead").innerHTML = "<tr><th class='c1'>Cliente</th><th>Razón social</th><th class='sp'>Supervisor</th><th>Promotor</th><th>Frecuencia</th>" + D.focos.map(f => `<th class="fx">${esc(f)}</th>`).join("") + "</tr>";
   gRender();
@@ -377,7 +377,7 @@ function gSetup(){
 
 function gFilter(){
   const D = G.data, spv = $("fSpv").value, fdv = $("fFdv").value, dia = $("fDia").value, foco = $("fFoco").value, q = $("fQ").value.trim().toLowerCase();
-  return D.rows.filter(r => (!spv || r[2] === spv) && (!fdv || r[3] === fdv) && (!dia || String(r[4]||"").split(/[,\s]+/).includes(dia))
+  return D.rows.filter(r => (!spv || r[2] === spv) && (!fdv || r[3] === fdv) && (!dia || String(r[4]||"").toUpperCase().split(/[,\s]+/).some(x => FRECS[dia].includes(x)))
     && (foco === "" || r[5][foco] !== "1")
     && (!q || String(r[0]).includes(q) || String(r[1]||"").toLowerCase().includes(q)));
 }
