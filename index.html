@@ -111,7 +111,7 @@ td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.06);white-space:no
 tr:hover td{background:rgba(255,255,255,.04)}
 td.c1,th.c1{position:sticky;left:0;z-index:1;background:#0f1d42;font-weight:800}
 th.c1{z-index:3;background:#14244f}
-td.rs{max-width:220px;overflow:hidden;text-overflow:ellipsis}
+td.rs{max-width:260px;overflow:hidden;text-overflow:ellipsis}
 th.fx,td.fx{text-align:center;min-width:74px}
 td.fx.ok{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
 td.fx.no{color:rgba(255,255,255,.18)}
@@ -251,7 +251,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
 .snap{background:#0b1736!important;padding:16px!important}
 @media (max-width:560px){.hbtns{width:100%}.hbtns .btn-up{flex:1}}
 @media (max-width:900px){.filters{grid-template-columns:repeat(2,minmax(0,1fr))}.filters .q{grid-column:1/-1}.clear{grid-column:1/-1;padding:10px}}
-@media (max-width:560px){td.rs{max-width:150px}.sp{display:none}.vhead .btn-up{width:100%}}
+@media (max-width:560px){td.rs{max-width:118px}#vGrillas table{font-size:12px}#vGrillas th.fx{white-space:normal;min-width:52px;line-height:1.2}#vGrillas td.fx{min-width:52px}#vGrillas td,#vGrillas th{padding:8px 6px}.sp{display:none}.vhead .btn-up{width:100%}}
 @media (max-width:820px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.tiles{grid-template-columns:1fr}.top{justify-content:center}.top .brand{text-align:center}.hello{width:100%;text-align:center}}
 @media (prefers-reduced-motion:reduce){.tile,.tile::after,.btn-in{transition:none}#fizz{display:none}}
@@ -313,7 +313,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 9 · 01/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 10 · 01/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -604,7 +604,7 @@ function gSetup(){
   opts($("fFdv"), "Todos los promotores", uniq(rows.map(r => r[3])));
   $("fDia").innerHTML = `<option value="">Todas las frecuencias</option>` + Object.keys(FRECS).map(d => `<option>${d}</option>`).join("");
   $("fFoco").innerHTML = `<option value="">Todos los focos</option>` + focos.map(f => `<option value="${f.i}">Sin ${esc(f.n)}</option>`).join("");
-  $("gHead").innerHTML = "<tr><th class='c1'>Cliente</th><th>Razón social</th><th class='sp'>Supervisor</th><th>Promotor</th><th>Frecuencia</th>" + focos.map(f => `<th class="fx">${esc(f.n)}</th>`).join("") + "</tr>";
+  $("gHead").innerHTML = "<tr><th class='c1'>Cliente</th><th>Razón social</th>" + focos.map(f => `<th class="fx">${esc(f.n)}</th>`).join("") + "</tr>";
   gRender();
 }
 
@@ -635,9 +635,9 @@ function gRender(){
 
   const rows = G.mode === "comp" ? base.filter(r => r[6]) : G.mode === "nocomp" ? base.filter(r => !r[6]) : base;
   $("gCount").textContent = `${fmtN(rows.length)} clientes`;
-  $("gRows").innerHTML = rows.length ? rows.slice(0, G.limit).map(r => `<tr><td class="c1">${esc(r[0])}</td><td class="rs" title="${esc(r[1])}">${esc(r[1])}</td><td class="sp">${esc(tc(r[2]))}</td><td>${esc(tc(r[3]))}</td><td>${esc(r[4])}</td>` +
+  $("gRows").innerHTML = rows.length ? rows.slice(0, G.limit).map(r => `<tr><td class="c1">${esc(r[0])}</td><td class="rs" title="${esc(r[1])}">${esc(r[1])}</td>` +
       focos.map(f => { const v = r[7][f.i]; return !v ? `<td class="fx no">·</td>` : f.tipo === "skus" ? `<td class="fx num">${v}</td>` : `<td class="fx ok">X</td>`; }).join("") + "</tr>").join("")
-    : `<tr><td colspan="${5 + focos.length}" class="empty">No hay clientes con esos filtros.</td></tr>`;
+    : `<tr><td colspan="${2 + focos.length}" class="empty">No hay clientes con esos filtros.</td></tr>`;
   $("gMore").hidden = rows.length <= G.limit;
 }
 ["fSpv","fFdv","fDia","fFoco"].forEach(id => $(id).addEventListener("change", () => { G.limit = 200; gRender(); }));
