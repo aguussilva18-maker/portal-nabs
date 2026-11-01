@@ -237,6 +237,19 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
 .vscroll img{display:block;width:1300px;max-width:none;height:auto;min-width:100%;border-radius:10px;background:#fff}
 .vx{position:absolute;z-index:2;top:calc(10px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px))}
 @media (min-width:1340px){.vscroll img{width:auto;max-width:100%;min-width:0;margin:0 auto}}
+/* ===== Acciones / cierres ===== */
+.acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0}
+.acts > :first-child{margin:0 auto 0 0}
+.act{font:700 13px var(--body);color:var(--ink);background:var(--glass);border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer}
+.act:hover{border-color:var(--fizz)}
+.act:disabled{opacity:.6;cursor:wait}
+.hbtns{display:flex;gap:8px;flex-wrap:wrap}
+.btn-up.ghost{background:var(--glass);color:var(--ink);border:1px solid var(--line)}
+.cz-bar{display:grid;gap:10px;margin-bottom:16px}
+.sel{font:600 15px var(--body);color:var(--ink);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+.sel option{color:#0a1430}
+.snap{background:#0b1736!important;padding:16px!important}
+@media (max-width:560px){.hbtns{width:100%}.hbtns .btn-up{flex:1}}
 @media (max-width:900px){.filters{grid-template-columns:repeat(2,minmax(0,1fr))}.filters .q{grid-column:1/-1}.clear{grid-column:1/-1;padding:10px}}
 @media (max-width:560px){td.rs{max-width:150px}.sp{display:none}.vhead .btn-up{width:100%}}
 @media (max-width:820px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -300,7 +313,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 8 · 31/10</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 9 · 01/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -321,7 +334,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
         <button class="clear" id="fClear">Limpiar filtros</button>
       </div>
       <div class="focos" id="gFocos"></div>
-      <p class="count" id="gCount"></p>
+      <div class="acts"><p class="count" id="gCount"></p><button class="act" id="gCopy">📋 Copiar imagen</button><button class="act" id="gXls">⬇ Descargar Excel</button></div>
       <div class="tbl"><table><thead id="gHead"></thead><tbody id="gRows"></tbody></table></div>
       <button class="more" id="gMore" hidden>Ver más clientes</button>
     </div>
@@ -331,14 +344,16 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
   <section id="vObj" class="view" hidden>
     <div class="vhead">
       <button class="back" data-back>← Volver</button>
-      <div class="vtitle"><h1>Objetivos del mes</h1><p id="oUpd">Cargando…</p></div>
-      <button class="btn-up" id="oUpBtn">⬆ Cargar objetivos</button>
+      <div class="vtitle"><h1 id="oTitle">Objetivos del mes</h1><p id="oUpd">Cargando…</p></div>
+      <div class="hbtns"><button class="btn-up ghost" id="oCloseBtn">🔒 Pasar a cierre</button><button class="btn-up" id="oUpBtn">⬆ Cargar objetivos</button></div>
     </div>
+    <div class="cz-bar" id="czBar" hidden><div class="tabs" id="czYears" role="tablist"></div><div class="chips" id="czMonths"></div></div>
     <div id="oBody">
       <div class="chips" id="oChips"></div>
-      <div class="canales" id="oCanales"></div>
-      <div class="rk-banner"><div class="rk-t">🏆 RANKING 🏆</div><div class="rk-s">Cumplimiento de focos del mes — ¡vamos con todo, se puede llegar! 💪</div></div>
-      <div class="rk-cols" id="oRank"></div>
+      <div id="oCardsWrap"><div class="canales" id="oCanales"></div></div>
+      <div class="acts"><span></span><button class="act" id="oCopyCards">📋 Copiar tarjetas</button><button class="act" id="oCopyRank">📋 Copiar ranking</button></div>
+      <div id="oRankWrap"><div class="rk-banner"><div class="rk-t">🏆 RANKING 🏆</div><div class="rk-s" id="rkSub">Cumplimiento de focos del mes — ¡vamos con todo, se puede llegar! 💪</div></div>
+      <div class="rk-cols" id="oRank"></div></div>
       <p class="count">🥇🥈🥉 podio de cada equipo · 🔥 tercio de arriba · 💪 tercio del medio · ⚡ con margen para crecer · Tocá un promotor para ver su detalle.</p>
     </div>
     <div class="empty" id="oEmpty" hidden></div>
@@ -366,6 +381,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
       <button class="btn-up" id="iUpBtn">⬆ Cambiar imagen</button>
     </div>
     <div class="tabs" id="iTabs" role="tablist"></div>
+    <div class="acts"><span></span><button class="act" id="iCopy">📋 Copiar imagen</button><button class="act" id="iDown">⬇ Descargar</button></div>
     <div id="iBody"><button class="img-card" id="iOpen" aria-label="Ver imagen en grande"><img id="iPic" alt=""><span class="zoom">🔍 Tocá para ver en grande</span></button></div>
     <div class="empty" id="iEmpty" hidden></div>
   </section>
@@ -383,6 +399,21 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
         <input id="iKey" type="password" autocomplete="off">
         <button class="btn-in" id="iGo" type="button">PUBLICAR IMAGEN</button>
         <div class="msg" id="iMsg"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="mClose" hidden>
+    <div class="sheet" role="dialog" aria-labelledby="cTitle">
+      <div class="sheet-head"><h2 id="cTitle">Pasar el mes a cierre</h2><button class="x" id="cClose" aria-label="Cerrar">×</button></div>
+      <div class="step">
+        <p class="hint">Guarda una foto fija de los objetivos y la venta de hoy en <b>Cierres</b>. Hacelo después de publicar la base plana definitiva del mes. Si ya existe un cierre de ese mes, se reemplaza.</p>
+        <div class="row2"><div style="flex:1;display:grid;gap:6px"><label class="fl" for="cMes">MES</label><select id="cMes" class="sel"></select></div><div style="flex:1;display:grid;gap:6px"><label class="fl" for="cAnio">AÑO</label><select id="cAnio" class="sel"></select></div></div>
+        <div class="resume" id="cResume"></div>
+        <label class="fl" for="cKey">CLAVE DE ADMINISTRADORA</label>
+        <input id="cKey" type="password" autocomplete="off">
+        <button class="btn-in" id="cGo" type="button">GUARDAR CIERRE</button>
+        <div class="msg" id="cMsg"></div>
       </div>
     </div>
   </div>
@@ -422,6 +453,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
 <div class="toast" id="toast" hidden></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 /* Burbujas de fondo */
 (function(){
@@ -448,7 +480,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbwgGTcWaZ0z7hCpbqEnXl8d
 /* Links de los botones (encriptados). Para cambiarlos usá editor.html */
 const PAYLOAD = {"iter":150000,"salt":"oDf/SsVP4Iwz8g/d/hvV1Q==","iv":"/Z6HxyD+MiiynQMU","data":"hy6POKZ4ljvNBQ/zsByZCD3PXdYjPz5R4BH5JmCgFjVdRxAldoxJwRci3Pam/SKv3UjuUhgkAoP9HxcjSv4HVoszQZ5zS5OR9x+JmQFe9SRXLWqQJx3pFRMHf9VrGUKL/iOKyaVDdEAUUh9blZKVPE2770d3nK61DtqjqOrapf7w4MoHs3kxT93pDgvoacDF4rFwhoeTDcCpkhI="};
 /* Botones que ya tienen tablero adentro del portal */
-const INTERNAL = { grillas: "vGrillas", objetivos: "vObj", ptc: "vImg", ptr: "vImg" };
+const INTERNAL = { grillas: "vGrillas", objetivos: "vObj", cierres: "vObj", ptc: "vImg", ptr: "vImg" };
 
 const $ = id => document.getElementById(id);
 const b64d = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
@@ -507,7 +539,7 @@ document.querySelectorAll("[data-back]").forEach(b => b.addEventListener("click"
 
 document.querySelectorAll(".tile[data-k]").forEach(b => b.addEventListener("click", () => {
   const k = b.dataset.k;
-  if (INTERNAL[k]) { go(INTERNAL[k]); if (k === "grillas") loadGrillas(); if (k === "objetivos") loadObj(); if (k === "ptc" || k === "ptr") loadImg(k); return; }
+  if (INTERNAL[k]) { go(INTERNAL[k]); if (k === "grillas") loadGrillas(); if (k === "objetivos") loadObj(); if (k === "cierres") loadCierres(); if (k === "ptc" || k === "ptr") loadImg(k); return; }
   const url = LINKS[k];
   if (url && /^https?:\/\//i.test(url)) { window.open(url, "_blank", "noopener"); return; }
   toast(b.querySelector(".name").textContent + ": próximamente");
@@ -670,7 +702,7 @@ function parseBase(aoa){
   const spvOf = {};
   for (const [f, m] of Object.entries(spvCount)) spvOf[f] = Object.entries(m).sort((a,b) => b[1]-a[1])[0][0];
   const cols = H.map((h,i) => ({h, i})).filter(c => c.h && !/cantidad|importe|fecha|^año$|^mes$/i.test(c.h));
-  return {H, N, rows, spvOf, iProd, cols, venta: maxF ? maxF.toLocaleDateString("es-AR",{day:"2-digit",month:"2-digit"}) : ""};
+  return {H, N, rows, spvOf, iProd, cols, venta: maxF ? maxF.toLocaleDateString("es-AR",{day:"2-digit",month:"2-digit"}) : "", ventaISO: maxF ? maxF.toISOString() : ""};
 }
 
 function parseMaestro(aoa){
@@ -811,7 +843,7 @@ function buildAvances(){
     const u = norm(x.r[iU]), k = u === "ung" ? "Vol UNG (HL)" : u === "aguas eco" ? "Vol Aguas (HL)" : null; if (!k) continue;
     (prom[x.sv] ||= {}); prom[x.sv][k] = (prom[x.sv][k] || 0) + (Number(x.r[iHL]) || 0);
   }
-  return {v:1, venta:B.venta, prom};
+  return {v:1, venta:B.venta, ventaISO:B.ventaISO, prom};
 }
 
 $("upGo").addEventListener("click", async () => {
@@ -827,7 +859,7 @@ $("upGo").addEventListener("click", async () => {
     let res = await apiPut("grillas", key, Object.assign(await sealData(data), stamp));
     if (!res.ok) throw new Error(res.error || "No se pudo guardar");
     res = await apiPut("focos", key, Object.assign(await sealData(U.focos), stamp));
-    res = await apiPut("avances", key, Object.assign(await sealData(buildAvances()), stamp)); O.av = null;
+    res = await apiPut("avances", key, Object.assign(await sealData(buildAvances()), stamp)); O.cur = null;
     if (U.carteraNueva) { res = await apiPut("cartera", key, Object.assign(await sealData({rows:U.cartera}), stamp)); U.carteraNueva = false; }
     m.className = "msg ok"; m.textContent = `¡Listo! ${fmtN(data.rows.length)} clientes publicados para todos`;
     G.data = null; await loadGrillas(true);
@@ -843,15 +875,25 @@ const isVol = k => VOLK.includes(k);
 const pctCls = p => p >= 90 ? "g" : p >= 70 ? "w" : "c";
 function oEmpty(html){ $("oBody").hidden = true; $("oEmpty").hidden = false; $("oEmpty").innerHTML = html; }
 
+function setObjMode(mode){
+  O.mode = mode; O.sup = ""; O.open = null;
+  const c = mode === "cierre";
+  $("oTitle").textContent = c ? "Cierres" : "Objetivos del mes";
+  $("czBar").hidden = !c; $("oUpBtn").hidden = c; $("oCloseBtn").hidden = c;
+  $("rkSub").textContent = c ? "Cumplimiento final de focos del mes 🏁" : "Cumplimiento de focos del mes — ¡vamos con todo, se puede llegar! 💪";
+}
 async function loadObj(force){
-  if (O.obj && O.av && !force) return;
+  setObjMode("actual");
+  if (O.cur && !force) { O.obj = O.cur.obj; O.av = O.cur.av; $("oUpd").textContent = O.cur.upd; $("oBody").hidden = false; $("oEmpty").hidden = true; oRender(); return; }
+  $("oBody").hidden = true; $("oEmpty").hidden = true;
   $("oUpd").textContent = "Cargando…";
   try {
     const [po, pa] = await Promise.all([apiGet("objetivos"), apiGet("avances")]);
     if (!po || !po.data) { $("oUpd").textContent = "Sin objetivos todavía"; oEmpty("Todavía no hay objetivos cargados.<br>Tocá <b>⬆ Cargar objetivos</b> y subí el Excel del mes."); return; }
     if (!pa || !pa.data) { $("oUpd").textContent = "Falta la venta"; oEmpty("Los objetivos están cargados, pero falta la venta.<br>Publicá la base plana desde <b>Grillas → ⬆ Actualizar grillas</b>."); return; }
     O.obj = await openData(po); O.av = await openData(pa);
-    $("oUpd").textContent = (O.av.venta ? "Venta al " + O.av.venta + " · " : "") + "Actualizado " + fmtDate(pa.updated);
+    O.cur = {obj:O.obj, av:O.av, upd:(O.av.venta ? "Venta al " + O.av.venta + " · " : "") + "Actualizado " + fmtDate(pa.updated)};
+    $("oUpd").textContent = O.cur.upd;
     $("oBody").hidden = false; $("oEmpty").hidden = true;
     oRender();
   } catch(e) { $("oUpd").textContent = "Error al cargar"; oEmpty("No se pudieron abrir los objetivos. Revisá tu conexión y volvé a entrar."); }
@@ -966,7 +1008,7 @@ $("oGo").addEventListener("click", async () => {
     const res = await apiPut("objetivos", key, Object.assign(await sealData(data), {updated:new Date().toISOString(), name:f.name}));
     if (!res.ok) throw new Error(res.error || "No se pudo guardar");
     m.className = "msg ok"; m.textContent = "¡Listo! Objetivos publicados";
-    O.obj = null; await loadObj(true);
+    O.cur = null; await loadObj(true);
     setTimeout(() => { $("mObj").hidden = true; $("oKey").value = ""; }, 1300);
   } catch(err) { m.className = "msg bad"; m.textContent = err.message || "Error al publicar"; }
   $("oGo").disabled = false;
@@ -1039,6 +1081,149 @@ $("iGo").addEventListener("click", async () => {
   } catch(err) { m.className = "msg bad"; m.textContent = err.message || "Error al publicar"; }
   $("iGo").disabled = false;
 });
+/* ===== Cierres por año y mes ===== */
+const MESES = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+const CZ = { idx:null, y:null, m:null, cache:{} };
+const czKey = (y, m) => "cierre_" + y + "_" + String(m).padStart(2, "0");
+async function loadCzIdx(){
+  const p = await apiGet("cierres");
+  return p && p.data ? (await openData(p)).list || [] : [];
+}
+async function loadCierres(){
+  setObjMode("cierre");
+  $("oBody").hidden = true; $("oEmpty").hidden = true; $("oUpd").textContent = "Cargando…";
+  try {
+    CZ.idx = await loadCzIdx();
+    if (!CZ.idx.length) { $("oUpd").textContent = "Sin cierres todavía"; $("czBar").hidden = true; oEmpty("Todavía no hay meses cerrados.<br>Se cargan desde <b>Objetivos del mes → 🔒 Pasar a cierre</b>."); return; }
+    const last = CZ.idx.slice().sort((a,b) => b.y - a.y || b.m - a.m)[0];
+    if (!CZ.y || !CZ.idx.some(e => e.y === CZ.y && e.m === CZ.m)) { CZ.y = last.y; CZ.m = last.m; }
+    czBarRender(); await czShow();
+  } catch(e) { $("oUpd").textContent = "Error al cargar"; oEmpty("No se pudieron abrir los cierres. Revisá tu conexión y volvé a entrar."); }
+}
+function czBarRender(){
+  const years = [...new Set(CZ.idx.map(e => e.y))].sort((a,b) => b - a);
+  $("czYears").innerHTML = years.map(y => `<button class="tab${y===CZ.y?" on":""}" data-y="${y}" role="tab">${y}</button>`).join("");
+  const ms = CZ.idx.filter(e => e.y === CZ.y).map(e => e.m).sort((a,b) => a - b);
+  $("czMonths").innerHTML = ms.map(m => `<button class="chip${m===CZ.m?" on":""}" data-m="${m}">${MESES[m-1]}</button>`).join("");
+}
+async function czShow(){
+  const k = czKey(CZ.y, CZ.m);
+  $("oUpd").textContent = "Cargando…"; $("oBody").hidden = true;
+  let c = CZ.cache[k];
+  if (!c) { const p = await apiGet(k); if (!p || !p.data) { oEmpty("No se encontró ese cierre."); return; } c = await openData(p); CZ.cache[k] = c; }
+  if (O.mode !== "cierre" || czKey(CZ.y, CZ.m) !== k) return;
+  O.obj = c.obj; O.av = c.av; O.sup = ""; O.open = null;
+  $("oUpd").textContent = "Cierre " + MESES[CZ.m-1] + " " + CZ.y + (c.av.venta ? " · venta al " + c.av.venta : "");
+  $("oBody").hidden = false; $("oEmpty").hidden = true;
+  oRender();
+}
+$("czYears").addEventListener("click", e => { const b = e.target.closest(".tab"); if (!b) return; CZ.y = +b.dataset.y; CZ.m = Math.max(...CZ.idx.filter(x => x.y === CZ.y).map(x => x.m)); czBarRender(); czShow(); });
+$("czMonths").addEventListener("click", e => { const b = e.target.closest(".chip"); if (!b) return; CZ.m = +b.dataset.m; czBarRender(); czShow(); });
+
+/* Pasar el mes actual a cierre */
+$("oCloseBtn").addEventListener("click", () => {
+  if (!O.cur) { toast("Primero tienen que estar cargados los objetivos y la venta"); return; }
+  const av = O.cur.av; let y, m;
+  if (av.ventaISO) { const d = new Date(av.ventaISO); y = d.getFullYear(); m = d.getMonth() + 1; }
+  else { const now = new Date(); m = av.venta ? +av.venta.split("/")[1] : now.getMonth() + 1; y = now.getFullYear() - (m > now.getMonth() + 1 ? 1 : 0); }
+  $("cMes").innerHTML = MESES.map((n,i) => `<option value="${i+1}"${i+1===m?" selected":""}>${n}</option>`).join("");
+  const ys = [y - 1, y, y + 1];
+  $("cAnio").innerHTML = ys.map(v => `<option${v===y?" selected":""}>${v}</option>`).join("");
+  $("cResume").innerHTML = `Se guardan <b>${fmtN(O.cur.obj.rows.length)}</b> promotores con sus objetivos y la venta${av.venta ? " al <b>" + av.venta + "</b>" : ""}.`;
+  $("cMsg").textContent = ""; $("mClose").hidden = false;
+});
+$("cClose").addEventListener("click", () => $("mClose").hidden = true);
+$("cGo").addEventListener("click", async () => {
+  const m = $("cMsg"), key = $("cKey").value, y = +$("cAnio").value, mes = +$("cMes").value;
+  m.className = "msg";
+  if (!key) { m.className = "msg bad"; m.textContent = "Escribí la clave de administradora"; return; }
+  $("cGo").disabled = true;
+  try {
+    m.textContent = "Guardando cierre…";
+    const stamp = {updated:new Date().toISOString()};
+    let res = await apiPut(czKey(y, mes), key, Object.assign(await sealData({y, m:mes, obj:O.cur.obj, av:O.cur.av}), stamp));
+    if (!res.ok) throw new Error(res.error || "No se pudo guardar");
+    const list = (await loadCzIdx()).filter(e => !(e.y === y && e.m === mes));
+    list.push({y, m:mes});
+    res = await apiPut("cierres", key, Object.assign(await sealData({list}), stamp));
+    if (!res.ok) throw new Error(res.error || "No se pudo guardar el índice");
+    delete CZ.cache[czKey(y, mes)]; CZ.y = y; CZ.m = mes;
+    m.className = "msg ok"; m.textContent = `¡Listo! ${MESES[mes-1]} ${y} quedó en Cierres`;
+    setTimeout(() => { $("mClose").hidden = true; $("cKey").value = ""; }, 1500);
+  } catch(err) { m.className = "msg bad"; m.textContent = err.message || "Error al guardar"; }
+  $("cGo").disabled = false;
+});
+
+/* ===== Copiar imagen / descargar ===== */
+function saveBlob(blob, name){
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+/* Copia al portapapeles (para pegar en WhatsApp). Si el navegador no deja, descarga la imagen. */
+async function copyBlob(blobPromise, name, btn){
+  const txt = btn.textContent; btn.disabled = true; btn.textContent = "Preparando…";
+  try {
+    if (!navigator.clipboard || !window.ClipboardItem) throw new Error("sin portapapeles");
+    await navigator.clipboard.write([new ClipboardItem({"image/png": blobPromise})]);
+    toast("✓ Imagen copiada — pegala en WhatsApp");
+  } catch(e) {
+    try { saveBlob(await blobPromise, name); toast("Se descargó la imagen"); } catch(e2) { toast("No se pudo generar la imagen"); }
+  }
+  btn.disabled = false; btn.textContent = txt;
+}
+/* Saca una foto de un bloque de la página */
+function snapBlob(el, prep){
+  return new Promise((ok, bad) => {
+    if (!window.html2canvas) return bad(new Error("sin html2canvas"));
+    const w = Math.max(el.scrollWidth, el.offsetWidth);
+    html2canvas(el, {backgroundColor:"#0b1736", scale:2, useCORS:true, windowWidth:Math.max(innerWidth, w + 40),
+      onclone: doc => { const c = doc.getElementById(el.id); c.classList.add("snap"); if (prep) prep(c); }})
+      .then(cv => cv.toBlob(b => b ? ok(b) : bad(new Error("vacía")), "image/png")).catch(bad);
+  });
+}
+const today = () => new Date().toISOString().slice(0,10);
+const slug = s => norm(s).replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "") || "todos";
+
+$("gCopy").addEventListener("click", () => {
+  const who = $("fFdv").value || $("fSpv").value || G.canal;
+  copyBlob(snapBlob($("gBody"), c => {
+    c.querySelectorAll(".filters,#gMore,.acts,#gTabs").forEach(x => x.remove());
+    const tb = c.querySelector(".tbl"); tb.style.maxHeight = "none"; tb.style.overflow = "visible";
+    const tag = c.ownerDocument.createElement("div");
+    tag.style.cssText = "font:800 18px Unbounded,Arial Black,sans-serif;color:#fff;margin:0 0 12px";
+    tag.textContent = "Grilla " + G.canal + " · " + tc(who) + (G.data.venta ? " · venta al " + G.data.venta : "");
+    c.prepend(tag);
+  }), "grilla_" + slug(who) + ".png", $("gCopy"));
+});
+$("gXls").addEventListener("click", () => {
+  if (!G.data) return;
+  const focos = canalFocos(), base = gFilter();
+  const rows = G.mode === "comp" ? base.filter(r => r[6]) : G.mode === "nocomp" ? base.filter(r => !r[6]) : base;
+  const head = ["Cliente","Razón social","Supervisor","Promotor","Frecuencia","Comprador", ...focos.map(f => f.n)];
+  const data = rows.map(r => [isNaN(+r[0]) ? r[0] : +r[0], r[1], tc(r[2]), tc(r[3]), r[4], r[6] ? "X" : "", ...focos.map(f => { const v = r[7][f.i]; return !v ? "" : f.tipo === "skus" ? v : "X"; })]);
+  const ws = XLSX.utils.aoa_to_sheet([head, ...data]);
+  ws["!cols"] = head.map((h,i) => ({wch: i === 1 ? 32 : Math.max(10, h.length + 2)}));
+  ws["!autofilter"] = {ref: XLSX.utils.encode_range({s:{r:0,c:0}, e:{r:data.length, c:head.length-1}})};
+  const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Grilla " + G.canal.replace("+",""));
+  const who = $("fFdv").value || $("fSpv").value || G.canal;
+  XLSX.writeFile(wb, "grilla_" + slug(who) + "_" + today() + ".xlsx");
+  toast("⬇ Excel descargado (" + fmtN(rows.length) + " clientes)");
+});
+const objName = what => (O.mode === "cierre" ? "cierre_" + CZ.y + "_" + String(CZ.m).padStart(2,"0") : "objetivos") + "_" + what + "_" + slug(O.sup) + ".png";
+$("oCopyCards").addEventListener("click", () => copyBlob(snapBlob($("oCardsWrap"), c => { const p = c.querySelector(".pt-wrap"); if (p) p.style.overflow = "visible"; }), objName("tarjetas"), $("oCopyCards")));
+$("oCopyRank").addEventListener("click", () => copyBlob(snapBlob($("oRankWrap"), c => c.querySelectorAll("tr.det").forEach(x => x.remove())), objName("ranking"), $("oCopyRank")));
+
+function imgBlob(type){
+  return new Promise((ok, bad) => {
+    const im = new Image();
+    im.onload = () => { const c = document.createElement("canvas"); c.width = im.naturalWidth; c.height = im.naturalHeight; c.getContext("2d").drawImage(im, 0, 0); c.toBlob(b => b ? ok(b) : bad(new Error("vacía")), type, .92); };
+    im.onerror = bad; im.src = $("iPic").src;
+  });
+}
+const imgName = ext => (IV.view === "ptc" ? "PTC" : "PTR_" + slug(IMG_VIEWS.ptr.slots[IV.slot].n)) + "." + ext;
+$("iCopy").addEventListener("click", () => { if (!$("iPic").src) return; copyBlob(imgBlob("image/png"), imgName("png"), $("iCopy")); });
+$("iDown").addEventListener("click", async () => { if (!$("iPic").src) return; try { saveBlob(await imgBlob("image/jpeg"), imgName("jpg")); toast("⬇ Imagen descargada"); } catch(e) { toast("No se pudo descargar"); } });
+
 </script>
 </body>
 </html>
