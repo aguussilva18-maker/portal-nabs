@@ -237,6 +237,31 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
 .vscroll img{display:block;width:1300px;max-width:none;height:auto;min-width:100%;border-radius:10px;background:#fff}
 .vx{position:absolute;z-index:2;top:calc(10px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px))}
 @media (min-width:1340px){.vscroll img{width:auto;max-width:100%;min-width:0;margin:0 auto}}
+/* ===== Frescura ===== */
+.fr-leg{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.fr-leg i{width:12px;height:12px;border-radius:3px;background:rgba(255,77,109,.35);border:1px solid var(--heat)}
+.fr-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline;margin-bottom:12px}
+.fr-head b{font:900 18px var(--display);letter-spacing:.06em}
+.fr-head span{font-size:13px;color:var(--muted)}.fr-head span strong{color:var(--ink)}
+.fr-grid{columns:3 320px;column-gap:16px}
+.fr-grid>.fr-cat,.fr-grid>.fr-empty{break-inside:avoid;margin-bottom:16px;display:block}
+.fr-cat{--c:#5b5bd6;background:var(--glass);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.fr-cat h3{margin:0;padding:12px 14px;font:900 15px var(--display);letter-spacing:.1em;display:flex;justify-content:space-between;align-items:center;background:var(--c);color:#fff}
+.fr-cat h3 small{font:700 11px var(--body);letter-spacing:0;opacity:.85}
+.fr{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+.fr th{position:static;background:rgba(255,255,255,.05);font:700 10px var(--body);letter-spacing:.1em;color:var(--muted);text-align:left;padding:7px 10px;border-bottom:1px solid var(--line)}
+.fr th.v,.fr td.v{text-align:right}
+.fr td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:middle;white-space:normal}
+.fr td.cd{color:var(--muted);font-weight:700;width:52px}
+.fr td.v{white-space:nowrap;font-weight:800}
+.fr td.v small{display:block;font:600 10.5px var(--body);color:var(--muted)}
+.fr tr.risk td{background:rgba(255,77,109,.16)}
+.fr tr.risk td.cd{color:#ff8fa3}
+.fr tr.risk td.ds{font-weight:800}
+.dpill{display:inline-block;margin-top:3px;font:800 10.5px var(--body);color:#fff;background:var(--heat);border-radius:999px;padding:2px 8px}
+.fr-empty{padding:14px;color:var(--muted);font-size:13px}
+.fr-cat.miss h3{background:rgba(255,255,255,.08);color:var(--ink);border-bottom:3px solid var(--c)}
+
 /* ===== Acciones / cierres ===== */
 .acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0}
 .acts > :first-child{margin:0 auto 0 0}
@@ -307,13 +332,13 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
     <div class="sec">
       <h3>PRODUCTO</h3>
       <div class="tiles">
-        <button class="tile" data-k="frescura" style="--c:var(--fizz)"><span class="dot">F</span><span><span class="name">Frescura</span><span class="sub">Vencimientos de lote por SKU</span></span><span class="go">→</span></button>
+        <button class="tile" data-k="frescura" style="--c:var(--fizz)"><span class="dot">F</span><span><span class="name">Frescura</span><span class="sub">Vencimientos de lote y faltantes de stock</span></span><span class="go">→</span></button>
         <button class="tile" data-k="combos" style="--c:var(--tang)"><span class="dot">+</span><span><span class="name">Combos</span><span class="sub">Combos habilitados del mes</span></span><span class="go">→</span></button>
       </div>
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 10 · 01/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 11 · 01/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -403,6 +428,41 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
     </div>
   </div>
 
+  <section id="vFr" class="view" hidden>
+    <div class="vhead">
+      <button class="back" data-back>← Volver</button>
+      <div class="vtitle"><h1>Frescura</h1><p id="fUpd">Cargando…</p></div>
+      <button class="btn-up" id="fUpBtn">⬆ Actualizar frescura</button>
+    </div>
+    <div id="fBody">
+      <div class="tabs" id="fTabs" role="tablist"></div>
+      <div class="acts"><span class="fr-leg"><i></i> Menos de 60 días para vencer</span><button class="act" id="fCopy">📋 Copiar imagen</button></div>
+      <div id="fSnap"><div class="fr-head" id="fHead"></div><div class="fr-grid" id="fGrid"></div></div>
+    </div>
+    <div class="empty" id="fEmpty" hidden></div>
+  </section>
+
+  <div class="modal" id="mFr" hidden>
+    <div class="sheet" role="dialog" aria-labelledby="frTitle">
+      <div class="sheet-head"><h2 id="frTitle">Actualizar frescura</h2><button class="x" id="frClose" aria-label="Cerrar">×</button></div>
+      <div class="step">
+        <label class="fl" for="frFile">ARCHIVO DE FRESCURA (bloqueo y prebloqueo)</label>
+        <input id="frFile" class="file" type="file" accept=".xlsx,.xls">
+        <label class="fl" for="frSkus">LISTA DE SKUs <em id="frSkusHint">(opcional si no cambió)</em></label>
+        <input id="frSkus" class="file" type="file" accept=".xlsx,.xls">
+        <button class="btn-in" id="frRead" type="button">LEER ARCHIVOS</button>
+        <div class="msg" id="frReadMsg"></div>
+        <div class="resume" id="frResume" hidden></div>
+      </div>
+      <div class="step" id="frPub" hidden>
+        <label class="fl" for="frKey">CLAVE DE ADMINISTRADORA</label>
+        <input id="frKey" type="password" autocomplete="off">
+        <button class="btn-in" id="frGo" type="button">PUBLICAR FRESCURA</button>
+        <div class="msg" id="frMsg"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal" id="mClose" hidden>
     <div class="sheet" role="dialog" aria-labelledby="cTitle">
       <div class="sheet-head"><h2 id="cTitle">Pasar el mes a cierre</h2><button class="x" id="cClose" aria-label="Cerrar">×</button></div>
@@ -480,7 +540,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbwgGTcWaZ0z7hCpbqEnXl8d
 /* Links de los botones (encriptados). Para cambiarlos usá editor.html */
 const PAYLOAD = {"iter":150000,"salt":"oDf/SsVP4Iwz8g/d/hvV1Q==","iv":"/Z6HxyD+MiiynQMU","data":"hy6POKZ4ljvNBQ/zsByZCD3PXdYjPz5R4BH5JmCgFjVdRxAldoxJwRci3Pam/SKv3UjuUhgkAoP9HxcjSv4HVoszQZ5zS5OR9x+JmQFe9SRXLWqQJx3pFRMHf9VrGUKL/iOKyaVDdEAUUh9blZKVPE2770d3nK61DtqjqOrapf7w4MoHs3kxT93pDgvoacDF4rFwhoeTDcCpkhI="};
 /* Botones que ya tienen tablero adentro del portal */
-const INTERNAL = { grillas: "vGrillas", objetivos: "vObj", cierres: "vObj", ptc: "vImg", ptr: "vImg" };
+const INTERNAL = { grillas: "vGrillas", objetivos: "vObj", cierres: "vObj", ptc: "vImg", ptr: "vImg", frescura: "vFr" };
 
 const $ = id => document.getElementById(id);
 const b64d = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
@@ -515,7 +575,7 @@ async function openData(p){
 
 /* ===== Navegación ===== */
 function go(view){
-  ["login","hub","vGrillas","vObj","vImg"].forEach(id => $(id).hidden = id !== view);
+  ["login","hub","vGrillas","vObj","vImg","vFr"].forEach(id => $(id).hidden = id !== view);
   scrollTo(0,0);
 }
 function toast(msg){ $("toast").textContent = msg; $("toast").hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => $("toast").hidden = true, 2600); }
@@ -539,7 +599,7 @@ document.querySelectorAll("[data-back]").forEach(b => b.addEventListener("click"
 
 document.querySelectorAll(".tile[data-k]").forEach(b => b.addEventListener("click", () => {
   const k = b.dataset.k;
-  if (INTERNAL[k]) { go(INTERNAL[k]); if (k === "grillas") loadGrillas(); if (k === "objetivos") loadObj(); if (k === "cierres") loadCierres(); if (k === "ptc" || k === "ptr") loadImg(k); return; }
+  if (INTERNAL[k]) { go(INTERNAL[k]); if (k === "grillas") loadGrillas(); if (k === "objetivos") loadObj(); if (k === "cierres") loadCierres(); if (k === "frescura") loadFr(); if (k === "ptc" || k === "ptr") loadImg(k); return; }
   const url = LINKS[k];
   if (url && /^https?:\/\//i.test(url)) { window.open(url, "_blank", "noopener"); return; }
   toast(b.querySelector(".name").textContent + ": próximamente");
@@ -1223,6 +1283,151 @@ function imgBlob(type){
 const imgName = ext => (IV.view === "ptc" ? "PTC" : "PTR_" + slug(IMG_VIEWS.ptr.slots[IV.slot].n)) + "." + ext;
 $("iCopy").addEventListener("click", () => { if (!$("iPic").src) return; copyBlob(imgBlob("image/png"), imgName("png"), $("iCopy")); });
 $("iDown").addEventListener("click", async () => { if (!$("iPic").src) return; try { saveBlob(await imgBlob("image/jpeg"), imgName("jpg")); toast("⬇ Imagen descargada"); } catch(e) { toast("No se pudo descargar"); } });
+
+
+/* ===== Frescura ===== */
+const FR_CATS = [
+  {n:"Single Serve", c:"#5149d6"}, {n:"Gatorade", c:"#e2780f"}, {n:"MS Familiares", c:"#1f8a4c"},
+  {n:"Energía", c:"#c0302b"}, {n:"Saborizadas", c:"#2465b8"}
+];
+/* Categoría por descripción (si la lista de SKUs trae columna Categoría, manda esa) */
+function frCat(desc){
+  const d = String(desc).toUpperCase();
+  if (/GATORADE/.test(d)) return "Gatorade";
+  if (/RED ?BULL|^RB |ROCKSTAR/.test(d)) return "Energía";
+  if (/H2OH/.test(d)) return "Saborizadas";
+  if (/1500|1\.500|2000|2\.000|2250|2\.250|3000|3\.000|1,5|2,25/.test(d)) return "MS Familiares";
+  return "Single Serve";
+}
+const FRV = { data:null, tab:"fr" };
+const fdate = iso => { const d = new Date(iso); return d.getUTCDate() + "/" + (d.getUTCMonth() + 1) + "/" + d.getUTCFullYear(); };
+
+async function loadFr(force){
+  if (FRV.data && !force) return frRender();
+  $("fUpd").textContent = "Cargando…"; $("fBody").hidden = true; $("fEmpty").hidden = true;
+  try {
+    const p = await apiGet("frescura");
+    if (!p || !p.data) { $("fUpd").textContent = "Sin datos todavía"; $("fEmpty").hidden = false; $("fEmpty").innerHTML = "Todavía no hay frescura cargada.<br>Tocá <b>⬆ Actualizar frescura</b> y subí el archivo de bloqueo y prebloqueo."; return; }
+    FRV.data = await openData(p); FRV.updated = p.updated;
+    frRender();
+  } catch(e) { $("fUpd").textContent = "Error al cargar"; $("fEmpty").hidden = false; $("fEmpty").textContent = "No se pudo abrir la frescura. Revisá tu conexión y volvé a entrar."; }
+}
+function frRender(){
+  const D = FRV.data;
+  $("fUpd").textContent = "Stock al " + fdate(D.fecha) + " · actualizado " + fmtDate(FRV.updated);
+  $("fBody").hidden = false; $("fEmpty").hidden = true;
+  $("fTabs").innerHTML = `<button class="tab${FRV.tab==="fr"?" on":""}" data-t="fr">Frescura<b>${D.rows.length}</b></button><button class="tab${FRV.tab==="fa"?" on":""}" data-t="fa">Faltantes de stock<b>${D.faltantes.length}</b></button>`;
+  document.querySelector("#vFr .fr-leg").hidden = FRV.tab !== "fr";
+  $("fHead").innerHTML = `<b>${FRV.tab === "fr" ? "CONTROL DE VENCIMIENTOS DE LOTE" : "FALTANTES DE STOCK"}</b><span>Actualizado al <strong>${fdate(D.fecha)}</strong></span>`;
+  if (FRV.tab === "fr") {
+    $("fGrid").innerHTML = FR_CATS.map(cat => {
+      const rs = D.rows.filter(r => r.cat === cat.n).sort((a,b) => a.vto.localeCompare(b.vto));
+      const nr = rs.filter(r => r.dias < 60).length;
+      return `<div class="fr-cat" style="--c:${cat.c}"><h3>${cat.n.toUpperCase()}${nr ? `<small>⚠ ${nr} por vencer</small>` : ""}</h3>` +
+        (rs.length ? `<table class="fr"><thead><tr><th>Cod</th><th>Descripción</th><th class="v">Vence lote</th></tr></thead><tbody>` +
+          rs.map(r => `<tr class="${r.dias < 60 ? "risk" : ""}"><td class="cd">${esc(r.cod)}</td><td class="ds">${esc(r.desc)}</td><td class="v">${fdate(r.vto)}${r.dias < 60 ? `<br><span class="dpill">${r.dias} días</span>` : r.otros ? `<small>+${r.otros} lote${r.otros > 1 ? "s" : ""}</small>` : ""}</td></tr>`).join("") +
+          `</tbody></table>` : `<div class="fr-empty">Sin stock en esta categoría.</div>`) + `</div>`;
+    }).join("");
+  } else {
+    $("fGrid").innerHTML = FR_CATS.map(cat => {
+      const rs = D.faltantes.filter(r => r.cat === cat.n);
+      if (!rs.length) return "";
+      return `<div class="fr-cat miss" style="--c:${cat.c}"><h3>${cat.n.toUpperCase()}<small>${rs.length} sin stock</small></h3><table class="fr"><thead><tr><th>Cod</th><th>Descripción</th></tr></thead><tbody>` +
+        rs.map(r => `<tr><td class="cd">${esc(r.cod)}</td><td class="ds">${esc(r.desc)}</td></tr>`).join("") + `</tbody></table></div>`;
+    }).join("") || `<div class="fr-empty">¡No hay faltantes! Todos los SKUs de la lista tienen stock.</div>`;
+  }
+}
+$("fTabs").addEventListener("click", e => { const b = e.target.closest(".tab"); if (!b) return; FRV.tab = b.dataset.t; frRender(); });
+$("fCopy").addEventListener("click", () => copyBlob(snapBlob($("fSnap")), (FRV.tab === "fr" ? "frescura_" : "faltantes_") + today() + ".png", $("fCopy")));
+
+/* --- Carga --- */
+const FU = {};
+$("fUpBtn").addEventListener("click", () => { $("mFr").hidden = false; $("frReadMsg").textContent = ""; $("frMsg").textContent = ""; });
+$("frClose").addEventListener("click", () => $("mFr").hidden = true);
+function parseSkus(wb){
+  const aoa = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header:1, defval:"", raw:true});
+  const hi = aoa.findIndex(r => r.some(c => ["cod","codigo","articulo","sku"].includes(norm(c))));
+  if (hi < 0) throw new Error("La lista de SKUs no tiene la columna COD");
+  const N = aoa[hi].map(norm), iC = N.findIndex(h => ["cod","codigo","articulo","sku"].includes(h));
+  const iD = N.findIndex(h => ["producto","descripcion","descripcion articulo"].includes(h)), iK = N.findIndex(h => h.startsWith("categor"));
+  return aoa.slice(hi + 1).filter(r => String(r[iC]).trim()).map(r => {
+    const desc = String(r[iD] ?? "").trim().replace(/\s+/g, " "), k = iK >= 0 ? String(r[iK]).trim() : "";
+    const cat = FR_CATS.find(c => norm(c.n) === norm(k) || (norm(k) && norm(c.n).startsWith(norm(k))));
+    return {cod:String(r[iC]).replace(/\.0$/,"").trim(), desc, cat: cat ? cat.n : frCat(desc)};
+  });
+}
+function parseFrescura(wb){
+  const sh = wb.SheetNames.find(n => norm(n) === "frescura");
+  if (!sh) throw new Error("El archivo no tiene la hoja Frescura");
+  const aoa = XLSX.utils.sheet_to_json(wb.Sheets[sh], {header:1, defval:"", raw:true});
+  const hi = aoa.findIndex(r => r.some(c => norm(c) === "fecvtolote"));
+  if (hi < 0) throw new Error("No encontré la columna fecvtolote en la hoja Frescura");
+  const N = aoa[hi].map(norm), ix = n => N.indexOf(n);
+  const iA = ix("articulo"), iD = ix("descripcion"), iV = ix("fecvtolote"), iB = ix("bultos"), iU = ix("unids"), iN = ix("negocio");
+  let fecha = null;
+  for (const r of aoa.slice(0, hi)) for (const c of r) if (c instanceof Date) { fecha = c; break; }
+  if (!fecha) { const d = wb.Sheets[wb.SheetNames.find(n => norm(n).startsWith("defin"))]; if (d && d.B1 && d.B1.v instanceof Date) fecha = d.B1.v; }
+  if (!fecha) fecha = new Date();
+  const lots = [];
+  for (const r of aoa.slice(hi + 1)) {
+    const cod = String(r[iA]).replace(/\.0$/,"").trim(); if (!cod || !(r[iV] instanceof Date)) continue;
+    if (!((Number(r[iB]) || 0) > 0 || (Number(r[iU]) || 0) > 0)) continue;
+    lots.push({cod, desc:String(r[iD]).trim().replace(/\s+/g, " "), vto:r[iV], neg:String(r[iN] ?? "").trim().toUpperCase()});
+  }
+  return {fecha, lots};
+}
+$("frRead").addEventListener("click", async () => {
+  const m = $("frReadMsg"), f = $("frFile").files[0], fs = $("frSkus").files[0];
+  m.className = "msg"; $("frResume").hidden = true; $("frPub").hidden = true;
+  if (!f) { m.className = "msg bad"; m.textContent = "Elegí el archivo de frescura"; return; }
+  $("frRead").disabled = true;
+  try {
+    m.textContent = "Leyendo archivos…";
+    const F = parseFrescura(XLSX.read(await f.arrayBuffer(), {type:"array", cellDates:true}));
+    let lista;
+    if (fs) lista = parseSkus(XLSX.read(await fs.arrayBuffer(), {type:"array"}));
+    else { const p = await apiGet("frescura_skus"); lista = p && p.data ? (await openData(p)).list : []; }
+    const enLista = new Map(lista.map(s => [s.cod, s]));
+    // SKUs nuevos: de UNG (o sin negocio cargado) que están en stock y no figuran en la lista
+    const nuevos = new Map();
+    F.lots.forEach(l => { if (!enLista.has(l.cod) && (l.neg === "UNG" || l.neg === "") && !nuevos.has(l.cod)) nuevos.set(l.cod, {cod:l.cod, desc:l.desc, cat:frCat(l.desc), sinNeg:l.neg === ""}); });
+    const listaFinal = [...lista, ...[...nuevos.values()].map(({cod,desc,cat}) => ({cod,desc,cat}))];
+    const byCod = new Map(listaFinal.map(s => [s.cod, s]));
+    const grp = new Map();
+    F.lots.filter(l => byCod.has(l.cod)).forEach(l => { (grp.get(l.cod) || grp.set(l.cod, []).get(l.cod)).push(l.vto); });
+    const f0 = Date.UTC(F.fecha.getFullYear(), F.fecha.getMonth(), F.fecha.getDate());
+    const rows = [...grp.entries()].map(([cod, vs]) => {
+      vs.sort((a,b) => a - b); const v = vs[0], vu = Date.UTC(v.getFullYear(), v.getMonth(), v.getDate());
+      return {cod, desc:byCod.get(cod).desc, cat:byCod.get(cod).cat, vto:new Date(vu).toISOString(), dias:Math.round((vu - f0) / 864e5), otros:new Set(vs.map(x => x.toDateString())).size - 1};
+    });
+    const faltantes = listaFinal.filter(s => !grp.has(s.cod));
+    FU.data = {fecha:new Date(f0).toISOString(), rows, faltantes}; FU.lista = listaFinal; FU.listaCambio = !!fs || nuevos.size > 0;
+    const riesgo = rows.filter(r => r.dias < 60).length;
+    $("frResume").innerHTML = `Stock al <b>${fdate(FU.data.fecha)}</b><br>SKUs con stock: <b>${rows.length}</b> · por vencer (&lt;60 días): <b>${riesgo}</b><br>Faltantes de stock: <b>${faltantes.length}</b>` +
+      (nuevos.size ? `<br><br>⚠ <b>Nuevos en stock que no estaban en tu lista</b> (se agregan solos):<br>${[...nuevos.values()].map(n => `${esc(n.cod)} · ${esc(n.desc)} → ${n.cat}${n.sinNeg ? " <i>(sin negocio en el archivo)</i>" : ""}`).join("<br>")}` : "") +
+      (!lista.length && !fs ? `<br><br>No había lista de SKUs guardada: se usan todos los de UNG en stock. Subí la lista para ver faltantes.` : "");
+    $("frResume").hidden = false; $("frPub").hidden = false;
+    m.className = "msg ok"; m.textContent = "Listo. Revisá el resumen y publicá.";
+  } catch(err) { m.className = "msg bad"; m.textContent = err.message || "No se pudo leer el archivo"; }
+  $("frRead").disabled = false;
+});
+$("frGo").addEventListener("click", async () => {
+  const m = $("frMsg"), key = $("frKey").value;
+  m.className = "msg";
+  if (!key) { m.className = "msg bad"; m.textContent = "Escribí la clave de administradora"; return; }
+  $("frGo").disabled = true;
+  try {
+    m.textContent = "Publicando…";
+    const stamp = {updated:new Date().toISOString()};
+    let res = await apiPut("frescura", key, Object.assign(await sealData(FU.data), stamp));
+    if (!res.ok) throw new Error(res.error || "No se pudo guardar");
+    if (FU.listaCambio) res = await apiPut("frescura_skus", key, Object.assign(await sealData({list:FU.lista}), stamp));
+    m.className = "msg ok"; m.textContent = "¡Listo! Frescura publicada";
+    FRV.data = null; await loadFr(true);
+    setTimeout(() => { $("mFr").hidden = true; $("frKey").value = ""; }, 1300);
+  } catch(err) { m.className = "msg bad"; m.textContent = err.message || "Error al publicar"; }
+  $("frGo").disabled = false;
+});
 
 </script>
 </body>
