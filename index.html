@@ -386,7 +386,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 15 · 02/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 16 · 03/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -403,7 +403,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
         <select id="fFdv" aria-label="Promotor"></select>
         <select id="fDia" aria-label="Frecuencia de visita"></select>
         <select id="fFoco" aria-label="Foco faltante"></select>
-        <input id="fQ" class="q" type="search" placeholder="Buscar por código o razón social…" aria-label="Buscar cliente">
+        <input id="fQ" class="q" type="search" name="buscar-cliente-grilla" autocomplete="off" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore placeholder="Buscar por código o razón social…" aria-label="Buscar cliente">
         <button class="clear" id="fClear">Limpiar filtros</button>
       </div>
       <div class="focos" id="gFocos"></div>
@@ -740,6 +740,8 @@ function fmtDate(iso){ try { const d = new Date(iso); return d.toLocaleDateStrin
 function gEmpty(html){ $("gBody").hidden = true; $("gEmpty").hidden = false; $("gEmpty").innerHTML = html; }
 
 async function loadGrillas(force){
+  /* el navegador a veces autocompleta el buscador con el usuario del login */
+  if (CRED && $("fQ").value.trim().toUpperCase() === CRED[0]) $("fQ").value = "";
   if (G.data && !force) return;
   if (!apiReady()){ $("gUpd").textContent = "Falta conectar el guardado"; gEmpty("Todavía no está conectado el Apps Script."); return; }
   $("gUpd").textContent = "Cargando…";
@@ -1062,6 +1064,16 @@ async function loadObj(force){
     if (!po || !po.data) { $("oUpd").textContent = "Sin objetivos todavía"; oEmpty("Todavía no hay objetivos cargados.<br>Tocá <b>⬆ Cargar objetivos</b> y subí el Excel del mes."); return; }
     if (!pa || !pa.data) { $("oUpd").textContent = "Falta la venta"; oEmpty("Los objetivos están cargados, pero falta la venta.<br>Publicá la base plana desde <b>Grillas → ⬆ Actualizar grillas</b>."); return; }
     O.obj = await openData(po); O.av = await openData(pa);
+    /* Mesa de cada promotor: la de la última base plana publicada (Grillas), no la del Excel de objetivos */
+    try {
+      const pg = await apiGet("grillas");
+      if (pg && pg.data) {
+        const gd = await openData(pg), cnt = {};
+        (gd.rows || []).forEach(r => { const k = String(r[3]).toUpperCase(); (cnt[k] ||= {}); cnt[k][r[2]] = (cnt[k][r[2]] || 0) + 1; });
+        const mesa = {}; Object.entries(cnt).forEach(([k, m]) => mesa[k] = Object.entries(m).sort((a,b) => b[1] - a[1])[0][0]);
+        O.obj = Object.assign({}, O.obj, {rows: O.obj.rows.map(r => mesa[r.prom.toUpperCase()] ? Object.assign({}, r, {sup: mesa[r.prom.toUpperCase()]}) : r)});
+      }
+    } catch(e) {}
     O.cur = {obj:O.obj, av:O.av, upd:(O.av.venta ? "Venta al " + O.av.venta + " · " : "") + "Actualizado " + fmtDate(pa.updated)};
     $("oUpd").textContent = O.cur.upd;
     $("oBody").hidden = false; $("oEmpty").hidden = true;
