@@ -447,7 +447,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 19 · 04/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 20 · 06/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -957,16 +957,23 @@ const CANAL_MESA = {"AVILA EZEQUIEL":"K+T","ECEIZA KEVIN":"K+T","RIERA SALA DANI
 const MESA_MANUAL = {"FERREYRA LEONARDO":"REF","FERREYRA TOBIAS":"REF","VEDIA ELIZABETH":"REF"};
 const ALL_CH = ["K+T","AS","REF","MAY"], KT_CH = ["K+T","REF","MAY"];
 const C = (col, op, val) => ({col, op, val});
+/* Focos de noviembre 2026 (RMV): mismos 8 KPIs que el tablero de cobertura */
+const SS_CAL = ["500 CC PET","350 CC PET","354 CC","354 CC LATA","269 CC LATA"];
+const NO_SS = [C("Marca","distinto de","RED BULL"), C("Marca","distinto de","GATORADE"), C("Marca","distinto de","ROCKSTAR")];
+const FOCOS_VER = "2026-11";
 const FOCOS_DEFAULT = [
   {n:"UNG", tipo:"clientes", canales:ALL_CH, grupos:[[C("Unidad de Negocio","=","UNG")]]},
-  {n:"CCC Black", tipo:"clientes", canales:KT_CH, grupos:[[C("Marca","=","PEPSI BLACK")],[C("Marca","=","PEPSI"),C("Calibre","contiene","2250")]]},
-  {n:"CCC H2OH", tipo:"clientes", canales:KT_CH, grupos:[[C("Marca","=","H2OH")]]},
-  {n:"CCC RB", tipo:"clientes", canales:KT_CH, grupos:[[C("Marca","=","RED BULL")]]},
-  {n:"Convivencia", tipo:"todos", canales:["AS"], grupos:[[C("Marca","contiene","PEPSI"),C("Calibre","contiene","1500")],[C("Marca","contiene","PEPSI"),C("Calibre","contiene","2000")]]},
-  {n:"TBD Gatorade", tipo:"skus", canales:["AS"], grupos:[[C("Marca","=","GATORADE")]]},
-  {n:"CCC Jagger", tipo:"clientes", canales:["AS"], grupos:[[C("Marca","contiene","JAGER")]]},
-  {n:"CCC Aguas Puras", tipo:"clientes", canales:ALL_CH, grupos:[[C("Unidad de Negocio","=","AGUAS ECO")]]}
+  {n:"Convivencia", tipo:"todos", canales:ALL_CH, grupos:[[C("Marca","contiene","PEPSI"),C("Calibre","contiene","1500")],[C("Marca","contiene","PEPSI"),C("Calibre","contiene","2000")]]},
+  {n:"CCC Black", tipo:"clientes", canales:ALL_CH, grupos:[[C("Marca","=","PEPSI BLACK")],[C("Marca","=","PEPSI"),C("Calibre","contiene","2250")]]},
+  {n:"TBD SS", tipo:"skus", canales:ALL_CH, grupos:SS_CAL.map(cal => [C("Unidad de Negocio","=","UNG"), C("Calibre","=",cal), ...NO_SS])},
+  {n:"TBD Gatorade", tipo:"skus", canales:ALL_CH, grupos:[[C("Marca","=","GATORADE")]]},
+  {n:"CCC H2OH", tipo:"clientes", canales:ALL_CH, grupos:[[C("Marca","=","H2OH")]]},
+  {n:"CCC RB", tipo:"clientes", canales:ALL_CH, grupos:[[C("Marca","=","RED BULL")]]},
+  {n:"CCC Aguas Puras", tipo:"clientes", canales:ALL_CH, grupos:[[C("Unidad de Negocio","=","AGUAS ECO")]]},
+  {n:"CCC Jagger", tipo:"clientes", canales:KT_CH, grupos:[[C("Marca","contiene","JAGER")]]}
 ];
+/* si los focos guardados son de otro mes, se reemplazan por los del mes actual */
+const focosOk = f => Array.isArray(f) && f.some(x => x.n === "TBD SS");
 const TIPOS = {clientes:"Clientes con compra (cualquier opción)", todos:"Tiene que comprar TODAS las opciones", skus:"Cantidad de SKUs distintos"};
 const norm = s => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g,"").trim().toLowerCase();
 const U = { base:null, cartera:null, focos:null };
@@ -975,7 +982,7 @@ $("gUpBtn").addEventListener("click", async () => {
   $("mUp").hidden = false; $("readMsg").textContent = ""; $("upMsg").textContent = "";
   if (!U.focos) {
     try { const p = await apiGet("focos"); U.focos = p && p.data ? await openData(p) : null; } catch(e) {}
-    if (!U.focos) U.focos = JSON.parse(JSON.stringify(FOCOS_DEFAULT));
+    if (!focosOk(U.focos)) U.focos = JSON.parse(JSON.stringify(FOCOS_DEFAULT));
   }
 });
 $("upClose").addEventListener("click", () => $("mUp").hidden = true);
@@ -1033,7 +1040,7 @@ function evalFoco(f, B){
     .filter(g => g.length && g.every(c => c.i >= 0));
   const res = new Map();
   if (!groups.length) return res;
-  const ok = (r, g) => g.every(c => { const x = norm(r[c.i]); return c.op === "=" ? x === c.v : x.includes(c.v); });
+  const ok = (r, g) => g.every(c => { const x = norm(r[c.i]); return c.op === "=" ? x === c.v : c.op === "distinto de" ? x !== c.v : c.op === "no contiene" ? !x.includes(c.v) : x.includes(c.v); });
   if (f.tipo === "todos") {
     const sets = groups.map(() => new Set());
     for (const {cli, r} of B.rows) groups.forEach((g,k) => { if (ok(r, g)) sets[k].add(cli); });
@@ -1071,7 +1078,7 @@ function renderFocos(){
         ${ALL_CH.map(c => `<label class="ck"><input type="checkbox" data-k="canal" value="${c}"${f.canales.includes(c)?" checked":""}>${c}</label>`).join("")}</div>
       ${f.grupos.map((g, gi) => `${gi ? `<div class="or">${sep}</div>` : ""}<div class="grp" data-g="${gi}"><span class="grp-l">OPCIÓN ${gi+1}</span>
         ${g.map((c, ci) => `<div class="cond" data-c="${ci}"><select data-k="col" aria-label="Columna">${colOptions(c.col)}</select>
-          <select data-k="op" aria-label="Operador"><option value="="${c.op==="="?" selected":""}>es igual a</option><option value="contiene"${c.op==="contiene"?" selected":""}>contiene</option></select>
+          <select data-k="op" aria-label="Operador"><option value="="${c.op==="="?" selected":""}>es igual a</option><option value="contiene"${c.op==="contiene"?" selected":""}>contiene</option><option value="distinto de"${c.op==="distinto de"?" selected":""}>es distinto de</option><option value="no contiene"${c.op==="no contiene"?" selected":""}>no contiene</option></select>
           <input type="text" data-k="val" value="${esc(c.val)}" list="${dlFor(c.col)}" aria-label="Valor"><button class="rm" data-act="delC" type="button" aria-label="Quitar condición">×</button></div>`).join("")}
         <button class="mini" data-act="addC" type="button">+ condición (y)</button></div>`).join("")}
       <button class="mini" data-act="addG" type="button">+ otra opción (${sep.toLowerCase()})</button>
