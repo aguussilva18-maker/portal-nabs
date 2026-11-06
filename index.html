@@ -94,7 +94,7 @@ body{font-family:var(--body);color:var(--ink);background:var(--night);overflow-x
 .filters select option{color:#0a1430}
 .filters select:focus,.filters input:focus{outline:none;border-color:var(--fizz)}
 .clear{font:700 13px var(--body);color:var(--heat);background:none;border:1px solid var(--heat);border-radius:12px;padding:0 14px;cursor:pointer;white-space:nowrap}
-.focos{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:10px;margin-bottom:16px}
+.focos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
 .foco{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;gap:6px}
 .foco .fn{font:700 11px var(--display);letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
 .foco .fv{display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}
@@ -103,10 +103,6 @@ body{font-family:var(--body);color:var(--ink);background:var(--night);overflow-x
 .bar{height:6px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
 .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--lime),var(--aqua));border-radius:99px}
 .foco .falta{font-size:12px;color:var(--sun);font-weight:600}
-.foco .okf{font-size:12px;color:var(--lime);font-weight:700}
-.foco .cov{display:flex;justify-content:space-between;gap:6px;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:6px;margin-top:2px;font-variant-numeric:tabular-nums}
-.foco .cov b{color:var(--ink);font-weight:700}
-.foco .bar.cv{height:4px}.foco .bar.cv i{background:var(--fizz)}
 .count{font-size:13px;color:var(--muted);margin:0 0 8px}
 .tbl{overflow:auto;max-height:70vh;border:1px solid var(--line);border-radius:14px;background:rgba(10,20,48,.6)}
 table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
@@ -451,7 +447,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 20 · 06/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 21 · 06/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -468,7 +464,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
         <select id="fFdv" aria-label="Promotor"></select>
         <select id="fDia" aria-label="Frecuencia de visita"></select>
         <select id="fFoco" aria-label="Foco faltante"></select>
-        <input id="fQ" class="q" type="search" name="buscar-cliente-grilla" autocomplete="off" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore placeholder="Buscar por código o razón social…" aria-label="Buscar cliente">
+        <input id="fQ" class="q" type="search" readonly onfocus="this.removeAttribute('readonly')" name="buscar-cliente-grilla" autocomplete="off" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore placeholder="Buscar por código o razón social…" aria-label="Buscar cliente">
         <button class="clear" id="fClear">Limpiar filtros</button>
       </div>
       <div class="focos" id="gFocos"></div>
@@ -865,7 +861,7 @@ async function apiPut(k, admin, payload){
 /* ===== Grillas ===== */
 const FRECS = {"LU · JU":["LUN","JUE"], "MA · VI":["MAR","VIE"], "MI · SA":["MIE","SAB"]};
 const CANALES = ["K+T","AS","REF","MAY"];
-const G = { data:null, obj:null, mode:"todos", limit:200, canal:"K+T" };
+const G = { data:null, mode:"todos", limit:200, canal:"K+T" };
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const uniq = a => [...new Set(a.filter(Boolean))].sort((x,y) => x.localeCompare(y,"es"));
 const fmtN = n => Number(n).toLocaleString("es-AR");
@@ -887,7 +883,6 @@ async function loadGrillas(force){
     const d = await openData(p);
     if (!d.v) { $("gUpd").textContent = "Formato anterior"; gEmpty("Las grillas cargadas son del formato anterior.<br>Tocá <b>⬆ Actualizar grillas</b> y subí la base plana."); return; }
     G.data = d;
-    try { const po = await apiGet("objetivos"); G.obj = po && po.data ? await openData(po) : null; } catch(e) { G.obj = null; }
     $("gUpd").textContent = (d.venta ? "Venta al " + d.venta + " · " : "") + "Actualizado " + fmtDate(p.updated);
     $("gBody").hidden = false; $("gEmpty").hidden = true;
     const present = CANALES.filter(c => d.rows.some(r => r[5] === c));
@@ -918,7 +913,7 @@ function gSetup(){
 }
 
 function gFilter(){
-  const spv = $("fSpv").value, fdv = $("fFdv").value, dia = $("fDia").value, foco = $("fFoco").value, q = $("fQ").value.trim().toLowerCase();
+  const spv = $("fSpv").value, fdv = $("fFdv").value, dia = $("fDia").value, foco = $("fFoco").value, q = (() => { const v = $("fQ").value.trim(); if (CRED && v.toUpperCase() === CRED[0]) { $("fQ").value = ""; return ""; } return v.toLowerCase(); })();
   return canalRows().filter(r => (!spv || r[2] === spv) && (!fdv || r[3] === fdv)
     && (!dia || String(r[4]||"").toUpperCase().split(/[,\s]+/).some(x => FRECS[dia].includes(x)))
     && (foco === "" || !r[7][foco])
@@ -933,24 +928,13 @@ function gRender(){
   $("gChips").innerHTML = [["todos","Todos",base.length],["comp","Compradores",nC],["nocomp","No compradores",base.length - nC]]
     .map(([m,l,n]) => `<button class="chip${G.mode===m?" on":""}" data-m="${m}">${l}<b>${fmtN(n)}</b></button>`).join("");
 
-  /* Tarjetas: objetivo del mes (si hay) + cobertura de cartera. Se calculan sobre canal + supervisor + promotor (sin frecuencia ni buscador). */
-  const fdv = $("fFdv").value;
-  const scope = canalRows().filter(r => (!spv || r[2] === spv) && (!fdv || r[3] === fdv));
-  const proms = new Set(scope.map(r => String(r[3]).toUpperCase()));
-  const objRows = G.obj && G.obj.rows ? G.obj.rows.filter(o => o.canal === G.canal && proms.has(o.prom)) : [];
   $("gFocos").innerHTML = focos.map(f => {
-    const n = scope.filter(r => r[7][f.i] > 0).length, N = scope.length, cpct = N ? Math.round(n * 100 / N) : 0;
-    const skus = f.tipo === "skus", a = skus ? scope.reduce((s,r) => s + (r[7][f.i] || 0), 0) : n;
-    const unit = skus ? " SKUs" : " clientes";
-    const o = objRows.reduce((s,r) => s + (r.obj[f.n] || 0), 0);
-    const cov = `<span class="cov"><span>Cobertura cartera</span><span><b>${cpct}%</b> · ${fmtN(n)} de ${fmtN(N)}</span></span><div class="bar cv"><i style="width:${cpct}%"></i></div>`;
-    if (o > 0) {
-      const p = Math.round(a * 100 / o), falta = Math.max(0, Math.ceil(o - a));
-      return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${p}%</b><span>${fmtN(a)} de ${fmtN(Math.round(o))} objetivo</span></span><div class="bar"><i style="width:${Math.min(100,p)}%"></i></div>` +
-        (falta ? `<span class="falta">Faltan ${fmtN(falta)}${unit} para el objetivo</span>` : `<span class="okf">¡Objetivo cumplido!${a > o ? " +" + fmtN(Math.round(a - o)) + unit : ""}</span>`) + cov + `</div>`;
+    const n = base.filter(r => r[7][f.i] > 0).length, pct = base.length ? Math.round(n * 100 / base.length) : 0;
+    if (f.tipo === "skus") {
+      const tot = base.reduce((s,r) => s + (r[7][f.i] || 0), 0);
+      return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${fmtN(tot)}</b><span>SKUs en ${fmtN(n)} clientes</span></span><div class="bar"><i style="width:${pct}%"></i></div><span class="falta">${base.length - n ? fmtN(base.length - n) + " clientes sin compra" : "¡Cartera completa!"}</span></div>`;
     }
-    if (skus) return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${fmtN(a)}</b><span>SKUs en ${fmtN(n)} clientes</span></span><div class="bar"><i style="width:${cpct}%"></i></div><span class="falta">${N - n ? fmtN(N - n) + " clientes sin compra" : "¡Cartera completa!"}</span></div>`;
-    return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${cpct}%</b><span>${fmtN(n)} de ${fmtN(N)}</span></span><div class="bar"><i style="width:${cpct}%"></i></div><span class="falta">${N - n ? "Faltan " + fmtN(N - n) + " clientes" : "¡Cartera completa!"}</span></div>`;
+    return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${pct}%</b><span>${fmtN(n)} de ${fmtN(base.length)}</span></span><div class="bar"><i style="width:${pct}%"></i></div><span class="falta">${base.length - n ? "Faltan " + fmtN(base.length - n) + " clientes" : "¡Cartera completa!"}</span></div>`;
   }).join("");
 
   const rows = G.mode === "comp" ? base.filter(r => r[6]) : G.mode === "nocomp" ? base.filter(r => !r[6]) : base;
@@ -979,17 +963,17 @@ const NO_SS = [C("Marca","distinto de","RED BULL"), C("Marca","distinto de","GAT
 const FOCOS_VER = "2026-11";
 const FOCOS_DEFAULT = [
   {n:"UNG", tipo:"clientes", canales:ALL_CH, grupos:[[C("Unidad de Negocio","=","UNG")]]},
-  {n:"Convivencia", tipo:"todos", canales:ALL_CH, grupos:[[C("Marca","contiene","PEPSI"),C("Calibre","contiene","1500")],[C("Marca","contiene","PEPSI"),C("Calibre","contiene","2000")]]},
-  {n:"CCC Black", tipo:"clientes", canales:ALL_CH, grupos:[[C("Marca","=","PEPSI BLACK")],[C("Marca","=","PEPSI"),C("Calibre","contiene","2250")]]},
-  {n:"TBD SS", tipo:"skus", canales:ALL_CH, grupos:SS_CAL.map(cal => [C("Unidad de Negocio","=","UNG"), C("Calibre","=",cal), ...NO_SS])},
-  {n:"TBD Gatorade", tipo:"skus", canales:ALL_CH, grupos:[[C("Marca","=","GATORADE")]]},
-  {n:"CCC H2OH", tipo:"clientes", canales:ALL_CH, grupos:[[C("Marca","=","H2OH")]]},
-  {n:"CCC RB", tipo:"clientes", canales:ALL_CH, grupos:[[C("Marca","=","RED BULL")]]},
-  {n:"CCC Aguas Puras", tipo:"clientes", canales:ALL_CH, grupos:[[C("Unidad de Negocio","=","AGUAS ECO")]]},
-  {n:"CCC Jagger", tipo:"clientes", canales:KT_CH, grupos:[[C("Marca","contiene","JAGER")]]}
-];
+  {n:"Convivencia", tipo:"todos", canales:["AS"], grupos:[[C("Marca","contiene","PEPSI"),C("Calibre","contiene","1500")],[C("Marca","contiene","PEPSI"),C("Calibre","contiene","2000")]]},
+  {n:"CCC Black", tipo:"clientes", canales:["K+T"], grupos:[[C("Marca","=","PEPSI BLACK")],[C("Marca","=","PEPSI"),C("Calibre","contiene","2250")]]},
+  {n:"TBD Gatorade", tipo:"skus", canales:["AS"], grupos:[[C("Marca","=","GATORADE")]]},
+  {n:"CCC H2OH", tipo:"clientes", canales:["K+T","AS"], grupos:[[C("Marca","=","H2OH")]]},
+  {n:"CCC RB", tipo:"clientes", canales:["K+T","AS"], grupos:[[C("Marca","=","RED BULL")]]},
+  {n:"CCC Jagger", tipo:"clientes", canales:["K+T"], grupos:[[C("Marca","contiene","JAGER")]]},
+  {n:"CCC Aguas Puras", tipo:"clientes", canales:["K+T","AS"], grupos:[[C("Unidad de Negocio","=","AGUAS ECO")]]}
+].map(f => Object.assign(f, {ver:FOCOS_VER}));
+/* TBD SS (por si se vuelve a pedir): skus · grupos SS_CAL.map(cal => [UNG, Calibre = cal, ...NO_SS]) */
 /* si los focos guardados son de otro mes, se reemplazan por los del mes actual */
-const focosOk = f => Array.isArray(f) && f.some(x => x.n === "TBD SS");
+const focosOk = f => Array.isArray(f) && f.some(x => x.ver === FOCOS_VER);
 const TIPOS = {clientes:"Clientes con compra (cualquier opción)", todos:"Tiene que comprar TODAS las opciones", skus:"Cantidad de SKUs distintos"};
 const norm = s => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g,"").trim().toLowerCase();
 const U = { base:null, cartera:null, focos:null };
@@ -1345,7 +1329,7 @@ $("oGo").addEventListener("click", async () => {
     const res = await apiPut("objetivos", key, Object.assign(await sealData(data), {updated:new Date().toISOString(), name:f.name}));
     if (!res.ok) throw new Error(res.error || "No se pudo guardar");
     m.className = "msg ok"; m.textContent = "¡Listo! Objetivos publicados";
-    O.cur = null; G.obj = data; await loadObj(true);
+    O.cur = null; await loadObj(true);
     setTimeout(() => { $("mObj").hidden = true; $("oKey").value = ""; }, 1300);
   } catch(err) { m.className = "msg bad"; m.textContent = err.message || "Error al publicar"; }
   $("oGo").disabled = false;
