@@ -94,7 +94,7 @@ body{font-family:var(--body);color:var(--ink);background:var(--night);overflow-x
 .filters select option{color:#0a1430}
 .filters select:focus,.filters input:focus{outline:none;border-color:var(--fizz)}
 .clear{font:700 13px var(--body);color:var(--heat);background:none;border:1px solid var(--heat);border-radius:12px;padding:0 14px;cursor:pointer;white-space:nowrap}
-.focos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.focos{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:10px;margin-bottom:16px}
 .foco{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;gap:6px}
 .foco .fn{font:700 11px var(--display);letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
 .foco .fv{display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}
@@ -103,6 +103,10 @@ body{font-family:var(--body);color:var(--ink);background:var(--night);overflow-x
 .bar{height:6px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
 .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--lime),var(--aqua));border-radius:99px}
 .foco .falta{font-size:12px;color:var(--sun);font-weight:600}
+.foco .okf{font-size:12px;color:var(--lime);font-weight:700}
+.foco .cov{display:flex;justify-content:space-between;gap:6px;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:6px;margin-top:2px;font-variant-numeric:tabular-nums}
+.foco .cov b{color:var(--ink);font-weight:700}
+.foco .bar.cv{height:4px}.foco .bar.cv i{background:var(--fizz)}
 .count{font-size:13px;color:var(--muted);margin:0 0 8px}
 .tbl{overflow:auto;max-height:70vh;border:1px solid var(--line);border-radius:14px;background:rgba(10,20,48,.6)}
 table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
@@ -861,7 +865,7 @@ async function apiPut(k, admin, payload){
 /* ===== Grillas ===== */
 const FRECS = {"LU · JU":["LUN","JUE"], "MA · VI":["MAR","VIE"], "MI · SA":["MIE","SAB"]};
 const CANALES = ["K+T","AS","REF","MAY"];
-const G = { data:null, mode:"todos", limit:200, canal:"K+T" };
+const G = { data:null, obj:null, mode:"todos", limit:200, canal:"K+T" };
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const uniq = a => [...new Set(a.filter(Boolean))].sort((x,y) => x.localeCompare(y,"es"));
 const fmtN = n => Number(n).toLocaleString("es-AR");
@@ -883,6 +887,7 @@ async function loadGrillas(force){
     const d = await openData(p);
     if (!d.v) { $("gUpd").textContent = "Formato anterior"; gEmpty("Las grillas cargadas son del formato anterior.<br>Tocá <b>⬆ Actualizar grillas</b> y subí la base plana."); return; }
     G.data = d;
+    try { const po = await apiGet("objetivos"); G.obj = po && po.data ? await openData(po) : null; } catch(e) { G.obj = null; }
     $("gUpd").textContent = (d.venta ? "Venta al " + d.venta + " · " : "") + "Actualizado " + fmtDate(p.updated);
     $("gBody").hidden = false; $("gEmpty").hidden = true;
     const present = CANALES.filter(c => d.rows.some(r => r[5] === c));
@@ -928,13 +933,24 @@ function gRender(){
   $("gChips").innerHTML = [["todos","Todos",base.length],["comp","Compradores",nC],["nocomp","No compradores",base.length - nC]]
     .map(([m,l,n]) => `<button class="chip${G.mode===m?" on":""}" data-m="${m}">${l}<b>${fmtN(n)}</b></button>`).join("");
 
+  /* Tarjetas: objetivo del mes (si hay) + cobertura de cartera. Se calculan sobre canal + supervisor + promotor (sin frecuencia ni buscador). */
+  const fdv = $("fFdv").value;
+  const scope = canalRows().filter(r => (!spv || r[2] === spv) && (!fdv || r[3] === fdv));
+  const proms = new Set(scope.map(r => String(r[3]).toUpperCase()));
+  const objRows = G.obj && G.obj.rows ? G.obj.rows.filter(o => o.canal === G.canal && proms.has(o.prom)) : [];
   $("gFocos").innerHTML = focos.map(f => {
-    const n = base.filter(r => r[7][f.i] > 0).length, pct = base.length ? Math.round(n * 100 / base.length) : 0;
-    if (f.tipo === "skus") {
-      const tot = base.reduce((s,r) => s + (r[7][f.i] || 0), 0);
-      return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${fmtN(tot)}</b><span>SKUs en ${fmtN(n)} clientes</span></span><div class="bar"><i style="width:${pct}%"></i></div><span class="falta">${base.length - n ? fmtN(base.length - n) + " clientes sin compra" : "¡Cartera completa!"}</span></div>`;
+    const n = scope.filter(r => r[7][f.i] > 0).length, N = scope.length, cpct = N ? Math.round(n * 100 / N) : 0;
+    const skus = f.tipo === "skus", a = skus ? scope.reduce((s,r) => s + (r[7][f.i] || 0), 0) : n;
+    const unit = skus ? " SKUs" : " clientes";
+    const o = objRows.reduce((s,r) => s + (r.obj[f.n] || 0), 0);
+    const cov = `<span class="cov"><span>Cobertura cartera</span><span><b>${cpct}%</b> · ${fmtN(n)} de ${fmtN(N)}</span></span><div class="bar cv"><i style="width:${cpct}%"></i></div>`;
+    if (o > 0) {
+      const p = Math.round(a * 100 / o), falta = Math.max(0, Math.ceil(o - a));
+      return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${p}%</b><span>${fmtN(a)} de ${fmtN(Math.round(o))} objetivo</span></span><div class="bar"><i style="width:${Math.min(100,p)}%"></i></div>` +
+        (falta ? `<span class="falta">Faltan ${fmtN(falta)}${unit} para el objetivo</span>` : `<span class="okf">¡Objetivo cumplido!${a > o ? " +" + fmtN(Math.round(a - o)) + unit : ""}</span>`) + cov + `</div>`;
     }
-    return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${pct}%</b><span>${fmtN(n)} de ${fmtN(base.length)}</span></span><div class="bar"><i style="width:${pct}%"></i></div><span class="falta">${base.length - n ? "Faltan " + fmtN(base.length - n) + " clientes" : "¡Cartera completa!"}</span></div>`;
+    if (skus) return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${fmtN(a)}</b><span>SKUs en ${fmtN(n)} clientes</span></span><div class="bar"><i style="width:${cpct}%"></i></div><span class="falta">${N - n ? fmtN(N - n) + " clientes sin compra" : "¡Cartera completa!"}</span></div>`;
+    return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${cpct}%</b><span>${fmtN(n)} de ${fmtN(N)}</span></span><div class="bar"><i style="width:${cpct}%"></i></div><span class="falta">${N - n ? "Faltan " + fmtN(N - n) + " clientes" : "¡Cartera completa!"}</span></div>`;
   }).join("");
 
   const rows = G.mode === "comp" ? base.filter(r => r[6]) : G.mode === "nocomp" ? base.filter(r => !r[6]) : base;
@@ -1329,7 +1345,7 @@ $("oGo").addEventListener("click", async () => {
     const res = await apiPut("objetivos", key, Object.assign(await sealData(data), {updated:new Date().toISOString(), name:f.name}));
     if (!res.ok) throw new Error(res.error || "No se pudo guardar");
     m.className = "msg ok"; m.textContent = "¡Listo! Objetivos publicados";
-    O.cur = null; await loadObj(true);
+    O.cur = null; G.obj = data; await loadObj(true);
     setTimeout(() => { $("mObj").hidden = true; $("oKey").value = ""; }, 1300);
   } catch(err) { m.className = "msg bad"; m.textContent = err.message || "Error al publicar"; }
   $("oGo").disabled = false;
