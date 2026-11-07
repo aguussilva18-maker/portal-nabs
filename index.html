@@ -89,7 +89,7 @@ body{font-family:var(--body);color:var(--ink);background:var(--night);overflow-x
 .chip{font:700 13px var(--body);color:var(--ink);background:var(--glass);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
 .chip b{font-weight:800;opacity:.75;margin-left:4px}
 .chip.on{background:var(--fizz);border-color:var(--fizz);color:var(--night)}
-.filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,1.6fr) auto;gap:8px;margin-bottom:16px}
+.filters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr)) minmax(0,1.4fr) auto;gap:8px;margin-bottom:16px}
 .filters select,.filters input{width:100%;font:600 14px var(--body);color:var(--ink);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
 .filters select option{color:#0a1430}
 .filters select:focus,.filters input:focus{outline:none;border-color:var(--fizz)}
@@ -315,6 +315,15 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
 .cb-leg{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px;font-size:12px;color:var(--muted)}
 .cb-leg span{display:inline-flex;align-items:center;gap:6px}.cb-leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
 @media (max-width:640px){.cb-sec{grid-template-columns:1fr}.cb-side{flex-direction:row;justify-content:flex-start;padding:10px 14px}.cb-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cb-ph{height:86px}.cb-ph img{max-height:86px;max-width:100%}}
+/* ===== Habilitados ===== */
+.hab{display:inline-block;font:800 10.5px var(--body);letter-spacing:.04em;padding:3px 8px;border-radius:999px;margin:1px 3px 1px 0;background:rgba(255,201,60,.18);color:var(--sun);border:1px solid rgba(255,201,60,.45)}
+.hab.h1{background:rgba(56,200,255,.16);color:var(--fizz);border-color:rgba(56,200,255,.45)}
+.hab.h2{background:rgba(126,224,129,.16);color:var(--lime);border-color:rgba(126,224,129,.45)}
+td.hb{white-space:nowrap}
+.hl-list{display:grid;gap:8px}
+.hl-row{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border-radius:12px;padding:10px 12px;font-size:13px}
+.hl-row b{flex:1}.hl-row small{color:var(--muted)}
+.hl-row button{font:700 12px var(--body);color:#ff8fa3;background:none;border:1px solid rgba(255,77,109,.4);border-radius:999px;padding:5px 10px;cursor:pointer}
 /* ===== Gerencial ===== */
 .ger-f{display:grid;grid-template-columns:1.3fr repeat(4,minmax(0,1fr)) auto;gap:8px;margin-bottom:12px}
 .ger-f select{width:100%;font:600 14px var(--body);color:var(--ink);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
@@ -452,14 +461,14 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 22 · 07/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 23 · 07/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
     <div class="vhead">
       <button class="back" data-back>← Volver</button>
       <div class="vtitle"><h1>Grillas</h1><p id="gUpd">Cargando…</p></div>
-      <button class="btn-up" id="gUpBtn">⬆ Actualizar grillas</button>
+      <div class="hbtns"><button class="btn-up ghost" id="hUpBtn">🏷 Habilitados</button><button class="btn-up" id="gUpBtn">⬆ Actualizar grillas</button></div>
     </div>
     <div id="gBody">
       <div class="tabs" id="gTabs" role="tablist"></div>
@@ -469,6 +478,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
         <select id="fFdv" aria-label="Promotor"></select>
         <select id="fDia" aria-label="Frecuencia de visita"></select>
         <select id="fFoco" aria-label="Foco faltante"></select>
+        <select id="fHab" aria-label="Habilitados"></select>
         <input id="fQ" class="q" type="search" readonly onfocus="this.removeAttribute('readonly')" name="buscar-cliente-grilla" autocomplete="off" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore placeholder="Buscar por código o razón social…" aria-label="Buscar cliente">
         <button class="clear" id="fClear">Limpiar filtros</button>
       </div>
@@ -526,6 +536,25 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
   </section>
 
   <div class="viewer" id="iViewer" hidden><button class="x vx" id="iVClose" aria-label="Cerrar">×</button><div class="vscroll"><img id="iVPic" alt=""></div></div>
+
+  <div class="modal" id="mHab" hidden>
+    <div class="sheet" role="dialog" aria-labelledby="hUpTitle">
+      <div class="sheet-head"><h2 id="hUpTitle">Clientes habilitados</h2><button class="x" id="hUpClose" aria-label="Cerrar">×</button></div>
+      <div class="step">
+        <p class="hint">Subí el export de clientes de cada combo (columna <b>CLIENTE</b>). En las grillas aparece una etiqueta en cada cliente habilitado y se puede filtrar. Si la lista ya existe, <b>se reemplaza</b>.</p>
+        <div class="hl-list" id="hList"></div>
+        <label class="fl" for="hName">LISTA</label>
+        <select id="hName" class="file"></select>
+        <div id="hNewWrap" hidden><label class="fl" for="hNew">NOMBRE DE LA LISTA NUEVA</label><input id="hNew" placeholder="Ej: Combo GTD habilitados"><label class="fl" for="hShort">ETIQUETA CORTA</label><input id="hShort" maxlength="8" placeholder="Ej: GTD"></div>
+        <label class="fl" for="hFile">ARCHIVO DE CLIENTES</label>
+        <input id="hFile" class="file" type="file" accept=".xlsx,.xls,.csv">
+        <label class="fl" for="hKey">CLAVE DE ADMINISTRADORA</label>
+        <input id="hKey" type="password" autocomplete="off">
+        <button class="btn-in" id="hGo" type="button">PUBLICAR LISTA</button>
+        <div class="msg" id="hMsg"></div>
+      </div>
+    </div>
+  </div>
 
   <div class="modal" id="mImg" hidden>
     <div class="sheet" role="dialog" aria-labelledby="iUpTitle">
@@ -889,6 +918,7 @@ async function loadGrillas(force){
     if (!d.v) { $("gUpd").textContent = "Formato anterior"; gEmpty("Las grillas cargadas son del formato anterior.<br>Tocá <b>⬆ Actualizar grillas</b> y subí la base plana."); return; }
     G.data = d;
     try { const po = await apiGet("objetivos"); G.obj = po && po.data ? await openData(po) : null; } catch(e) { G.obj = null; }
+    await habLoad();
     $("gUpd").textContent = (d.venta ? "Venta al " + d.venta + " · " : "") + "Actualizado " + fmtDate(p.updated);
     $("gBody").hidden = false; $("gEmpty").hidden = true;
     const present = CANALES.filter(c => d.rows.some(r => r[5] === c));
@@ -914,7 +944,11 @@ function gSetup(){
   opts($("fFdv"), "Todos los promotores", uniq(rows.map(r => r[3])));
   $("fDia").innerHTML = `<option value="">Todas las frecuencias</option>` + Object.keys(FRECS).map(d => `<option>${d}</option>`).join("");
   $("fFoco").innerHTML = `<option value="">Todos los focos</option>` + focos.map(f => `<option value="${f.i}">Sin ${esc(f.n)}</option>`).join("");
-  $("gHead").innerHTML = "<tr><th class='c1'>Cliente</th><th>Razón social</th>" + focos.map(f => `<th class="fx">${esc(f.n)}</th>`).join("") + "</tr>";
+  const hl = habLists().filter(l => rows.some(r => l.set.has(String(r[0]))));
+  $("fHab").innerHTML = `<option value="">Todos (habilitados o no)</option>` + hl.map(l => `<option value="${esc(l.n)}">Habilitados ${esc(l.s)}</option><option value="!${esc(l.n)}">No habilitados ${esc(l.s)}</option>`).join("");
+  $("fHab").hidden = !hl.length;
+  G.habCols = hl;
+  $("gHead").innerHTML = "<tr><th class='c1'>Cliente</th><th>Razón social</th>" + (hl.length ? "<th>Habilitado</th>" : "") + focos.map(f => `<th class="fx">${esc(f.n)}</th>`).join("") + "</tr>";
   gRender();
 }
 
@@ -923,6 +957,7 @@ function gFilter(){
   return canalRows().filter(r => (!spv || r[2] === spv) && (!fdv || r[3] === fdv)
     && (!dia || String(r[4]||"").toUpperCase().split(/[,\s]+/).some(x => FRECS[dia].includes(x)))
     && (foco === "" || !r[7][foco])
+    && habOk(r)
     && (!q || String(r[0]).includes(q) || String(r[1]||"").toLowerCase().includes(q)));
 }
 
@@ -938,7 +973,9 @@ function gRender(){
   const fdvSel = $("fFdv").value;
   const proms = new Set(canalRows().filter(r => (!spv || r[2] === spv) && (!fdvSel || r[3] === fdvSel)).map(r => String(r[3]).toUpperCase()));
   const objRows = G.obj && G.obj.rows ? G.obj.rows.filter(o => o.canal === G.canal && proms.has(String(o.prom).toUpperCase())) : [];
-  const objOf = k => objRows.reduce((s, o) => s + (o.obj[k] > 0 ? o.obj[k] : 0), 0);
+  /* con filtros que achican la cartera (frecuencia, búsqueda, foco, habilitados) el objetivo del promotor no aplica */
+  const narrow = $("fDia").value || $("fQ").value.trim() || $("fFoco").value !== "" || $("fHab").value;
+  const objOf = k => narrow ? 0 : objRows.reduce((s, o) => s + (o.obj[k] > 0 ? o.obj[k] : 0), 0);
   $("gFocos").innerHTML = focos.map(f => {
     const n = base.filter(r => r[7][f.i] > 0).length, pct = base.length ? Math.round(n * 100 / base.length) : 0;
     const sk = f.tipo === "skus", tot = sk ? base.reduce((s,r) => s + (r[7][f.i] || 0), 0) : n, ob = objOf(f.n);
@@ -954,17 +991,18 @@ function gRender(){
 
   const rows = G.mode === "comp" ? base.filter(r => r[6]) : G.mode === "nocomp" ? base.filter(r => !r[6]) : base;
   $("gCount").textContent = `${fmtN(rows.length)} clientes`;
-  $("gRows").innerHTML = rows.length ? rows.slice(0, G.limit).map(r => `<tr><td class="c1">${esc(r[0])}</td><td class="rs" title="${esc(r[1])}">${esc(r[1])}</td>` +
+  $("gRows").innerHTML = rows.length ? rows.slice(0, G.limit).map(r => `<tr><td class="c1">${esc(r[0])}</td><td class="rs" title="${esc(r[1])}">${esc(r[1])}</td>` + habCell(r) +
       focos.map(f => { const v = r[7][f.i]; return !v ? `<td class="fx no">·</td>` : f.tipo === "skus" ? `<td class="fx num">${v}</td>` : `<td class="fx ok">X</td>`; }).join("") + "</tr>").join("")
-    : `<tr><td colspan="${2 + focos.length}" class="empty">No hay clientes con esos filtros.</td></tr>`;
+    : `<tr><td colspan="${2 + (G.habCols && G.habCols.length ? 1 : 0) + focos.length}" class="empty">No hay clientes con esos filtros.</td></tr>`;
   $("gMore").hidden = rows.length <= G.limit;
 }
 ["fSpv","fFdv","fDia","fFoco"].forEach(id => $(id).addEventListener("change", () => { G.limit = 200; gRender(); }));
 $("fQ").addEventListener("input", () => { G.limit = 200; gRender(); });
+$("fHab").addEventListener("change", () => { G.limit = 200; gRender(); });
 $("gChips").addEventListener("click", e => { const b = e.target.closest(".chip"); if (!b) return; G.mode = b.dataset.m; G.limit = 200; gRender(); });
 $("gTabs").addEventListener("click", e => { const b = e.target.closest(".tab"); if (!b) return; G.canal = b.dataset.c; G.mode = "todos"; G.limit = 200; $("fQ").value = ""; gSetup(); });
 $("gMore").addEventListener("click", () => { G.limit += 300; gRender(); });
-$("fClear").addEventListener("click", () => { ["fSpv","fFdv","fDia","fFoco"].forEach(id => $(id).value = ""); $("fQ").value = ""; G.mode = "todos"; G.limit = 200; gRender(); });
+$("fClear").addEventListener("click", () => { ["fSpv","fFdv","fDia","fFoco","fHab"].forEach(id => $(id).value = ""); $("fQ").value = ""; G.mode = "todos"; G.limit = 200; gRender(); });
 
 /* ===== Actualizar grillas desde base plana ===== */
 /* Mesa → canal. Los promotores de la lista MESA_MANUAL se pasan a otra mesa (Ref sale de Lemos May). */
@@ -1535,8 +1573,9 @@ $("gXls").addEventListener("click", () => {
   if (!G.data) return;
   const focos = canalFocos(), base = gFilter();
   const rows = G.mode === "comp" ? base.filter(r => r[6]) : G.mode === "nocomp" ? base.filter(r => !r[6]) : base;
-  const head = ["Cliente","Razón social","Supervisor","Promotor","Frecuencia","Comprador", ...focos.map(f => f.n)];
-  const data = rows.map(r => [isNaN(+r[0]) ? r[0] : +r[0], r[1], tc(r[2]), tc(r[3]), r[4], r[6] ? "X" : "", ...focos.map(f => { const v = r[7][f.i]; return !v ? "" : f.tipo === "skus" ? v : "X"; })]);
+  const hl = G.habCols || [];
+  const head = ["Cliente","Razón social","Supervisor","Promotor","Frecuencia","Comprador", ...hl.map(l => "Habilitado " + l.s), ...focos.map(f => f.n)];
+  const data = rows.map(r => [isNaN(+r[0]) ? r[0] : +r[0], r[1], tc(r[2]), tc(r[3]), r[4], r[6] ? "X" : "", ...hl.map(l => l.set.has(String(r[0])) ? "X" : ""), ...focos.map(f => { const v = r[7][f.i]; return !v ? "" : f.tipo === "skus" ? v : "X"; })]);
   const ws = XLSX.utils.aoa_to_sheet([head, ...data]);
   ws["!cols"] = head.map((h,i) => ({wch: i === 1 ? 32 : Math.max(10, h.length + 2)}));
   ws["!autofilter"] = {ref: XLSX.utils.encode_range({s:{r:0,c:0}, e:{r:data.length, c:head.length-1}})};
@@ -2411,6 +2450,80 @@ $("gerGo").addEventListener("click", async () => {
     await loadGer(true);
   } catch(err){ console.error(err); m.className = "msg bad"; m.textContent = err.message || "Error al cargar"; }
   $("gerGo").disabled = false;
+});
+
+/* ===== Clientes habilitados (combos CNC, listados REF, etc.) ===== */
+const HAB_DEF = [["Combo 500 CNC","CNC"],["Combos listados REF","REF"]];
+const H = { data:null, lists:[] };
+async function habLoad(){
+  try { const p = await apiGet("habilitados"); H.data = p && p.data ? await openData(p) : {listas:[]}; }
+  catch(e){ H.data = {listas:[]}; }
+  H.lists = (H.data.listas || []).map((l, i) => ({...l, i, set:new Set(l.clis.map(String))}));
+}
+const habLists = () => H.lists || [];
+function habOk(r){
+  const v = $("fHab").value; if (!v) return true;
+  const neg = v[0] === "!", l = habLists().find(x => x.n === (neg ? v.slice(1) : v));
+  if (!l) return true;
+  return neg ? !l.set.has(String(r[0])) : l.set.has(String(r[0]));
+}
+function habCell(r){
+  const hl = G.habCols || []; if (!hl.length) return "";
+  return `<td class="hb">${hl.filter(l => l.set.has(String(r[0]))).map(l => `<span class="hab h${l.i % 3}">${esc(l.s)}</span>`).join("")}</td>`;
+}
+function habModal(){
+  const L = habLists();
+  $("hList").innerHTML = L.length ? L.map(l => `<div class="hl-row"><span class="hab h${l.i % 3}">${esc(l.s)}</span><b>${esc(l.n)}</b><small>${fmtN(l.clis.length)} clientes${l.up ? " · " + fmtDate(l.up) : ""}</small><button type="button" data-del="${esc(l.n)}">Quitar</button></div>`).join("") : `<p class="hint" style="margin:0">Todavía no hay listas cargadas.</p>`;
+  const names = [...new Set([...HAB_DEF.map(x => x[0]), ...L.map(l => l.n)])];
+  $("hName").innerHTML = names.map(n => `<option>${esc(n)}</option>`).join("") + `<option value="__new">➕ Otra lista…</option>`;
+  $("hNewWrap").hidden = true;
+}
+$("hUpBtn").addEventListener("click", async () => { $("mHab").hidden = false; $("hMsg").textContent = ""; $("hMsg").className = "msg"; if (!H.data) await habLoad(); habModal(); });
+$("hUpClose").addEventListener("click", () => $("mHab").hidden = true);
+$("hName").addEventListener("change", () => $("hNewWrap").hidden = $("hName").value !== "__new");
+const isCliHead = c => /^(cliente|codigo cliente|cod\.? cliente|cod cliente)$/.test(norm(c).replace(/[▼▲]/g, "").trim());
+function habParse(aoa){
+  const hi = aoa.findIndex(r => r.some(isCliHead));
+  if (hi < 0) throw new Error("No encuentro la columna CLIENTE en el archivo");
+  const ci = aoa[hi].findIndex(isCliHead), out = new Set();
+  for (let j = hi + 1; j < aoa.length; j++){ const v = String(aoa[j][ci] ?? "").replace(/\.0$/, "").trim(); if (/^\d+$/.test(v)) out.add(v); }
+  if (!out.size) throw new Error("El archivo no tiene códigos de cliente");
+  return [...out];
+}
+async function habSave(listas, key){
+  const res = await apiPut("habilitados", key, Object.assign(await sealData({listas}), {updated:new Date().toISOString()}));
+  if (!res.ok) throw new Error(res.error || "No se pudo guardar");
+  H.data = {listas}; H.lists = listas.map((l, i) => ({...l, i, set:new Set(l.clis.map(String))}));
+  habModal(); if (G.data) gSetup();
+}
+$("hGo").addEventListener("click", async () => {
+  const m = $("hMsg"), f = $("hFile").files[0], key = $("hKey").value;
+  let n = $("hName").value, s = (HAB_DEF.find(x => x[0] === n) || [])[1];
+  m.className = "msg";
+  if (n === "__new"){ n = $("hNew").value.trim(); s = $("hShort").value.trim().toUpperCase(); if (!n || !s){ m.className = "msg bad"; m.textContent = "Poné el nombre y la etiqueta de la lista"; return; } }
+  if (!s){ const e = habLists().find(l => l.n === n); s = e ? e.s : n.slice(0, 6).toUpperCase(); }
+  if (!f){ m.className = "msg bad"; m.textContent = "Elegí el archivo de clientes"; return; }
+  if (!key){ m.className = "msg bad"; m.textContent = "Escribí la clave de administradora"; return; }
+  $("hGo").disabled = true;
+  try {
+    m.textContent = "Leyendo…";
+    const clis = habParse(await readSheet(f));
+    const prev = H.data.listas || [], pos = prev.findIndex(l => l.n === n), item = {n, s, clis, up:new Date().toISOString()};
+    const listas = prev.filter(l => l.n !== n);
+    if (pos >= 0) listas.splice(pos, 0, item); else listas.push(item);
+    m.textContent = "Publicando…"; await habSave(listas, key);
+    const cs = new Set(clis), enG = G.data ? G.data.rows.filter(r => cs.has(String(r[0]))).length : 0;
+    m.className = "msg ok"; m.innerHTML = `¡Listo! <b>${esc(n)}</b>: ${fmtN(clis.length)} clientes` + (G.data ? ` · ${fmtN(enG)} están en las grillas` : "");
+    $("hFile").value = "";
+  } catch(err){ m.className = "msg bad"; m.textContent = err.message || "Error al cargar"; }
+  $("hGo").disabled = false;
+});
+$("hList").addEventListener("click", async e => {
+  const b = e.target.closest("[data-del]"); if (!b) return;
+  const key = $("hKey").value, m = $("hMsg");
+  if (!key){ m.className = "msg bad"; m.textContent = "Para quitar una lista escribí primero la clave de administradora"; return; }
+  try { await habSave((H.data.listas || []).filter(l => l.n !== b.dataset.del), key); m.className = "msg ok"; m.textContent = "Lista quitada"; }
+  catch(err){ m.className = "msg bad"; m.textContent = err.message; }
 });
 
 </script>
