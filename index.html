@@ -103,6 +103,11 @@ body{font-family:var(--body);color:var(--ink);background:var(--night);overflow-x
 .bar{height:6px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
 .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--lime),var(--aqua));border-radius:99px}
 .foco .falta{font-size:12px;color:var(--sun);font-weight:600}
+.foco .falta.ok{color:var(--lime)}
+.foco .cob{display:grid;gap:5px;border-top:1px dashed var(--line);padding-top:7px;margin-top:2px;font-size:12px;color:var(--muted)}
+.foco .cob b{color:var(--ink)}
+.foco .cob .bar{height:4px}
+.foco .cob .bar i{background:var(--fizz)}
 .count{font-size:13px;color:var(--muted);margin:0 0 8px}
 .tbl{overflow:auto;max-height:70vh;border:1px solid var(--line);border-radius:14px;background:rgba(10,20,48,.6)}
 table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
@@ -447,7 +452,7 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 21 · 06/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 22 · 07/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -883,6 +888,7 @@ async function loadGrillas(force){
     const d = await openData(p);
     if (!d.v) { $("gUpd").textContent = "Formato anterior"; gEmpty("Las grillas cargadas son del formato anterior.<br>Tocá <b>⬆ Actualizar grillas</b> y subí la base plana."); return; }
     G.data = d;
+    try { const po = await apiGet("objetivos"); G.obj = po && po.data ? await openData(po) : null; } catch(e) { G.obj = null; }
     $("gUpd").textContent = (d.venta ? "Venta al " + d.venta + " · " : "") + "Actualizado " + fmtDate(p.updated);
     $("gBody").hidden = false; $("gEmpty").hidden = true;
     const present = CANALES.filter(c => d.rows.some(r => r[5] === c));
@@ -928,12 +934,21 @@ function gRender(){
   $("gChips").innerHTML = [["todos","Todos",base.length],["comp","Compradores",nC],["nocomp","No compradores",base.length - nC]]
     .map(([m,l,n]) => `<button class="chip${G.mode===m?" on":""}" data-m="${m}">${l}<b>${fmtN(n)}</b></button>`).join("");
 
+  /* objetivo de los promotores que quedan en el filtro (sale de "Objetivos del mes") */
+  const fdvSel = $("fFdv").value;
+  const proms = new Set(canalRows().filter(r => (!spv || r[2] === spv) && (!fdvSel || r[3] === fdvSel)).map(r => String(r[3]).toUpperCase()));
+  const objRows = G.obj && G.obj.rows ? G.obj.rows.filter(o => o.canal === G.canal && proms.has(String(o.prom).toUpperCase())) : [];
+  const objOf = k => objRows.reduce((s, o) => s + (o.obj[k] > 0 ? o.obj[k] : 0), 0);
   $("gFocos").innerHTML = focos.map(f => {
     const n = base.filter(r => r[7][f.i] > 0).length, pct = base.length ? Math.round(n * 100 / base.length) : 0;
-    if (f.tipo === "skus") {
-      const tot = base.reduce((s,r) => s + (r[7][f.i] || 0), 0);
-      return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${fmtN(tot)}</b><span>SKUs en ${fmtN(n)} clientes</span></span><div class="bar"><i style="width:${pct}%"></i></div><span class="falta">${base.length - n ? fmtN(base.length - n) + " clientes sin compra" : "¡Cartera completa!"}</span></div>`;
+    const sk = f.tipo === "skus", tot = sk ? base.reduce((s,r) => s + (r[7][f.i] || 0), 0) : n, ob = objOf(f.n);
+    if (ob > 0) {
+      const po = Math.round(tot * 100 / ob), falta = ob - tot, u = sk ? " SKUs" : " clientes";
+      return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${po}%</b><span>${fmtN(tot)} de ${fmtN(ob)} objetivo</span></span><div class="bar"><i style="width:${Math.min(100, po)}%"></i></div>` +
+        `<span class="falta${falta > 0 ? "" : " ok"}">${falta > 0 ? "Faltan " + fmtN(falta) + u + " para el objetivo" : "¡Objetivo cumplido! 🎉"}</span>` +
+        `<div class="cob"><span>Cobertura cartera <b>${pct}%</b> · ${fmtN(n)} de ${fmtN(base.length)}</span><div class="bar"><i style="width:${pct}%"></i></div></div></div>`;
     }
+    if (sk) return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${fmtN(tot)}</b><span>SKUs en ${fmtN(n)} clientes</span></span><div class="bar"><i style="width:${pct}%"></i></div><span class="falta">${base.length - n ? fmtN(base.length - n) + " clientes sin compra" : "¡Cartera completa!"}</span></div>`;
     return `<div class="foco"><span class="fn">${esc(f.n)}</span><span class="fv"><b>${pct}%</b><span>${fmtN(n)} de ${fmtN(base.length)}</span></span><div class="bar"><i style="width:${pct}%"></i></div><span class="falta">${base.length - n ? "Faltan " + fmtN(base.length - n) + " clientes" : "¡Cartera completa!"}</span></div>`;
   }).join("");
 
@@ -1329,7 +1344,7 @@ $("oGo").addEventListener("click", async () => {
     const res = await apiPut("objetivos", key, Object.assign(await sealData(data), {updated:new Date().toISOString(), name:f.name}));
     if (!res.ok) throw new Error(res.error || "No se pudo guardar");
     m.className = "msg ok"; m.textContent = "¡Listo! Objetivos publicados";
-    O.cur = null; await loadObj(true);
+    G.obj = data; O.cur = null; await loadObj(true);
     setTimeout(() => { $("mObj").hidden = true; $("oKey").value = ""; }, 1300);
   } catch(err) { m.className = "msg bad"; m.textContent = err.message || "Error al publicar"; }
   $("oGo").disabled = false;
