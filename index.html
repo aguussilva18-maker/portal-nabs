@@ -488,7 +488,7 @@ td.hb{white-space:nowrap}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 25 · 10/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 26 · 10/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -2422,7 +2422,7 @@ const pcol = p => p >= 0 ? "#7ee081" : "#ff8fa3";
 function svgYear(host, rows, sel, fmt, unit, Y){
   const W = chartW(host), H = 232, pl = 4, pr = 4, pt = 30, pb = 24, iw = W - pl - pr, ih = H - pt - pb, base = pt + ih;
   const mx = Math.max(1, ...rows.flatMap(r => [r.a || 0, r.b || 0, r.ov || 0])) * 1.04;
-  const gw = iw / 12, bw = Math.max(5, Math.min(44, (gw - 10) / 2)), lab = bw >= 30, fs = bw >= 38 ? 12 : 10.5;
+  const gw = iw / 12, bw = Math.max(5, Math.min(44, (gw - 8) / 2)), lab = bw >= 20, fs = bw >= 38 ? 12 : 10.5;
   let s = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${unit} por mes ${Y} contra ${Y-1}">`;
   s += `<line x1="${pl}" x2="${W-pr}" y1="${base}" y2="${base}" stroke="rgba(255,255,255,.22)"/>`;
   rows.forEach((r, i) => {
