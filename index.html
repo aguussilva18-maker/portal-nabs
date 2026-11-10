@@ -325,34 +325,58 @@ td.hb{white-space:nowrap}
 .hl-row b{flex:1}.hl-row small{color:var(--muted)}
 .hl-row button{font:700 12px var(--body);color:#ff8fa3;background:none;border:1px solid rgba(255,77,109,.4);border-radius:999px;padding:5px 10px;cursor:pointer}
 /* ===== Gerencial ===== */
-.ger-f{display:grid;grid-template-columns:1.3fr repeat(4,minmax(0,1fr)) auto;gap:8px;margin-bottom:12px}
-.ger-f select{width:100%;font:600 14px var(--body);color:var(--ink);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
-.ger-f select option{color:#0a1430}
-.ger-f select:focus{outline:none;border-color:var(--fizz)}
-.ger-cut{font-size:13px;color:var(--muted);margin:0 0 4px;line-height:1.45}.ger-cut b{color:var(--ink)}
-.ger-flt{font:800 12px var(--display);letter-spacing:.08em;color:var(--sun);margin:0 0 12px;text-transform:uppercase}
+.wrap:has(#vGer:not([hidden])){max-width:1440px}
+.gx-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.gx-sups{display:flex;flex-wrap:wrap;gap:6px}
+.gx-sups button{font:800 11.5px var(--body);letter-spacing:.04em;text-transform:uppercase;color:var(--ink);background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:999px;padding:8px 13px;cursor:pointer}
+.gx-sups button.on{background:#fff;color:#0a1430;border-color:#fff}
+.gx-sel{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.gx-sel select{font:700 12.5px var(--body);color:var(--ink);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:999px;padding:8px 12px;max-width:190px}
+.gx-sel select option{color:#0a1430}
+.gx-mes{display:flex;align-items:center;gap:8px;font:800 10.5px var(--body);letter-spacing:.1em;color:var(--muted);margin-left:6px}
+.gx-mes select{background:#fff;color:#0a1430;border-color:#fff}
+.ger-cut{font-size:13px;color:var(--muted);margin:0 0 12px;line-height:1.45}.ger-cut b{color:var(--ink)}
+.gx-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.gx-k{background:linear-gradient(160deg,rgba(255,255,255,.1),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;gap:5px;align-content:start}
+.gx-k span.l{font:800 10.5px var(--body);letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.gx-k b{font:900 24px var(--display);line-height:1.1;font-variant-numeric:tabular-nums}
+.gx-k b small{font:700 12px var(--body);color:var(--muted)}
+.gx-k .ps{display:flex;flex-wrap:wrap;gap:6px}
+.gx-k .ob{height:6px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden;margin-top:2px}
+.gx-k .ob i{display:block;height:100%;background:linear-gradient(90deg,#ffc93c,#ffde7a);border-radius:4px}
+.gx-k .pj{font-size:12px;color:var(--muted)}.gx-k .pj b{font:800 12px var(--body);color:var(--ink)}
+.dl{font:800 12px var(--body);padding:2px 8px;border-radius:999px;font-variant-numeric:tabular-nums}
+.dl.up{background:rgba(126,224,129,.18);color:var(--lime)}.dl.dn{background:rgba(255,77,109,.18);color:#ff8fa3}.dl.na{background:rgba(255,255,255,.06);color:var(--muted)}
+.dl.obj{background:rgba(255,201,60,.18);color:var(--sun)}
+.gx-row{display:grid;grid-template-columns:minmax(0,1fr) 220px 260px;gap:10px;margin-bottom:10px}
+.gx-card{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:16px;padding:12px 12px 6px;min-width:0}
+.gx-h{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.gx-card h3,.gx-h h3{margin:0;font:800 12.5px var(--display);letter-spacing:.05em}
+.gx-card h4{margin:0 0 4px;font:800 11px var(--display);letter-spacing:.05em;text-align:center;color:var(--ink)}
+.gx-card svg{display:block;max-width:100%;height:auto}
+.gx-card svg text{font-family:Figtree,Arial,sans-serif}
+.gx-note{font-size:12px;color:var(--muted);margin:2px 0 16px}
+.gx-sec{font:800 15px var(--display);margin:18px 0 10px}
+.leg{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:0}
+.leg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-2px}
+.leg i.ln{width:18px;height:3px;border-radius:2px;vertical-align:3px}
+.leg i.dash{width:18px;height:0;border-top:3px dashed #ffc93c;border-radius:0;vertical-align:3px;background:none}
+.leg i.dashc{width:18px;height:0;border-top:3px dashed #ffc93c;border-radius:0;vertical-align:3px;background:none}
 .gks{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:10px;margin-bottom:14px}
 .gk{background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:6px;align-content:start}
+.gk-gan{border-color:rgba(126,224,129,.35);background:linear-gradient(160deg,rgba(126,224,129,.12),var(--glass))}
 .gk-l{font:700 10.5px var(--display);letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
-.gk b{font:900 23px var(--display);font-variant-numeric:tabular-nums;line-height:1.15}
+.gk b{font:900 22px var(--display);font-variant-numeric:tabular-nums;line-height:1.15}
 .gk b small{font:700 12px var(--body);color:var(--muted)}
 .gk-d{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--muted);flex-wrap:wrap}
 .gk-d em{font-style:normal;font-variant-numeric:tabular-nums;opacity:.85}
-.dl{font:800 12px var(--body);padding:2px 7px;border-radius:999px;font-variant-numeric:tabular-nums}
-.dl.up{background:rgba(126,224,129,.18);color:var(--lime)}.dl.dn{background:rgba(255,77,109,.18);color:#ff8fa3}.dl.na{background:rgba(255,255,255,.06);color:var(--muted)}
-.gk-gan{border-color:rgba(126,224,129,.35);background:linear-gradient(160deg,rgba(126,224,129,.12),var(--glass))}
-.gproj{grid-column:1/-1;background:linear-gradient(100deg,rgba(255,201,60,.16),rgba(255,255,255,.04));border:1px solid rgba(255,201,60,.35);border-radius:14px;padding:11px 14px;font-size:14px}
-.gproj span{color:var(--muted);font-size:12.5px}
-.gcols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.gcols{display:grid;grid-template-columns:1fr 1.15fr;gap:14px}
 .gch{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:14px 14px 8px;margin-bottom:14px;min-width:0}
 .gch h3{margin:0;font:800 14px var(--display);letter-spacing:.03em}
-.gch .gsub{font-size:12px;color:var(--muted);margin-top:3px}
-.leg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:8px 0 6px}
-.leg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-2px}
-.leg i.ln{width:18px;height:3px;border-radius:2px;vertical-align:3px}
-.leg i.dash{width:18px;height:0;border-top:3px dashed #ffc93c;border-radius:0;vertical-align:3px;background:none}
+.gch .gsub{font-size:12px;color:var(--muted);margin:3px 0 8px}
 .gch svg{display:block;max-width:100%;height:auto}
 .gch svg text{font:600 11px Figtree,Arial,sans-serif;fill:rgba(255,255,255,.62)}
+.gch .tabs{margin:10px 0 4px}
 .ger-tip{position:fixed;z-index:30;pointer-events:none;background:#fff;color:#0a1430;font:600 12.5px var(--body);border-radius:10px;padding:8px 11px;box-shadow:0 8px 24px rgba(0,0,0,.35);max-width:260px;line-height:1.45}
 .ger-tip small{color:#5d6a86}
 #vGer td.r,#vGer th.r{text-align:right}
@@ -361,10 +385,13 @@ td.hb{white-space:nowrap}
 .ger-lock{display:grid;place-items:center;padding:24px 0}
 .ger-lock .card h2{color:var(--ink);font:800 17px var(--display)}
 .ger-lock .card p{margin:0;font-size:13px;color:var(--muted);line-height:1.45}
-.ger-loaded{font-size:13px;line-height:1.7;background:rgba(255,255,255,.05);border-radius:12px;padding:10px 14px}
-.ger-loaded small{color:var(--muted)}
-@media (max-width:900px){.ger-f{grid-template-columns:repeat(2,minmax(0,1fr))}.ger-f #gerMes{grid-column:1/-1}.ger-f .clear{grid-column:1/-1;padding:10px}.gcols{grid-template-columns:1fr}}
-@media (max-width:420px){.gk b{font-size:20px}.gks{grid-template-columns:1fr 1fr}.gk{padding:12px}}
+.gobj{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.gobj label{display:grid;gap:5px;font:800 11px var(--body);letter-spacing:.06em;color:var(--muted)}
+.gobj input{font:700 15px var(--body)}
+.opt{font:500 12px var(--body);color:var(--muted);font-style:normal;margin-left:6px}
+@media (max-width:1100px){.gx-row{grid-template-columns:1fr 1fr}.gx-main{grid-column:1/-1}}
+@media (max-width:900px){.gx-kpis{grid-template-columns:1fr 1fr}.gcols{grid-template-columns:1fr}.gx-sel select{max-width:none;flex:1 1 140px}.gx-mes{width:100%;margin:0}.gx-mes select{flex:1}}
+@media (max-width:420px){.gx-k b{font-size:20px}.gks{grid-template-columns:1fr 1fr}.gk{padding:12px}.gk b{font-size:19px}}
 .gm{display:grid;gap:10px}
 .gm-y{display:grid;grid-template-columns:52px repeat(12,minmax(0,1fr));gap:5px;align-items:center}
 .gm-y b{font:900 14px var(--display)}
@@ -377,7 +404,7 @@ td.hb{white-space:nowrap}
 .gm-leg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
 .gm-leg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px;border:1px solid var(--line);background:rgba(255,255,255,.05)}
 .gm-leg i.ok{background:rgba(126,224,129,.4)}.gm-leg i.pa{background:rgba(255,201,60,.4)}
-@media (max-width:620px){.gm-y{grid-template-columns:repeat(6,minmax(0,1fr))}.gm-y b{grid-column:1/-1}}
+@media (max-width:620px){.gm-y{grid-template-columns:repeat(6,minmax(0,1fr))}.gm-y b{grid-column:1/-1}.gobj{grid-template-columns:1fr}}
 /* ===== Acciones / cierres ===== */
 .acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0}
 .acts > :first-child{margin:0 auto 0 0}
@@ -461,7 +488,7 @@ td.hb{white-space:nowrap}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 23 · 07/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 25 · 10/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -718,7 +745,7 @@ td.hb{white-space:nowrap}
     <div class="vhead">
       <button class="back" data-back>← Volver</button>
       <div class="vtitle"><h1>Tablero gerencial</h1><p id="gerUpd">Cargando…</p></div>
-      <button class="btn-up" id="gerUpBtn">⬆ Subir base plana</button>
+      <div class="hbtns"><button class="btn-up ghost" id="gerCopyAll">📋 Copiar tablero</button><button class="btn-up" id="gerUpBtn">⬆ Subir base y objetivos</button></div>
     </div>
     <div class="ger-lock" id="gerLock" hidden>
       <div class="card">
@@ -732,55 +759,85 @@ td.hb{white-space:nowrap}
     </div>
     <div id="gerBody" hidden>
       <div id="gerSnap1">
-        <div class="ger-f">
-          <select id="gerMes" aria-label="Mes"></select>
-          <select id="gerSup" aria-label="Supervisor"></select>
-          <select id="gerProm" aria-label="Promotor"></select>
-          <select id="gerCan" aria-label="Canal"></select>
-          <select id="gerUn" aria-label="Unidad de negocio"></select>
-          <button class="clear" id="gerClear">Limpiar</button>
+        <div class="gx-bar">
+          <div class="gx-sups" id="gerSups"></div>
+          <div class="gx-sel">
+            <select id="gerProm" aria-label="Promotor"></select>
+            <select id="gerCan" aria-label="Canal"></select>
+            <select id="gerUn" aria-label="Unidad de negocio"></select>
+            <select id="gerMar" aria-label="Marcas"></select>
+            <select id="gerCal" aria-label="Calibres"></select>
+            <label class="gx-mes"><span>MES DE CORTE</span><select id="gerMes" aria-label="Mes de corte"></select></label>
+          </div>
         </div>
         <p class="ger-cut" id="gerCut"></p>
-        <p class="ger-flt" id="gerFlt"></p>
-        <div class="gks" id="gerKpis"></div>
-        <div class="acts"><div class="chips" id="gerMeas" style="margin:0"></div><button class="act" id="gerCopy1">📋 Copiar resumen</button></div>
-        <div class="gcols">
-          <div class="gch"><h3 id="gerMonT">Evolución mensual</h3><p class="gsub">Tocá un mes para verlo en detalle</p><div class="leg" id="gerMonL"></div><div id="gerMon"></div></div>
-          <div class="gch"><h3 id="gerDayT">Acumulado del mes</h3><p class="gsub">Cómo viene el mes contra el año y el mes anterior</p><div class="leg" id="gerDayL"></div><div id="gerDay"></div></div>
+        <div class="gx-kpis" id="gerKpis"></div>
+        <div class="gx-row">
+          <div class="gx-card gx-main"><div class="gx-h"><h3 id="gxT1">VOLUMEN HL</h3><div class="leg" id="gxL1"></div></div><div id="gx1"></div></div>
+          <div class="gx-card gx-side"><h4>HL · YTD VS LYTD</h4><div id="gx1a"></div></div>
+          <div class="gx-card gx-side"><h4>HL · COMPARATIVA</h4><div id="gx1b"></div></div>
+        </div>
+        <div class="gx-row">
+          <div class="gx-card gx-main"><div class="gx-h"><h3>CCC · CLIENTES CON COMPRA</h3><div class="leg" id="gxL2"></div></div><div id="gx2"></div></div>
+          <div class="gx-card gx-side"><h4 id="gx2aT">CCC · CARTERA VS CNC</h4><div id="gx2a"></div></div>
+          <div class="gx-card gx-side"><h4>CCC · COMPARATIVA</h4><div id="gx2b"></div></div>
+        </div>
+        <div class="gx-row">
+          <div class="gx-card gx-main"><div class="gx-h"><h3>TOTAL BRAND DISTRIBUTION</h3><div class="leg" id="gxL3"></div></div><div id="gx3"></div></div>
+          <div class="gx-card gx-side"><h4>TBD · YTD VS LYTD</h4><div id="gx3a"></div></div>
+          <div class="gx-card gx-side"><h4>TBD · COMPARATIVA</h4><div id="gx3b"></div></div>
+        </div>
+        <p class="gx-note" id="gxNote"></p>
+      </div>
+      <div id="gerSnap3">
+        <h2 class="gx-sec">💰 Rentabilidad del distri</h2>
+        <div class="gks" id="gerRent"></div>
+      </div>
+      <div class="gcols">
+        <div class="gch"><h3 id="gerDayT">Acumulado del mes</h3><p class="gsub">Cómo viene el mes contra el año y el mes anterior</p><div class="leg" id="gerDayL"></div><div id="gerDay"></div></div>
+        <div class="gch" id="gerSnap2">
+          <div class="gx-h"><h3>Apertura</h3><div class="chips" id="gerMeas" style="margin:0"></div></div>
+          <div class="tabs" id="gerDims" role="tablist"></div>
+          <div class="acts"><p class="count" id="gerTblNote"></p><button class="act" id="gerCopy2">📋 Copiar tabla</button><button class="act" id="gerXls">⬇ Excel</button></div>
+          <div class="tbl"><table><thead id="gerHead"></thead><tbody id="gerRows"></tbody></table></div>
         </div>
       </div>
-      <div id="gerSnap2">
-        <div class="tabs" id="gerDims" role="tablist"></div>
-        <div class="acts"><p class="count" id="gerTblNote"></p><button class="act" id="gerCopy2">📋 Copiar tabla</button><button class="act" id="gerXls">⬇ Descargar Excel</button></div>
-        <div class="tbl"><table><thead id="gerHead"></thead><tbody id="gerRows"></tbody></table></div>
-      </div>
     </div>
-    <div class="empty" id="gerEmpty" hidden>Todavía no hay bases cargadas.<br>Tocá <b>⬆ Subir base plana</b> , elegí el mes y cargá su base plana.</div>
+    <div class="empty" id="gerEmpty" hidden>Todavía no hay bases cargadas.<br>Tocá <b>⬆ Subir base y objetivos</b>, elegí el mes y cargá su base plana.</div>
   </section>
   <div class="ger-tip" id="gerTip" hidden></div>
 
   <div class="modal" id="mGer" hidden>
     <div class="sheet" role="dialog" aria-labelledby="gerUpTitle">
-      <div class="sheet-head"><h2 id="gerUpTitle">Subir base plana</h2><button class="x" id="gerUpClose" aria-label="Cerrar">×</button></div>
+      <div class="sheet-head"><h2 id="gerUpTitle">Base plana y objetivos</h2><button class="x" id="gerUpClose" aria-label="Cerrar">×</button></div>
       <div class="step">
         <h3><span>1</span> Elegí el mes</h3>
-        <p class="hint">Tocá el mes que vas a cargar. Si ya estaba cargado <b>se reemplaza</b>, así vas actualizando el mes en curso.</p>
+        <p class="hint">Tocá el mes. Si ya estaba cargado <b>se reemplaza</b>, así vas actualizando el mes en curso.</p>
         <div class="gm" id="gerGrid"></div>
         <p class="hint" id="gerGridHint" hidden>🔒 Escribí la clave gerencial (abajo) para ver qué meses ya están cargados.</p>
-        <div class="gm-leg"><span><i class="ok"></i>Cargado completo</span><span><i class="pa"></i>Cargado parcial</span><span><i></i>Sin cargar</span></div>
+        <div class="gm-leg"><span><i class="ok"></i>Cargado completo</span><span><i class="pa"></i>Cargado parcial</span><span><i></i>Sin cargar</span><span>🎯 con objetivo</span></div>
       </div>
       <div class="step">
-        <h3><span>2</span> Subí la base plana de <b id="gerSelLbl" style="margin-left:4px;color:var(--fizz)"></b></h3>
-        <input id="gerFile" class="file" type="file" accept=".xlsx,.xls,.csv">
+        <h3><span>2</span> Base plana <em class="opt">(opcional si solo cargás objetivos)</em></h3>
+        <input id="gerFile" class="file" type="file" accept=".xlsx,.xls,.csv" multiple>
+        <p class="hint" style="margin:0">Podés elegir <b>varios archivos juntos</b> (uno por mes, de cualquier año): cada archivo se carga en el mes que tiene la mayor parte de su venta.</p>
       </div>
       <div class="step">
-        <h3><span>3</span> Publicar</h3>
+        <h3><span>3</span> Objetivos de <b class="gerSelLbl" style="margin-left:4px;color:var(--fizz)"></b> <em class="opt">(total distri)</em></h3>
+        <div class="gobj">
+          <label>HL<input id="gerObjHl" inputmode="decimal" placeholder="Ej: 7200"></label>
+          <label>CCC (clientes)<input id="gerObjCc" inputmode="numeric" placeholder="Ej: 3100"></label>
+          <label>TBD<input id="gerObjTbd" inputmode="numeric" placeholder="Ej: 21500"></label>
+        </div>
+      </div>
+      <div class="step">
+        <h3><span>4</span> Publicar</h3>
         <label class="fl" for="gerKeyG">CLAVE GERENCIAL <em>— la que van a usar los gerentes para ver el tablero</em></label>
         <input id="gerKeyG" type="password" autocomplete="off">
         <p class="hint" id="gerFirst" hidden>⚠️ Es la primera carga: la clave que escribas acá queda como clave gerencial. Anotala, después tiene que ser siempre la misma.</p>
         <label class="fl" for="gerKeyA">CLAVE DE ADMINISTRADORA</label>
         <input id="gerKeyA" type="password" autocomplete="off">
-        <button class="btn-in" id="gerGo" type="button">PROCESAR Y PUBLICAR</button>
+        <button class="btn-in" id="gerGo" type="button">PUBLICAR</button>
         <div class="msg" id="gerMsg"></div>
       </div>
     </div>
@@ -2039,41 +2096,52 @@ $("cbGo").addEventListener("click", async () => {
 });
 
 /* ===== Gerencial ===== */
-const GER = { cred:null, idx:null, idxP:null, cache:{}, ym:null, dim:"un", meas:"hl", f:{sup:"", prom:"", canal:"", un:""} };
+const GF0 = () => ({sup:"", prom:"", canal:"", un:"", marca:"", cal:""});
+const GER = { cred:null, idx:null, idxP:null, cache:{}, ccache:{}, ym:null, dim:"un", meas:"hl", f:GF0(), cart:undefined };
 const GDIMS = [["un","Unidad de negocio"],["marca","Marca"],["calibre","Calibre"],["canal","Canal"],["mesa","Supervisor"],["fdv","Promotor"]];
 const GMEAS = [["hl","HL"],["bu","Bultos"],["fin","$ Final"],["pn","$ PNSF"],["gan","$ Ganancia"]];
 /* PNIT ÷ PNSF por marca (lista 03/11, precio tradicional). Ganancia del distri = PNSF × (factor − 1): el descuento al cliente lo reintegra Quilmes por WAPI */
 const GAN_K = {"7 UP": 1.1626, "7 UP FREE": 1.1651, "DANTE ROBINO": 1.2235, "DONDE MANDA CAPITAN": 1.155, "ECO DE LOS ANDES": 1.1572, "GATORADE": 1.1923, "GLACIAR": 1.1621, "H2OH": 1.163, "JAGERMEISTER": 1.2322, "MALEANTE": 1.1552, "MIRINDA": 1.1674, "NESTLE PUREZA VITAL": 1.1624, "NOVECENTO": 1.2262, "OTRO LOCO MAS": 1.1557, "PASO DE LOS TOROS": 1.1598, "PATAGONIA MKTP": 1.2523, "PEPSI": 1.1629, "PEPSI BLACK": 1.1583, "PLAYADITO": 1.1603, "QUILMES MARKETPLACE": 1.2034, "RED BULL": 1.1438, "ROCKSTAR": 1.1939, "STELLA ARTOIS MARKETPLACE": 1.2661}, GAN_K_DEF = 1.163;
+const C25 = "#5b8def", C26 = "#a970ff", C26b = "#d2b0ff", COBJ = "#ffc93c", LYCOL = "rgba(190,200,225,.45)";
 const pad2 = n => String(n).padStart(2,"0");
-const gKey = ym => "ger_" + ym.replace("-","_");
+const gKey = ym => "ger_" + ym.replace("-","_"), gcKey = ym => "gcl_" + ym.replace("-","_");
 const ymAdd = (ym, n) => { let y = +ym.slice(0,4), m = +ym.slice(5) + n; while (m < 1){ m += 12; y--; } while (m > 12){ m -= 12; y++; } return y + "-" + pad2(m); };
 const ymLabel = ym => MESES[+ym.slice(5)-1] + " " + ym.slice(0,4);
+const ymShort = ym => MESES[+ym.slice(5)-1].slice(0,3).toUpperCase() + " " + ym.slice(2,4);
 const daysIn = ym => new Date(+ym.slice(0,4), +ym.slice(5), 0).getDate();
+const curYM = () => new Date().getFullYear() + "-" + pad2(new Date().getMonth() + 1);
 /* un mes ya terminado cuenta como completo aunque el último día no tenga venta */
-const gFull = (ym, d) => d >= daysIn(ym) || ym < (new Date().getFullYear() + "-" + pad2(new Date().getMonth() + 1));
+const gFull = (ym, d) => d >= daysIn(ym) || ym < curYM();
 function habiles(ym, upto){ let n = 0; const y = +ym.slice(0,4), m = +ym.slice(5); for (let d = 1; d <= upto; d++) if (new Date(y, m-1, d).getDay() !== 0) n++; return n; }
 const fmtShort = v => { const a = Math.abs(v), f = (x, s) => x.toLocaleString("es-AR",{maximumFractionDigits: Math.abs(x) < 10 ? 1 : 0}) + s;
   return a >= 1e6 ? f(v/1e6," M") : a >= 1e4 ? f(v/1e3," mil") : Math.round(v).toLocaleString("es-AR"); };
 const fmtHL = v => v.toLocaleString("es-AR",{maximumFractionDigits: Math.abs(v) < 100 ? 1 : 0});
 const fmtMeas = (m, v) => m === "hl" ? fmtHL(v) + " HL" : m === "bu" ? fmtN(Math.round(v)) + " bultos" : "$ " + fmtShort(v);
 const fmtMeasN = (m, v) => m === "hl" ? fmtHL(v) : m === "bu" ? fmtN(Math.round(v)) : "$ " + fmtShort(v);
-const gpct = (a, b) => (b && b > 0) ? (a / b - 1) * 100 : null;
+const fInt = v => fmtN(Math.round(v));
+const gpct = (a, b) => (a != null && b && b > 0) ? (a / b - 1) * 100 : null;
 const fpct = p => p === null || !isFinite(p) ? "—" : (p > 0 ? "+" : "") + p.toLocaleString("es-AR",{maximumFractionDigits:1}) + "%";
 const dpill = p => p === null || !isFinite(p) ? '<span class="dl na">s/d</span>' : `<span class="dl ${p >= 0 ? "up" : "dn"}">${p >= 0 ? "▲" : "▼"} ${fpct(Math.abs(p)).replace("+","")}</span>`;
 const dcell = p => p === null || !isFinite(p) ? '<span class="vp">—</span>' : `<span class="${p >= 0 ? "dpos" : "dneg"}">${p >= 0 ? "▲" : "▼"} ${fpct(Math.abs(p)).replace("+","")}</span>`;
+const noFilt = () => Object.values(GER.f).every(v => !v);
 
 function gerShow(what){ $("gerLock").hidden = what !== "lock"; $("gerBody").hidden = what !== "body"; $("gerEmpty").hidden = what !== "empty"; }
+function normIdx(idx){
+  idx.m ||= {}; idx.obj ||= {};
+  Object.values(idx.m).forEach(e => { e.t = (e.t || []).map(r => r.length >= 11 ? r : [r[0], r[1], r[2], r[3], null, null, r[4], r[5], r[6], r[7], r[8] || 0]); });
+  return idx;
+}
 
 async function loadGer(force){
   if (!apiReady()){ $("gerUpd").textContent = "Falta conectar el guardado"; gerShow("empty"); return; }
   $("gerUpd").textContent = "Cargando…";
   try {
-    if (!GER.idxP || force){ GER.idxP = await apiGet("ger_idx"); GER.idx = null; GER.cache = {}; }
+    if (!GER.idxP || force){ GER.idxP = await apiGet("ger_idx"); GER.idx = null; GER.cache = {}; GER.ccache = {}; }
     if (!GER.idxP || !GER.idxP.data){ $("gerUpd").textContent = "Sin datos todavía"; gerShow("empty"); return; }
     if (!GER.cred){ try { const s = sessionStorage.getItem("nabs_ger"); if (s) GER.cred = ["GERENCIAL", s]; } catch(e){} }
     if (!GER.cred){ $("gerUpd").textContent = "Acceso con clave gerencial"; gerShow("lock"); return; }
     if (!GER.idx){
-      try { GER.idx = await openData(GER.idxP, GER.cred); }
+      try { GER.idx = normIdx(await openData(GER.idxP, GER.cred)); }
       catch(e){ GER.cred = null; try{ sessionStorage.removeItem("nabs_ger"); }catch(_){}
         $("gerUpd").textContent = "Acceso con clave gerencial"; gerShow("lock"); $("gerLkMsg").textContent = "Clave gerencial incorrecta"; return; }
     }
@@ -2089,148 +2157,241 @@ $("gerUnlock").addEventListener("click", async () => {
   const p = $("gerPass").value; if (!p) return;
   $("gerLkMsg").textContent = ""; $("gerUnlock").disabled = true; $("gerUnlock").textContent = "VERIFICANDO…";
   GER.cred = ["GERENCIAL", p];
-  try { GER.idx = await openData(GER.idxP, GER.cred); try{ sessionStorage.setItem("nabs_ger", p); }catch(e){} $("gerPass").value = ""; await loadGer(); }
+  try { GER.idx = normIdx(await openData(GER.idxP, GER.cred)); try{ sessionStorage.setItem("nabs_ger", p); }catch(e){} $("gerPass").value = ""; await loadGer(); }
   catch(e){ GER.cred = null; GER.idx = null; $("gerLkMsg").textContent = "Clave gerencial incorrecta"; }
   $("gerUnlock").disabled = false; $("gerUnlock").textContent = "ENTRAR";
 });
 $("gerPass").addEventListener("keydown", e => { if (e.key === "Enter") $("gerUnlock").click(); });
 
+/* ---- datos ---- */
 async function gerMonth(ym){
   if (!GER.idx.m[ym]) return null;
   if (GER.cache[ym]) return GER.cache[ym];
   const p = await apiGet(gKey(ym)); if (!p || !p.data) return null;
   return GER.cache[ym] = await openData(p, GER.cred);
 }
-
-/* filtros por nombre (los índices cambian entre meses) */
-function gFlt(md){
-  const F = GER.f, D = md.dims;
-  return { m: D.mesa.map(n => !F.sup || n === F.sup), f: D.fdv.map(n => !F.prom || n === F.prom),
-           c: D.canal.map(n => !F.canal || n === F.canal), p: D.pk.map(p => !F.un || p[2] === F.un) };
+async function gerCl(ym){
+  if (!GER.idx.m[ym]) return null;
+  if (GER.ccache[ym] !== undefined) return GER.ccache[ym];
+  let gc = null;
+  try { const p = await apiGet(gcKey(ym)); if (p && p.data) gc = await openData(p, GER.cred); } catch(e){}
+  if (!gc){ const md = await gerMonth(ym); if (md && md.cl) gc = {legacy:true, dims:md.dims, cl:md.cl}; }
+  return GER.ccache[ym] = gc;
 }
+async function gerCartera(){
+  if (GER.cart !== undefined) return GER.cart;
+  try { const p = await apiGet("grillas"); GER.cart = p && p.data ? await openData(p) : null; } catch(e){ GER.cart = null; }
+  return GER.cart;
+}
+function gFlt(D){
+  const F = GER.f;
+  return { m: D.mesa.map(n => !F.sup || n === F.sup), f: D.fdv.map(n => !F.prom || n === F.prom), c: D.canal.map(n => !F.canal || n === F.canal),
+           p: D.pk.map(p => (!F.un || p[2] === F.un) && (!F.marca || p[0] === F.marca) && (!F.cal || p[1] === F.cal)) };
+}
+const tOk = r => { const F = GER.f; return (!F.sup || r[0] === F.sup) && (!F.prom || r[1] === F.prom) && (!F.canal || r[2] === F.canal) && (!F.un || r[3] === F.un) && (!F.marca || r[4] === F.marca) && (!F.cal || r[5] === F.cal); };
+function tFromCube(md){
+  const D = md.dims, tm = new Map();
+  for (const a of md.c){ const k = a[1] + "|" + a[2] + "|" + a[3] + "|" + a[4], p = D.pk[a[4]];
+    let x = tm.get(k); if (!x){ x = [D.mesa[a[1]], D.fdv[a[2]], D.canal[a[3]], p[2], p[0], p[1], 0, 0, 0, 0, 0]; tm.set(k, x); }
+    x[6] += a[5]; x[7] += a[6]; x[8] += a[7]; x[9] += a[8]; x[10] += a[9] || 0; }
+  return [...tm.values()];
+}
+function idxTot(ym, k){
+  const e = GER.idx.m[ym]; if (!e) return null;
+  const i = {hl:6, bu:7, fin:8, pn:9, gan:10}[k]; let s = 0;
+  for (const r of e.t) if (tOk(r)) s += r[i] || 0;
+  return s;
+}
+const z0 = () => ({hl:0, bu:0, fin:0, pn:0, gan:0, cp:0});
 function gKeyOf(md, dim){
   const D = md.dims;
   return dim === "un" ? r => D.pk[r[4]][2] : dim === "marca" ? r => D.pk[r[4]][0] : dim === "calibre" ? r => D.pk[r[4]][1]
        : dim === "canal" ? r => D.canal[r[3]] : dim === "mesa" ? r => D.mesa[r[1]] : r => D.fdv[r[2]];
 }
-const z0 = () => ({hl:0, bu:0, fin:0, pn:0, gan:0, cp:0});
-/* totales y apertura hasta el día D */
-function gAgg(md, D, dim){
+function gAgg(md, Dd, dim){
   if (!md) return null;
-  const f = gFlt(md), k = gKeyOf(md, dim), t = z0(), by = {};
+  const f = gFlt(md.dims), k = gKeyOf(md, dim || "un"), t = z0(), by = {};
   for (const r of md.c){
-    if (r[0] > D || !(f.m[r[1]] && f.f[r[2]] && f.c[r[3]] && f.p[r[4]])) continue;
+    if (r[0] > Dd || !(f.m[r[1]] && f.f[r[2]] && f.c[r[3]] && f.p[r[4]])) continue;
     const o = by[k(r)] ||= z0();
     o.hl += r[5]; o.bu += r[6]; o.fin += r[7]; o.pn += r[8]; o.gan += r[9] || 0;
     t.hl += r[5]; t.bu += r[6]; t.fin += r[7]; t.pn += r[8]; t.gan += r[9] || 0;
   }
-  const all = new Set(), sets = {}, cdim = {mesa:1, fdv:2, canal:3}[dim], Dm = md.dims;
-  for (const c of md.cl){
+  return {t, by};
+}
+/* clientes con compra (CCC) y total brand distribution (cliente × SKU) hasta el día Dd */
+function cStats(gc, Dd, wantSet){
+  if (!gc) return null;
+  const D = gc.dims, f = gFlt(D), skuP = gc.legacy ? null : D.sku.map(s => f.p[s[2]]);
+  let cc = 0, tbd = 0; const set = wantSet ? new Set() : null;
+  for (const c of gc.cl){
     if (!(f.m[c[1]] && f.f[c[2]] && f.c[c[3]])) continue;
-    const L = c[4];
+    const L = c[4]; let k = 0;
+    for (let i = 0; i < L.length; i += 2) if (L[i+1] <= Dd && (gc.legacy ? f.p[L[i]] : skuP[L[i]])) k++;
+    if (k){ cc++; tbd += k; if (set) set.add(String(c[0])); }
+  }
+  return {cc, tbd: gc.legacy ? null : tbd, set};
+}
+function cBy(gc, Dd, dim){
+  const out = {}; if (!gc) return out;
+  const D = gc.dims, f = gFlt(D), cdim = {mesa:1, fdv:2, canal:3}[dim];
+  const pkOf = s => gc.legacy ? s : D.sku[s][2], pv = (pk) => dim === "un" ? D.pk[pk][2] : dim === "marca" ? D.pk[pk][0] : D.pk[pk][1];
+  for (const c of gc.cl){
+    if (!(f.m[c[1]] && f.f[c[2]] && f.c[c[3]])) continue;
+    const L = c[4], seen = new Set();
     for (let i = 0; i < L.length; i += 2){
-      const pk = L[i]; if (L[i+1] > D || !f.p[pk]) continue;
-      all.add(c[0]);
-      const key = cdim ? Dm[dim][c[cdim]] : (dim === "un" ? Dm.pk[pk][2] : dim === "marca" ? Dm.pk[pk][0] : Dm.pk[pk][1]);
-      (sets[key] ||= new Set()).add(c[0]);
+      const pk = pkOf(L[i]); if (L[i+1] > Dd || !f.p[pk]) continue;
+      const key = cdim ? D[dim][c[cdim]] : pv(pk);
+      if (seen.has(key)) continue; seen.add(key); out[key] = (out[key] || 0) + 1;
       if (cdim) break;
     }
   }
-  t.cp = all.size;
-  for (const key in sets) (by[key] ||= z0()).cp = sets[key].size;
-  return {t, by};
+  return out;
 }
-/* acumulado diario (para la curva) */
 function gDaily(md, meas){
   if (!md) return null;
-  const n = daysIn(md.ym), f = gFlt(md), v = new Array(n).fill(0), mi = {hl:5, bu:6, fin:7, pn:8, gan:9}[meas];
+  const n = daysIn(md.ym), f = gFlt(md.dims), v = new Array(n).fill(0), mi = {hl:5, bu:6, fin:7, pn:8, gan:9}[meas];
   for (const r of md.c) if (f.m[r[1]] && f.f[r[2]] && f.c[r[3]] && f.p[r[4]]) v[r[0]-1] += r[mi] || 0;
   for (let i = 1; i < n; i++) v[i] += v[i-1];
   return v;
 }
-/* total de un mes desde el índice (para el gráfico de 12 meses) */
-function gIdxTot(ym, meas){
-  const e = GER.idx.m[ym]; if (!e) return null;
-  const F = GER.f, mi = {hl:4, bu:5, fin:6, pn:7, gan:8}[meas]; let s = 0;
-  for (const r of e.t) if ((!F.sup || r[0] === F.sup) && (!F.prom || r[1] === F.prom) && (!F.canal || r[2] === F.canal) && (!F.un || r[3] === F.un)) s += r[mi] || 0;
-  return s;
-}
 
+/* ---- filtros ---- */
 function gerSetup(cur){
-  const yms = Object.keys(GER.idx.m).sort().reverse(), D = cur.dims;
-  $("gerMes").innerHTML = yms.map(ym => { const e = GER.idx.m[ym], full = gFull(ym, e.d);
-    return `<option value="${ym}"${ym === GER.ym ? " selected" : ""}>${ymLabel(ym)}${full ? "" : " (al " + pad2(e.d) + ")"}</option>`; }).join("");
-  const F = GER.f, mesas = uniq(D.mesa), canales = uniq(D.canal), uns = uniq(D.pk.map(p => p[2]));
+  const yms = Object.keys(GER.idx.m).sort().reverse(), D = cur.dims, F = GER.f;
+  $("gerMes").innerHTML = yms.map(ym => { const e = GER.idx.m[ym];
+    return `<option value="${ym}"${ym === GER.ym ? " selected" : ""}>${ymLabel(ym)}${gFull(ym, e.d) ? "" : " (al " + pad2(e.d) + ")"}</option>`; }).join("");
+  const mesas = uniq(D.mesa).filter(Boolean);
   if (F.sup && !mesas.includes(F.sup)) F.sup = "";
+  $("gerSups").innerHTML = mesas.map(n => `<button type="button" data-s="${esc(n)}" class="${F.sup === n ? "on" : ""}">${esc(tc(n))}</button>`).join("") + `<button type="button" data-s="" class="${F.sup ? "" : "on"}">Todos</button>`;
   const fdvs = new Set(); for (const r of cur.c) if (!F.sup || D.mesa[r[1]] === F.sup) fdvs.add(D.fdv[r[2]]);
-  const proms = uniq([...fdvs]); if (F.prom && !proms.includes(F.prom)) F.prom = "";
-  if (F.canal && !canales.includes(F.canal)) F.canal = "";
-  if (F.un && !uns.includes(F.un)) F.un = "";
+  const keep = (k, list) => { if (F[k] && !list.includes(F[k])) F[k] = ""; return list; };
+  const proms = keep("prom", uniq([...fdvs]).filter(Boolean)), canales = keep("canal", uniq(D.canal)),
+        uns = keep("un", uniq(D.pk.map(p => p[2]))), mars = keep("marca", uniq(D.pk.filter(p => !F.un || p[2] === F.un).map(p => p[0]))),
+        cals = keep("cal", uniq(D.pk.filter(p => (!F.un || p[2] === F.un) && (!F.marca || p[0] === F.marca)).map(p => p[1])).filter(Boolean));
   const o = (id, all, list, val, nm) => $(id).innerHTML = `<option value="">${all}</option>` + list.map(v => `<option value="${esc(v)}"${v === val ? " selected" : ""}>${esc(nm ? tc(v) : v)}</option>`).join("");
-  o("gerSup", "Todos los supervisores", mesas, F.sup, 1);
-  o("gerProm", "Todos los promotores", proms, F.prom, 1);
-  o("gerCan", "Todos los canales", canales, F.canal);
-  o("gerUn", "Todas las unidades", uns, F.un);
+  o("gerProm", "Promotores", proms, F.prom, 1); o("gerCan", "Canales", canales, F.canal); o("gerUn", "Unidades", uns, F.un);
+  o("gerMar", "Marcas", mars, F.marca); o("gerCal", "Calibres", cals, F.cal);
   $("gerMeas").innerHTML = GMEAS.map(([k,l]) => `<button class="chip${GER.meas === k ? " on" : ""}" data-m="${k}">${l}</button>`).join("");
   $("gerDims").innerHTML = GDIMS.map(([k,l]) => `<button class="tab${GER.dim === k ? " on" : ""}" data-d="${k}">${l}</button>`).join("");
 }
 
+/* ---- render ---- */
 async function gerRender(){
-  const ym = GER.ym, full = gFull(ym, GER.idx.m[ym].d), D = full ? 31 : GER.idx.m[ym].d, m = GER.meas;
+  const ym = GER.ym, e = GER.idx.m[ym], full = gFull(ym, e.d), D = full ? 31 : e.d, Y = +ym.slice(0,4), M = +ym.slice(5);
+  const ymAA = ymAdd(ym, -12), ymMA = ymAdd(ym, -1);
   $("gerCut").textContent = "Cargando " + ymLabel(ym) + "…";
-  const [cur, aa, ma] = await Promise.all([gerMonth(ym), gerMonth(ymAdd(ym,-12)), gerMonth(ymAdd(ym,-1))]);
+  const yearYms = []; for (let y = Y - 1; y <= Y; y++) for (let m = 1; m <= 12; m++){ const k = y + "-" + pad2(m); if (GER.idx.m[k]) yearYms.push(k); }
+  if (!yearYms.includes(ymMA) && GER.idx.m[ymMA]) yearYms.push(ymMA);
+  const [cur, aa, ma] = await Promise.all([gerMonth(ym), gerMonth(ymAA), gerMonth(ymMA)]);
+  const gcs = {}; (await Promise.all(yearYms.map(k => gerCl(k)))).forEach((g, i) => gcs[yearYms[i]] = g);
   if (!cur){ $("gerCut").textContent = "No se pudo abrir " + ymLabel(ym); return; }
   gerSetup(cur);
-  const dim = GER.dim, A = gAgg(cur, D, dim), B = gAgg(aa, D, dim), C = gAgg(ma, D, dim);
-  const ymAA = ymAdd(ym,-12), ymMA = ymAdd(ym,-1);
-  $("gerCut").innerHTML = full
-    ? `<b>${ymLabel(ym)}</b> · mes completo · comparado contra ${ymLabel(ymAA)} (AA) y ${ymLabel(ymMA)} (MA)`
-    : `<b>${ymLabel(ym)}</b> · venta del 1 al ${pad2(D)} · comparado contra el mismo período de ${ymLabel(ymAA)} (AA) y ${ymLabel(ymMA)} (MA)`;
-  const filt = [GER.f.sup && tc(GER.f.sup), GER.f.prom && tc(GER.f.prom), GER.f.canal, GER.f.un].filter(Boolean).join(" · ");
-  $("gerFlt").textContent = filt ? "Filtro: " + filt : "Total GBA Norte";
+  const F = GER.f, nf = noFilt(), obj = nf ? (GER.idx.obj[ym] || null) : null;
+  /* meses cargados con la versión anterior: el filtro de marca/calibre se arma desde su detalle */
+  if (F.marca || F.cal){
+    const leg = yearYms.filter(k => GER.idx.m[k].t.some(r => r[4] == null));
+    (await Promise.all(leg.map(gerMonth))).forEach((md, i) => { if (md) GER.idx.m[leg[i]].t = tFromCube(md); });
+  }
+  const filt = [F.sup && tc(F.sup), F.prom && tc(F.prom), F.canal, F.un, F.marca, F.cal].filter(Boolean).join(" · ");
+  $("gerCut").innerHTML = `<b>${ymLabel(ym)}</b> · ${full ? "mes completo" : "venta del 1 al " + pad2(D)} · ${filt ? "Filtro: <b>" + esc(filt) + "</b>" : "<b>Total GBA Norte</b>"} · AA = ${ymLabel(ymAA)}${full ? "" : " al " + pad2(D)}`;
+
+  /* totales del mes y comparativos al mismo día */
+  const A = gAgg(cur, D, GER.dim), B = gAgg(aa, D, GER.dim), C = gAgg(ma, D, GER.dim);
+  const sC = cStats(gcs[ym], D), sA = cStats(gcs[ymAA], D), sM = cStats(gcs[ymMA], D);
+  const hd = habiles(ym, Math.min(D, daysIn(ym))), ht = habiles(ym, daysIn(ym)), proj = !full && hd ? A.t.hl / hd * ht : null;
 
   /* KPIs */
-  const t = A.t, ta = B && B.t, tm = C && C.t, mo = m === "pn" ? "pn" : "fin";
+  const objPill = (v, o) => o ? `<span class="dl obj">🎯 ${Math.round(v / o * 100)}% de ${fInt(o)}</span>` : "";
+  const objBar = (v, o) => o ? `<div class="ob"><i style="width:${Math.min(100, v / o * 100)}%"></i></div>` : "";
+  const sku = s => s && s.cc && s.tbd != null ? s.tbd / s.cc : null;
+  const MS = MESES[M-1].toUpperCase();
+  let k = `<div class="gx-k"><span class="l">HL ${MS}</span><b>${fmtHL(A.t.hl)} <small>HL</small></b><div class="ps">${dpill(gpct(A.t.hl, B && B.t.hl))}<span class="dl na">vs AA</span>${objPill(A.t.hl, obj && obj.hl)}</div>${objBar(A.t.hl, obj && obj.hl)}${proj ? `<span class="pj">Proyección al cierre: <b>${fmtHL(proj)} HL</b>${obj && obj.hl ? " · " + Math.round(proj / obj.hl * 100) + "% del obj." : ""}</span>` : ""}</div>`;
+  k += `<div class="gx-k"><span class="l">CCC ${MS}</span><b>${sC ? fInt(sC.cc) : "—"}</b><div class="ps">${dpill(sC && sA ? gpct(sC.cc, sA.cc) : null)}<span class="dl na">vs AA</span>${sC ? objPill(sC.cc, obj && obj.cc) : ""}</div>${sC ? objBar(sC.cc, obj && obj.cc) : ""}</div>`;
+  k += `<div class="gx-k"><span class="l">SKU/PDV ${MS}</span><b>${sku(sC) != null ? sku(sC).toLocaleString("es-AR",{maximumFractionDigits:2}) : "—"}</b><div class="ps">${dpill(gpct(sku(sC), sku(sA)))}<span class="dl na">vs AA</span></div></div>`;
+  k += `<div class="gx-k"><span class="l">TBD ${MS}</span><b>${sC && sC.tbd != null ? fInt(sC.tbd) : "—"}</b><div class="ps">${dpill(sC && sA ? gpct(sC.tbd, sA.tbd) : null)}<span class="dl na">vs AA</span>${sC && sC.tbd != null ? objPill(sC.tbd, obj && obj.tbd) : ""}</div>${sC && sC.tbd != null ? objBar(sC.tbd, obj && obj.tbd) : ""}</div>`;
+  $("gerKpis").innerHTML = k;
+
+  /* series anuales */
+  const series = fn => MESES.map((n, i) => {
+    const a = Y + "-" + pad2(i+1), b = (Y-1) + "-" + pad2(i+1);
+    return {lab: n.slice(0,3).toUpperCase(), ym:a, a: GER.idx.m[a] ? fn(a) : null, b: GER.idx.m[b] ? fn(b) : null,
+            o: nf && GER.idx.obj[a] ? GER.idx.obj[a] : null, part: GER.idx.m[a] && !gFull(a, GER.idx.m[a].d) ? GER.idx.m[a].d : 0};
+  });
+  const sHL = series(k => idxTot(k, "hl")), sCC = series(k => { const s = cStats(gcs[k], 31); return s ? s.cc : null; }), sTB = series(k => { const s = cStats(gcs[k], 31); return s ? s.tbd : null; });
+  /* el mes de corte en curso se compara contra el mismo período del año anterior */
+  const iM = M - 1;
+  sHL.forEach(r => r.p = gpct(r.a, r.b)); sCC.forEach(r => r.p = gpct(r.a, r.b)); sTB.forEach(r => r.p = gpct(r.a, r.b));
+  [sHL, sCC, sTB].forEach(s => s.forEach(r => { if (r.part && r.ym !== ym) r.p = null; }));
+  if (!full){ sHL[iM].p = gpct(A.t.hl, B && B.t.hl); sCC[iM].p = sA ? gpct(sC && sC.cc, sA.cc) : null; sTB[iM].p = sA ? gpct(sC && sC.tbd, sA.tbd) : null; }
+  sHL.forEach(r => r.ov = r.o && r.o.hl); sCC.forEach(r => r.ov = r.o && r.o.cc); sTB.forEach(r => r.ov = r.o && r.o.tbd);
+  const leg = has => `<span><i style="background:${C25}"></i>${Y-1}</span><span><i style="background:${C26}"></i>${Y}</span>` + (has ? `<span><i class="dashc"></i>Objetivo</span>` : "");
+  $("gxT1").textContent = "VOLUMEN HL · " + (F.marca || F.un || "TODAS LAS MARCAS");
+  $("gxL1").innerHTML = leg(sHL.some(r => r.ov)); $("gxL2").innerHTML = leg(sCC.some(r => r.ov)); $("gxL3").innerHTML = leg(sTB.some(r => r.ov));
+  svgYear($("gx1"), sHL, iM, fmtHL, "HL", Y); svgYear($("gx2"), sCC, iM, fInt, "clientes", Y); svgYear($("gx3"), sTB, iM, fInt, "SKU-PDV", Y);
+
+  /* YTD vs LYTD (el mes en curso, al mismo día) */
+  /* YTD vs LYTD: solo los meses que están cargados en los dos años (el mes de corte, al mismo día) */
+  const ytd = (s, curV, aaV) => { let a = 0, b = 0, n = 0;
+    for (let i = 0; i < M; i++){ const av = i === iM ? curV : s[i].a, bv = i === iM ? aaV : s[i].b; if (av == null || bv == null) continue; a += av; b += bv; n++; }
+    return n ? {a, b} : {a: null, b: null}; };
+  const yH = ytd(sHL, A.t.hl, B ? B.t.hl : null), yT = ytd(sTB, sC && sC.tbd, sA ? sA.tbd : null);
+  const ytdObj = s => { let o = 0; for (let i = 0; i < M; i++){ if (s[i].a == null) continue; if (!s[i].ov) return null; o += s[i].ov; } return full ? o : null; };
+  svgCols($("gx1a"), [{lab:"YTD", v:yH.a, col:C26, top: yH.b ? fpct(gpct(yH.a, yH.b)) : "", up: yH.a >= yH.b}, {lab:"LYTD", v:yH.b, col:C25}], fmtHL);
+  svgCols($("gx3a"), [{lab:"YTD", v:yT.a, col:C26, top: yT.b ? fpct(gpct(yT.a, yT.b)) : "", up: yT.a >= yT.b}, {lab:"LYTD", v:yT.b, col:C25}], fInt);
+
+  /* comparativas: mes de corte vs mes anterior vs mismo mes año anterior (al mismo día) */
+  const comp = (host, v, vm, va, o, fmt) => svgCols(host, (o && full ? [{lab:"OBJ", v:o, obj:1, top: v != null ? Math.round(v / o * 100) + "%" : "", up: v >= o}] : []).concat([
+    {lab: ymShort(ym), v, col:C26},
+    {lab: ymShort(ymMA), v: vm, col:C26b, top: vm ? fpct(gpct(v, vm)) : "", up: v >= vm},
+    {lab: ymShort(ymAA), v: va, col:C25, top: va ? fpct(gpct(v, va)) : "", up: v >= va}]), fmt);
+  comp($("gx1b"), A.t.hl, C && C.t.hl, B && B.t.hl, obj && obj.hl, fmtHL);
+  comp($("gx2b"), sC && sC.cc, sM && sM.cc, sA && sA.cc, obj && obj.cc, fInt);
+  comp($("gx3b"), sC && sC.tbd, sM && sM.tbd, sA && sA.tbd, obj && obj.tbd, fInt);
+
+  /* cartera vs CCC vs CNC (cartera de las grillas: solo para el último mes cargado) */
+  const latest = Object.keys(GER.idx.m).sort().pop();
+  const cart = ym === latest && !F.un && !F.marca && !F.cal ? await gerCartera() : null;
+  if (cart && cart.rows){
+    const rows = cart.rows.filter(r => (!F.sup || r[2] === F.sup) && (!F.prom || r[3] === F.prom) && (!F.canal || r[5] === F.canal));
+    const set = (cStats(gcs[ym], D, true) || {}).set || new Set(), ccc = rows.filter(r => set.has(String(r[0]))).length, n = rows.length;
+    $("gx2aT").textContent = "CCC · CARTERA VS CNC";
+    svgCols($("gx2a"), [{lab:"Cartera", v:n, col:C25}, {lab:"CCC", v:ccc, col:C26, top: n ? (ccc / n * 100).toLocaleString("es-AR",{maximumFractionDigits:1}) + "%" : "", up:true},
+      {lab:"CNC", v:n - ccc, col:"#7d8aa6", top: n ? ((n - ccc) / n * 100).toLocaleString("es-AR",{maximumFractionDigits:1}) + "%" : "", up:false}], fInt);
+  } else {
+    $("gx2aT").textContent = "CCC · SKU/PDV";
+    svgCols($("gx2a"), [{lab: ymShort(ym), v: sku(sC), col:C26, top: sku(sA) ? fpct(gpct(sku(sC), sku(sA))) : "", up: sku(sC) >= sku(sA)}, {lab: ymShort(ymAA), v: sku(sA), col:C25}], v => v.toLocaleString("es-AR",{maximumFractionDigits:2}));
+  }
+  const notes = [];
+  if (!full) notes.push(`${ymLabel(ym)} va al día ${pad2(D)}: su % se compara contra el mismo período del año anterior.`);
+  if (!nf) notes.push("Los objetivos son del total distri: con filtros no se muestran.");
+  if (yearYms.some(k => gcs[k] && gcs[k].legacy)) notes.push("Hay meses cargados con la versión anterior: para ver su TBD volvé a subir esa base.");
+  $("gxNote").textContent = notes.join(" ");
+
+  /* rentabilidad */
+  const t = A.t, ta = B && B.t, tm = C && C.t;
   const mk = x => x && x.pn > 0 ? x.gan / x.pn * 100 : null, fpp = v => v.toLocaleString("es-AR",{maximumFractionDigits:1}) + "%";
   const ppill = (a, b) => a == null || b == null ? '<span class="dl na">s/d</span>' : Math.abs(a - b) < 0.05 ? '<span class="dl na">= 0 pp</span>' : `<span class="dl ${a - b >= 0 ? "up" : "dn"}">${a - b >= 0 ? "▲" : "▼"} ${Math.abs(a - b).toLocaleString("es-AR",{maximumFractionDigits:1})} pp</span>`;
-  const mkCard = `<div class="gk gk-gan"><span class="gk-l">Markup distri</span><b>${mk(t) != null ? fpp(mk(t)) : "—"} <small>s/ costo</small></b>
-    <div class="gk-d">${ppill(mk(t), mk(ta))}<span>vs AA</span>${mk(ta) != null ? "<em>" + fpp(mk(ta)) + "</em>" : ""}</div>
-    <div class="gk-d">${ppill(mk(t), mk(tm))}<span>vs MA</span>${mk(tm) != null ? "<em>" + fpp(mk(tm)) + "</em>" : ""}</div></div>`;
-  const drop = x => x && x.cp ? x.bu / x.cp : null, ph = x => x && x.hl > 0 ? x[mo] / x.hl : null;
-  const card = (lab, val, unit, a, b, va, vb) => `<div class="gk"><span class="gk-l">${lab}</span><b>${val}${unit ? " <small>" + unit + "</small>" : ""}</b>
+  const card = (lab, val, unit, a, b, va, vb, cls) => `<div class="gk${cls ? " " + cls : ""}"><span class="gk-l">${lab}</span><b>${val}${unit ? " <small>" + unit + "</small>" : ""}</b>
     <div class="gk-d">${dpill(gpct(a, va))}<span>vs AA</span>${va != null ? "<em>" + b(va) + "</em>" : ""}</div>
     <div class="gk-d">${dpill(gpct(a, vb))}<span>vs MA</span>${vb != null ? "<em>" + b(vb) + "</em>" : ""}</div></div>`;
-  let html = card("Volumen", fmtHL(t.hl), "HL", t.hl, fmtHL, ta && ta.hl, tm && tm.hl)
-    + card("Bultos", fmtN(Math.round(t.bu)), "", t.bu, v => fmtN(Math.round(v)), ta && ta.bu, tm && tm.bu)
-    + card(mo === "pn" ? "Facturación PNSF" : "Facturación", "$ " + fmtShort(t[mo]), "", t[mo], v => "$ " + fmtShort(v), ta && ta[mo], tm && tm[mo])
-    + card("Ganancia distri", "$ " + fmtShort(t.gan), "", t.gan, v => "$ " + fmtShort(v), ta && ta.gan, tm && tm.gan).replace('class="gk"', 'class="gk gk-gan"')
-    + mkCard
-    + card("Ganancia por HL", t.hl > 0 ? "$ " + fmtShort(t.gan / t.hl) : "—", "", t.hl > 0 ? t.gan / t.hl : null, v => "$ " + fmtShort(v), ta && ta.hl > 0 ? ta.gan / ta.hl : null, tm && tm.hl > 0 ? tm.gan / tm.hl : null).replace('class="gk"', 'class="gk gk-gan"')
-    + card("Clientes compradores", fmtN(t.cp), "", t.cp, fmtN, ta && ta.cp, tm && tm.cp)
-    + card("Drop", drop(t) != null ? drop(t).toLocaleString("es-AR",{maximumFractionDigits:1}) : "—", "bultos/cliente", drop(t), v => v.toLocaleString("es-AR",{maximumFractionDigits:1}), drop(ta), drop(tm))
-    + card("Precio promedio", ph(t) != null ? "$ " + fmtShort(ph(t)) : "—", "/ HL", ph(t), v => "$ " + fmtShort(v), ph(ta), ph(tm));
-  if (!full){
-    const hd = habiles(ym, D), ht = habiles(ym, daysIn(ym)), proj = hd ? t.hl / hd * ht : 0;
-    const aaFull = GER.idx.m[ymAA] ? gIdxTot(ymAA, "hl") : null;
-    html += `<div class="gproj">📈 <b>Proyección al cierre: ${fmtHL(proj)} HL</b> <span>(${hd} de ${ht} días hábiles, lun a sáb)</span>${aaFull ? ` · vs ${ymLabel(ymAA)} completo ${dcell(gpct(proj, aaFull))}` : ""}</div>`;
-  }
-  $("gerKpis").innerHTML = html;
-
-  /* 12 meses */
-  const y = +ym.slice(0,4), rows = MESES.map((n, i) => { const k = y + "-" + pad2(i+1), kl = (y-1) + "-" + pad2(i+1);
-    return {lab: n.slice(0,3).toUpperCase(), ym:k, a: gIdxTot(k, m), b: gIdxTot(kl, m), pa: GER.idx.m[k] && !gFull(k, GER.idx.m[k].d) ? GER.idx.m[k].d : 0}; });
-  rows.forEach(r => { if (r.pa && r.a > 0){ const hd = habiles(r.ym, r.pa); if (hd) r.pr = r.a / hd * habiles(r.ym, daysIn(r.ym)); } });
-  $("gerMonT").textContent = "Evolución mensual · " + GMEAS.find(x => x[0] === m)[1];
-  $("gerMonL").innerHTML = `<span><i style="background:var(--fizz)"></i>${y}</span><span><i style="background:${LYCOL}"></i>${y-1}</span>` + (rows.some(r => r.pr) ? `<span><i style="border:1.5px dashed var(--fizz);background:none"></i>Proyección mes en curso</span>` : "");
-  svgBars($("gerMon"), rows, +ym.slice(5)-1, m, y);
+  const $f = v => "$ " + fmtShort(v), drop = (x, s) => x && s && s.cc ? x.bu / s.cc : null, ph = x => x && x.hl > 0 ? x.fin / x.hl : null, gh = x => x && x.hl > 0 ? x.gan / x.hl : null;
+  $("gerRent").innerHTML = card("Facturación", $f(t.fin), "", t.fin, $f, ta && ta.fin, tm && tm.fin)
+    + card("Ganancia distri", $f(t.gan), "", t.gan, $f, ta && ta.gan, tm && tm.gan, "gk-gan")
+    + `<div class="gk gk-gan"><span class="gk-l">Markup distri</span><b>${mk(t) != null ? fpp(mk(t)) : "—"} <small>s/ costo</small></b>
+      <div class="gk-d">${ppill(mk(t), mk(ta))}<span>vs AA</span></div><div class="gk-d">${ppill(mk(t), mk(tm))}<span>vs MA</span></div></div>`
+    + card("Ganancia por HL", gh(t) != null ? $f(gh(t)) : "—", "", gh(t), $f, gh(ta), gh(tm), "gk-gan")
+    + card("Precio promedio", ph(t) != null ? $f(ph(t)) : "—", "/ HL", ph(t), $f, ph(ta), ph(tm))
+    + card("Drop", drop(t, sC) != null ? drop(t, sC).toLocaleString("es-AR",{maximumFractionDigits:1}) : "—", "bultos/cliente", drop(t, sC), v => v.toLocaleString("es-AR",{maximumFractionDigits:1}), drop(ta, sA), drop(tm, sM));
 
   /* acumulado diario */
-  const dc = gDaily(cur, m), da = gDaily(aa, m), dm = gDaily(ma, m);
-  $("gerDayT").textContent = "Acumulado del mes día a día · " + GMEAS.find(x => x[0] === m)[1];
-  $("gerDayL").innerHTML = `<span><i class="ln" style="background:var(--fizz)"></i>${ymLabel(ym)}</span>` + (da ? `<span><i class="ln" style="background:${LYCOL}"></i>${ymLabel(ymAA)}</span>` : "") + (dm ? `<span><i class="ln dash"></i>${ymLabel(ymMA)}</span>` : "");
-  svgLines($("gerDay"), [{v:dc.slice(0, D), col:"#38c8ff", w:2.5, lab:ymLabel(ym), main:1}, da && {v:da, col:LYCOL, w:2, lab:ymLabel(ymAA)}, dm && {v:dm, col:"#ffc93c", w:2, dash:"5 4", lab:ymLabel(ymMA)}].filter(Boolean), daysIn(ym), m);
+  const m = GER.meas, dc = gDaily(cur, m), da = gDaily(aa, m), dm = gDaily(ma, m);
+  $("gerDayT").textContent = "Acumulado del mes · " + GMEAS.find(x => x[0] === m)[1];
+  $("gerDayL").innerHTML = `<span><i class="ln" style="background:${C26}"></i>${ymLabel(ym)}</span>` + (da ? `<span><i class="ln" style="background:${C25}"></i>${ymLabel(ymAA)}</span>` : "") + (dm ? `<span><i class="ln dash"></i>${ymLabel(ymMA)}</span>` : "");
+  svgLines($("gerDay"), [{v:dc.slice(0, Math.min(D, dc.length)), col:C26, w:2.5, lab:ymLabel(ym), main:1}, da && {v:da, col:C25, w:2, lab:ymLabel(ymAA)}, dm && {v:dm, col:COBJ, w:2, dash:"5 4", lab:ymLabel(ymMA)}].filter(Boolean), daysIn(ym), m);
 
   /* apertura */
+  [[A, gcs[ym]], [B, gcs[ymAA]], [C, gcs[ymMA]]].forEach(([X, g]) => { if (!X) return; const cb = cBy(g, D, GER.dim); X.t.cp = (cStats(g, D) || {}).cc || 0; for (const key in cb) (X.by[key] ||= z0()).cp = cb[key]; });
   GER.last = {A, B, C, ym, D};
   gerTable();
 }
@@ -2239,63 +2400,86 @@ function gerTable(){
   const {A, B, C} = GER.last, m = GER.meas, dim = GER.dim, person = dim === "mesa" || dim === "fdv";
   const keys = Object.keys(A.by).sort((a,b) => A.by[b][m] - A.by[a][m]);
   const ml = GMEAS.find(x => x[0] === m)[1], dl = GDIMS.find(x => x[0] === dim)[1];
-  const hd = `<tr><th class="c1">${dl}</th><th class="r">${ml}</th><th class="r">Part.</th><th class="r">${ml} AA</th><th class="r">vs AA</th><th class="r">vs MA</th><th class="r">Markup</th><th class="r">Compr.</th><th class="r">Compr. vs AA</th></tr>`;
+  $("gerHead").innerHTML = `<tr><th class="c1">${dl}</th><th class="r">${ml}</th><th class="r">Part.</th><th class="r">vs AA</th><th class="r">vs MA</th><th class="r">Markup</th><th class="r">CCC</th><th class="r">CCC vs AA</th></tr>`;
   const row = (name, a, b, c, tot) => `<tr${tot ? ' class="tot"' : ""}><td class="c1">${esc(name)}</td><td class="r">${fmtMeasN(m, a[m])}</td><td class="r">${tot ? "100%" : A.t[m] ? (a[m] / A.t[m] * 100).toLocaleString("es-AR",{maximumFractionDigits:1}) + "%" : "—"}</td>
-    <td class="r vp">${b ? fmtMeasN(m, b[m]) : "—"}</td><td class="r">${dcell(b ? gpct(a[m], b[m]) : null)}</td><td class="r">${dcell(c ? gpct(a[m], c[m]) : null)}</td>
+    <td class="r">${dcell(b ? gpct(a[m], b[m]) : null)}</td><td class="r">${dcell(c ? gpct(a[m], c[m]) : null)}</td>
     <td class="r">${a.pn > 0 ? (a.gan / a.pn * 100).toLocaleString("es-AR",{maximumFractionDigits:1}) + "%" : "—"}</td><td class="r">${fmtN(a.cp)}</td><td class="r">${dcell(b ? gpct(a.cp, b.cp) : null)}</td></tr>`;
   let body = row("Total", A.t, B && B.t, C && C.t, 1);
   for (const k of keys) body += row(k ? (person ? tc(k) : k) : "(sin dato)", A.by[k], B && B.by[k], C && C.by[k]);
-  $("gerHead").innerHTML = hd; $("gerRows").innerHTML = body;
-  $("gerTblNote").textContent = person ? "AA = lo que vendió ese " + (dim === "mesa" ? "supervisor" : "promotor") + " el año pasado (puede haber cambiado de cartera)." : "";
+  $("gerRows").innerHTML = body;
+  $("gerTblNote").textContent = person ? "AA = lo que vendió esa persona el año pasado (puede haber cambiado de cartera)." : "";
 }
 
 /* ---- gráficos ---- */
-const LYCOL = "rgba(190,200,225,.45)";
-function chartW(el){ return Math.max(290, Math.min(1060, el.clientWidth || 600)); }
+function chartW(el){ return Math.max(200, Math.min(1400, el.clientWidth || 600)); }
 function niceMax(v){ if (!(v > 0)) return 1; const e = Math.pow(10, Math.floor(Math.log10(v))), f = v / e; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * e; }
-function barPath(x, base, w, h){ if (h <= 0) return ""; const r = Math.min(4, h, w/2), y = base - h;
+function barPath(x, base, w, h){ if (!(h > 0)) return ""; const r = Math.min(4, h, w/2), y = base - h;
   return `M${x},${base}V${y+r}Q${x},${y} ${x+r},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${base}Z`; }
 function gTip(html, e){ const t = $("gerTip"); if (!html){ t.hidden = true; return; } t.innerHTML = html; t.hidden = false;
   const w = t.offsetWidth, h = t.offsetHeight; let x = e.clientX + 14, yy = e.clientY - h - 12;
   if (x + w > innerWidth - 8) x = e.clientX - w - 14; if (x < 8) x = 8; if (yy < 8) yy = e.clientY + 16; t.style.left = x + "px"; t.style.top = yy + "px"; }
-function svgBars(host, rows, sel, m, y){
-  const W = chartW(host), H = 220, pl = 46, pr = 6, pt = 12, pb = 26, iw = W - pl - pr, ih = H - pt - pb, base = pt + ih;
-  const mx = niceMax(Math.max(0, ...rows.flatMap(r => [r.a || 0, r.b || 0, r.pr || 0])));
-  const gw = iw / rows.length, bw = Math.max(4, Math.min(20, (gw - 8) / 2));
-  let s = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Evolución mensual ${y} contra ${y-1}">`;
-  for (let i = 0; i <= 4; i++){ const yy = base - ih * i / 4;
-    s += `<line x1="${pl}" x2="${W-pr}" y1="${yy}" y2="${yy}" stroke="rgba(255,255,255,${i ? ".07" : ".22"})"/><text x="${pl-6}" y="${yy+4}" text-anchor="end">${fmtShort(mx*i/4)}</text>`; }
-  rows.forEach((r, i) => { const cx = pl + gw * i + gw / 2;
-    if (i === sel) s += `<rect x="${pl+gw*i+1}" y="${pt}" width="${gw-2}" height="${ih}" rx="8" fill="rgba(56,200,255,.08)"/>`;
-    s += `<path d="${barPath(cx - bw - 1, base, bw, (r.b || 0) / mx * ih)}" fill="${LYCOL}"/><path d="${barPath(cx + 1, base, bw, (r.a || 0) / mx * ih)}" fill="#38c8ff"/>`;
-    if (r.pr) s += `<path d="${barPath(cx + 1, base, bw, r.pr / mx * ih)}" fill="none" stroke="#38c8ff" stroke-width="1.5" stroke-dasharray="4 3"/>`;
-    s += `<text x="${cx}" y="${H-8}" text-anchor="middle"${i === sel ? ' style="fill:#fff;font-weight:800"' : ""}>${gw < 34 ? r.lab[0] : r.lab}</text>`;
-    s += `<rect class="hit" x="${pl+gw*i}" y="${pt}" width="${gw}" height="${ih+pb}" fill="transparent" data-i="${i}" style="cursor:${r.a != null ? "pointer" : "default"}"/>`; });
+const pcol = p => p >= 0 ? "#7ee081" : "#ff8fa3";
+function svgYear(host, rows, sel, fmt, unit, Y){
+  const W = chartW(host), H = 232, pl = 4, pr = 4, pt = 30, pb = 24, iw = W - pl - pr, ih = H - pt - pb, base = pt + ih;
+  const mx = Math.max(1, ...rows.flatMap(r => [r.a || 0, r.b || 0, r.ov || 0])) * 1.04;
+  const gw = iw / 12, bw = Math.max(5, Math.min(44, (gw - 10) / 2)), lab = bw >= 30, fs = bw >= 38 ? 12 : 10.5;
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${unit} por mes ${Y} contra ${Y-1}">`;
+  s += `<line x1="${pl}" x2="${W-pr}" y1="${base}" y2="${base}" stroke="rgba(255,255,255,.22)"/>`;
+  rows.forEach((r, i) => {
+    const cx = pl + gw * i + gw / 2, xb = cx - bw - 1, xa = cx + 1, hb = (r.b || 0) / mx * ih, ha = (r.a || 0) / mx * ih;
+    if (i === sel) s += `<rect x="${pl+gw*i+1}" y="${pt-26}" width="${gw-2}" height="${ih+26}" rx="8" fill="rgba(169,112,255,.12)"/>`;
+    s += `<path d="${barPath(xb, base, bw, hb)}" fill="${C25}"/><path d="${barPath(xa, base, bw, ha)}" fill="${C26}"${r.part ? ' fill-opacity=".75"' : ""}/>`;
+    if (lab){
+      const vt = (x, h, v) => { if (v == null || h <= 18) return ""; const tx = fmt(v), z = Math.min(fs, bw * 1.75 / tx.length);
+        return `<text x="${x + bw/2}" y="${base - h + 15}" text-anchor="middle" font-size="${z.toFixed(1)}" font-weight="800" fill="#fff">${tx}</text>`; };
+      s += vt(xb, hb, r.b) + vt(xa, ha, r.a);
+    }
+    if (r.ov){ const yo = base - r.ov / mx * ih; s += `<line x1="${xa - 3}" x2="${xa + bw + 3}" y1="${yo}" y2="${yo}" stroke="${COBJ}" stroke-width="2.5" stroke-dasharray="4 2"/>`; }
+    if (r.p != null && isFinite(r.p)){ const top = Math.max(hb, ha, r.ov ? r.ov / mx * ih : 0);
+      s += `<text x="${cx}" y="${base - top - 7}" text-anchor="middle" font-size="${lab ? 13 : 10}" font-weight="800" fill="${pcol(r.p)}">${(r.p > 0 ? "+" : "") + Math.round(r.p)}%</text>`; }
+    s += `<text x="${cx}" y="${H-7}" text-anchor="middle" font-size="12" font-weight="800" fill="${i === sel ? "#fff" : "rgba(255,255,255,.7)"}">${gw < 34 ? r.lab[0] : r.lab}${r.part && gw >= 40 ? "*" : ""}</text>`;
+    s += `<rect class="hit" x="${pl+gw*i}" y="0" width="${gw}" height="${H}" fill="transparent" data-i="${i}" style="cursor:${r.a != null ? "pointer" : "default"}"/>`;
+  });
   host.innerHTML = s + "</svg>";
   host.querySelectorAll(".hit").forEach(h => {
     const r = rows[+h.dataset.i], nm = MESES[+h.dataset.i];
-    const tip = () => `<b>${nm}</b>${r.pa ? " <small>(al " + pad2(r.pa) + ")</small>" : ""}<br>${y}: ${r.a != null ? fmtMeas(m, r.a) : "sin datos"}<br>${y-1}: ${r.b != null ? fmtMeas(m, r.b) : "sin datos"}${r.a != null && r.b ? "<br>Variación: " + fpct(gpct(r.a, r.b)) + (r.pa ? " <small>(mes en curso)</small>" : "") : ""}${r.pr ? "<br>Proyección: " + fmtMeas(m, r.pr) + (r.b ? " (" + fpct(gpct(r.pr, r.b)) + ")" : "") : ""}`;
+    const tip = () => `<b>${nm}</b>${r.part ? " <small>(al " + pad2(r.part) + ")</small>" : ""}<br>${Y}: ${r.a != null ? fmt(r.a) + " " + unit : "sin datos"}<br>${Y-1}: ${r.b != null ? fmt(r.b) + " " + unit : "sin datos"}` +
+      (r.p != null && isFinite(r.p) ? "<br>Variación: " + fpct(r.p) + (r.part ? " <small>(mismo período)</small>" : "") : "") +
+      (r.ov ? `<br>🎯 Objetivo: ${fmt(r.ov)}${r.a != null ? " · " + Math.round(r.a / r.ov * 100) + "%" : ""}` : "");
     h.addEventListener("pointermove", e => gTip(tip(), e)); h.addEventListener("pointerleave", () => gTip(""));
     h.addEventListener("click", () => { if (r.a != null && r.ym !== GER.ym){ gTip(""); GER.ym = r.ym; gerRender(); } });
   });
 }
+function svgCols(host, items, fmt){
+  const W = chartW(host), H = 196, pt = 26, pb = 26, ih = H - pt - pb, base = pt + ih, n = items.length;
+  const mx = Math.max(1, ...items.map(it => it.v || 0)) * 1.02, gw = W / n, bw = Math.min(64, gw - 12);
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">`;
+  items.forEach((it, i) => {
+    const x = gw * i + (gw - bw) / 2, h = (it.v || 0) / mx * ih, cx = gw * i + gw / 2;
+    s += it.obj ? `<path d="${barPath(x, base, bw, h)}" fill="rgba(255,201,60,.18)" stroke="${COBJ}" stroke-width="2" stroke-dasharray="5 3"/>` : `<path d="${barPath(x, base, bw, h)}" fill="${it.col}"/>`;
+    if (it.v != null) s += h > 20 ? `<text x="${cx}" y="${base - h + 16}" text-anchor="middle" font-size="${bw > 50 ? 13 : 11.5}" font-weight="800" fill="#fff">${fmt(it.v)}</text>` : `<text x="${cx}" y="${base - h - 4}" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">${fmt(it.v)}</text>`;
+    if (it.top) s += `<text x="${cx}" y="${base - h - (h > 20 ? 7 : 20)}" text-anchor="middle" font-size="12.5" font-weight="800" fill="${it.obj ? COBJ : pcol(it.up ? 1 : -1)}">${it.obj ? "🎯 " : it.up ? "▲ " : "▼ "}${it.top.replace("+","").replace("-","")}</text>`;
+    s += `<text x="${cx}" y="${H-8}" text-anchor="middle" font-size="12" font-weight="800" fill="rgba(255,255,255,.8)">${esc(it.lab)}</text>`;
+  });
+  host.innerHTML = s + "</svg>";
+}
 function svgLines(host, series, n, m){
   const W = chartW(host), H = 220, pl = 46, pr = 10, pt = 12, pb = 24, iw = W - pl - pr, ih = H - pt - pb, base = pt + ih;
   const mx = niceMax(Math.max(0, ...series.flatMap(s => s.v)));
-  const X = d => pl + (n > 1 ? (d / (n - 1)) * iw : 0), Y = v => base - Math.max(0, v) / mx * ih;
+  const X = d => pl + (n > 1 ? (d / (n - 1)) * iw : 0), Yp = v => base - Math.max(0, v) / mx * ih;
   let s = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Acumulado diario del mes">`;
   for (let i = 0; i <= 4; i++){ const yy = base - ih * i / 4;
     s += `<line x1="${pl}" x2="${W-pr}" y1="${yy}" y2="${yy}" stroke="rgba(255,255,255,${i ? ".07" : ".22"})"/><text x="${pl-6}" y="${yy+4}" text-anchor="end">${fmtShort(mx*i/4)}</text>`; }
   const step = W < 480 ? 5 : 2;
   for (let d = 0; d < n; d++) if ((d + 1) % step === 0 || d === 0) s += `<text x="${X(d)}" y="${H-6}" text-anchor="middle">${d+1}</text>`;
   [...series].reverse().forEach(sr => { if (!sr.v.length) return;
-    s += `<path d="${sr.v.map((v, d) => (d ? "L" : "M") + X(d).toFixed(1) + "," + Y(v).toFixed(1)).join("")}" fill="none" stroke="${sr.col}" stroke-width="${sr.w}" stroke-linejoin="round" stroke-linecap="round"${sr.dash ? ` stroke-dasharray="${sr.dash}"` : ""}/>`; });
+    s += `<path d="${sr.v.map((v, d) => (d ? "L" : "M") + X(d).toFixed(1) + "," + Yp(v).toFixed(1)).join("")}" fill="none" stroke="${sr.col}" stroke-width="${sr.w}" stroke-linejoin="round" stroke-linecap="round"${sr.dash ? ` stroke-dasharray="${sr.dash}"` : ""}/>`; });
   const mn = series.find(x => x.main);
-  if (mn && mn.v.length){ const d = mn.v.length - 1; s += `<circle cx="${X(d)}" cy="${Y(mn.v[d])}" r="4.5" fill="#38c8ff" stroke="#0b1736" stroke-width="2"/>`; }
-  s += `<line id="gerXh" x1="0" x2="0" y1="${pt}" y2="${base}" stroke="rgba(255,255,255,.4)" stroke-dasharray="3 3" visibility="hidden"/>`;
+  if (mn && mn.v.length){ const d = mn.v.length - 1; s += `<circle cx="${X(d)}" cy="${Yp(mn.v[d])}" r="4.5" fill="${C26}" stroke="#0b1736" stroke-width="2"/>`; }
+  s += `<line class="xh" x1="0" x2="0" y1="${pt}" y2="${base}" stroke="rgba(255,255,255,.4)" stroke-dasharray="3 3" visibility="hidden"/>`;
   s += `<rect class="ov" x="${pl}" y="${pt}" width="${iw}" height="${ih}" fill="transparent"/>`;
   host.innerHTML = s + "</svg>";
-  const ov = host.querySelector(".ov"), xh = host.querySelector("#gerXh"), svg = host.querySelector("svg");
+  const ov = host.querySelector(".ov"), xh = host.querySelector(".xh"), svg = host.querySelector("svg");
   ov.addEventListener("pointermove", e => {
     const rc = svg.getBoundingClientRect(), x = (e.clientX - rc.left) * W / rc.width, d = Math.max(0, Math.min(n - 1, Math.round((x - pl) / iw * (n - 1))));
     xh.setAttribute("x1", X(d)); xh.setAttribute("x2", X(d)); xh.setAttribute("visibility", "visible");
@@ -2305,24 +2489,25 @@ function svgLines(host, series, n, m){
 }
 let gerRT; addEventListener("resize", () => { clearTimeout(gerRT); gerRT = setTimeout(() => { if (!$("vGer").hidden && GER.last) gerRender(); }, 250); });
 
-/* ---- filtros ---- */
+/* ---- eventos de filtros ---- */
 $("gerMes").addEventListener("change", e => { GER.ym = e.target.value; gerRender(); });
-$("gerSup").addEventListener("change", e => { GER.f.sup = e.target.value; GER.f.prom = ""; gerRender(); });
+$("gerSups").addEventListener("click", e => { const b = e.target.closest("[data-s]"); if (!b) return; GER.f.sup = b.dataset.s; GER.f.prom = ""; gerRender(); });
 $("gerProm").addEventListener("change", e => { GER.f.prom = e.target.value; gerRender(); });
 $("gerCan").addEventListener("change", e => { GER.f.canal = e.target.value; gerRender(); });
-$("gerUn").addEventListener("change", e => { GER.f.un = e.target.value; gerRender(); });
-$("gerClear").addEventListener("click", () => { GER.f = {sup:"", prom:"", canal:"", un:""}; gerRender(); });
+$("gerUn").addEventListener("change", e => { GER.f.un = e.target.value; GER.f.marca = ""; GER.f.cal = ""; gerRender(); });
+$("gerMar").addEventListener("change", e => { GER.f.marca = e.target.value; GER.f.cal = ""; gerRender(); });
+$("gerCal").addEventListener("change", e => { GER.f.cal = e.target.value; gerRender(); });
 $("gerMeas").addEventListener("click", e => { const b = e.target.closest("[data-m]"); if (b){ GER.meas = b.dataset.m; gerRender(); } });
 $("gerDims").addEventListener("click", e => { const b = e.target.closest("[data-d]"); if (b){ GER.dim = b.dataset.d; gerRender(); } });
 
-const gerName = w => "gerencial_" + w + "_" + GER.ym + "_" + slug([GER.f.sup, GER.f.prom, GER.f.canal, GER.f.un].filter(Boolean).join(" ") || "total") + ".png";
-$("gerCopy1").addEventListener("click", () => copyBlob(snapBlob($("gerSnap1"), c => c.querySelectorAll(".ger-f,.acts").forEach(x => x.remove())), gerName("resumen"), $("gerCopy1")));
-$("gerCopy2").addEventListener("click", () => copyBlob(snapBlob($("gerSnap2"), c => { c.querySelectorAll(".acts").forEach(x => x.remove()); const tb = c.querySelector(".tbl"); tb.style.maxHeight = "none"; tb.style.overflow = "visible"; }), gerName(GER.dim), $("gerCopy2")));
+const gerName = w => "gerencial_" + w + "_" + GER.ym + "_" + slug(Object.values(GER.f).filter(Boolean).join(" ") || "total") + ".png";
+$("gerCopyAll").addEventListener("click", () => copyBlob(snapBlob($("gerSnap1"), c => c.querySelectorAll(".gx-sel select").forEach(x => x.remove())), gerName("tablero"), $("gerCopyAll")));
+$("gerCopy2").addEventListener("click", () => copyBlob(snapBlob($("gerSnap2"), c => { c.querySelectorAll(".acts,.chips").forEach(x => x.remove()); const tb = c.querySelector(".tbl"); tb.style.maxHeight = "none"; tb.style.overflow = "visible"; }), gerName(GER.dim), $("gerCopy2")));
 $("gerXls").addEventListener("click", () => {
   if (!GER.last) return;
   const {A, B, C, ym} = GER.last, dim = GER.dim, person = dim === "mesa" || dim === "fdv", dl = GDIMS.find(x => x[0] === dim)[1];
   const keys = Object.keys(A.by).sort((a,b) => A.by[b].hl - A.by[a].hl);
-  const head = [dl, "HL", "HL AA", "HL MA", "Bultos", "Bultos AA", "$ Final", "$ Final AA", "$ PNSF", "$ Ganancia distri", "$ Ganancia AA", "Markup %", "Markup AA %", "Compradores", "Compradores AA", "Compradores MA"];
+  const head = [dl, "HL", "HL AA", "HL MA", "Bultos", "Bultos AA", "$ Final", "$ Final AA", "$ PNSF", "$ Ganancia distri", "$ Ganancia AA", "Markup %", "Markup AA %", "CCC", "CCC AA", "CCC MA"];
   const r2 = v => Math.round(v * 100) / 100;
   const line = (n, a, b, c) => [n, r2(a.hl), b ? r2(b.hl) : "", c ? r2(c.hl) : "", Math.round(a.bu), b ? Math.round(b.bu) : "", Math.round(a.fin), b ? Math.round(b.fin) : "", Math.round(a.pn), Math.round(a.gan), b ? Math.round(b.gan) : "", a.pn > 0 ? r2(a.gan / a.pn * 100) : "", b && b.pn > 0 ? r2(b.gan / b.pn * 100) : "", a.cp, b ? b.cp : "", c ? c.cp : ""];
   const data = [line("TOTAL", A.t, B && B.t, C && C.t), ...keys.map(k => line(k ? (person ? tc(k) : k) : "(sin dato)", A.by[k], B && B.by[k], C && C.by[k]))];
@@ -2341,7 +2526,7 @@ function gerDate(v){
   return null;
 }
 const gnum = v => typeof v === "number" ? v : (s => s.includes(",") ? parseFloat(s.replace(/\./g, "").replace(",", ".")) : parseFloat(s))(String(v ?? "").trim()) || 0;
-function gerNewB(ym){ return {ym, dm:{mesa:new Map(), fdv:new Map(), canal:new Map(), pk:new Map()}, dims:{mesa:[], fdv:[], canal:[], pk:[]}, cube:new Map(), cl:new Map(), d:0, n:0, files:new Set()}; }
+function gerNewB(ym){ return {ym, dm:{mesa:new Map(), fdv:new Map(), canal:new Map(), pk:new Map(), sku:new Map()}, dims:{mesa:[], fdv:[], canal:[], pk:[], sku:[]}, cube:new Map(), cl:new Map(), d:0, n:0, files:new Set()}; }
 function gerIx(b, k, key, val){ let i = b.dm[k].get(key); if (i === undefined){ i = b.dims[k].length; b.dims[k].push(val ?? key); b.dm[k].set(key, i); } return i; }
 function gerParse(aoa, B, fname){
   const hi = headerAt(aoa, "Código Cliente");
@@ -2350,9 +2535,10 @@ function gerParse(aoa, B, fname){
   const need = n => { const i = fi(n); if (i < 0) throw new Error(fname + ": le falta la columna " + n); return i; };
   const iF = fi("Fecha"), iA = fi("Año"), iMes = fi("Mes"), iCli = need("Código Cliente"), iSup = need("Sector de Supervisión"), iFdv = need("Sector de Venta"),
         iMar = need("Marca"), iCal = fi("Calibre"), iUn = need("Unidad de Negocio"), iHl = need("Cantidad Total en HL"), iBu = need("Cantidad Total en Bultos"),
-        iFin = need("Importe Final"), iPn = fi("Importe Bruto PNSF"), iCan = fi("Canal Ajustado");
+        iFin = need("Importe Final"), iPn = fi("Importe Bruto PNSF"), iCan = fi("Canal Ajustado"), iSku = need("Código Producto"), iProd = fi("Producto");
   if (iF < 0 && (iA < 0 || iMes < 0)) throw new Error(fname + ": le falta la columna Fecha");
   let n = 0;
+  const up = s => String(s ?? "").trim().toUpperCase();
   for (let j = hi + 1; j < aoa.length; j++){
     const r = aoa[j], cli = String(r[iCli] ?? "").replace(/\.0$/, "").trim(); if (!cli) continue;
     let ymd = iF >= 0 ? gerDate(r[iF]) : null;
@@ -2360,18 +2546,18 @@ function gerParse(aoa, B, fname){
     const ym = ymd[0] + "-" + pad2(ymd[1]), d = ymd[2];
     let b = B.get(ym); if (!b){ b = gerNewB(ym); B.set(ym, b); }
     b.files.add(fname);
-    const up = s => String(s ?? "").trim().toUpperCase();
     const mar = up(r[iMar]), cal = iCal >= 0 ? up(r[iCal]) : "", un = up(r[iUn]), can = iCan >= 0 ? (up(r[iCan]) || "SIN CANAL") : "SIN CANAL";
     const mi = gerIx(b, "mesa", up(r[iSup])), fdi = gerIx(b, "fdv", up(r[iFdv])), ci = gerIx(b, "canal", can), pk = gerIx(b, "pk", mar + "|" + cal + "|" + un, [mar, cal, un]);
+    const code = String(r[iSku] ?? "").replace(/\.0$/, "").trim(), si = gerIx(b, "sku", code, [code, iProd >= 0 ? up(r[iProd]) : "", pk]);
     const hl = gnum(r[iHl]), bu = gnum(r[iBu]), fin = gnum(r[iFin]), pn = iPn >= 0 ? gnum(r[iPn]) : 0;
     const key = d + "," + mi + "," + fdi + "," + ci + "," + pk;
     let a = b.cube.get(key); if (!a){ a = [d, mi, fdi, ci, pk, 0, 0, 0, 0, 0]; b.cube.set(key, a); }
     a[5] += hl; a[6] += bu; a[7] += fin; a[8] += pn; a[9] += pn * ((GAN_K[mar] || GAN_K_DEF) - 1);
     if (d > b.d) b.d = d;
     if (bu > 0){
-      let c = b.cl.get(cli); if (!c){ c = {v:new Map(), p:new Map()}; b.cl.set(cli, c); }
+      let c = b.cl.get(cli); if (!c){ c = {v:new Map(), s:new Map()}; b.cl.set(cli, c); }
       const vk = mi + "," + fdi + "," + ci; c.v.set(vk, (c.v.get(vk) || 0) + 1);
-      const pd = c.p.get(pk); if (pd === undefined || d < pd) c.p.set(pk, d);
+      const sd = c.s.get(si); if (sd === undefined || d < sd) c.s.set(si, d);
     }
     b.n++; n++;
   }
@@ -2381,71 +2567,95 @@ function gerFinal(b){
   const R = (v, k) => Math.round(v * k) / k;
   const c = [...b.cube.values()].map(a => [a[0], a[1], a[2], a[3], a[4], R(a[5], 1e4), R(a[6], 100), Math.round(a[7]), Math.round(a[8]), Math.round(a[9])]);
   const cl = [...b.cl.entries()].map(([cli, o]) => { const vk = [...o.v.entries()].sort((x, y) => y[1] - x[1])[0][0].split(",").map(Number);
-    return [cli, vk[0], vk[1], vk[2], [...o.p.entries()].flat()]; });
+    return [cli, vk[0], vk[1], vk[2], [...o.s.entries()].flat()]; });
   const tm = new Map();
-  for (const a of c){ const k = a[1] + "|" + a[2] + "|" + a[3] + "|" + b.dims.pk[a[4]][2];
-    let t = tm.get(k); if (!t){ t = [b.dims.mesa[a[1]], b.dims.fdv[a[2]], b.dims.canal[a[3]], b.dims.pk[a[4]][2], 0, 0, 0, 0, 0]; tm.set(k, t); }
-    t[4] += a[5]; t[5] += a[6]; t[6] += a[7]; t[7] += a[8]; t[8] += a[9]; }
-  const t = [...tm.values()].map(x => [x[0], x[1], x[2], x[3], R(x[4], 1e3), Math.round(x[5]), Math.round(x[6]), Math.round(x[7]), Math.round(x[8])]);
-  return {md:{v:1, ym:b.ym, d:b.d, dims:b.dims, c, cl}, ie:{d:b.d, n:b.n, t, files:[...b.files]}};
+  for (const a of c){ const p = b.dims.pk[a[4]], k = a[1] + "|" + a[2] + "|" + a[3] + "|" + a[4];
+    let t = tm.get(k); if (!t){ t = [b.dims.mesa[a[1]], b.dims.fdv[a[2]], b.dims.canal[a[3]], p[2], p[0], p[1], 0, 0, 0, 0, 0]; tm.set(k, t); }
+    t[6] += a[5]; t[7] += a[6]; t[8] += a[7]; t[9] += a[8]; t[10] += a[9]; }
+  const t = [...tm.values()].map(x => [...x.slice(0, 6), R(x[6], 1e3), Math.round(x[7]), Math.round(x[8]), Math.round(x[9]), Math.round(x[10])]);
+  const dims = {mesa:b.dims.mesa, fdv:b.dims.fdv, canal:b.dims.canal, pk:b.dims.pk};
+  return {md:{v:2, ym:b.ym, d:b.d, dims, c}, gc:{v:2, ym:b.ym, dims:{...dims, sku:b.dims.sku}, cl}, ie:{v:2, d:b.d, n:b.n, t, files:[...b.files]}};
 }
 
 const GUP = { ym:null, idx:null };
 function gerGrid(){
-  const now = new Date(), cy = now.getFullYear(), cym = cy + "-" + pad2(now.getMonth() + 1), idx = GUP.idx;
+  const now = new Date(), cy = now.getFullYear(), cym = curYM(), idx = GUP.idx;
   if (!GUP.ym) GUP.ym = cym;
   $("gerGrid").innerHTML = [cy, cy - 1].map(y => `<div class="gm-y"><b>${y}</b>` + MESES.map((n, i) => {
-    const ym = y + "-" + pad2(i + 1), e = idx && idx.m[ym], full = e && gFull(ym, e.d);
-    return `<button type="button" class="gm-b${e ? (full ? " ok" : " pa") : ""}${ym === GUP.ym ? " on" : ""}" data-ym="${ym}"${ym > cym ? " disabled" : ""}>${n.slice(0,3).toUpperCase()}<small>${e ? (full ? "✓" : "al " + pad2(e.d)) : ""}</small></button>`;
+    const ym = y + "-" + pad2(i + 1), e = idx && idx.m[ym], full = e && gFull(ym, e.d), o = idx && idx.obj && idx.obj[ym];
+    return `<button type="button" class="gm-b${e ? (full ? " ok" : " pa") : ""}${ym === GUP.ym ? " on" : ""}" data-ym="${ym}"${ym > cym ? " disabled" : ""}>${n.slice(0,3).toUpperCase()}<small>${e ? (full ? "✓" : "al " + pad2(e.d)) : ""}${o ? " 🎯" : ""}</small></button>`;
   }).join("") + "</div>").join("");
-  $("gerSelLbl").textContent = ymLabel(GUP.ym);
+  document.querySelectorAll(".gerSelLbl").forEach(x => x.textContent = ymLabel(GUP.ym));
   $("gerGridHint").hidden = !!idx || !(GER.idxP && GER.idxP.data);
+  const o = idx && idx.obj && idx.obj[GUP.ym] || {};
+  const fo = v => v != null ? String(v).replace(".", ",") : "";
+  $("gerObjHl").value = fo(o.hl); $("gerObjCc").value = fo(o.cc); $("gerObjTbd").value = fo(o.tbd);
 }
+const objNum = s => { s = String(s || "").trim(); if (!s) return null; if (/^\d{1,3}(\.\d{3})+(,\d+)?$/.test(s)) s = s.replace(/\./g, ""); const v = parseFloat(s.replace(",", ".")); return isFinite(v) && v > 0 ? v : null; };
 $("gerGrid").addEventListener("click", e => { const b = e.target.closest("[data-ym]"); if (!b || b.disabled) return; GUP.ym = b.dataset.ym; gerGrid(); });
 $("gerKeyG").addEventListener("change", async () => {
   if (GUP.idx || !(GER.idxP && GER.idxP.data) || !$("gerKeyG").value) return;
-  try { GUP.idx = await openData(GER.idxP, ["GERENCIAL", $("gerKeyG").value]); gerGrid(); $("gerMsg").textContent = ""; }
+  try { GUP.idx = normIdx(await openData(GER.idxP, ["GERENCIAL", $("gerKeyG").value])); gerGrid(); $("gerMsg").textContent = ""; }
   catch(e){ $("gerMsg").className = "msg bad"; $("gerMsg").textContent = "La clave gerencial no coincide"; }
 });
 $("gerUpBtn").addEventListener("click", async () => {
   $("mGer").hidden = false; $("gerMsg").textContent = ""; $("gerMsg").className = "msg";
   if (!GER.idxP){ try { GER.idxP = await apiGet("ger_idx"); } catch(e){} }
-  GUP.idx = GER.idx || (GER.idxP && GER.idxP.data ? null : {v:1, m:{}});
+  GUP.idx = GER.idx || (GER.idxP && GER.idxP.data ? null : {v:2, m:{}, obj:{}});
   if (GER.cred && !$("gerKeyG").value) $("gerKeyG").value = GER.cred[1];
+  if (!GUP.ym && GER.ym) GUP.ym = GER.ym;
   $("gerFirst").hidden = !!(GER.idxP && GER.idxP.data);
   gerGrid();
 });
 $("gerUpClose").addEventListener("click", () => $("mGer").hidden = true);
 $("gerGo").addEventListener("click", async () => {
-  const m = $("gerMsg"), file = $("gerFile").files[0], gk = $("gerKeyG").value, admin = $("gerKeyA").value, ym = GUP.ym;
+  const m = $("gerMsg"), files = [...$("gerFile").files], gk = $("gerKeyG").value, admin = $("gerKeyA").value, ym = GUP.ym;
+  const ob = {hl: objNum($("gerObjHl").value), cc: objNum($("gerObjCc").value), tbd: objNum($("gerObjTbd").value)};
+  const hasObj = ob.hl || ob.cc || ob.tbd;
   m.className = "msg";
-  if (!file){ m.className = "msg bad"; m.textContent = "Elegí el archivo de base plana de " + ymLabel(ym); return; }
   if (!gk){ m.className = "msg bad"; m.textContent = "Escribí la clave gerencial"; return; }
   if (!admin){ m.className = "msg bad"; m.textContent = "Escribí la clave de administradora"; return; }
   $("gerGo").disabled = true;
   try {
     const gc = ["GERENCIAL", gk];
     m.textContent = "Verificando…";
-    let idx = {v:1, m:{}};
+    let idx = {v:2, m:{}, obj:{}};
     const p = await apiGet("ger_idx");
-    if (p && p.data){ try { idx = await openData(p, gc); } catch(e){ throw new Error("La clave gerencial no coincide con la de los meses ya cargados"); } }
-    m.textContent = `Leyendo ${file.name}… puede tardar un poco`;
-    await new Promise(r => setTimeout(r, 30));
-    const B = new Map();
-    if (!gerParse(await readSheet(file), B, file.name)) throw new Error(file.name + ": no tiene filas de venta");
-    if (!B.has(ym)) throw new Error(`Ese archivo no tiene venta de ${ymLabel(ym)} (trae: ${[...B.keys()].sort().map(ymLabel).join(", ")}). Revisá el mes elegido o el archivo.`);
-    const otros = [...B.keys()].filter(k => k !== ym), stamp = {updated:new Date().toISOString()};
-    m.textContent = `Guardando ${ymLabel(ym)}…`;
-    const {md, ie} = gerFinal(B.get(ym));
-    let res = await apiPut(gKey(ym), admin, Object.assign(await sealData(md, gc), stamp));
-    if (!res.ok) throw new Error(res.error || "No se pudo guardar " + ymLabel(ym));
-    idx.m[ym] = Object.assign(ie, {up:stamp.updated});
-    res = await apiPut("ger_idx", admin, Object.assign(await sealData(idx, gc), stamp));
+    if (p && p.data){ try { idx = normIdx(await openData(p, gc)); } catch(e){ throw new Error("La clave gerencial no coincide con la de los meses ya cargados"); } }
+    if (!files.length && !hasObj && !idx.obj[ym]) throw new Error("Elegí la base plana o cargá algún objetivo");
+    const stamp = {updated:new Date().toISOString()}, done = [], cargados = [], avisos = [];
+    for (let i = 0; i < files.length; i++){
+      const file = files[i];
+      m.textContent = `Leyendo ${file.name} (${i+1} de ${files.length})… puede tardar un poco`;
+      await new Promise(r => setTimeout(r, 30));
+      const B = new Map();
+      if (!gerParse(await readSheet(file), B, file.name)) throw new Error(file.name + ": no tiene filas de venta");
+      /* cada archivo va al mes con la mayor parte de su venta; si trae unas pocas filas de otro mes, se ignoran */
+      const main = [...B.values()].sort((x, y) => y.n - x.n)[0], k = main.ym;
+      if (cargados.includes(k)) throw new Error(`Hay dos archivos de ${ymLabel(k)}. Elegí uno solo por mes.`);
+      const otros = [...B.values()].filter(x => x !== main);
+      if (otros.length) avisos.push(`${file.name}: se ignoraron ${fmtN(otros.reduce((s, x) => s + x.n, 0))} filas de ${otros.map(x => ymLabel(x.ym)).join(", ")}`);
+      m.textContent = `Guardando ${ymLabel(k)} (${i+1} de ${files.length})…`;
+      const {md, gc: gcl, ie} = gerFinal(main);
+      let res = await apiPut(gKey(k), admin, Object.assign(await sealData(md, gc), stamp));
+      if (!res.ok) throw new Error(res.error || "No se pudo guardar " + ymLabel(k));
+      res = await apiPut(gcKey(k), admin, Object.assign(await sealData(gcl, gc), stamp));
+      if (!res.ok) throw new Error(res.error || "No se pudo guardar " + ymLabel(k));
+      idx.m[k] = Object.assign(ie, {up:stamp.updated});
+      cargados.push(k);
+      /* se guarda el índice después de cada mes, así si se corta no se pierde lo ya cargado */
+      res = await apiPut("ger_idx", admin, Object.assign(await sealData(idx, gc), stamp));
+      if (!res.ok) throw new Error(res.error || "No se pudo guardar el índice");
+      GUP.idx = idx; gerGrid();
+    }
+    if (cargados.length) done.push("bases cargadas: " + cargados.sort().map(k => ymLabel(k) + (gFull(k, idx.m[k].d) ? "" : " (al " + pad2(idx.m[k].d) + ")")).join(", "));
+    if (hasObj){ idx.obj[ym] = Object.fromEntries(Object.entries(ob).filter(([k, v]) => v)); done.push("objetivos guardados"); }
+    else if (idx.obj[ym] && !$("gerObjHl").value && !$("gerObjCc").value && !$("gerObjTbd").value){ delete idx.obj[ym]; done.push("objetivos borrados"); }
+    const res = await apiPut("ger_idx", admin, Object.assign(await sealData(idx, gc), stamp));
     if (!res.ok) throw new Error(res.error || "No se pudo guardar el índice");
-    m.className = "msg ok";
-    m.innerHTML = `¡Listo! ${ymLabel(ym)} cargado (${gFull(ym, ie.d) ? "mes completo" : "venta al " + pad2(ie.d)})` + (otros.length ? `<br><small>El archivo también traía ${otros.map(ymLabel).join(", ")}: no se cargó, elegí ese mes y subilo aparte.</small>` : "");
+    m.className = "msg ok"; m.innerHTML = "¡Listo! " + done.join(" · ").replace("objetivos", "objetivos de " + ymLabel(ym)) + (avisos.length ? "<br><small>" + avisos.map(esc).join("<br>") + "</small>" : "");
     GUP.idx = idx; GER.cred = gc; try{ sessionStorage.setItem("nabs_ger", gk); }catch(e){}
-    if (ym > (GER.ym || "")) GER.ym = ym;
+    const ult = cargados.sort().pop(); if (ult && ult > (GER.ym || "")) GER.ym = ult;
     $("gerFile").value = ""; $("gerFirst").hidden = true; gerGrid();
     await loadGer(true);
   } catch(err){ console.error(err); m.className = "msg bad"; m.textContent = err.message || "Error al cargar"; }
