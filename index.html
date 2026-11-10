@@ -488,7 +488,7 @@ td.hb{white-space:nowrap}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 26 · 10/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 27 · 10/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -820,7 +820,7 @@ td.hb{white-space:nowrap}
       <div class="step">
         <h3><span>2</span> Base plana <em class="opt">(opcional si solo cargás objetivos)</em></h3>
         <input id="gerFile" class="file" type="file" accept=".xlsx,.xls,.csv" multiple>
-        <p class="hint" style="margin:0">Podés elegir <b>varios archivos juntos</b> (uno por mes, de cualquier año): cada archivo se carga en el mes que tiene la mayor parte de su venta.</p>
+        <p class="hint" style="margin:0">Podés elegir <b>varios archivos juntos</b> (uno por mes, de cualquier año): también sirve un archivo con varios meses juntos (un trimestre o un año): el portal separa la venta por mes según la columna Fecha.</p>
       </div>
       <div class="step">
         <h3><span>3</span> Objetivos de <b class="gerSelLbl" style="margin-left:4px;color:var(--fizz)"></b> <em class="opt">(total distri)</em></h3>
@@ -2630,12 +2630,15 @@ $("gerGo").addEventListener("click", async () => {
       await new Promise(r => setTimeout(r, 30));
       const B = new Map();
       if (!gerParse(await readSheet(file), B, file.name)) throw new Error(file.name + ": no tiene filas de venta");
-      /* cada archivo va al mes con la mayor parte de su venta; si trae unas pocas filas de otro mes, se ignoran */
-      const main = [...B.values()].sort((x, y) => y.n - x.n)[0], k = main.ym;
-      if (cargados.includes(k)) throw new Error(`Hay dos archivos de ${ymLabel(k)}. Elegí uno solo por mes.`);
-      const otros = [...B.values()].filter(x => x !== main);
-      if (otros.length) avisos.push(`${file.name}: se ignoraron ${fmtN(otros.reduce((s, x) => s + x.n, 0))} filas de ${otros.map(x => ymLabel(x.ym)).join(", ")}`);
-      m.textContent = `Guardando ${ymLabel(k)} (${i+1} de ${files.length})…`;
+      /* un archivo puede traer varios meses (ej: un trimestre o un año entero): se carga cada mes con venta real;
+         si trae unas pocas filas sueltas de otro mes (ej: el último día del mes anterior), esas se ignoran */
+      const all = [...B.values()].sort((x, y) => y.n - x.n), top = all[0].n;
+      const meses = all.filter(x => x.n >= top * 0.05), sueltos = all.filter(x => x.n < top * 0.05);
+      if (sueltos.length) avisos.push(`${file.name}: se ignoraron ${fmtN(sueltos.reduce((s, x) => s + x.n, 0))} filas sueltas de ${sueltos.map(x => ymLabel(x.ym)).join(", ")}`);
+      for (const main of meses.sort((x, y) => x.ym < y.ym ? -1 : 1)){
+      const k = main.ym;
+      if (cargados.includes(k)) throw new Error(`${ymLabel(k)} viene en dos archivos. Cada mes tiene que estar completo en un solo archivo.`);
+      m.textContent = `Guardando ${ymLabel(k)} (archivo ${i+1} de ${files.length})…`;
       const {md, gc: gcl, ie} = gerFinal(main);
       let res = await apiPut(gKey(k), admin, Object.assign(await sealData(md, gc), stamp));
       if (!res.ok) throw new Error(res.error || "No se pudo guardar " + ymLabel(k));
@@ -2647,6 +2650,7 @@ $("gerGo").addEventListener("click", async () => {
       res = await apiPut("ger_idx", admin, Object.assign(await sealData(idx, gc), stamp));
       if (!res.ok) throw new Error(res.error || "No se pudo guardar el índice");
       GUP.idx = idx; gerGrid();
+      }
     }
     if (cargados.length) done.push("bases cargadas: " + cargados.sort().map(k => ymLabel(k) + (gFull(k, idx.m[k].d) ? "" : " (al " + pad2(idx.m[k].d) + ")")).join(", "));
     if (hasObj){ idx.obj[ym] = Object.fromEntries(Object.entries(ob).filter(([k, v]) => v)); done.push("objetivos guardados"); }
