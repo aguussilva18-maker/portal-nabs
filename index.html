@@ -488,7 +488,7 @@ td.hb{white-space:nowrap}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 27 · 10/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 28 · 10/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -2554,7 +2554,8 @@ function gerParse(aoa, B, fname){
     let a = b.cube.get(key); if (!a){ a = [d, mi, fdi, ci, pk, 0, 0, 0, 0, 0]; b.cube.set(key, a); }
     a[5] += hl; a[6] += bu; a[7] += fin; a[8] += pn; a[9] += pn * ((GAN_K[mar] || GAN_K_DEF) - 1);
     if (d > b.d) b.d = d;
-    if (bu > 0){
+    /* CCC y TBD como la tabla dinámica de Agustina: cuenta toda fila con importe (deja afuera lo bonificado/sin cargo, importe 0) */
+    if (fin !== 0){
       let c = b.cl.get(cli); if (!c){ c = {v:new Map(), s:new Map()}; b.cl.set(cli, c); }
       const vk = mi + "," + fdi + "," + ci; c.v.set(vk, (c.v.get(vk) || 0) + 1);
       const sd = c.s.get(si); if (sd === undefined || d < sd) c.s.set(si, d);
