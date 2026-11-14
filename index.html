@@ -387,7 +387,8 @@ td.hb{white-space:nowrap}
 .ger-lock .card p{margin:0;font-size:13px;color:var(--muted);line-height:1.45}
 .gobj{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .gobj label{display:grid;gap:5px;font:800 11px var(--body);letter-spacing:.06em;color:var(--muted)}
-.gobj input{font:700 15px var(--body)}
+.gobj label{min-width:0}
+.gobj input{font:700 15px var(--body);width:100%;min-width:0;box-sizing:border-box}
 .opt{font:500 12px var(--body);color:var(--muted);font-style:normal;margin-left:6px}
 @media (max-width:1100px){.gx-row{grid-template-columns:1fr 1fr}.gx-main{grid-column:1/-1}}
 @media (max-width:900px){.gx-kpis{grid-template-columns:1fr 1fr}.gcols{grid-template-columns:1fr}.gx-sel select{max-width:none;flex:1 1 140px}.gx-mes{width:100%;margin:0}.gx-mes select{flex:1}}
@@ -404,7 +405,7 @@ td.hb{white-space:nowrap}
 .gm-leg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
 .gm-leg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px;border:1px solid var(--line);background:rgba(255,255,255,.05)}
 .gm-leg i.ok{background:rgba(126,224,129,.4)}.gm-leg i.pa{background:rgba(255,201,60,.4)}
-@media (max-width:620px){.gm-y{grid-template-columns:repeat(6,minmax(0,1fr))}.gm-y b{grid-column:1/-1}.gobj{grid-template-columns:1fr}}
+@media (max-width:620px){.gm-y{grid-template-columns:repeat(6,minmax(0,1fr))}.gm-y b{grid-column:1/-1}.gobj{grid-template-columns:1fr 1fr!important}}
 /* ===== Acciones / cierres ===== */
 .acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0}
 .acts > :first-child{margin:0 auto 0 0}
@@ -488,7 +489,7 @@ td.hb{white-space:nowrap}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 29 · 12/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 30 · 14/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -826,12 +827,14 @@ td.hb{white-space:nowrap}
         <p class="hint" style="margin:0">Podés elegir <b>varios archivos juntos</b> (uno por mes, de cualquier año): también sirve un archivo con varios meses juntos (un trimestre o un año): el portal separa la venta por mes según la columna Fecha.</p>
       </div>
       <div class="step">
-        <h3><span>3</span> Objetivos de <b class="gerSelLbl" style="margin-left:4px;color:var(--fizz)"></b> <em class="opt">(total distri)</em></h3>
-        <div class="gobj">
-          <label>HL<input id="gerObjHl" inputmode="decimal" placeholder="Ej: 7200"></label>
-          <label>CCC (clientes)<input id="gerObjCc" inputmode="numeric" placeholder="Ej: 3100"></label>
-          <label>TBD<input id="gerObjTbd" inputmode="numeric" placeholder="Ej: 21500"></label>
+        <h3><span>3</span> Objetivos de <b class="gerSelLbl" style="margin-left:4px;color:var(--fizz)"></b> <em class="opt">(por unidad de negocio)</em></h3>
+        <div class="gobj" style="grid-template-columns:repeat(4,minmax(0,1fr))">
+          <label>HL UNG<input id="gerObjHl" inputmode="decimal" placeholder="Ej: 7261,5"></label>
+          <label>HL AGUAS ECO<input id="gerObjHlA" inputmode="decimal" placeholder="Ej: 1043,9"></label>
+          <label>CCC UNG<input id="gerObjCc" inputmode="numeric" placeholder="Ej: 3100"></label>
+          <label>TBD UNG<input id="gerObjTbd" inputmode="numeric" placeholder="Ej: 21500"></label>
         </div>
+        <p class="hint" style="margin:0" id="gerObjHint"></p>
       </div>
       <div class="step">
         <h3><span>4</span> Publicar</h3>
@@ -2101,7 +2104,7 @@ $("cbGo").addEventListener("click", async () => {
 
 /* ===== Gerencial ===== */
 const GF0 = () => ({sup:"", prom:"", canal:"", un:"", marca:"", cal:""});
-const GER = { cred:null, idx:null, idxP:null, cache:{}, ccache:{}, ym:null, dim:"un", meas:"hl", f:GF0(), cart:undefined };
+const GER = { cred:null, idx:null, idxP:null, cache:{}, ccache:{}, ym:null, dim:"un", meas:"hl", f:Object.assign(GF0(), {un:"UNG"}), cart:undefined };
 const GDIMS = [["un","Unidad de negocio"],["marca","Marca"],["calibre","Calibre"],["canal","Canal"],["mesa","Supervisor"],["fdv","Promotor"]];
 const GMEAS = [["hl","HL"],["bu","Bultos"],["fin","$ Final"],["pn","$ PNSF"],["gan","$ Ganancia"]];
 /* PNIT ÷ PNSF por marca (lista 03/11, precio tradicional). Ganancia del distri = PNSF × (factor − 1): el descuento al cliente lo reintegra Quilmes por WAPI */
@@ -2128,6 +2131,16 @@ const fpct = p => p === null || !isFinite(p) ? "—" : (p > 0 ? "+" : "") + p.to
 const dpill = p => p === null || !isFinite(p) ? '<span class="dl na">s/d</span>' : `<span class="dl ${p >= 0 ? "up" : "dn"}">${p >= 0 ? "▲" : "▼"} ${fpct(Math.abs(p)).replace("+","")}</span>`;
 const dcell = p => p === null || !isFinite(p) ? '<span class="vp">—</span>' : `<span class="${p >= 0 ? "dpos" : "dneg"}">${p >= 0 ? "▲" : "▼"} ${fpct(Math.abs(p)).replace("+","")}</span>`;
 const noFilt = () => Object.values(GER.f).every(v => !v);
+/* objetivo que aplica según la unidad elegida (con otros filtros no aplica: es el objetivo de toda la distri) */
+function objOf(ym){
+  const o = GER.idx.obj[ym], F = GER.f;
+  if (!o || F.sup || F.prom || F.canal || F.marca || F.cal) return null;
+  const hlU = o.hlU ?? o.hl, hlA = o.hlA;
+  if (F.un === "UNG") return {hl:hlU, cc:o.cc, tbd:o.tbd, lab:"UNG"};
+  if (F.un === "AGUAS ECO") return hlA ? {hl:hlA, lab:"Aguas"} : null;
+  if (!F.un && (hlU || hlA)) return {mix:(hlU || 0) + (hlA || 0), lab:"UNG + Aguas"};
+  return null;
+}
 
 function gerShow(what){ $("gerLock").hidden = what !== "lock"; $("gerBody").hidden = what !== "body"; $("gerEmpty").hidden = what !== "empty"; }
 function normIdx(idx){
@@ -2291,7 +2304,7 @@ async function gerRender(){
   const gcs = {}; (await Promise.all(yearYms.map(k => gerCl(k)))).forEach((g, i) => gcs[yearYms[i]] = g);
   if (!cur){ $("gerCut").textContent = "No se pudo abrir " + ymLabel(ym); return; }
   gerSetup(cur);
-  const F = GER.f, nf = noFilt(), obj = nf ? (GER.idx.obj[ym] || null) : null;
+  const F = GER.f, nf = noFilt(), obj = objOf(ym);
   /* meses cargados con la versión anterior: el filtro de marca/calibre se arma desde su detalle */
   if (F.marca || F.cal){
     const leg = yearYms.filter(k => GER.idx.m[k].t.some(r => r[4] == null));
@@ -2310,7 +2323,10 @@ async function gerRender(){
   const objBar = (v, o) => o ? `<div class="ob"><i style="width:${Math.min(100, v / o * 100)}%"></i></div>` : "";
   const sku = s => s && s.cc && s.tbd != null ? s.tbd / s.cc : null;
   const MS = MESES[M-1].toUpperCase();
-  let k = `<div class="gx-k"><span class="l">HL ${MS}</span><b>${fmtHL(A.t.hl)} <small>HL</small></b><div class="ps">${dpill(gpct(A.t.hl, B && B.t.hl))}<span class="dl na">vs AA</span>${objPill(A.t.hl, obj && obj.hl)}</div>${objBar(A.t.hl, obj && obj.hl)}${proj ? `<span class="pj">Proyección al cierre: <b>${fmtHL(proj)} HL</b>${obj && obj.hl ? " · " + Math.round(proj / obj.hl * 100) + "% del obj." : ""}</span>` : ""}</div>`;
+  let mixV = null;
+  if (obj && obj.mix){ const u = gAgg(cur, D, "un").by; mixV = ((u["UNG"] || {}).hl || 0) + ((u["AGUAS ECO"] || {}).hl || 0); }
+  const hlObjHtml = obj && obj.mix ? `${objPill(mixV, obj.mix).replace("🎯", "🎯 UNG+Aguas")}</div>${objBar(mixV, obj.mix)}` : `${objPill(A.t.hl, obj && obj.hl)}</div>${objBar(A.t.hl, obj && obj.hl)}`;
+  let k = `<div class="gx-k"><span class="l">HL ${MS}${obj && obj.lab && !obj.mix ? " · " + obj.lab : ""}</span><b>${fmtHL(A.t.hl)} <small>HL</small></b><div class="ps">${dpill(gpct(A.t.hl, B && B.t.hl))}<span class="dl na">vs AA</span>${hlObjHtml}${proj ? `<span class="pj">Proyección al cierre: <b>${fmtHL(proj)} HL</b>${obj && obj.hl ? " · " + Math.round(proj / obj.hl * 100) + "% del obj." : ""}</span>` : ""}</div>`;
   k += `<div class="gx-k"><span class="l">CCC ${MS}</span><b>${sC ? fInt(sC.cc) : "—"}</b><div class="ps">${dpill(sC && sA ? gpct(sC.cc, sA.cc) : null)}<span class="dl na">vs AA</span>${sC ? objPill(sC.cc, obj && obj.cc) : ""}</div>${sC ? objBar(sC.cc, obj && obj.cc) : ""}</div>`;
   k += `<div class="gx-k"><span class="l">SKU/PDV ${MS}</span><b>${sku(sC) != null ? sku(sC).toLocaleString("es-AR",{maximumFractionDigits:2}) : "—"}</b><div class="ps">${dpill(gpct(sku(sC), sku(sA)))}<span class="dl na">vs AA</span></div></div>`;
   k += `<div class="gx-k"><span class="l">TBD ${MS}</span><b>${sC && sC.tbd != null ? fInt(sC.tbd) : "—"}</b><div class="ps">${dpill(sC && sA ? gpct(sC.tbd, sA.tbd) : null)}<span class="dl na">vs AA</span>${sC && sC.tbd != null ? objPill(sC.tbd, obj && obj.tbd) : ""}</div>${sC && sC.tbd != null ? objBar(sC.tbd, obj && obj.tbd) : ""}</div>`;
@@ -2320,7 +2336,7 @@ async function gerRender(){
   const series = fn => MESES.map((n, i) => {
     const a = Y + "-" + pad2(i+1), b = (Y-1) + "-" + pad2(i+1);
     return {lab: n.slice(0,3).toUpperCase(), ym:a, a: GER.idx.m[a] ? fn(a) : null, b: GER.idx.m[b] ? fn(b) : null,
-            o: nf && GER.idx.obj[a] ? GER.idx.obj[a] : null, part: GER.idx.m[a] && !gFull(a, GER.idx.m[a].d) ? GER.idx.m[a].d : 0};
+            o: objOf(a), part: GER.idx.m[a] && !gFull(a, GER.idx.m[a].d) ? GER.idx.m[a].d : 0};
   });
   const sHL = series(k => idxTot(k, "hl")), sCC = series(k => { const s = cStats(gcs[k], 31); return s ? s.cc : null; }), sTB = series(k => { const s = cStats(gcs[k], 31); return s ? s.tbd : null; });
   /* el mes de corte en curso se compara contra el mismo período del año anterior */
@@ -2368,7 +2384,8 @@ async function gerRender(){
   }
   const notes = [];
   if (!full) notes.push(`${ymLabel(ym)} va al día ${pad2(D)}: su % se compara contra el mismo período del año anterior.`);
-  if (!nf) notes.push("Los objetivos son del total distri: con filtros no se muestran.");
+  if (F.sup || F.prom || F.canal || F.marca || F.cal) notes.push("Los objetivos son de toda la distri por unidad de negocio: con filtros de supervisor, promotor, canal, marca o calibre no se muestran.");
+  else if (!F.un && obj && obj.mix) notes.push("Sin filtro de unidad, el objetivo de HL se compara contra la venta de UNG + Aguas Eco (sin Marketplace ni Vino). Elegí UNG para ver también CCC y TBD contra objetivo.");
   if (yearYms.some(k => gcs[k] && gcs[k].legacy)) notes.push("Hay meses cargados con la versión anterior: para ver su TBD volvé a subir esa base.");
   $("gxNote").textContent = notes.join(" ");
 
@@ -2593,8 +2610,12 @@ function gerGrid(){
   document.querySelectorAll(".gerSelLbl").forEach(x => x.textContent = ymLabel(GUP.ym));
   $("gerGridHint").hidden = !!idx || !(GER.idxP && GER.idxP.data);
   const o = idx && idx.obj && idx.obj[GUP.ym] || {};
-  const fo = v => v != null ? String(v).replace(".", ",") : "";
-  $("gerObjHl").value = fo(o.hl); $("gerObjCc").value = fo(o.cc); $("gerObjTbd").value = fo(o.tbd);
+  const fo = v => v != null ? String(Math.round(v * 10) / 10).replace(".", ",") : "";
+  /* el mes en curso toma los HL de "Objetivos del mes" si todavía no se cargaron acá */
+  const vol = GUP.ym === cym && GUP.vol ? GUP.vol : null, auto = !o.hlU && !o.hl && !o.hlA && vol;
+  $("gerObjHl").value = fo(o.hlU ?? o.hl ?? (auto ? vol.u : null)); $("gerObjHlA").value = fo(o.hlA ?? (auto ? vol.a : null));
+  $("gerObjCc").value = fo(o.cc); $("gerObjTbd").value = fo(o.tbd);
+  $("gerObjHint").textContent = auto ? "Los HL se completaron con la suma de Objetivos del mes (Vol UNG y Vol Aguas). Revisalos antes de publicar." : "";
 }
 const objNum = s => { s = String(s || "").trim(); if (!s) return null; if (/^\d{1,3}(\.\d{3})+(,\d+)?$/.test(s)) s = s.replace(/\./g, ""); const v = parseFloat(s.replace(",", ".")); return isFinite(v) && v > 0 ? v : null; };
 $("gerGrid").addEventListener("click", e => { const b = e.target.closest("[data-ym]"); if (!b || b.disabled) return; GUP.ym = b.dataset.ym; gerGrid(); });
@@ -2609,14 +2630,15 @@ $("gerUpBtn").addEventListener("click", async () => {
   GUP.idx = GER.idx || (GER.idxP && GER.idxP.data ? null : {v:2, m:{}, obj:{}});
   if (GER.cred && !$("gerKeyG").value) $("gerKeyG").value = GER.cred[1];
   if (!GUP.ym && GER.ym) GUP.ym = GER.ym;
+  if (!GUP.vol){ try { const po = await apiGet("objetivos"); if (po && po.data){ const od = await openData(po), s = k => od.rows.reduce((a, r) => a + (+(r.obj || {})[k] || 0), 0); GUP.vol = {u:s("Vol UNG (HL)"), a:s("Vol Aguas (HL)")}; } } catch(e){} }
   $("gerFirst").hidden = !!(GER.idxP && GER.idxP.data);
   gerGrid();
 });
 $("gerUpClose").addEventListener("click", () => $("mGer").hidden = true);
 $("gerGo").addEventListener("click", async () => {
   const m = $("gerMsg"), files = [...$("gerFile").files], gk = $("gerKeyG").value, admin = $("gerKeyA").value, ym = GUP.ym;
-  const ob = {hl: objNum($("gerObjHl").value), cc: objNum($("gerObjCc").value), tbd: objNum($("gerObjTbd").value)};
-  const hasObj = ob.hl || ob.cc || ob.tbd;
+  const ob = {hlU: objNum($("gerObjHl").value), hlA: objNum($("gerObjHlA").value), cc: objNum($("gerObjCc").value), tbd: objNum($("gerObjTbd").value)};
+  const hasObj = ob.hlU || ob.hlA || ob.cc || ob.tbd;
   m.className = "msg";
   if (!gk){ m.className = "msg bad"; m.textContent = "Escribí la clave gerencial"; return; }
   if (!admin){ m.className = "msg bad"; m.textContent = "Escribí la clave de administradora"; return; }
@@ -2659,7 +2681,7 @@ $("gerGo").addEventListener("click", async () => {
     }
     if (cargados.length) done.push("bases cargadas: " + cargados.sort().map(k => ymLabel(k) + (gFull(k, idx.m[k].d) ? "" : " (al " + pad2(idx.m[k].d) + ")")).join(", "));
     if (hasObj){ idx.obj[ym] = Object.fromEntries(Object.entries(ob).filter(([k, v]) => v)); done.push("objetivos guardados"); }
-    else if (idx.obj[ym] && !$("gerObjHl").value && !$("gerObjCc").value && !$("gerObjTbd").value){ delete idx.obj[ym]; done.push("objetivos borrados"); }
+    else if (idx.obj[ym] && !$("gerObjHl").value && !$("gerObjHlA").value && !$("gerObjCc").value && !$("gerObjTbd").value){ delete idx.obj[ym]; done.push("objetivos borrados"); }
     const res = await apiPut("ger_idx", admin, Object.assign(await sealData(idx, gc), stamp));
     if (!res.ok) throw new Error(res.error || "No se pudo guardar el índice");
     m.className = "msg ok"; m.innerHTML = "¡Listo! " + done.join(" · ").replace("objetivos", "objetivos de " + ymLabel(ym)) + (avisos.length ? "<br><small>" + avisos.map(esc).join("<br>") + "</small>" : "");
