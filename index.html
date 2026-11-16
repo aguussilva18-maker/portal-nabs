@@ -315,6 +315,47 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
 .cb-leg{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px;font-size:12px;color:var(--muted)}
 .cb-leg span{display:inline-flex;align-items:center;gap:6px}.cb-leg i{width:12px;height:12px;border-radius:3px;display:inline-block}
 @media (max-width:640px){.cb-sec{grid-template-columns:1fr}.cb-side{flex-direction:row;justify-content:flex-start;padding:10px 14px}.cb-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cb-ph{height:86px}.cb-ph img{max-height:86px;max-width:100%}}
+/* ===== Programa de Mercado ===== */
+.pm-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:18px}
+.pm-k{background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;gap:4px;align-content:start}
+.pm-k span{font:800 10.5px var(--body);letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.pm-k b{font:900 24px var(--display);line-height:1.1}.pm-k b small{font:700 13px var(--body);color:var(--muted)}
+.pm-k small{font-size:12px;color:var(--muted)}.pm-k small b.bad{font:800 12px var(--body);color:#ff8fa3}
+.pm-k.rel{border-color:rgba(56,200,255,.4)}.pm-k.pag{border-color:rgba(126,224,129,.4)}.pm-k.opp{border-color:rgba(255,201,60,.45);background:linear-gradient(160deg,rgba(255,201,60,.12),var(--glass))}
+.pm-h{font:800 17px var(--display);margin:0 0 4px;display:flex;align-items:center;gap:10px}
+.pm-tag{font:800 11px var(--body);letter-spacing:.06em;background:rgba(56,200,255,.18);color:var(--fizz);border-radius:999px;padding:3px 10px}
+.pm-sub{font-size:13px;color:var(--muted);margin:0 0 12px;line-height:1.45}
+.pm-tops{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pm-top h3{font:800 11.5px var(--body);letter-spacing:.08em;color:var(--muted);margin:0 0 6px}
+.pm-top>div{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.pm-li{display:grid;grid-template-columns:18px 1fr auto;gap:8px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--line)}
+.pm-li:last-child{border-bottom:0}
+.pm-li.star{background:linear-gradient(90deg,rgba(255,201,60,.18),rgba(255,201,60,.04))}
+.pm-st{color:var(--sun);font-weight:900}
+.pm-nm{display:grid;gap:4px;min-width:0}.pm-nm b{font:700 13.5px var(--body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pm-chips{display:flex;gap:4px;flex-wrap:wrap}
+.pm-v{font:900 16px var(--display);font-variant-numeric:tabular-nums}
+.pm-li.star .pm-v{color:var(--sun)}
+.pm-b{display:inline-block;font:700 10.5px var(--body);padding:2px 8px;border-radius:999px;white-space:nowrap;border:1px solid transparent}
+.pm-fdv{background:rgba(255,255,255,.08);color:var(--muted);border-color:var(--line)}
+.pm-in{background:rgba(126,224,129,.16);color:var(--lime);border-color:rgba(126,224,129,.45)}
+.pm-out{background:rgba(255,255,255,.05);color:var(--muted)}
+.pm-nunca{background:rgba(255,77,109,.16);color:#ff8fa3;border-color:rgba(255,77,109,.45)}
+.pm-rel.ok{background:rgba(126,224,129,.16);color:var(--lime)}.pm-rel.mid{background:rgba(255,201,60,.16);color:var(--sun)}.pm-rel.bad{background:rgba(255,77,109,.16);color:#ff8fa3}
+.pm-fil{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.4fr);gap:8px;margin-bottom:12px}
+.pm-fil select,.pm-fil input{width:100%;font:600 14px var(--body);color:var(--ink);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:12px;padding:10px 12px;box-sizing:border-box}
+.pm-fil select option{color:#0a1430}
+.pm-t th.pm-s{cursor:pointer}.pm-t th.pm-s.on{color:var(--fizz)}
+.pm-t td.n,.pm-t th.n{text-align:right}
+.pm-pos{display:inline-block;min-width:30px;text-align:center;font:800 12.5px var(--body);padding:3px 6px;border-radius:8px;background:rgba(255,255,255,.06)}
+.pm-pos.t{background:rgba(255,201,60,.2);color:var(--sun)}
+.pm-pr{display:block;font-size:11px;color:var(--muted);margin-top:3px;white-space:normal;max-width:230px;line-height:1.35}
+.pm-pay{font:800 11.5px var(--body);color:var(--ink);background:rgba(255,255,255,.07);border:1px dashed var(--line);border-radius:999px;padding:5px 11px;cursor:pointer;white-space:nowrap}
+.pm-pay.on{background:rgba(126,224,129,.2);color:var(--lime);border:1px solid rgba(126,224,129,.5)}
+.pm-t tr.a-red td.c1{box-shadow:inset 3px 0 0 #ff4d6d}
+.pm-t td.pm-cli{max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.pm-t tr.a-grey td{opacity:.7}
+@media (max-width:1000px){.pm-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.pm-tops{grid-template-columns:1fr}.pm-fil{grid-template-columns:1fr 1fr}}
 /* ===== Habilitados ===== */
 .hab{display:inline-block;font:800 10.5px var(--body);letter-spacing:.04em;padding:3px 8px;border-radius:999px;margin:1px 3px 1px 0;background:rgba(255,201,60,.18);color:var(--sun);border:1px solid rgba(255,201,60,.45)}
 .hab.h1{background:rgba(56,200,255,.16);color:var(--fizz);border-color:rgba(56,200,255,.45)}
@@ -470,6 +511,7 @@ td.hb{white-space:nowrap}
       <div class="tiles">
         <button class="tile" data-k="ptc" style="--c:var(--lime)"><span class="dot">$</span><span><span class="name">PTC</span><span class="sub">Precio al consumidor</span></span><span class="go">→</span></button>
         <button class="tile" data-k="ptr" style="--c:var(--aqua)"><span class="dot">%</span><span><span class="name">PTR</span><span class="sub">Escalas K+T y AS</span></span><span class="go">→</span></button>
+        <button class="tile" data-k="pm" style="--c:var(--lime)"><span class="dot">★</span><span><span class="name">Programa de Mercado</span><span class="sub">Ranking AS: volumen, SKUs, PM y relevamiento</span></span><span class="go">→</span></button>
         <a class="tile" href="https://aguussilva18-maker.github.io/relevamiento-pdv/" target="_blank" rel="noopener" style="--c:var(--heat);text-decoration:none;color:inherit"><span class="dot">R</span><span><span class="name">Relevamiento PDV</span><span class="sub">Visitas, fotos y oportunidades en el punto de venta</span></span><span class="go">↗</span></a>
       </div>
     </div>
@@ -490,7 +532,7 @@ td.hb{white-space:nowrap}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 32 · 16/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 33 · 16/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -746,6 +788,52 @@ td.hb{white-space:nowrap}
       </div>
     </div>
   </div>
+  <section id="vPm" class="view" hidden>
+    <div class="vhead">
+      <button class="back" data-back>← Volver</button>
+      <div class="vtitle"><h1>Programa de Mercado · AS</h1><p id="pmUpd">Cargando…</p></div>
+      <div class="hbtns"><button class="btn-up ghost" id="pmRelBtn">⬆ Subir relevamiento</button><button class="btn-up" id="pmPiBtn">⬆ Subir PI</button></div>
+    </div>
+    <div id="pmBody">
+      <div class="pm-kpis" id="pmKpis"></div>
+      <div id="pmSnap1">
+        <h2 class="pm-h">Mejores clientes · Autoservicio <span class="pm-tag">AS</span></h2>
+        <p class="pm-sub">Top 10 por volumen (bultos) y top 10 por variedad (SKUs distintos) en lo que va del mes. <b>★</b> = está en los dos rankings. Al lado de cada cliente: si está en PM y su último relevamiento.</p>
+        <div class="pm-tops"><div class="pm-top"><h3>POR VOLUMEN (BULTOS)</h3><div id="pmTopV"></div></div><div class="pm-top"><h3>POR VARIEDAD (SKUS DISTINTOS)</h3><div id="pmTopS"></div></div></div>
+        <div class="acts" style="justify-content:flex-end"><button class="act" id="pmCopy1">📋 Copiar imagen</button></div>
+      </div>
+      <h2 class="pm-h" style="margin-top:22px">Todos los clientes de autoservicio</h2>
+      <div class="chips" id="pmPmF">
+        <button class="chip on" data-f="">Todos</button><button class="chip" data-f="pm">En PM</button><button class="chip" data-f="nopm">Sin PM</button>
+      </div>
+      <div class="pm-fil">
+        <select id="pmProm" aria-label="Promotor"></select>
+        <select id="pmRelF" aria-label="Relevamiento"><option value="">Relevamiento: todos</option><option value="si">Relevados</option><option value="no">Nunca relevados</option></select>
+        <select id="pmPagF" aria-label="Pago"><option value="">Pago: todos</option><option value="si">Pagados</option><option value="no">No pagados</option></select>
+        <input id="pmQ" type="search" placeholder="Buscar código o razón social…" autocomplete="off" readonly onfocus="this.removeAttribute('readonly')">
+      </div>
+      <div id="pmSnap2">
+        <div class="acts"><p class="count" id="pmCount"></p><button class="act" id="pmCopy2">📋 Copiar imagen</button><button class="act" id="pmXls">⬇ Descargar Excel</button></div>
+        <div class="tbl"><table class="pm-t"><thead><tr><th class="c1">Cliente</th><th class="n pm-s" data-s="v"># Vol.</th><th class="n pm-s" data-s="s"># SKU</th><th>Promotor</th><th class="n pm-s" data-s="v">Bultos</th><th class="n pm-s" data-s="s">SKUs</th><th>PM</th><th>Relevamiento</th><th class="n">Pagado</th></tr></thead><tbody id="pmRows"></tbody></table></div>
+      </div>
+    </div>
+    <div class="empty" id="pmEmpty" hidden></div>
+  </section>
+
+  <div class="modal" id="mPm" hidden>
+    <div class="sheet" role="dialog" aria-labelledby="pmUpTitle">
+      <div class="sheet-head"><h2 id="pmUpTitle">Subir archivo</h2><button class="x" id="pmUpClose" aria-label="Cerrar">×</button></div>
+      <div class="step">
+        <p class="hint" id="pmUpHint"></p>
+        <input id="pmFile" class="file" type="file" accept=".xlsx,.xls,.csv">
+        <label class="fl" for="pmKey">CLAVE DE ADMINISTRADORA</label>
+        <input id="pmKey" type="password" autocomplete="off">
+        <button class="btn-in" id="pmGo" type="button">PUBLICAR</button>
+        <div class="msg" id="pmMsg"></div>
+      </div>
+    </div>
+  </div>
+
   <section id="vGer" class="view" hidden>
     <div class="vhead">
       <button class="back" data-back>← Volver</button>
@@ -880,7 +968,7 @@ const API_URL = "https://script.google.com/macros/s/AKfycbwgGTcWaZ0z7hCpbqEnXl8d
 /* Links de los botones (encriptados). Para cambiarlos usá editor.html */
 const PAYLOAD = {"iter":150000,"salt":"oDf/SsVP4Iwz8g/d/hvV1Q==","iv":"/Z6HxyD+MiiynQMU","data":"hy6POKZ4ljvNBQ/zsByZCD3PXdYjPz5R4BH5JmCgFjVdRxAldoxJwRci3Pam/SKv3UjuUhgkAoP9HxcjSv4HVoszQZ5zS5OR9x+JmQFe9SRXLWqQJx3pFRMHf9VrGUKL/iOKyaVDdEAUUh9blZKVPE2770d3nK61DtqjqOrapf7w4MoHs3kxT93pDgvoacDF4rFwhoeTDcCpkhI="};
 /* Botones que ya tienen tablero adentro del portal */
-const INTERNAL = { grillas: "vGrillas", objetivos: "vObj", cierres: "vObj", ptc: "vImg", ptr: "vImg", frescura: "vFr", combos: "vCb", gerencial: "vGer" };
+const INTERNAL = { grillas: "vGrillas", objetivos: "vObj", cierres: "vObj", ptc: "vImg", ptr: "vImg", frescura: "vFr", combos: "vCb", gerencial: "vGer", pm: "vPm" };
 
 const $ = id => document.getElementById(id);
 const b64d = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
@@ -915,7 +1003,7 @@ async function openData(p, cred = CRED){
 
 /* ===== Navegación ===== */
 function go(view){
-  ["login","hub","vGrillas","vObj","vImg","vFr","vCb","vGer"].forEach(id => $(id).hidden = id !== view);
+  ["login","hub","vGrillas","vObj","vImg","vFr","vCb","vGer","vPm"].forEach(id => $(id).hidden = id !== view);
   scrollTo(0,0);
 }
 function toast(msg){ $("toast").textContent = msg; $("toast").hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => $("toast").hidden = true, 2600); }
@@ -939,7 +1027,7 @@ document.querySelectorAll("[data-back]").forEach(b => b.addEventListener("click"
 
 document.querySelectorAll(".tile[data-k]").forEach(b => b.addEventListener("click", () => {
   const k = b.dataset.k;
-  if (INTERNAL[k]) { go(INTERNAL[k]); if (k === "grillas") loadGrillas(); if (k === "objetivos") loadObj(); if (k === "cierres") loadCierres(); if (k === "frescura") loadFr(); if (k === "combos") loadCb(); if (k === "gerencial") loadGer(); if (k === "ptc" || k === "ptr") loadImg(k); return; }
+  if (INTERNAL[k]) { go(INTERNAL[k]); if (k === "grillas") loadGrillas(); if (k === "objetivos") loadObj(); if (k === "cierres") loadCierres(); if (k === "frescura") loadFr(); if (k === "combos") loadCb(); if (k === "gerencial") loadGer(); if (k === "pm") loadPm(); if (k === "ptc" || k === "ptr") loadImg(k); return; }
   const url = LINKS[k];
   if (url && /^https?:\/\//i.test(url)) { window.open(url, "_blank", "noopener"); return; }
   toast(b.querySelector(".name").textContent + ": próximamente");
@@ -1288,6 +1376,7 @@ $("upGo").addEventListener("click", async () => {
     if (!res.ok) throw new Error(res.error || "No se pudo guardar");
     res = await apiPut("focos", key, Object.assign(await sealData(U.focos), stamp));
     res = await apiPut("avances", key, Object.assign(await sealData(buildAvances()), stamp)); O.cur = null;
+    try { res = await apiPut("pm_rank", key, Object.assign(await sealData(buildRank()), stamp)); PM.rank = null; } catch(e){ console.error(e); }
     if (U.carteraNueva) { res = await apiPut("cartera", key, Object.assign(await sealData({rows:U.cartera}), stamp)); U.carteraNueva = false; }
     m.className = "msg ok"; m.textContent = `¡Listo! ${fmtN(data.rows.length)} clientes publicados para todos`;
     G.data = null; await loadGrillas(true);
@@ -2767,6 +2856,216 @@ $("hList").addEventListener("click", async e => {
   try { await habSave((H.data.listas || []).filter(l => l.n !== b.dataset.del), key); m.className = "msg ok"; m.textContent = "Lista quitada"; }
   catch(err){ m.className = "msg bad"; m.textContent = err.message; }
 });
+
+/* ===== Programa de Mercado · AS ===== */
+const PM = { rank:null, list:null, rel:null, pago:null, f:"", sort:"v", key:"", mode:"", pend:null };
+const pmYM = () => new Date().getFullYear() + "-" + String(new Date().getMonth() + 1).padStart(2, "0");
+const pmMes = () => MESES[new Date().getMonth()];
+
+/* resumen por cliente que se arma al publicar las grillas (misma base plana) */
+function buildRank(){
+  const B = U.base, N = B.N, iFin = N.indexOf(norm("Importe Final")), iHL = N.indexOf(norm("Cantidad Total en HL")), iBu = N.indexOf(norm("Cantidad Total en Bultos")),
+        iCan = N.indexOf(norm("Canal Ajustado")), iNom = N.indexOf("cliente");
+  const rsOf = new Map(U.cartera.map(([cli, rs]) => [cli, rs])), m = new Map();
+  for (const x of B.rows){
+    let o = m.get(x.cli); if (!o){ o = {bu:0, hl:0, sk:new Set(), fdv:{}, can:{}, rs:""}; m.set(x.cli, o); }
+    o.bu += Number(x.r[iBu]) || 0; o.hl += iHL >= 0 ? (Number(x.r[iHL]) || 0) : 0;
+    if (B.iProd >= 0 && (iFin < 0 || Number(x.r[iFin]) !== 0)) o.sk.add(String(x.r[B.iProd]));
+    o.fdv[x.sv] = (o.fdv[x.sv] || 0) + 1;
+    const c = iCan >= 0 ? String(x.r[iCan]).trim().toUpperCase() : ""; o.can[c] = (o.can[c] || 0) + 1;
+    if (!o.rs && iNom >= 0) o.rs = String(x.r[iNom]).trim();
+  }
+  const top = obj => Object.entries(obj).sort((a, b) => b[1] - a[1])[0][0];
+  const rows = [...m.entries()].map(([cli, o]) => [cli, rsOf.get(cli) || o.rs, top(o.fdv), top(o.can), Math.round(o.bu * 10) / 10, Math.round(o.hl * 100) / 100, o.sk.size]);
+  return {v:1, venta:B.venta, rows};
+}
+
+async function loadPm(force){
+  $("pmUpd").textContent = "Cargando…";
+  try {
+    if (!PM.rank || force){
+      const [a, b, c, d] = await Promise.all(["pm_rank", "pm_list", "pm_rel", "pm_pago"].map(k => apiGet(k).catch(() => null)));
+      const op = async p => p && p.data ? await openData(p) : null;
+      PM.rank = await op(a); PM.list = await op(b); PM.rel = await op(c); PM.pago = (await op(d)) || {};
+      PM.upd = [a, b, c].map(p => p && p.updated).filter(Boolean).sort().pop();
+    }
+    if (!PM.rank){
+      $("pmBody").hidden = true; $("pmEmpty").hidden = false;
+      $("pmEmpty").innerHTML = "Falta armar el ranking: entrá a <b>Grillas → ⬆ Actualizar grillas</b> y publicá la base plana una vez. Después subí el <b>PI</b> y el <b>relevamiento</b> con los botones de arriba.";
+      $("pmUpd").textContent = "Sin datos todavía"; return;
+    }
+    $("pmBody").hidden = false; $("pmEmpty").hidden = true;
+    $("pmUpd").textContent = `Venta al ${PM.rank.venta || "—"}` + (PM.list ? ` · PI ${PM.list.mes || ""}` : " · falta subir el PI") + (PM.rel ? ` · Relevamiento al ${fmtDate(PM.rel.hasta)}` : " · falta subir el relevamiento");
+    pmSetup(); pmRender();
+  } catch(e){ console.error(e); $("pmUpd").textContent = "Error al cargar"; }
+}
+
+/* une ranking + PI + relevamiento + pagos en una fila por cliente */
+function pmData(){
+  const as = PM.rank.rows.filter(r => r[3] === "AS");
+  const byV = [...as].sort((a, b) => b[4] - a[4]), byS = [...as].sort((a, b) => b[6] - a[6] || b[4] - a[4]);
+  const pV = new Map(byV.map((r, i) => [r[0], i + 1])), pS = new Map(byS.map((r, i) => [r[0], i + 1]));
+  const L = (PM.list && PM.list.clis) || {}, R = (PM.rel && PM.rel.clis) || {}, P = (PM.pago[pmYM()]) || {};
+  const out = as.map(r => ({cli:r[0], rs:r[1], fdv:r[2], bu:r[4], hl:r[5], sk:r[6], pv:pV.get(r[0]), ps:pS.get(r[0]), pm:L[r[0]] || null, rel:R[r[0]] || null, pago:P[r[0]] || null}));
+  const seen = new Set(as.map(r => r[0]));
+  for (const [cli, pm] of Object.entries(L)) if (!seen.has(cli)) out.push({cli, rs:pm.rs || "", fdv:"", bu:0, hl:0, sk:0, pv:null, ps:null, pm, rel:R[cli] || null, pago:P[cli] || null, sinCompra:true});
+  return out;
+}
+const pmTags = x => (x.pm ? `<span class="pm-b pm-in">PM${x.pm.gas ? " · Gas" : ""}${x.pm.agua ? " · Aguas" : ""}${x.pm.tier ? " · " + esc(x.pm.tier) : ""}</span>` : `<span class="pm-b pm-out">Sin PM</span>`);
+const pmRelTxt = x => !x.rel ? `<span class="pm-b pm-nunca">Nunca relevado</span>`
+  : `<span class="pm-b pm-rel ${x.rel.pct >= .75 ? "ok" : x.rel.pct >= .5 ? "mid" : "bad"}">${Math.round(x.rel.pct * 100)}% · ${fmtD(x.rel.f)}</span>`;
+const fmtD = iso => { const d = new Date(iso); return isNaN(d) ? "" : d.toLocaleDateString("es-AR", {day:"2-digit", month:"2-digit"}); };
+
+function pmSetup(){
+  const proms = uniq(PM.rank.rows.filter(r => r[3] === "AS").map(r => r[2])).filter(Boolean);
+  const v = $("pmProm").value;
+  $("pmProm").innerHTML = `<option value="">Todos los promotores</option>` + proms.map(p => `<option value="${esc(p)}"${p === v ? " selected" : ""}>${esc(tc(p))}</option>`).join("");
+}
+function pmRender(){
+  const all = pmData(), ym = pmYM(), pmAll = all.filter(x => x.pm);
+  const relPm = pmAll.filter(x => x.rel).length, pag = pmAll.filter(x => x.pago).length;
+  const top20 = new Set(all.filter(x => x.pv && x.pv <= 20).map(x => x.cli)), opp = all.filter(x => top20.has(x.cli) && !x.pm).length;
+  const k = (l, v, s, cls) => `<div class="pm-k${cls ? " " + cls : ""}"><span>${l}</span><b>${v}</b>${s ? `<small>${s}</small>` : ""}</div>`;
+  $("pmKpis").innerHTML = k("Clientes AS con compra", fmtN(all.filter(x => !x.sinCompra).length), "en lo que va del mes")
+    + k("En programa de mercado", PM.list ? fmtN(pmAll.length) : "—", PM.list ? `${fmtN(pmAll.filter(x => x.sinCompra).length)} sin compra este mes` : "subí el PI")
+    + k("PM relevados", PM.list ? `${fmtN(relPm)} <small>de ${fmtN(pmAll.length)}</small>` : "—", PM.list ? `<b class="bad">${fmtN(pmAll.length - relPm)} nunca relevados</b>` : "", "rel")
+    + k(`Pagados ${pmMes()}`, PM.list ? `${fmtN(pag)} <small>de ${fmtN(pmAll.length)}</small>` : "—", "se marcan con el botón de cada cliente", "pag")
+    + k("Top 20 en volumen sin PM", fmtN(opp), "oportunidad para sumar al programa", "opp");
+
+  /* tops */
+  const as = all.filter(x => !x.sinCompra), tv = [...as].sort((a, b) => a.pv - b.pv).slice(0, 10), ts = [...as].sort((a, b) => a.ps - b.ps).slice(0, 10);
+  const both = new Set(tv.map(x => x.cli).filter(c => ts.some(y => y.cli === c)));
+  const li = (x, val) => `<div class="pm-li${both.has(x.cli) ? " star" : ""}"><span class="pm-st">${both.has(x.cli) ? "★" : ""}</span><span class="pm-nm"><b>${esc(x.cli)} · ${esc(x.rs)}</b><span class="pm-chips"><span class="pm-b pm-fdv">${esc(tc(x.fdv))}</span>${pmTags(x)}${pmRelTxt(x)}</span></span><span class="pm-v">${val}</span></div>`;
+  $("pmTopV").innerHTML = tv.map(x => li(x, fmtHL(x.bu))).join("");
+  $("pmTopS").innerHTML = ts.map(x => li(x, fmtN(x.sk))).join("");
+
+  /* tabla */
+  const q = norm($("pmQ").value.trim()), pr = $("pmProm").value, rf = $("pmRelF").value, pf = $("pmPagF").value;
+  let rows = all.filter(x => (!PM.f || (PM.f === "pm" ? x.pm : !x.pm)) && (!pr || x.fdv === pr) && (!rf || (rf === "si" ? x.rel : !x.rel)) && (!pf || (pf === "si" ? x.pago : !x.pago))
+    && (!q || norm(x.cli + " " + x.rs).includes(q)));
+  const key = PM.sort === "s" ? "ps" : "pv";
+  rows.sort((a, b) => (a[key] ?? 1e9) - (b[key] ?? 1e9));
+  PM.last = rows;
+  $("pmCount").textContent = `${fmtN(rows.length)} clientes · ordenado por ${PM.sort === "s" ? "variedad de SKUs" : "volumen"}`;
+  document.querySelectorAll(".pm-s").forEach(th => th.classList.toggle("on", th.dataset.s === PM.sort));
+  $("pmRows").innerHTML = rows.map(x => {
+    const alert = x.pm && !x.rel ? " a-red" : x.pm && x.sinCompra ? " a-grey" : "";
+    return `<tr class="${alert}"><td class="c1 pm-cli"><b>${esc(x.cli)}</b> · ${esc(x.rs)}</td><td class="n"><span class="pm-pos${x.pv && x.pv <= 10 ? " t" : ""}">${x.pv ?? "—"}</span></td><td class="n"><span class="pm-pos${x.ps && x.ps <= 10 ? " t" : ""}">${x.ps ?? "—"}</span></td><td>${esc(tc(x.fdv))}</td><td class="n">${x.sinCompra ? "sin compra" : fmtHL(x.bu)}</td><td class="n">${x.sinCompra ? "—" : fmtN(x.sk)}</td>
+      <td>${pmTags(x)}</td><td>${pmRelTxt(x)}${x.rel && x.rel.progs ? `<small class="pm-pr">${x.rel.progs.map(p => esc(p.n) + " " + Math.round(p.pct * 100) + "%").join(" · ")}</small>` : ""}</td>
+      <td class="n">${x.pm ? `<button class="pm-pay${x.pago ? " on" : ""}" data-pay="${esc(x.cli)}" title="${x.pago ? "Pagado el " + fmtD(x.pago) : "Marcar como pagado"}">${x.pago ? "✓ Pagado" : "Marcar"}</button>` : ""}</td></tr>`;
+  }).join("") || `<tr><td colspan="9" class="empty">No hay clientes con esos filtros.</td></tr>`;
+}
+
+/* filtros y orden */
+$("pmPmF").addEventListener("click", e => { const b = e.target.closest("[data-f]"); if (!b) return; PM.f = b.dataset.f; $("pmPmF").querySelectorAll(".chip").forEach(c => c.classList.toggle("on", c === b)); pmRender(); });
+["pmProm", "pmRelF", "pmPagF"].forEach(id => $(id).addEventListener("change", pmRender));
+$("pmQ").addEventListener("input", pmRender);
+document.querySelectorAll(".pm-s").forEach(th => th.addEventListener("click", () => { PM.sort = th.dataset.s; pmRender(); }));
+$("pmCopy1").addEventListener("click", () => copyBlob(snapBlob($("pmSnap1"), c => c.querySelectorAll(".acts").forEach(x => x.remove())), "pm_mejores_clientes_as.png", $("pmCopy1")));
+$("pmCopy2").addEventListener("click", () => copyBlob(snapBlob($("pmSnap2"), c => { c.querySelectorAll(".acts").forEach(x => x.remove()); const tb = c.querySelector(".tbl"); tb.style.maxHeight = "none"; tb.style.overflow = "visible"; }), "pm_clientes_as.png", $("pmCopy2")));
+$("pmXls").addEventListener("click", () => {
+  const head = ["Pos. volumen", "Pos. SKUs", "Cliente", "Razón social", "Promotor", "Bultos", "HL", "SKUs distintos", "En PM", "Gaseosas", "Aguas", "Tier", "Último relevamiento", "% cumplimiento", "Programas relevados", "Pagado " + pmMes()];
+  const data = (PM.last || []).map(x => [x.pv ?? "", x.ps ?? "", isNaN(+x.cli) ? x.cli : +x.cli, x.rs, tc(x.fdv), x.bu, x.hl, x.sk, x.pm ? "Sí" : "No", x.pm && x.pm.gas ? "Sí" : "", x.pm && x.pm.agua ? "Sí" : "", x.pm ? x.pm.tier || "" : "",
+    x.rel ? fmtD(x.rel.f) : "Nunca", x.rel ? Math.round(x.rel.pct * 100) + "%" : "", x.rel && x.rel.progs ? x.rel.progs.map(p => p.n + " " + Math.round(p.pct * 100) + "%").join(" · ") : "", x.pago ? "Sí (" + fmtD(x.pago) + ")" : ""]);
+  const ws = XLSX.utils.aoa_to_sheet([head, ...data]); ws["!cols"] = head.map((h, i) => ({wch: i === 3 ? 34 : 13}));
+  const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Clientes AS"); XLSX.writeFile(wb, "programa_mercado_as_" + pmYM() + ".xlsx"); toast("⬇ Excel descargado");
+});
+
+/* subir PI / relevamiento / clave para pagos */
+function pmModal(mode){
+  PM.mode = mode; $("mPm").hidden = false; $("pmMsg").textContent = ""; $("pmMsg").className = "msg"; $("pmFile").value = "";
+  $("pmFile").hidden = mode === "pago";
+  $("pmUpTitle").textContent = mode === "pi" ? "Subir PI (programa de mercado)" : mode === "rel" ? "Subir relevamiento" : "Marcar pagados";
+  $("pmUpHint").innerHTML = mode === "pi" ? "Subí el archivo del PI del mes (hoja <b>PI</b>, con DISTRIBUIDOR, POC ID, TIER, NEGOCIADO GASEOSAS y NEGOCIADO AGUAS). Se toman los clientes de <b>EMCALA</b> con negociado de gaseosas o aguas. Reemplaza al anterior."
+    : mode === "rel" ? "Subí el Excel exportado del <b>Relevamiento PDV</b> (hoja <b>Visitas</b>). Se toma la última visita de cada cliente y su % de cumplimiento por programa."
+    : "Escribí la clave de administradora una vez y después marcás o desmarcás pagados tocando el botón de cada cliente.";
+  $("pmGo").textContent = mode === "pago" ? "CONFIRMAR" : "PUBLICAR";
+}
+$("pmPiBtn").addEventListener("click", () => pmModal("pi"));
+$("pmRelBtn").addEventListener("click", () => pmModal("rel"));
+$("pmUpClose").addEventListener("click", () => { $("mPm").hidden = true; PM.pend = null; });
+function parsePI(aoa){
+  const hi = aoa.findIndex(r => r.some(c => norm(c) === "distribuidor") && r.some(c => norm(c) === "poc id"));
+  if (hi < 0) throw new Error("No encuentro las columnas DISTRIBUIDOR y POC ID");
+  const N = aoa[hi].map(c => norm(c).replace(/\s+/g, " ").trim()), f = n => N.findIndex(h => h.startsWith(n));
+  const iD = f("distribuidor"), iCod = f("cod de distri"), iPoc = f("poc id"), iT = f("tier"), iG = f("negociado gaseosas"), iA = f("negociado aguas");
+  if (iG < 0 && iA < 0) throw new Error("Faltan las columnas NEGOCIADO GASEOSAS / NEGOCIADO AGUAS");
+  const si = v => norm(v) === "si", clis = {};
+  for (const r of aoa.slice(hi + 1)){
+    const emc = /emcala/i.test(String(r[iD] || "")) || String(r[iCod] || "").replace(/\.0$/, "") === "181652"; if (!emc) continue;
+    const poc = String(r[iPoc] || "").replace(/\.0$/, "").trim(); if (!poc) continue;
+    const cli = String(+poc.slice(6) || +poc);
+    const gas = iG >= 0 && si(r[iG]), agua = iA >= 0 && si(r[iA]); if (!gas && !agua) continue;
+    clis[cli] = {tier:String(r[iT] || "").trim(), gas:gas ? 1 : 0, agua:agua ? 1 : 0};
+  }
+  if (!Object.keys(clis).length) throw new Error("No encontré clientes de EMCALA con PM de gaseosas o aguas");
+  return clis;
+}
+function parseRel(aoa){
+  const hi = aoa.findIndex(r => r.some(c => norm(c) === "codigo cliente") && r.some(c => norm(c).startsWith("% cumplimiento")));
+  if (hi < 0) throw new Error("No encuentro la hoja Visitas (columnas Código cliente y % Cumplimiento)");
+  const N = aoa[hi].map(norm), f = n => N.findIndex(h => h.startsWith(n));
+  const iF = f("fecha"), iC = f("codigo cliente"), iP = f("programa"), iPct = f("% cumplimiento"), iId = f("id visita");
+  const visitas = new Map();
+  for (const r of aoa.slice(hi + 1)){
+    const cli = String(r[iC] ?? "").replace(/\.0$/, "").trim(); if (!cli) continue;
+    const fv = r[iF] instanceof Date ? r[iF] : new Date(String(r[iF]).replace(" ", "T")); if (isNaN(fv)) continue;
+    let pct = Number(String(r[iPct]).replace(",", ".").replace("%", "")); if (pct > 1) pct /= 100;
+    const id = iId >= 0 ? String(r[iId]) : cli + fv.toISOString().slice(0, 16);
+    let v = visitas.get(id); if (!v){ v = {cli, f:fv, progs:[]}; visitas.set(id, v); }
+    if (isFinite(pct)) v.progs.push({n:String(r[iP] || "").trim(), pct});
+  }
+  const clis = {}; let hasta = null;
+  for (const v of visitas.values()){
+    if (!hasta || v.f > hasta) hasta = v.f;
+    const c = clis[v.cli];
+    if (!c || new Date(c.f) < v.f){ const pct = v.progs.length ? v.progs.reduce((s, p) => s + p.pct, 0) / v.progs.length : 0;
+      clis[v.cli] = {f:v.f.toISOString(), pct, progs:v.progs, n:(c ? c.n : 0) + 1}; }
+    else c.n++;
+  }
+  if (!Object.keys(clis).length) throw new Error("El archivo no tiene visitas");
+  return {clis, hasta: hasta && hasta.toISOString(), visitas: visitas.size};
+}
+$("pmGo").addEventListener("click", async () => {
+  const m = $("pmMsg"), key = $("pmKey").value, f = $("pmFile").files[0];
+  m.className = "msg";
+  if (!key){ m.className = "msg bad"; m.textContent = "Escribí la clave de administradora"; return; }
+  if (PM.mode === "pago"){ PM.key = key; $("mPm").hidden = true; if (PM.pend){ const c = PM.pend; PM.pend = null; pmTogglePay(c); } return; }
+  if (!f){ m.className = "msg bad"; m.textContent = "Elegí el archivo"; return; }
+  $("pmGo").disabled = true;
+  try {
+    m.textContent = "Leyendo…";
+    const aoa = await readSheetAll(f, PM.mode === "pi" ? /^pi/i : /visitas/i), stamp = {updated:new Date().toISOString()};
+    if (PM.mode === "pi"){
+      const clis = parsePI(aoa), data = {mes:pmMes(), file:f.name, clis};
+      const res = await apiPut("pm_list", key, Object.assign(await sealData(data), stamp)); if (!res.ok) throw new Error(res.error || "No se pudo guardar");
+      PM.list = data; m.className = "msg ok"; m.textContent = `¡Listo! ${fmtN(Object.keys(clis).length)} clientes en programa de mercado`;
+    } else {
+      const data = parseRel(aoa);
+      const res = await apiPut("pm_rel", key, Object.assign(await sealData(data), stamp)); if (!res.ok) throw new Error(res.error || "No se pudo guardar");
+      PM.rel = data; m.className = "msg ok"; m.textContent = `¡Listo! ${fmtN(data.visitas)} visitas de ${fmtN(Object.keys(data.clis).length)} clientes`;
+    }
+    PM.key = key; if (PM.rank) loadPm();
+  } catch(err){ m.className = "msg bad"; m.textContent = err.message || "Error al cargar"; }
+  $("pmGo").disabled = false;
+});
+async function pmTogglePay(cli){
+  if (!PM.key){ PM.pend = cli; pmModal("pago"); return; }
+  const ym = pmYM(), pago = JSON.parse(JSON.stringify(PM.pago || {}));
+  (pago[ym] ||= {}); if (pago[ym][cli]) delete pago[ym][cli]; else pago[ym][cli] = new Date().toISOString();
+  try {
+    const res = await apiPut("pm_pago", PM.key, Object.assign(await sealData(pago), {updated:new Date().toISOString()}));
+    if (!res.ok){ PM.key = ""; toast(res.error || "No se pudo guardar"); return; }
+    PM.pago = pago; pmRender(); toast(pago[ym][cli] ? "✓ Marcado como pagado" : "Pago desmarcado");
+  } catch(e){ toast("No se pudo guardar"); }
+}
+$("pmRows").addEventListener("click", e => { const b = e.target.closest("[data-pay]"); if (b) pmTogglePay(b.dataset.pay); });
+/* lee la hoja que coincide con el nombre (PI / Visitas) o la primera */
+async function readSheetAll(file, rx){
+  const wb = XLSX.read(await file.arrayBuffer(), {type:"array", cellDates:true});
+  const sh = wb.SheetNames.find(n => rx.test(n.trim())) || wb.SheetNames.find(n => XLSX.utils.sheet_to_json(wb.Sheets[n], {header:1}).length > 1) || wb.SheetNames[0];
+  return XLSX.utils.sheet_to_json(wb.Sheets[sh], {header:1, defval:"", raw:true});
+}
 
 </script>
 <script>
