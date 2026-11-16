@@ -469,7 +469,7 @@ td.hb{white-space:nowrap}
       <h3>EJECUCIÓN EN EL PDV</h3>
       <div class="tiles">
         <button class="tile" data-k="ptc" style="--c:var(--lime)"><span class="dot">$</span><span><span class="name">PTC</span><span class="sub">Precio al consumidor</span></span><span class="go">→</span></button>
-        <button class="tile" data-k="ptr" style="--c:var(--aqua)"><span class="dot">%</span><span><span class="name">PTR</span><span class="sub">Escalas Drop bajo y Drop alto</span></span><span class="go">→</span></button>
+        <button class="tile" data-k="ptr" style="--c:var(--aqua)"><span class="dot">%</span><span><span class="name">PTR</span><span class="sub">Escalas K+T y AS</span></span><span class="go">→</span></button>
       </div>
     </div>
 
@@ -489,7 +489,7 @@ td.hb{white-space:nowrap}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 30 · 14/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 31 · 16/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -1454,7 +1454,7 @@ $("oGo").addEventListener("click", async () => {
 /* ===== PTC / PTR: imágenes ===== */
 const IMG_VIEWS = {
   ptc: {t:"PTC", slots:[{k:"img_ptc", n:"PTC sugerido"}]},
-  ptr: {t:"PTR", slots:[{k:"img_drop_bajo", n:"Drop bajo"}, {k:"img_drop_alto", n:"Drop alto"}]}
+  ptr: {t:"PTR", slots:[{k:"img_drop_bajo", n:"K+T"}, {k:"img_drop_alto", n:"AS"}]}
 };
 const IV = { view:null, slot:0, cache:{} };
 async function loadImg(view){
