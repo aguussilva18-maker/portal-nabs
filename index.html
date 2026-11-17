@@ -355,6 +355,29 @@ td.fx.num{background:rgba(126,224,129,.16);color:var(--lime);font-weight:900}
 .pm-t tr.a-red td.c1{box-shadow:inset 3px 0 0 #ff4d6d}
 .pm-t td.pm-cli{max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
 .pm-t tr.a-grey td{opacity:.7}
+.pm-relb{cursor:pointer;font:inherit;background:none;border:0;padding:0;color:inherit;text-align:left}
+.pm-relb .pm-b{cursor:pointer}.pm-relb:hover .pm-b.pm-rel{outline:2px solid rgba(255,255,255,.35)}
+.pm-relb .pm-ver{font:800 10.5px var(--body);color:var(--fizz);margin-left:6px;white-space:nowrap}
+#mRelD .sheet{max-width:880px;width:calc(100% - 24px);max-height:calc(100vh - 32px);overflow:auto}
+.rd-box{padding:4px 2px 2px;display:grid;gap:12px}
+.rd-top{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.rd-pct{font:900 30px var(--display);line-height:1}.rd-pct.ok{color:var(--lime)}.rd-pct.mid{color:var(--sun)}.rd-pct.bad{color:#ff8fa3}
+.rd-meta{display:grid;gap:3px;font-size:13px;color:var(--muted)}.rd-meta b{color:var(--ink);font-size:15px}
+.rd-hist{display:flex;gap:6px;flex-wrap:wrap}
+.rd-dev{background:rgba(56,200,255,.1);border:1px solid rgba(56,200,255,.35);border-radius:14px;padding:12px 14px}
+.rd-dev h4,.rd-p h4{margin:0 0 6px;font:800 11px var(--body);letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.rd-dev p{margin:0;font-size:14px;line-height:1.5;white-space:pre-line}
+.rd-p{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;gap:10px}
+.rd-ph{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.rd-ph b{font:800 15px var(--display)}
+.rd-ph a{margin-left:auto;font:800 12px var(--body);color:var(--fizz);text-decoration:none}
+.rd-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.rd-c ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.rd-c li{font-size:13px;line-height:1.4;padding:7px 9px;border-radius:9px;background:rgba(255,255,255,.04);border-left:3px solid var(--line)}
+.rd-c li small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.rd-c.ac li{border-left-color:var(--lime)}.rd-c.dv li{border-left-color:#ff4d6d}.rd-c.op li{border-left-color:var(--sun)}
+.rd-c.ac h4{color:var(--lime)}.rd-c.dv h4{color:#ff8fa3}.rd-c.op h4{color:var(--sun)}
+.rd-c .nada{font-size:12.5px;color:var(--muted);font-style:italic}
+@media (max-width:760px){.rd-cols{grid-template-columns:1fr}}
 @media (max-width:1000px){.pm-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.pm-tops{grid-template-columns:1fr}.pm-fil{grid-template-columns:1fr 1fr}}
 /* ===== Habilitados ===== */
 .hab{display:inline-block;font:800 10.5px var(--body);letter-spacing:.04em;padding:3px 8px;border-radius:999px;margin:1px 3px 1px 0;background:rgba(255,201,60,.18);color:var(--sun);border:1px solid rgba(255,201,60,.45)}
@@ -532,7 +555,7 @@ td.hb{white-space:nowrap}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 33 · 16/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 34 · 17/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -831,6 +854,14 @@ td.hb{white-space:nowrap}
         <button class="btn-in" id="pmGo" type="button">PUBLICAR</button>
         <div class="msg" id="pmMsg"></div>
       </div>
+    </div>
+  </div>
+
+  <div class="modal" id="mRelD" hidden>
+    <div class="sheet" role="dialog" aria-labelledby="rdTitle">
+      <div class="sheet-head"><h2 id="rdTitle">Relevamiento</h2><button class="x" id="rdClose" aria-label="Cerrar">×</button></div>
+      <div id="rdSnap"><div class="rd-box" id="rdBody"></div></div>
+      <div class="acts" style="justify-content:flex-end;margin-top:10px"><button class="act" id="rdCopy">📋 Copiar imagen</button></div>
     </div>
   </div>
 
@@ -2912,8 +2943,9 @@ function pmData(){
   return out;
 }
 const pmTags = x => (x.pm ? `<span class="pm-b pm-in">PM${x.pm.gas ? " · Gas" : ""}${x.pm.agua ? " · Aguas" : ""}${x.pm.tier ? " · " + esc(x.pm.tier) : ""}</span>` : `<span class="pm-b pm-out">Sin PM</span>`);
-const pmRelTxt = x => !x.rel ? `<span class="pm-b pm-nunca">Nunca relevado</span>`
-  : `<span class="pm-b pm-rel ${x.rel.pct >= .75 ? "ok" : x.rel.pct >= .5 ? "mid" : "bad"}">${Math.round(x.rel.pct * 100)}% · ${fmtD(x.rel.f)}</span>`;
+const pmRelCls = p => p >= .75 ? "ok" : p >= .5 ? "mid" : "bad";
+const pmRelTxt = (x, ver) => !x.rel ? `<span class="pm-b pm-nunca">Nunca relevado</span>`
+  : `<button type="button" class="pm-relb" data-rel="${esc(x.cli)}" title="Ver devolución, aciertos y desvíos"><span class="pm-b pm-rel ${pmRelCls(x.rel.pct)}">${Math.round(x.rel.pct * 100)}% · ${fmtD(x.rel.f)}</span>${ver ? `<span class="pm-ver">Ver detalle ›</span>` : ""}</button>`;
 const fmtD = iso => { const d = new Date(iso); return isNaN(d) ? "" : d.toLocaleDateString("es-AR", {day:"2-digit", month:"2-digit"}); };
 
 function pmSetup(){
@@ -2945,13 +2977,13 @@ function pmRender(){
     && (!q || norm(x.cli + " " + x.rs).includes(q)));
   const key = PM.sort === "s" ? "ps" : "pv";
   rows.sort((a, b) => (a[key] ?? 1e9) - (b[key] ?? 1e9));
-  PM.last = rows;
+  PM.last = rows; PM.lastAll = all;
   $("pmCount").textContent = `${fmtN(rows.length)} clientes · ordenado por ${PM.sort === "s" ? "variedad de SKUs" : "volumen"}`;
   document.querySelectorAll(".pm-s").forEach(th => th.classList.toggle("on", th.dataset.s === PM.sort));
   $("pmRows").innerHTML = rows.map(x => {
     const alert = x.pm && !x.rel ? " a-red" : x.pm && x.sinCompra ? " a-grey" : "";
     return `<tr class="${alert}"><td class="c1 pm-cli"><b>${esc(x.cli)}</b> · ${esc(x.rs)}</td><td class="n"><span class="pm-pos${x.pv && x.pv <= 10 ? " t" : ""}">${x.pv ?? "—"}</span></td><td class="n"><span class="pm-pos${x.ps && x.ps <= 10 ? " t" : ""}">${x.ps ?? "—"}</span></td><td>${esc(tc(x.fdv))}</td><td class="n">${x.sinCompra ? "sin compra" : fmtHL(x.bu)}</td><td class="n">${x.sinCompra ? "—" : fmtN(x.sk)}</td>
-      <td>${pmTags(x)}</td><td>${pmRelTxt(x)}${x.rel && x.rel.progs ? `<small class="pm-pr">${x.rel.progs.map(p => esc(p.n) + " " + Math.round(p.pct * 100) + "%").join(" · ")}</small>` : ""}</td>
+      <td>${pmTags(x)}</td><td>${pmRelTxt(x, true)}${x.rel && x.rel.progs ? `<small class="pm-pr">${x.rel.progs.map(p => esc(p.n) + " " + Math.round(p.pct * 100) + "%").join(" · ")}</small>` : ""}</td>
       <td class="n">${x.pm ? `<button class="pm-pay${x.pago ? " on" : ""}" data-pay="${esc(x.cli)}" title="${x.pago ? "Pagado el " + fmtD(x.pago) : "Marcar como pagado"}">${x.pago ? "✓ Pagado" : "Marcar"}</button>` : ""}</td></tr>`;
   }).join("") || `<tr><td colspan="9" class="empty">No hay clientes con esos filtros.</td></tr>`;
 }
@@ -2964,9 +2996,10 @@ document.querySelectorAll(".pm-s").forEach(th => th.addEventListener("click", ()
 $("pmCopy1").addEventListener("click", () => copyBlob(snapBlob($("pmSnap1"), c => c.querySelectorAll(".acts").forEach(x => x.remove())), "pm_mejores_clientes_as.png", $("pmCopy1")));
 $("pmCopy2").addEventListener("click", () => copyBlob(snapBlob($("pmSnap2"), c => { c.querySelectorAll(".acts").forEach(x => x.remove()); const tb = c.querySelector(".tbl"); tb.style.maxHeight = "none"; tb.style.overflow = "visible"; }), "pm_clientes_as.png", $("pmCopy2")));
 $("pmXls").addEventListener("click", () => {
-  const head = ["Pos. volumen", "Pos. SKUs", "Cliente", "Razón social", "Promotor", "Bultos", "HL", "SKUs distintos", "En PM", "Gaseosas", "Aguas", "Tier", "Último relevamiento", "% cumplimiento", "Programas relevados", "Pagado " + pmMes()];
+  const head = ["Pos. volumen", "Pos. SKUs", "Cliente", "Razón social", "Promotor", "Bultos", "HL", "SKUs distintos", "En PM", "Gaseosas", "Aguas", "Tier", "Último relevamiento", "% cumplimiento", "Programas relevados", "Devolución", "Desvíos", "Oportunidades", "Pagado " + pmMes()];
   const data = (PM.last || []).map(x => [x.pv ?? "", x.ps ?? "", isNaN(+x.cli) ? x.cli : +x.cli, x.rs, tc(x.fdv), x.bu, x.hl, x.sk, x.pm ? "Sí" : "No", x.pm && x.pm.gas ? "Sí" : "", x.pm && x.pm.agua ? "Sí" : "", x.pm ? x.pm.tier || "" : "",
-    x.rel ? fmtD(x.rel.f) : "Nunca", x.rel ? Math.round(x.rel.pct * 100) + "%" : "", x.rel && x.rel.progs ? x.rel.progs.map(p => p.n + " " + Math.round(p.pct * 100) + "%").join(" · ") : "", x.pago ? "Sí (" + fmtD(x.pago) + ")" : ""]);
+    x.rel ? fmtD(x.rel.f) : "Nunca", x.rel ? Math.round(x.rel.pct * 100) + "%" : "", x.rel && x.rel.progs ? x.rel.progs.map(p => p.n + " " + Math.round(p.pct * 100) + "%").join(" · ") : "",
+    x.rel && x.rel.nota || "", x.rel && x.rel.progs ? x.rel.progs.flatMap(p => (p.dv || []).map(d => p.n + ": " + d)).join("\n") : "", x.rel && x.rel.progs ? x.rel.progs.flatMap(p => (p.op || []).map(d => p.n + ": " + d)).join("\n") : "", x.pago ? "Sí (" + fmtD(x.pago) + ")" : ""]);
   const ws = XLSX.utils.aoa_to_sheet([head, ...data]); ws["!cols"] = head.map((h, i) => ({wch: i === 3 ? 34 : 13}));
   const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Clientes AS"); XLSX.writeFile(wb, "programa_mercado_as_" + pmYM() + ".xlsx"); toast("⬇ Excel descargado");
 });
@@ -2977,7 +3010,7 @@ function pmModal(mode){
   $("pmFile").hidden = mode === "pago";
   $("pmUpTitle").textContent = mode === "pi" ? "Subir PI (programa de mercado)" : mode === "rel" ? "Subir relevamiento" : "Marcar pagados";
   $("pmUpHint").innerHTML = mode === "pi" ? "Subí el archivo del PI del mes (hoja <b>PI</b>, con DISTRIBUIDOR, POC ID, TIER, NEGOCIADO GASEOSAS y NEGOCIADO AGUAS). Se toman los clientes de <b>EMCALA</b> con negociado de gaseosas o aguas. Reemplaza al anterior."
-    : mode === "rel" ? "Subí el Excel exportado del <b>Relevamiento PDV</b> (hoja <b>Visitas</b>). Se toma la última visita de cada cliente y su % de cumplimiento por programa."
+    : mode === "rel" ? "Subí el Excel exportado del <b>Relevamiento PDV</b> (el archivo completo, sin tocar). Se toma la última visita de cada cliente: % por programa, devolución, aciertos, desvíos y oportunidades."
     : "Escribí la clave de administradora una vez y después marcás o desmarcás pagados tocando el botón de cada cliente.";
   $("pmGo").textContent = mode === "pago" ? "CONFIRMAR" : "PUBLICAR";
 }
@@ -3001,31 +3034,91 @@ function parsePI(aoa){
   if (!Object.keys(clis).length) throw new Error("No encontré clientes de EMCALA con PM de gaseosas o aguas");
   return clis;
 }
-function parseRel(aoa){
-  const hi = aoa.findIndex(r => r.some(c => norm(c) === "codigo cliente") && r.some(c => norm(c).startsWith("% cumplimiento")));
-  if (hi < 0) throw new Error("No encuentro la hoja Visitas (columnas Código cliente y % Cumplimiento)");
-  const N = aoa[hi].map(norm), f = n => N.findIndex(h => h.startsWith(n));
-  const iF = f("fecha"), iC = f("codigo cliente"), iP = f("programa"), iPct = f("% cumplimiento"), iId = f("id visita");
+/* preguntas del checklist de la app de relevamiento (para armar los aciertos) */
+const REL_Q = {"as_gaseosas_gondola":[["¿Qué % de la góndola de gaseosas ocupan las marcas A (Pepsi/7up)?"],["¿Está ejecutado en vertical con Black pegado a Zero?"],["¿Se incluyó Mirinda, NS 2,25L o H2OH con gas en esta góndola? (no deberían estar)"],["¿Qué % de la góndola de isotónicas ocupa Gatorade?"]],"as_gaseosas_frio":[["¿La 1ra posición del EDF es de NABS (gaseosas) o está pegada a Coca-Cola?","1 equipo"],["¿Está ejecutado arriba SS y abajo MS?","1 equipo"],["¿Cuántos frentes de Red Bull tiene el EDF de NABS?","1 equipo"],["¿Cuántos frentes de aguas tiene el EDF de NABS?","1 equipo"],["EDF 1 (Gaseosas): ¿Cumple 50% Pepsi (mitad Black) + 35% 7up + 10% PDT + 5% Energía — con la 1ra bandeja de 500ml/latas/energía, 2da y 3ra bandeja de 1,5L y 4ta bandeja de 2L?","2 equipos"],["EDF 2 (Hidratación): ¿Tiene Aguas Puras, H2OH, Gatorade y Gatorade Zero, con al menos un estante con todos los calibres de Gatorade?","2 equipos"],["EDF 1: ¿Es full Pepsi con algunos frentes de energía?","3 equipos o más"],["EDF 2: ¿Es 70% 7up / 30% PDT?","3 equipos o más"],["EDF 3 (Hidratación): ¿Tiene Aguas Puras, H2OH, Gatorade y Gatorade Zero, con al menos un estante con todos los calibres de Gatorade?","3 equipos o más"]],"as_gaseosas_puntera":[["¿Hay puntera de Pepsi Black en conjunto con Regular y 7up?"],["¿Hay puntera de Gatorade en conjunto con funcionales y energía?"]],"as_gaseosas_adicionales":[["¿Cuántas exhibiciones adicionales en zona caliente hay?"],["¿Al menos una de las exhibiciones adicionales es de Pepsi?"]],"as_aguas_gondola":[["¿Qué % de la góndola ocupan las Aguas Saborizadas?"],["¿H2OH sin gas está ejecutado entre Aquarius y Levite?"],["¿H2OH con gas y sin gas están ejecutados juntos?"],["¿Qué % de la góndola ocupan las Aguas Puras?"],["¿Se incluyeron bidones en esta góndola? (no deberían estar)"]],"kt_frio_alto_transito":[["¿Cuántos estantes de SS (single serve) tiene el EDF?"],["¿El estante de MS ejecuta solamente 1,5L?"]],"kt_frio_tradicional":[["¿Cuántos estantes de SS (single serve) tiene el EDF?"],["¿Tiene 2 estantes de MS, uno con 1,5L y otro con 2L?"]]};
+const REL_N = {as_gaseosas_gondola:["Góndola","Gaseosas"], as_gaseosas_frio:["Equipo de Frío","Gaseosas"], as_gaseosas_puntera:["Puntera","Gaseosas"], as_gaseosas_adicionales:["Exhibiciones Adicionales","Gaseosas"], as_aguas_gondola:["Góndola","Aguas"], kt_frio_alto_transito:["Kioscos - Alto tránsito","Frío"], kt_frio_tradicional:["Kiosco + tradicional","Frío"]};
+const relSplit = v => String(v || "").split(/\s*\|\s*/).map(s => s.trim()).filter(Boolean);
+const relQ = d => String(d).split(" → ")[0].trim();
+function relGuessRef(n, dv){
+  const c = Object.keys(REL_N).filter(k => norm(REL_N[k][0]) === norm(n)); if (c.length < 2) return c[0] || "";
+  const qs = new Set(dv.map(relQ)); return c.find(k => REL_Q[k].some(q => qs.has(q[0]))) || c[0];
+}
+function parseRel(wb){
   const visitas = new Map();
-  for (const r of aoa.slice(hi + 1)){
-    const cli = String(r[iC] ?? "").replace(/\.0$/, "").trim(); if (!cli) continue;
-    const fv = r[iF] instanceof Date ? r[iF] : new Date(String(r[iF]).replace(" ", "T")); if (isNaN(fv)) continue;
-    let pct = Number(String(r[iPct]).replace(",", ".").replace("%", "")); if (pct > 1) pct /= 100;
-    const id = iId >= 0 ? String(r[iId]) : cli + fv.toISOString().slice(0, 16);
-    let v = visitas.get(id); if (!v){ v = {cli, f:fv, progs:[]}; visitas.set(id, v); }
-    if (isFinite(pct)) v.progs.push({n:String(r[iP] || "").trim(), pct});
+  const dat = wb.SheetNames.find(n => /^_?datos$/i.test(n.trim()));
+  if (dat){
+    for (const r of XLSX.utils.sheet_to_json(wb.Sheets[dat], {header:1, defval:"", raw:true}).slice(1)){
+      if (String(r[0]) !== "visits") continue;
+      let j; try { j = JSON.parse(r[2]); } catch(e){ continue; }
+      const cli = String(j.clientCode ?? "").replace(/\.0$/, "").trim(), fv = new Date(j.timestamp); if (!cli || isNaN(fv)) continue;
+      visitas.set(j.id || cli + fv.toISOString(), {cli, f:fv, nota:String(j.notes || "").trim(), progs:(j.checks || []).filter(c => c.cumplimiento != null).map(c => ({
+        n:c.programa || c.refName || "", c:c.categoria || "", id:c.refId || "", pct:Number(c.cumplimiento) / 100,
+        op:(c.oportunidades || []).map(String).filter(Boolean), dv:(c.desvios || []).map(String).filter(Boolean),
+        foto:c.photoAssetId ? "https://drive.google.com/file/d/" + c.photoAssetId + "/view" : ""}))});
+    }
   }
-  const clis = {}; let hasta = null;
+  if (!visitas.size){
+    const sh = wb.SheetNames.find(n => /visitas/i.test(n)) || wb.SheetNames[0];
+    const aoa = XLSX.utils.sheet_to_json(wb.Sheets[sh], {header:1, defval:"", raw:true});
+    const hi = aoa.findIndex(r => r.some(c => norm(c) === "codigo cliente") && r.some(c => norm(c).startsWith("% cumplimiento")));
+    if (hi < 0) throw new Error("No encuentro la hoja Visitas (columnas Código cliente y % Cumplimiento)");
+    const N = aoa[hi].map(norm), f = n => N.findIndex(h => h.startsWith(n));
+    const iF = f("fecha"), iC = f("codigo cliente"), iP = f("programa"), iPct = f("% cumplimiento"), iId = f("id visita"), iO = f("oportunidades"), iD = f("desvios"), iFo = f("foto"), iN = f("notas");
+    for (const r of aoa.slice(hi + 1)){
+      const cli = String(r[iC] ?? "").replace(/\.0$/, "").trim(); if (!cli) continue;
+      const fv = r[iF] instanceof Date ? r[iF] : new Date(String(r[iF]).replace(" ", "T")); if (isNaN(fv)) continue;
+      let pct = Number(String(r[iPct]).replace(",", ".").replace("%", "")); if (pct > 1) pct /= 100;
+      const id = iId >= 0 ? String(r[iId]) : cli + fv.toISOString().slice(0, 16);
+      let v = visitas.get(id); if (!v){ v = {cli, f:fv, nota:iN >= 0 ? String(r[iN] || "").trim() : "", progs:[]}; visitas.set(id, v); }
+      const n = String(r[iP] || "").trim(), dv = iD >= 0 ? relSplit(r[iD]) : [], ref = relGuessRef(n, dv);
+      if (isFinite(pct)) v.progs.push({n, c:ref ? REL_N[ref][1] : "", id:ref, pct, op:iO >= 0 ? relSplit(r[iO]) : [], dv, foto:iFo >= 0 ? String(r[iFo] || "").trim() : ""});
+    }
+  }
+  const byCli = {}; let hasta = null;
   for (const v of visitas.values()){
+    if (!v.progs.length) continue;
     if (!hasta || v.f > hasta) hasta = v.f;
-    const c = clis[v.cli];
-    if (!c || new Date(c.f) < v.f){ const pct = v.progs.length ? v.progs.reduce((s, p) => s + p.pct, 0) / v.progs.length : 0;
-      clis[v.cli] = {f:v.f.toISOString(), pct, progs:v.progs, n:(c ? c.n : 0) + 1}; }
-    else c.n++;
+    v.pct = v.progs.reduce((s, p) => s + p.pct, 0) / v.progs.length;
+    (byCli[v.cli] ||= []).push(v);
+  }
+  const clis = {};
+  for (const [cli, vs] of Object.entries(byCli)){
+    vs.sort((a, b) => b.f - a.f); const u = vs[0];
+    clis[cli] = {f:u.f.toISOString(), pct:u.pct, nota:u.nota, progs:u.progs, n:vs.length, hist:vs.map(v => [v.f.toISOString(), Math.round(v.pct * 100) / 100])};
   }
   if (!Object.keys(clis).length) throw new Error("El archivo no tiene visitas");
-  return {clis, hasta: hasta && hasta.toISOString(), visitas: visitas.size};
+  return {v:2, clis, hasta: hasta && hasta.toISOString(), visitas: visitas.size};
 }
+/* aciertos = preguntas del checklist que no quedaron como desvío */
+function relAciertos(p){
+  const Q = REL_Q[p.id]; if (!Q) return null;
+  const dq = new Set((p.dv || []).map(relQ));
+  const g = (Q.find(q => q[1] && dq.has(q[0])) || [])[1];
+  const branch = Q.some(q => q[1]);
+  const vis = Q.filter(q => !q[1] || (g && q[1].split("|").some(x => g.split("|").includes(x))));
+  const ac = vis.filter(q => !dq.has(q[0])).map(q => q[0]);
+  if (branch && !g && !(p.dv || []).length && p.pct >= 1) ac.push("Cumple todos los puntos del checklist");
+  return ac;
+}
+function relDetalle(cli){
+  const x = (PM.last || []).concat(PM.lastAll || []).find(r => r.cli === cli); if (!x || !x.rel) return;
+  const R = x.rel, full = R.progs.some(p => p.dv || p.op);
+  const li = s => `<li>${esc(s)}</li>`, dvLi = s => { const [q, a] = String(s).split(" → "); return `<li>${esc(q)}${a ? `<small>→ ${esc(a)}</small>` : ""}</li>`; };
+  const col = (cls, h, arr, fn, vac) => `<div class="rd-c ${cls}"><h4>${h}</h4>${arr && arr.length ? `<ul>${arr.map(fn).join("")}</ul>` : `<p class="nada">${vac}</p>`}</div>`;
+  $("rdTitle").textContent = `${x.cli} · ${x.rs}`;
+  $("rdBody").innerHTML = `<div class="rd-top"><span class="rd-pct ${pmRelCls(R.pct)}">${Math.round(R.pct * 100)}%</span>
+      <div class="rd-meta"><b>Relevado el ${new Date(R.f).toLocaleDateString("es-AR", {day:"2-digit", month:"2-digit", year:"numeric"})}</b><span>${x.fdv ? "Promotor: " + esc(tc(x.fdv)) + " · " : ""}${R.n > 1 ? R.n + " visitas" : "1 visita"}</span></div>
+      <span class="rd-hist">${pmTags(x)}${(R.hist || []).slice(1, 5).map(h => `<span class="pm-b pm-rel ${pmRelCls(h[1])}">Antes: ${Math.round(h[1] * 100)}% · ${fmtD(h[0])}</span>`).join("")}</span></div>
+    ${R.nota ? `<div class="rd-dev"><h4>Devolución</h4><p>${esc(R.nota)}</p></div>` : ""}
+    ${full ? "" : `<p class="pm-sub">Para ver la devolución, los aciertos y los desvíos, volvé a subir el relevamiento (exportado de nuevo desde la app).</p>`}
+    ${R.progs.map(p => `<div class="rd-p"><div class="rd-ph"><b>${esc(p.n)}${p.c ? " · " + esc(p.c) : ""}</b><span class="pm-b pm-rel ${pmRelCls(p.pct)}">${Math.round(p.pct * 100)}%</span>${p.foto ? `<a href="${esc(p.foto)}" target="_blank" rel="noopener">📷 Ver foto</a>` : ""}</div>
+      ${full ? `<div class="rd-cols">${col("ac", "✓ Aciertos", relAciertos(p), li, "—")}${col("dv", "✗ Desvíos", p.dv, dvLi, "Sin desvíos")}${col("op", "💡 Oportunidades", p.op, li, "Sin oportunidades cargadas")}</div>` : ""}</div>`).join("")}`;
+  $("mRelD").hidden = false;
+}
+$("rdClose").addEventListener("click", () => { $("mRelD").hidden = true; });
+$("mRelD").addEventListener("click", e => { if (e.target === $("mRelD")) $("mRelD").hidden = true; });
+$("rdCopy").addEventListener("click", () => copyBlob(snapBlob($("rdSnap"), c => { const h = document.createElement("h2"); h.className = "pm-h"; h.textContent = "Relevamiento · " + $("rdTitle").textContent; c.prepend(h); c.querySelectorAll(".rd-ph a").forEach(a => a.remove()); }), "relevamiento.png", $("rdCopy")));
+$("pmBody").addEventListener("click", e => { const b = e.target.closest("[data-rel]"); if (b) relDetalle(b.dataset.rel); });
 $("pmGo").addEventListener("click", async () => {
   const m = $("pmMsg"), key = $("pmKey").value, f = $("pmFile").files[0];
   m.className = "msg";
@@ -3035,13 +3128,13 @@ $("pmGo").addEventListener("click", async () => {
   $("pmGo").disabled = true;
   try {
     m.textContent = "Leyendo…";
-    const aoa = await readSheetAll(f, PM.mode === "pi" ? /^pi/i : /visitas/i), stamp = {updated:new Date().toISOString()};
+    const aoa = PM.mode === "pi" ? await readSheetAll(f, /^pi/i) : null, stamp = {updated:new Date().toISOString()};
     if (PM.mode === "pi"){
       const clis = parsePI(aoa), data = {mes:pmMes(), file:f.name, clis};
       const res = await apiPut("pm_list", key, Object.assign(await sealData(data), stamp)); if (!res.ok) throw new Error(res.error || "No se pudo guardar");
       PM.list = data; m.className = "msg ok"; m.textContent = `¡Listo! ${fmtN(Object.keys(clis).length)} clientes en programa de mercado`;
     } else {
-      const data = parseRel(aoa);
+      const data = parseRel(XLSX.read(await f.arrayBuffer(), {type:"array", cellDates:true}));
       const res = await apiPut("pm_rel", key, Object.assign(await sealData(data), stamp)); if (!res.ok) throw new Error(res.error || "No se pudo guardar");
       PM.rel = data; m.className = "msg ok"; m.textContent = `¡Listo! ${fmtN(data.visitas)} visitas de ${fmtN(Object.keys(data.clis).length)} clientes`;
     }
