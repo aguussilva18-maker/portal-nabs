@@ -555,7 +555,7 @@ td.hb{white-space:nowrap}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 34 · 17/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 35 · 24/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -1733,9 +1733,13 @@ async function copyBlob(blobPromise, name, btn){
 function snapBlob(el, prep){
   return new Promise((ok, bad) => {
     if (!window.html2canvas) return bad(new Error("sin html2canvas"));
-    const w = Math.max(el.scrollWidth, el.offsetWidth);
-    html2canvas(el, {backgroundColor:"#0b1736", scale:2, useCORS:true, windowWidth:Math.max(innerWidth, w + 40),
-      onclone: doc => { const c = doc.getElementById(el.id); c.classList.add("snap"); if (prep) prep(c); }})
+    /* en el celu se arma la imagen con el diseño de compu (ancho fijo), así sale la tabla completa */
+    const mob = innerWidth < 900, tbW = Math.max(0, ...[...el.querySelectorAll("table")].map(t => t.scrollWidth + 40));
+    const w = mob ? Math.max(1100, tbW) : Math.max(el.scrollWidth, el.offsetWidth);
+    html2canvas(el, {backgroundColor:"#0b1736", scale:2, useCORS:true, windowWidth:Math.max(mob ? 0 : innerWidth, w + 40), scrollX:0, scrollY:0,
+      onclone: doc => { const c = doc.getElementById(el.id); c.classList.add("snap");
+        if (mob){ c.style.width = w + "px"; c.style.maxWidth = "none"; c.style.boxSizing = "border-box"; c.style.padding = "16px"; c.querySelectorAll(".tbl").forEach(t => { t.style.overflow = "visible"; t.style.maxHeight = "none"; }); }
+        if (prep) prep(c); }})
       .then(cv => cv.toBlob(b => b ? ok(b) : bad(new Error("vacía")), "image/png")).catch(bad);
   });
 }
