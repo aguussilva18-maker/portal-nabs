@@ -560,7 +560,7 @@ td.hb{white-space:nowrap}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 36 · 24/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 37 · 24/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -1817,6 +1817,9 @@ const FR_CATS = [
   {n:"Energía", c:"#c0302b"}, {n:"Saborizadas", c:"#2465b8"}, {n:"Aguas Eco", c:"#0f8fa8"}
 ];
 /* Categoría por descripción (si la lista de SKUs trae columna Categoría, manda esa) */
+const FR_AGUA = /GLACIAR|ECO (DE LOS )?ANDES|EDLA|NESTLE|PUREZA VITAL|^NPV/i;
+/* las aguas siempre van a su segmento, aunque la lista guardada diga otra categoría */
+const frFix = r => FR_AGUA.test(r.desc) && r.cat !== "Aguas Eco" ? Object.assign({}, r, {cat:"Aguas Eco"}) : r;
 function frCat(desc){
   const d = String(desc).toUpperCase();
   if (/GLACIAR|ECO (DE LOS )?ANDES|EDLA|NESTLE|PUREZA VITAL|^NPV/.test(d)) return "Aguas Eco";
@@ -1840,7 +1843,7 @@ async function loadFr(force){
   } catch(e) { $("fUpd").textContent = "Error al cargar"; $("fEmpty").hidden = false; $("fEmpty").textContent = "No se pudo abrir la frescura. Revisá tu conexión y volvé a entrar."; }
 }
 function frRender(){
-  const D = FRV.data;
+  const D0 = FRV.data, D = Object.assign({}, D0, {rows:D0.rows.map(frFix), faltantes:D0.faltantes.map(frFix)});
   $("fUpd").textContent = "Stock al " + fdate(D.fecha) + " · actualizado " + fmtDate(FRV.updated);
   $("fBody").hidden = false; $("fEmpty").hidden = true;
   $("fTabs").innerHTML = `<button class="tab${FRV.tab==="fr"?" on":""}" data-t="fr">Frescura<b>${D.rows.length}</b></button><button class="tab${FRV.tab==="fa"?" on":""}" data-t="fa">Faltantes de stock<b>${D.faltantes.length}</b></button>`;
@@ -1918,7 +1921,8 @@ $("frRead").addEventListener("click", async () => {
     // SKUs nuevos: de UNG (o sin negocio cargado) que están en stock y no figuran en la lista
     const nuevos = new Map();
     F.lots.forEach(l => { if (!enLista.has(l.cod) && (l.neg === "UNG" || l.neg === "" || /^AGUAS/.test(l.neg)) && !nuevos.has(l.cod)) nuevos.set(l.cod, {cod:l.cod, desc:l.desc, cat:/^AGUAS/.test(l.neg) ? "Aguas Eco" : frCat(l.desc), sinNeg:l.neg === ""}); });
-    const listaFinal = [...lista, ...[...nuevos.values()].map(({cod,desc,cat}) => ({cod,desc,cat}))];
+    const aguaNeg = new Set(F.lots.filter(l => /^AGUAS/.test(l.neg)).map(l => l.cod));
+    const listaFinal = [...lista, ...[...nuevos.values()].map(({cod,desc,cat}) => ({cod,desc,cat}))].map(s => aguaNeg.has(s.cod) ? Object.assign({}, s, {cat:"Aguas Eco"}) : frFix(s));
     const byCod = new Map(listaFinal.map(s => [s.cod, s]));
     const grp = new Map();
     F.lots.filter(l => byCod.has(l.cod)).forEach(l => { (grp.get(l.cod) || grp.set(l.cod, []).get(l.cod)).push(l.vto); });
