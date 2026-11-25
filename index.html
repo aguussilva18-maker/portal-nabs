@@ -395,6 +395,80 @@ td.hb{white-space:nowrap}
 .hl-row button{font:700 12px var(--body);color:#ff8fa3;background:none;border:1px solid rgba(255,77,109,.4);border-radius:999px;padding:5px 10px;cursor:pointer}
 /* ===== Gerencial ===== */
 .wrap:has(#vGer:not([hidden])){max-width:1440px}
+/* ===== Gerencial · Plan de inversión ===== */
+.gp-vt{margin:0 0 14px}
+.fr td.v small.lt{display:block;white-space:nowrap;font-size:10.5px;line-height:1.3}
+#gerBody.plan > :not(#gerView):not(#gerPlan){display:none!important}
+.gp-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.gp-glob{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.gp-glob label,.gp-esc label{display:grid;gap:4px;font:800 10px var(--body);letter-spacing:.08em;color:var(--muted)}
+.gp-glob label span,.gp-esc label span{display:flex;align-items:center;gap:4px;font:800 14px var(--body);color:var(--ink)}
+.gp-glob input,.gp-esc input,.gp-in{width:62px;font:800 14px var(--body);color:#0a1430;background:#fff;border:0;border-radius:9px;padding:6px 8px;text-align:center}
+.gp-warn{background:rgba(255,201,60,.12);border:1px solid rgba(255,201,60,.45);border-radius:12px;padding:10px 14px;font-size:13px;line-height:1.5;margin-bottom:12px}
+.gp-sec{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-bottom:14px;min-width:0}
+.gp-h{font:800 16px var(--display);margin:0 0 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.gp-sub{font-size:13px;color:var(--muted);margin:0 0 12px;line-height:1.45}.gp-sub b{color:var(--ink)}
+.gp-tag{font:800 10.5px var(--body);letter-spacing:.06em;border-radius:999px;padding:3px 9px;text-transform:uppercase}
+.gp-tag.t1{background:rgba(56,200,255,.18);color:var(--fizz)}.gp-tag.t2{background:rgba(126,224,129,.18);color:var(--lime)}.gp-tag.t3{background:rgba(255,201,60,.18);color:var(--sun)}.gp-tag.t4{background:rgba(255,77,109,.18);color:#ff8fa3}
+.gp-story{display:grid;grid-template-columns:1fr 34px 1fr 34px 1fr 34px 1fr;align-items:stretch}
+.gp-st{background:linear-gradient(160deg,rgba(255,255,255,.11),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:16px;padding:13px 15px;display:grid;gap:6px;align-content:start;min-width:0}
+.gp-st .l{font:800 10.5px var(--body);letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.gp-st b{font:900 26px var(--display);line-height:1.05;font-variant-numeric:tabular-nums}.gp-st b small{font:700 13px var(--body);color:var(--muted)}
+.gp-st p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.4}.gp-st p strong{color:var(--ink)}
+.gp-arr{display:grid;place-items:center;font:900 20px var(--display);color:var(--fizz)}
+.gp-st.bad{border-color:rgba(255,77,109,.45)}.gp-st.bad b{color:#ff8fa3}
+.gp-st.okk{border-color:rgba(126,224,129,.55)}.gp-st.okk b{color:var(--lime)}
+.gp-st.inv{border-color:rgba(56,200,255,.5)}.gp-st.inv b{color:var(--fizz)}
+.gp-st.vol{border-color:rgba(45,224,197,.5)}.gp-st.vol b{color:var(--aqua)}
+.gp-st.gan{border-color:rgba(126,224,129,.55);background:linear-gradient(160deg,rgba(126,224,129,.2),rgba(126,224,129,.04))}.gp-st.gan b{color:var(--lime)}
+.gp-bar2{height:8px;border-radius:5px;background:rgba(255,255,255,.1);overflow:hidden;display:flex}.gp-bar2 i{display:block;height:100%}
+.gp-ritmo{display:flex;gap:18px;margin-top:12px;font-size:13px;color:var(--muted);flex-wrap:wrap}.gp-ritmo b{color:var(--ink)}
+.gp-pitch{margin-top:12px;background:rgba(56,200,255,.1);border:1px solid rgba(56,200,255,.35);border-radius:14px;padding:12px 16px;font-size:14px;line-height:1.5}
+.gp-pitch b{color:var(--fizz)}
+.gp-tbl td{vertical-align:middle}
+.gp-tbl td.r,.gp-tbl th.r{text-align:right;font-variant-numeric:tabular-nums}
+.gp-tbl tr.off td{opacity:.55}.gp-tbl tr.off td:first-child{opacity:1}
+.gp-tbl tr.tot td{font-weight:900;background:rgba(56,200,255,.1)}
+.gp-tbl .gp-in{width:58px;padding:4px 6px;font-size:13px}.gp-tbl .gp-in.bu{width:70px}
+.gp-ck{width:18px;height:18px;accent-color:#38c8ff;cursor:pointer}
+.gp-rk{display:inline-grid;place-items:center;min-width:24px;height:24px;border-radius:8px;font:900 11.5px var(--display);background:rgba(255,201,60,.2);color:var(--sun)}
+.gp-tbl table{min-width:1180px}
+.gp-tbl td.gp-bk{font-size:12px;color:var(--muted);white-space:normal;min-width:130px;line-height:1.45;cursor:help}.gp-tbl td.gp-bk b{color:var(--ink)}
+.gp-tbl td.gp-sk{white-space:normal;min-width:220px;max-width:300px}
+.gp-vto{display:inline-block;margin-top:3px;font:800 10.5px var(--body);color:#ff8fa3;background:rgba(255,77,109,.14);border-radius:999px;padding:2px 8px}
+.gp-sk small{display:block;color:var(--muted);font-size:11px}
+.gp-stk{font-size:12px;white-space:nowrap}.gp-stk.bad{color:#ff8fa3;font-weight:800}.gp-stk.mid{color:var(--sun);font-weight:800}
+.gp-cols{display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
+.gp-cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.gp-simh{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.gp-simh select{font:700 13.5px var(--body);color:var(--ink);background:rgba(255,255,255,.1);border:1px solid var(--line);border-radius:12px;padding:9px 12px;max-width:100%}
+.gp-simh select option{color:#0a1430}#gsSku{flex:1 1 260px}
+.gp-acc{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.gp-acc button{font:700 11.5px var(--body);color:var(--ink);background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:10px;padding:6px 9px;cursor:pointer;text-align:left;line-height:1.3}
+.gp-acc button b{display:block;font-size:10px;letter-spacing:.06em;color:var(--muted)}
+.gp-acc button.on{border-color:var(--fizz);background:rgba(56,200,255,.14)}
+.gp-acc .cb{border-style:dashed;cursor:default}
+.gp-acc p{margin:0;font-size:12.5px;color:var(--muted)}
+.gp-esc{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.gp-esc label{border:1px solid var(--line);border-radius:12px;padding:8px}
+.gp-esc input{width:100%}.gp-esc label.ad{border-color:var(--sun);background:rgba(255,201,60,.1)}
+.gp-res{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.gp-res div{background:rgba(255,255,255,.06);border-radius:12px;padding:9px 11px;display:grid;gap:2px;min-width:0}
+.gp-res span{font:800 9.5px var(--body);letter-spacing:.08em;color:var(--muted);text-transform:uppercase}.gp-res b{font:900 17px var(--display);font-variant-numeric:tabular-nums}
+.gp-res .hi{background:rgba(56,200,255,.14)}.gp-res .hi b{color:var(--fizz)}.gp-res .ok{background:rgba(126,224,129,.14)}.gp-res .ok b{color:var(--lime)}
+.gp-note{font-size:12px;color:var(--muted);margin:8px 0 0;line-height:1.45}
+.gp-big{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:10px}.gp-big div{display:grid;gap:2px}.gp-big span{font-size:12px;color:var(--muted)}.gp-big b{font:900 22px var(--display);font-variant-numeric:tabular-nums}
+.gp-hb{display:grid;grid-template-columns:minmax(90px,150px) 1fr 86px;gap:8px;align-items:center;font-size:12.5px;margin:6px 0}
+.gp-hb span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.gp-hb .b{height:13px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden}.gp-hb .b i{display:block;height:100%;border-radius:4px}
+.gp-hb span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.gp-mini td,.gp-mini th{padding:7px 8px;font-size:12.5px}
+.gp-spark{display:flex;align-items:flex-end;gap:6px;height:110px;margin-top:8px}
+.gp-spark div{flex:1;display:grid;gap:3px;justify-items:center;font-size:10.5px;color:var(--muted);align-content:end}
+.gp-spark i{display:block;width:100%;border-radius:5px 5px 0 0;background:linear-gradient(#7ee081,#3aa86b)}.gp-spark .cur i{background:linear-gradient(#38c8ff,#1f7fb8)}
+.gp-spark em{font-style:normal;font-size:10px;color:var(--ink);font-variant-numeric:tabular-nums}
+@media (max-width:1100px){.gp-cols{grid-template-columns:1fr}.gp-cols3{grid-template-columns:1fr 1fr}}
+@media (max-width:900px){.gp-story{grid-template-columns:1fr 1fr;gap:8px}.gp-arr{display:none}.gp-esc{grid-template-columns:repeat(4,minmax(0,1fr))}.gp-res{grid-template-columns:1fr 1fr}.gp-cols3{grid-template-columns:1fr}}
+
 .gx-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
 .gx-sups{display:flex;flex-wrap:wrap;gap:6px}
 .gx-sups button{font:800 11.5px var(--body);letter-spacing:.04em;text-transform:uppercase;color:var(--ink);background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:999px;padding:8px 13px;cursor:pointer}
@@ -560,7 +634,7 @@ td.hb{white-space:nowrap}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 37 · 24/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 38 · 25/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -905,6 +979,7 @@ td.hb{white-space:nowrap}
       </div>
     </div>
     <div id="gerBody" hidden>
+      <div class="tabs gp-vt" id="gerView" role="tablist"><button class="tab on" data-v="res">📊 Resumen</button><button class="tab" data-v="plan">💸 Plan de inversión</button></div>
       <div id="gerSnap1">
         <div class="gx-bar">
           <div class="gx-sups" id="gerSups"></div>
@@ -949,10 +1024,85 @@ td.hb{white-space:nowrap}
           <div class="tbl"><table><thead id="gerHead"></thead><tbody id="gerRows"></tbody></table></div>
         </div>
       </div>
+      <div id="gerPlan" hidden>
+        <div class="gp-bar">
+          <div class="gx-sups" id="gpUn"><button data-u="UNG" class="on">UNG</button><button data-u="AGUAS ECO">Aguas Eco</button></div>
+          <div class="gp-glob">
+            <label>ADICIONAL<span><input id="gpAdic" inputmode="decimal" value="5">%</span></label>
+            <label title="Qué parte del adicional pone EMCALA (0 = lo pone todo Quilmes, 100 = lo pone todo EMCALA)">EMCALA PONE<span><input id="gpDis" inputmode="decimal" value="0">% del adic.</span></label>
+            <label title="Qué parte del volumen de los clientes caídos esperás recuperar">RECUPERO<span><input id="gpRec" inputmode="decimal" value="50">%</span></label>
+            <button class="btn-up ghost" id="gpPpBtn">⬆ Punto de pedido</button>
+          </div>
+        </div>
+        <p class="ger-cut" id="gpCut"></p>
+        <div id="gpWarn" class="gp-warn" hidden></div>
+
+        <div class="gp-sec" id="gpSnap1">
+          <h2 class="gp-h">¿Llegamos al objetivo? <span class="gp-tag t1">Caso de negocio</span></h2>
+          <p class="gp-sub">Lo que falta, lo que cuesta, lo que tracciona y lo que gana EMCALA, con los SKUs tildados abajo.</p>
+          <div class="gp-story" id="gpStory"></div>
+          <div class="gp-ritmo" id="gpRitmo"></div>
+          <div class="gp-pitch" id="gpPitch"></div>
+          <div class="acts" style="justify-content:flex-end"><button class="act" id="gpCopyTxt">📋 Copiar texto</button><button class="act" id="gpCopy1">📋 Copiar imagen</button></div>
+        </div>
+
+        <div class="gp-sec" id="gpSnap2">
+          <h2 class="gp-h">¿Dónde conviene poner plata? <span class="gp-tag t3">Ranking por SKU</span></h2>
+          <p class="gp-sub"><b>Recuperables</b> = clientes que compraron el SKU el mes pasado y este mes todavía no (por código de cliente). Los bultos del plan son esos bultos × el % de recupero. Podés cambiar el adicional y los bultos de cada SKU.</p>
+          <div class="chips" id="gpSort"><button class="chip on" data-s="hl">Más HL por $</button><button class="chip" data-s="vto">Vencimientos primero</button><button class="chip" data-s="rec">Más recuperables</button></div>
+          <div class="tbl gp-tbl"><table><thead><tr><th></th><th>#</th><th class="c1">SKU</th><th>Acción vigente</th><th class="r">Clientes recup.</th><th class="r">Bultos plan</th><th class="r">Adicional</th><th class="r">Inversión TS</th><th class="r">HL</th><th class="r">$ por HL</th><th class="r">Ganancia distri</th><th>Stock</th></tr></thead><tbody id="gpRows"></tbody></table></div>
+          <div class="acts"><p class="count" id="gpCount"></p><button class="act" id="gpAuto">✨ Elegir solos para llegar</button><button class="act" id="gpCopy2">📋 Copiar imagen</button><button class="act" id="gpXls">⬇ Excel</button></div>
+        </div>
+
+        <div class="gp-cols">
+          <div class="gp-sec" id="gpSnap3">
+            <h2 class="gp-h">Simulador TS <span class="gp-tag t1">Tu Excel, automático</span></h2>
+            <p class="gp-sub">Elegís el SKU y el canal: la lista y las acciones del Book se completan solas. Tocá una acción para cargar sus escalas. Todo se puede editar.</p>
+            <div class="gp-simh"><select id="gsSku" aria-label="SKU"></select><select id="gsCan" aria-label="Canal"><option>K+T</option><option>AS</option><option>MAY</option></select></div>
+            <div class="gp-acc" id="gsAcc"></div>
+            <div class="gp-esc">
+              <label>PTC<span><input id="gsPtc" inputmode="decimal">%</span></label>
+              <label>ESCALA 1<span><input id="gsE1" inputmode="decimal">%</span></label>
+              <label>ESCALA 2<span><input id="gsE2" inputmode="decimal">%</span></label>
+              <label>ESCALA 3<span><input id="gsE3" inputmode="decimal">%</span></label>
+              <label>ESCALA 4<span><input id="gsE4" inputmode="decimal">%</span></label>
+              <label class="ad">% ADICIONAL<span><input id="gsAd" inputmode="decimal" value="5">%</span></label>
+              <label>PALETAS<span><input id="gsPal" inputmode="decimal" value="1"></span></label>
+            </div>
+            <div class="gp-res" id="gsRes"></div>
+            <p class="gp-note">Mismas fórmulas que tu simulador: PTR = PNFT × (1 − descuentos) · PTC botella = PTR botella + 30% · Adicional $ = % adicional × precio lista bulto × bultos.</p>
+          </div>
+          <div class="gp-sec" id="gpSnap4">
+            <h2 class="gp-h">TS ejecutado del mes <span class="gp-tag t2">Lo que ya invertimos</span></h2>
+            <p class="gp-sub">Lo que los clientes pagaron por debajo de la lista (bultos × PNFT − importe final), con la lista vigente.</p>
+            <div id="gpTs"></div>
+          </div>
+        </div>
+
+        <div class="gp-cols3">
+          <div class="gp-sec" id="gpSnap5"><h2 class="gp-h">Clientes caídos <span class="gp-tag t4">En riesgo</span></h2><div id="gpCaidos"></div></div>
+          <div class="gp-sec"><h2 class="gp-h">Ganancia por HL <span class="gp-tag t2">Mix</span></h2><p class="gp-sub">Si sube, el mix mejora; si baja, vendemos más barato.</p><div id="gpGan"></div></div>
+          <div class="gp-sec" id="gpSnap6"><h2 class="gp-h">Compras <span class="gp-tag t3">Stock y vencimientos</span></h2><div id="gpCompras"></div></div>
+        </div>
+      </div>
     </div>
     <div class="empty" id="gerEmpty" hidden>Todavía no hay bases cargadas.<br>Tocá <b>⬆ Subir base y objetivos</b>, elegí el mes y cargá su base plana.</div>
   </section>
   <div class="ger-tip" id="gerTip" hidden></div>
+
+  <div class="modal" id="mPp" hidden>
+    <div class="sheet" role="dialog" aria-labelledby="ppTitle">
+      <div class="sheet-head"><h2 id="ppTitle">Punto de pedido</h2><button class="x" id="ppClose" aria-label="Cerrar">×</button></div>
+      <div class="step">
+        <p class="hint">Subí el <b>reporte de punto de pedido</b> tal cual sale del sistema. Se guardan solo los SKUs de UNG y Aguas Eco con stock, venta o pedido (lo de MKP, cerveza y vinos se descarta). Queda guardado con la clave gerencial.</p>
+        <input id="ppFile" class="file" type="file" accept=".xlsx,.xls,.csv">
+        <label class="fl" for="ppKey">CLAVE DE ADMINISTRADORA</label>
+        <input id="ppKey" type="password" autocomplete="off">
+        <button class="btn-in" id="ppGo" type="button">PUBLICAR</button>
+        <div class="msg" id="ppMsg"></div>
+      </div>
+    </div>
+  </div>
 
   <div class="modal" id="mGer" hidden>
     <div class="sheet" role="dialog" aria-labelledby="gerUpTitle">
@@ -1842,6 +1992,14 @@ async function loadFr(force){
     frRender();
   } catch(e) { $("fUpd").textContent = "Error al cargar"; $("fEmpty").hidden = false; $("fEmpty").textContent = "No se pudo abrir la frescura. Revisá tu conexión y volvé a entrar."; }
 }
+/* bultos del primer vencimiento y del resto (si el archivo se subió con la versión anterior, solo cuenta lotes) */
+function frLotTxt(r){
+  if (!r.lt) return r.otros && !(r.dias < 60) ? `<small>+${r.otros} lote${r.otros > 1 ? "s" : ""}</small>` : "";
+  const b1 = r.lt[0][1], rest = r.tot - b1;
+  if (!r.otros) return `<small>${fmtN(b1)} btos</small>`;
+  const nx = r.lt[1][0].split("-");
+  return `<small class="lt">${fmtN(b1)} btos</small><small class="lt">+${fmtN(rest)} desde ${+nx[2]}/${+nx[1]}</small>`;
+}
 function frRender(){
   const D0 = FRV.data, D = Object.assign({}, D0, {rows:D0.rows.map(frFix), faltantes:D0.faltantes.map(frFix)});
   $("fUpd").textContent = "Stock al " + fdate(D.fecha) + " · actualizado " + fmtDate(FRV.updated);
@@ -1855,7 +2013,7 @@ function frRender(){
       const nr = rs.filter(r => r.dias < 60).length;
       return `<div class="fr-cat" style="--c:${cat.c}"><h3>${cat.n.toUpperCase()}${nr ? `<small>⚠ ${nr} por vencer</small>` : ""}</h3>` +
         (rs.length ? `<table class="fr"><thead><tr><th>Cod</th><th>Descripción</th><th class="v">Vence lote</th></tr></thead><tbody>` +
-          rs.map(r => `<tr class="${r.dias < 60 ? "risk" : ""}"><td class="cd">${esc(r.cod)}</td><td class="ds">${esc(r.desc)}</td><td class="v">${fdate(r.vto)}${r.dias < 60 ? `<br><span class="dpill">${r.dias} días</span>` : r.otros ? `<small>+${r.otros} lote${r.otros > 1 ? "s" : ""}</small>` : ""}</td></tr>`).join("") +
+          rs.map(r => `<tr class="${r.dias < 60 ? "risk" : ""}"><td class="cd">${esc(r.cod)}</td><td class="ds">${esc(r.desc)}</td><td class="v">${fdate(r.vto)}${r.dias < 60 ? `<br><span class="dpill">${r.dias} días</span>` : ""}${frLotTxt(r)}</td></tr>`).join("") +
           `</tbody></table>` : `<div class="fr-empty">Sin stock en esta categoría.</div>`) + `</div>`;
     }).join("");
   } else {
@@ -1902,7 +2060,7 @@ function parseFrescura(wb){
   for (const r of aoa.slice(hi + 1)) {
     const cod = String(r[iA]).replace(/\.0$/,"").trim(); if (!cod || !(r[iV] instanceof Date)) continue;
     if (!((Number(r[iB]) || 0) > 0 || (Number(r[iU]) || 0) > 0)) continue;
-    lots.push({cod, desc:String(r[iD]).trim().replace(/\s+/g, " "), vto:r[iV], neg:String(r[iN] ?? "").trim().toUpperCase()});
+    lots.push({cod, desc:String(r[iD]).trim().replace(/\s+/g, " "), vto:r[iV], neg:String(r[iN] ?? "").trim().toUpperCase(), bu:Number(r[iB]) || 0});
   }
   return {fecha, lots};
 }
@@ -1925,11 +2083,14 @@ $("frRead").addEventListener("click", async () => {
     const listaFinal = [...lista, ...[...nuevos.values()].map(({cod,desc,cat}) => ({cod,desc,cat}))].map(s => aguaNeg.has(s.cod) ? Object.assign({}, s, {cat:"Aguas Eco"}) : frFix(s));
     const byCod = new Map(listaFinal.map(s => [s.cod, s]));
     const grp = new Map();
-    F.lots.filter(l => byCod.has(l.cod)).forEach(l => { (grp.get(l.cod) || grp.set(l.cod, []).get(l.cod)).push(l.vto); });
+    F.lots.filter(l => byCod.has(l.cod)).forEach(l => { (grp.get(l.cod) || grp.set(l.cod, []).get(l.cod)).push(l); });
     const f0 = Date.UTC(F.fecha.getFullYear(), F.fecha.getMonth(), F.fecha.getDate());
-    const rows = [...grp.entries()].map(([cod, vs]) => {
-      vs.sort((a,b) => a - b); const v = vs[0], vu = Date.UTC(v.getFullYear(), v.getMonth(), v.getDate());
-      return {cod, desc:byCod.get(cod).desc, cat:byCod.get(cod).cat, vto:new Date(vu).toISOString(), dias:Math.round((vu - f0) / 864e5), otros:new Set(vs.map(x => x.toDateString())).size - 1};
+    const rows = [...grp.entries()].map(([cod, ls]) => {
+      /* bultos por fecha de vencimiento: así se ve si lo que vence primero son pocos bultos */
+      const byF = new Map(); ls.forEach(l => { const u = Date.UTC(l.vto.getFullYear(), l.vto.getMonth(), l.vto.getDate()); byF.set(u, (byF.get(u) || 0) + l.bu); });
+      const fs = [...byF.entries()].sort((a, b) => a[0] - b[0]), vu = fs[0][0];
+      return {cod, desc:byCod.get(cod).desc, cat:byCod.get(cod).cat, vto:new Date(vu).toISOString(), dias:Math.round((vu - f0) / 864e5), otros:fs.length - 1,
+        lt:fs.map(([u, b]) => [new Date(u).toISOString().slice(0, 10), Math.round(b)]), tot:Math.round(fs.reduce((s, x) => s + x[1], 0))};
     });
     const faltantes = listaFinal.filter(s => !grp.has(s.cod));
     FU.data = {fecha:new Date(f0).toISOString(), rows, faltantes}; FU.lista = listaFinal; FU.listaCambio = !!fs || nuevos.size > 0;
@@ -2145,7 +2306,18 @@ function parseBook(wb){
     if (hb >= 0) { const NB = b[hb].map(norm), iCo = NB.indexOf("cod. accion"), iNo = NB.indexOf("nombre accion"), iCc = NB.indexOf("concepto");
       b.slice(hb + 1).forEach(r => { const code = String(r[iCo]).trim().replace(/\.0$/,""); if (/^\d+$/.test(code) && (iCc < 0 || /combo/i.test(r[iCc]))) bajas[code] = String(r[iNo]).trim(); }); }
   }
-  return {combos, bajas};
+  /* solapa Book Acciones: PTC, DROP, escalas, etc. (para el simulador del gerencial). EMCALA es nodo FEMSA */
+  const acc = [], shA = wb.SheetNames.find(n => norm(n) === "book acciones");
+  if (shA) {
+    const b = aoaOf(wb, shA), ha = b.findIndex(r => r.some(c => norm(c) === "codigo") && r.some(c => norm(c).startsWith("nombre accion")));
+    if (ha >= 0) { const NA = b[ha].map(norm), f = n => NA.findIndex(h => h.startsWith(n));
+      const iCc = f("concepto"), iCo = f("codigo"), iNo = f("nombre accion"), iDe = f("descuento"), iCa = f("canal"), iMa = f("marca"), iCl = f("calibre"), iSk = f("cod skus"), iNd = f("nodo");
+      b.slice(ha + 1).forEach(r => { const code = String(r[iCo]).trim().replace(/\.0$/,""); if (!/^\d+$/.test(code)) return;
+        const nodo = String(r[iNd] ?? "").trim().toUpperCase();
+        if (nodo && !/^TODOS|FEMSA/.test(nodo)) return;
+        acc.push([String(r[iCc]).trim().toUpperCase(), code, String(r[iNo]).trim(), String(r[iDe]).trim(), String(r[iCa]).trim().toUpperCase(), String(r[iMa] ?? "").trim(), String(r[iCl] ?? "").trim(), String(r[iSk] ?? "").trim(), nodo]); }); }
+  }
+  return {combos, bajas, acc};
 }
 function parseChess(wb){
   const a = aoaOf(wb, wb.SheetNames[0]), hi = a.findIndex(r => r.some(c => norm(c) === "identificador"));
@@ -2164,13 +2336,16 @@ function parseLista(wb){
   for (const r of a.slice(0, hi)) { const i = r.findIndex(c => /vigencia/i.test(String(c))); if (i >= 0 && r[i+1] instanceof Date && !fecha) fecha = r[i+1].toLocaleDateString("es-AR",{day:"2-digit",month:"2-digit",year:"numeric"}); }
   const N = a[hi].map(h => norm(h)), ix = n => N.indexOf(n);
   const iCl = ix("cod_g.cliente"), iNo = ix("nombre_g.cliente"), iP = ix("cod_producto"), iD = ix("desc.producto"), iU = ix("un/bulto"), iF = ix("pnft_x_bto tradicionales"), iPn = ix("pnit_x_bto tradicionales"), iII = ix("$_imp.internos");
+  const iPl = ix("precio_lista"), iSf = ix("pnsf"), iBp = ix("bul/pal"), iLt = ix("lts/un"), iNg = ix("negocio"), iMa = ix("marca");
   if (iPn < 0 || iII < 0) throw new Error("La lista no tiene las columnas PNIT_x_bto Tradicionales o $_Imp.Internos");
   if (iF < 0) throw new Error("La lista no tiene la columna PNFT_x_bto Tradicionales");
   const p = {};
   a.slice(hi + 1).forEach(r => {
     if (iNo >= 0 && !/emcala/i.test(r[iNo]) && !(iCl >= 0 && String(r[iCl]) === "181652")) return;
     const sku = String(r[iP]).replace(/\.0$/,"").trim(), f = Number(r[iF]);
-    if (sku && f > 0) p[sku] = {d:String(r[iD]).trim().toUpperCase(), ub:Number(r[iU]) || 1, f, pnit:Number(r[iPn]) || f / 1.21, ii:Number(r[iII]) || 0};
+    if (sku && f > 0) p[sku] = {d:String(r[iD]).trim().toUpperCase(), ub:Number(r[iU]) || 1, f, pnit:Number(r[iPn]) || f / 1.21, ii:Number(r[iII]) || 0,
+      pl:iPl >= 0 ? Number(r[iPl]) || 0 : 0, sf:iSf >= 0 ? Number(r[iSf]) || 0 : 0, bp:iBp >= 0 ? Number(r[iBp]) || 0 : 0, lt:iLt >= 0 ? Number(r[iLt]) || 0 : 0,
+      ng:iNg >= 0 ? String(r[iNg]).trim().toUpperCase() : "", ma:iMa >= 0 ? String(r[iMa]).trim().toUpperCase() : ""};
   });
   if (!Object.keys(p).length) throw new Error("No encontré precios de EMCALA en la lista");
   return {fecha, p};
@@ -2198,7 +2373,7 @@ $("cbRead").addEventListener("click", async () => {
     let saved = null; try { const p = await apiGet("combos"); if (p && p.data) saved = await openData(p); } catch(e) {}
     let cards, bookFecha, extra = "";
     if (fb) {
-      const B = parseBook(XLSX.read(await fb.arrayBuffer(), {type:"array"}));
+      const B = parseBook(XLSX.read(await fb.arrayBuffer(), {type:"array"})); CU.acc = B.acc;
       const C = parseChess(XLSX.read(await fc.arrayBuffer(), {type:"array"}));
       const baseN = s => norm(String(s).replace(/\s*-\s*gba\s+(femsa|lee)\s*$/i, "")).replace(/\s+/g, " ");
       const prev = saved ? new Set(saved.cards.map(c => baseN(c.name))) : null;
@@ -2227,7 +2402,7 @@ $("cbRead").addEventListener("click", async () => {
     }
     const precios = fl ? parseLista(XLSX.read(await fl.arrayBuffer(), {type:"array", cellDates:true})) : saved && saved.precios || null;
     const comp = fx ? parseComp(XLSX.read(await fx.arrayBuffer(), {type:"array"})) : saved && saved.comp || null;
-    CU.data = {cards, bookFecha, precios, comp};
+    CU.data = {cards, bookFecha, precios, comp, acc: fb ? CU.acc || [] : saved && saved.acc || []};
     const prevData = CB.data; CB.data = CU.data; const vig = cards.filter(c => c.st !== "baja");
     const sinComp = vig.filter(c => !compFor(c) && B_isUNG(c)).map(c => c.id);
     const faltan = precios ? [...new Set(vig.flatMap(c => (compFor(c) || []).map(x => String(x[0]))).filter(s => !precios.p[s]))] : [];
@@ -2313,7 +2488,7 @@ const GMEAS = [["hl","HL"],["bu","Bultos"],["fin","$ Final"],["pn","$ PNSF"],["g
 const GAN_K = {"7 UP": 1.1626, "7 UP FREE": 1.1651, "DANTE ROBINO": 1.2235, "DONDE MANDA CAPITAN": 1.155, "ECO DE LOS ANDES": 1.1572, "GATORADE": 1.1923, "GLACIAR": 1.1621, "H2OH": 1.163, "JAGERMEISTER": 1.2322, "MALEANTE": 1.1552, "MIRINDA": 1.1674, "NESTLE PUREZA VITAL": 1.1624, "NOVECENTO": 1.2262, "OTRO LOCO MAS": 1.1557, "PASO DE LOS TOROS": 1.1598, "PATAGONIA MKTP": 1.2523, "PEPSI": 1.1629, "PEPSI BLACK": 1.1583, "PLAYADITO": 1.1603, "QUILMES MARKETPLACE": 1.2034, "RED BULL": 1.1438, "ROCKSTAR": 1.1939, "STELLA ARTOIS MARKETPLACE": 1.2661}, GAN_K_DEF = 1.163;
 const C25 = "#5b8def", C26 = "#a970ff", C26b = "#d2b0ff", COBJ = "#ffc93c", LYCOL = "rgba(190,200,225,.45)";
 const pad2 = n => String(n).padStart(2,"0");
-const gKey = ym => "ger_" + ym.replace("-","_"), gcKey = ym => "gcl_" + ym.replace("-","_");
+const gKey = ym => "ger_" + ym.replace("-","_"), gcKey = ym => "gcl_" + ym.replace("-","_"), gsKey = ym => "gsk_" + ym.replace("-","_");
 const ymAdd = (ym, n) => { let y = +ym.slice(0,4), m = +ym.slice(5) + n; while (m < 1){ m += 12; y--; } while (m > 12){ m -= 12; y++; } return y + "-" + pad2(m); };
 const ymLabel = ym => MESES[+ym.slice(5)-1] + " " + ym.slice(0,4);
 const ymShort = ym => MESES[+ym.slice(5)-1].slice(0,3).toUpperCase() + " " + ym.slice(2,4);
@@ -2355,7 +2530,7 @@ async function loadGer(force){
   if (!apiReady()){ $("gerUpd").textContent = "Falta conectar el guardado"; gerShow("empty"); return; }
   $("gerUpd").textContent = "Cargando…";
   try {
-    if (!GER.idxP || force){ GER.idxP = await apiGet("ger_idx"); GER.idx = null; GER.cache = {}; GER.ccache = {}; }
+    if (!GER.idxP || force){ GER.idxP = await apiGet("ger_idx"); GER.idx = null; GER.cache = {}; GER.ccache = {}; PL.gs = {}; PL.ctx = null; }
     if (!GER.idxP || !GER.idxP.data){ $("gerUpd").textContent = "Sin datos todavía"; gerShow("empty"); return; }
     if (!GER.cred){ try { const s = sessionStorage.getItem("nabs_ger"); if (s) GER.cred = ["GERENCIAL", s]; } catch(e){} }
     if (!GER.cred){ $("gerUpd").textContent = "Acceso con clave gerencial"; gerShow("lock"); return; }
@@ -2497,6 +2672,7 @@ function gerSetup(cur){
 
 /* ---- render ---- */
 async function gerRender(){
+  if (!$("gerPlan").hidden) planLoad();
   const ym = GER.ym, e = GER.idx.m[ym], full = gFull(ym, e.d), D = full ? 31 : e.d, Y = +ym.slice(0,4), M = +ym.slice(5);
   const ymAA = ymAdd(ym, -12), ymMA = ymAdd(ym, -1);
   $("gerCut").textContent = "Cargando " + ymLabel(ym) + "…";
@@ -2749,7 +2925,7 @@ function gerDate(v){
   return null;
 }
 const gnum = v => typeof v === "number" ? v : (s => s.includes(",") ? parseFloat(s.replace(/\./g, "").replace(",", ".")) : parseFloat(s))(String(v ?? "").trim()) || 0;
-function gerNewB(ym){ return {ym, dm:{mesa:new Map(), fdv:new Map(), canal:new Map(), pk:new Map(), sku:new Map()}, dims:{mesa:[], fdv:[], canal:[], pk:[], sku:[]}, cube:new Map(), cl:new Map(), d:0, n:0, files:new Set()}; }
+function gerNewB(ym){ return {ym, dm:{mesa:new Map(), fdv:new Map(), canal:new Map(), pk:new Map(), sku:new Map()}, dims:{mesa:[], fdv:[], canal:[], pk:[], sku:[]}, cube:new Map(), cl:new Map(), skc:new Map(), cs:new Map(), d:0, n:0, files:new Set()}; }
 function gerIx(b, k, key, val){ let i = b.dm[k].get(key); if (i === undefined){ i = b.dims[k].length; b.dims[k].push(val ?? key); b.dm[k].set(key, i); } return i; }
 function gerParse(aoa, B, fname){
   const hi = headerAt(aoa, "Código Cliente");
@@ -2777,6 +2953,10 @@ function gerParse(aoa, B, fname){
     let a = b.cube.get(key); if (!a){ a = [d, mi, fdi, ci, pk, 0, 0, 0, 0, 0]; b.cube.set(key, a); }
     a[5] += hl; a[6] += bu; a[7] += fin; a[8] += pn; a[9] += pn * ((GAN_K[mar] || GAN_K_DEF) - 1);
     if (d > b.d) b.d = d;
+    /* detalle por SKU (plan de inversión): SKU×canal y cliente×SKU */
+    const sk = si + "," + ci; let z = b.skc.get(sk); if (!z){ z = [si, ci, 0, 0, 0, 0]; b.skc.set(sk, z); }
+    z[2] += bu; z[3] += hl; z[4] += fin; z[5] += pn;
+    let cm = b.cs.get(cli); if (!cm){ cm = new Map(); b.cs.set(cli, cm); } cm.set(si, (cm.get(si) || 0) + bu);
     /* CCC y TBD como la tabla dinámica de Agustina: cuenta toda fila con importe (deja afuera lo bonificado/sin cargo, importe 0) */
     if (fin !== 0){
       let c = b.cl.get(cli); if (!c){ c = {v:new Map(), s:new Map()}; b.cl.set(cli, c); }
@@ -2798,7 +2978,10 @@ function gerFinal(b){
     t[6] += a[5]; t[7] += a[6]; t[8] += a[7]; t[9] += a[8]; t[10] += a[9]; }
   const t = [...tm.values()].map(x => [...x.slice(0, 6), R(x[6], 1e3), Math.round(x[7]), Math.round(x[8]), Math.round(x[9]), Math.round(x[10])]);
   const dims = {mesa:b.dims.mesa, fdv:b.dims.fdv, canal:b.dims.canal, pk:b.dims.pk};
-  return {md:{v:2, ym:b.ym, d:b.d, dims, c}, gc:{v:2, ym:b.ym, dims:{...dims, sku:b.dims.sku}, cl}, ie:{v:2, d:b.d, n:b.n, t, files:[...b.files]}};
+  const gs = {v:1, ym:b.ym, d:b.d, sku:b.dims.sku, canal:b.dims.canal, pk:b.dims.pk,
+    t:[...b.skc.values()].map(z => [z[0], z[1], R(z[2], 100), R(z[3], 1e4), Math.round(z[4]), Math.round(z[5])]),
+    cs:[...b.cs.entries()].map(([cli, m]) => [cli, [...m.entries()].filter(x => x[1] > 0).flatMap(x => [x[0], R(x[1], 100)])])};
+  return {md:{v:2, ym:b.ym, d:b.d, dims, c}, gc:{v:2, ym:b.ym, dims:{...dims, sku:b.dims.sku}, cl}, ie:{v:2, d:b.d, n:b.n, t, files:[...b.files]}, gs};
 }
 
 const GUP = { ym:null, idx:null };
@@ -2868,11 +3051,14 @@ $("gerGo").addEventListener("click", async () => {
       const k = main.ym;
       if (cargados.includes(k)) throw new Error(`${ymLabel(k)} viene en dos archivos. Cada mes tiene que estar completo en un solo archivo.`);
       m.textContent = `Guardando ${ymLabel(k)} (archivo ${i+1} de ${files.length})…`;
-      const {md, gc: gcl, ie} = gerFinal(main);
+      const {md, gc: gcl, ie, gs} = gerFinal(main);
       let res = await apiPut(gKey(k), admin, Object.assign(await sealData(md, gc), stamp));
       if (!res.ok) throw new Error(res.error || "No se pudo guardar " + ymLabel(k));
       res = await apiPut(gcKey(k), admin, Object.assign(await sealData(gcl, gc), stamp));
       if (!res.ok) throw new Error(res.error || "No se pudo guardar " + ymLabel(k));
+      res = await apiPut(gsKey(k), admin, Object.assign(await sealData(gs, gc), stamp));
+      if (!res.ok) throw new Error(res.error || "No se pudo guardar " + ymLabel(k));
+      ie.sk = 1;
       idx.m[k] = Object.assign(ie, {up:stamp.updated});
       cargados.push(k);
       /* se guarda el índice después de cada mes, así si se corta no se pierde lo ya cargado */
@@ -2893,6 +3079,377 @@ $("gerGo").addEventListener("click", async () => {
     await loadGer(true);
   } catch(err){ console.error(err); m.className = "msg bad"; m.textContent = err.message || "Error al cargar"; }
   $("gerGo").disabled = false;
+});
+
+/* ===== Gerencial · Plan de inversión ===== */
+const PL = { auto:"", un:"UNG", sort:"hl", sel:new Map(), adic:new Map(), bu:new Map(), gs:{}, ctx:null, sim:{acc:null}, ppP:undefined, lp:undefined, fr:undefined };
+const pnum = s => { const v = parseFloat(String(s ?? "").replace(",", ".")); return isFinite(v) ? v : 0; };
+const m$ = v => "$" + fmtShort(v).replace(" mil", " mil").replace(" M", " M");
+const m$f = v => "$" + Math.round(v).toLocaleString("es-AR");
+const pct1 = v => (Math.round(v * 10) / 10).toLocaleString("es-AR") + "%";
+
+$("gerView").addEventListener("click", e => {
+  const b = e.target.closest("[data-v]"); if (!b) return;
+  document.querySelectorAll("#gerView .tab").forEach(x => x.classList.toggle("on", x === b));
+  const plan = b.dataset.v === "plan"; $("gerBody").classList.toggle("plan", plan); $("gerPlan").hidden = !plan;
+  if (plan) planLoad();
+});
+$("gpUn").addEventListener("click", e => { const b = e.target.closest("[data-u]"); if (!b) return; PL.un = b.dataset.u; PL.sel.clear();
+  document.querySelectorAll("#gpUn button").forEach(x => x.classList.toggle("on", x === b)); planCalc(); });
+$("gpSort").addEventListener("click", e => { const b = e.target.closest("[data-s]"); if (!b) return; PL.sort = b.dataset.s;
+  document.querySelectorAll("#gpSort .chip").forEach(x => x.classList.toggle("on", x === b)); planRender(); });
+$("gpDis").addEventListener("input", () => { planRender(); simCalc(); });
+["gpAdic", "gpRec"].forEach(id => $(id).addEventListener("change", () => { if (id === "gpAdic") PL.adic.clear(); else PL.bu.clear(); planCalc(); }));
+
+async function gerSk(ym){
+  if (!GER.idx.m[ym]) return null;
+  if (PL.gs[ym] !== undefined) return PL.gs[ym];
+  let g = null; try { const p = await apiGet(gsKey(ym)); if (p && p.data) g = await openData(p, GER.cred); } catch(e){}
+  return PL.gs[ym] = g;
+}
+async function planLoad(){
+  $("gpCut").textContent = "Cargando…";
+  try {
+    const ym = GER.ym, pv = ymAdd(ym, -1);
+    if (PL.lp === undefined){ try { const p = await apiGet("combos"); PL.lp = p && p.data ? await openData(p) : null; } catch(e){ PL.lp = null; } }
+    if (PL.fr === undefined){ try { const p = await apiGet("frescura"); PL.fr = p && p.data ? await openData(p) : null; } catch(e){ PL.fr = null; } }
+    if (PL.ppP === undefined){ try { const p = await apiGet("ger_pp"); PL.ppP = p && p.data ? await openData(p, GER.cred) : null; } catch(e){ PL.ppP = null; } }
+    const [g0, g1, cl1] = await Promise.all([gerSk(ym), gerSk(pv), gerCl(pv)]);
+    PL.ctx = {ym, pv, g0, g1, cl1};
+    planCalc();
+  } catch(e){ console.error(e); $("gpCut").textContent = "No se pudo armar el plan"; }
+}
+
+/* ---- Book: qué acciones aplican a un SKU ---- */
+const SZ = [[3, /(?<![\d,.])3\s*l(?![a-z])|3000/i], [2.25, /2[,.]25/], [2, /(?<![\d,.])2\s*l(?![a-z])|(?<![\d,.])2(?![\d,.])|2000/i], [1.5, /1[,.]5(?!\d)|1500/], [1.25, /1[,.]25|1250/], [1, /(?<![\d,.])1\s*l(?![a-z])|1000/i],
+  [0.75, /750|0[,.]75/], [0.5, /(?<!\d)500|0[,.]5(?!\d)/], [0.473, /473/], [0.4, /(?<!\d)400/], [0.354, /354|350/], [0.35, /(?<!\d)350|354/], [0.355, /355/], [0.269, /269/], [0.25, /(?<!\d)25[05]/], [0.7, /(?<!\d)700/]];
+function skuInfo(code){
+  const p = PL.lp && PL.lp.precios && PL.lp.precios.p[code]; if (!p) return null;
+  const d = p.d + " " + (PL.names && PL.names.get(String(code)) || ""), br = new Set();
+  if (/PEPSI/.test(d)) br.add("pepsi").add("core");
+  if (/7\s?UP|SEVEN/.test(d)) br.add("7up").add("sabores").add("core");
+  if (/MIRINDA|\bMIR\b/.test(d)) br.add("mirinda").add("sabores");
+  if (/^P\s/.test(p.d)) br.add("pepsi").add("core");
+  if (/PDT|PASO|TOROS/.test(d)) br.add("pdt").add("sabores");
+  if (/H2OH/.test(d)) br.add("h2oh").add("saborizadas");
+  if (/STILL/.test(d)) br.add("still");
+  if (/GATORADE|GTD/.test(d)) br.add("gatorade").add("gtd");
+  if (/ROCKSTAR/.test(d)) br.add("rockstar");
+  if (/RED BULL|^RB /.test(d)) br.add("red bull").add("rb");
+  if (/AWAFRUT/.test(d)) br.add("awafrut");
+  if (/RECO/.test(d)) br.add("reco");
+  const can = /CAN|LAT/.test(d), ns = /BLACK|FREE|ZERO|S\/AZ|SIN AZ|NS /.test(d);
+  return {p, br, can, ns, black:/BLACK/.test(d), lt:p.lt || 0};
+}
+const ltOk = (txt, lt) => { const e = SZ.find(z => Math.abs(z[0] - lt) < 0.004); return e ? e[1].test(txt) : false; };
+function accFor(code, canal){
+  const I = skuInfo(code), A = PL.lp && PL.lp.acc || []; if (!I) return [];
+  return A.filter(a => {
+    const [cc, , , , can, mar, cal] = a;
+    if (/COMBO/.test(cc) || /EST\. DE SERV/.test(can)) return false;
+    if (canal === "MAY" ? !/MAY/.test(can) : !(/MH/.test(can) || can.includes(canal === "K+T" ? "K+T" : "AS"))) return false;
+    if (!ltOk(cal + " / " + mar, I.lt)) return false;
+    return mar.split("/").some(seg => { const s = seg.toLowerCase().trim();
+      if (/latas?/.test(s)){ if (!I.can) return false; if (/sin black/.test(s) && I.black) return false; return true; }
+      if (/^pet\s*\d/.test(s)) return !I.can && ltOk(s, I.lt);
+      const brand = [...I.br].some(b => new RegExp("(^|[^a-z])" + b.replace(" ", "\\s") + "([^a-z]|$)").test(s));
+      if (!brand) return false;
+      if (/(^|\s)ns(\s|$)/.test(s) && !I.ns) return false;
+      if (/\d/.test(s) && !ltOk(s, I.lt)) return false;
+      return true; });
+  });
+}
+/* "2 btos 4% - 4 btos 9% - 6 btos 12%" → [[2,4],[4,9],[6,12]] */
+function accTiers(txt){ const r = [], rx = /(\d+)\s*(?:btos?|bultos?|bltos|bto|fp)\b[^\d%]*?(\d+(?:[.,]\d+)?)\s*%/gi; let m;
+  while ((m = rx.exec(txt))) r.push([+m[1], pnum(m[2])]); return r; }
+function combosFor(code){ const C = PL.lp && PL.lp.comp || {}; return Object.entries(C).filter(([k, c]) => c.l.some(x => String(x[0]) === String(code))).map(([k, c]) => [k, c.n, c.l.find(x => String(x[0]) === String(code))[3]]); }
+
+/* ---- cálculo ---- */
+function skuMap(g){
+  if (!g) return null;
+  const by = new Map();
+  for (const z of g.t){ const s = g.sku[z[0]], code = String(s[0]), un = (g.pk[s[2]] || [])[2] || "";
+    let x = by.get(code); if (!x){ x = {code, desc:s[1], un, bu:0, hl:0, fin:0, pn:0, can:{}}; by.set(code, x); }
+    x.bu += z[2]; x.hl += z[3]; x.fin += z[4]; x.pn += z[5];
+    const cn = g.canal[z[1]] || "SIN CANAL", c = x.can[cn] ||= {bu:0, hl:0, fin:0}; c.bu += z[2]; c.hl += z[3]; c.fin += z[4]; }
+  const cs = new Map(); for (const [cli, arr] of g.cs){ const m = new Map(); for (let i = 0; i < arr.length; i += 2) m.set(String(g.sku[arr[i]][0]), arr[i+1]); cs.set(String(cli), m); }
+  return {by, cs};
+}
+function planCalc(){
+  const C = PL.ctx; if (!C) return;
+  const {ym, pv} = C, e = GER.idx.m[ym], U = PL.un, warn = [];
+  if (!C.g0 || !C.g1) warn.push(`Para ver recuperables y TS ejecutado volvé a subir la base plana de <b>${[!C.g0 && ymLabel(ym), !C.g1 && ymLabel(pv)].filter(Boolean).join("</b> y <b>")}</b> (en ⬆ Subir base y objetivos). Las bases subidas antes no guardaban el detalle por SKU.`);
+  const P = PL.lp && PL.lp.precios && PL.lp.precios.p;
+  if (!P) warn.push("Falta la lista de precios: subila en Combos → 💲 Lista de precios.");
+  else if (!Object.values(P).some(p => p.pl)) warn.push("La lista de precios guardada es de la versión anterior: volvé a subirla en Combos → 💲 Lista de precios para tener precio de lista, PNSF y paletas.");
+  if (!(PL.lp && PL.lp.acc && PL.lp.acc.length)) warn.push("Para completar las acciones del Book, volvé a publicar los combos con el Book (Combos → ⬆ Actualizar combos).");
+  if (!PL.ppP) warn.push("Para ver stock y compras subí el reporte de punto de pedido (⬆ Punto de pedido).");
+  if (PL.fr && PL.fr.rows && !PL.fr.rows.some(r => r.lt)) warn.push("Para ver bultos por vencimiento, volvé a subir el archivo de frescura.");
+  $("gpWarn").hidden = !warn.length; $("gpWarn").innerHTML = warn.map(w => "⚠ " + w).join("<br>");
+
+  /* objetivo y proyección de la unidad */
+  const o = GER.idx.obj[ym] || {}, obj = U === "UNG" ? (o.hlU ?? o.hl) : o.hlA;
+  const act = (e.t || []).filter(r => r[3] === U).reduce((s, r) => s + r[6], 0);
+  const full = gFull(ym, e.d), hd = habiles(ym, Math.min(e.d, daysIn(ym))), ht = habiles(ym, daysIn(ym)), rest = Math.max(0, ht - hd);
+  const proj = full || !hd ? act : act / hd * ht, gap = obj ? Math.max(0, obj - proj) : 0;
+  C.k = {obj, act, proj, gap, hd, ht, rest, full};
+  $("gpCut").innerHTML = `<b>${U === "UNG" ? "UNG" : "Aguas Eco"}</b> · ${ymLabel(ym)} · ${full ? "mes completo" : "venta al " + pad2(e.d) + " · " + rest + " días de venta restantes"} · recuperables contra ${ymLabel(pv)}`;
+
+  /* SKUs */
+  const M0 = skuMap(C.g0), M1 = skuMap(C.g1); C.M0 = M0; C.M1 = M1;
+  PL.names = new Map(); [M1, M0].forEach(M => M && M.by.forEach((x, c) => PL.names.set(c, x.desc)));
+  const adG = pnum($("gpAdic").value), rec = pnum($("gpRec").value) / 100;
+  const frBy = new Map((PL.fr && PL.fr.rows || []).map(r => [String(r.cod), r]));
+  const ppBy = new Map((PL.ppP && PL.ppP.rows || []).map(r => [String(r[0]), r]));
+  const f0 = PL.fr ? new Date(PL.fr.fecha) : null;
+  /* días de venta que quedan desde la fecha del punto de pedido */
+  let restPP = rest; if (PL.ppP && PL.ppP.fecha){ const fp = new Date(PL.ppP.fecha); if (fp.getFullYear() === +ym.slice(0,4) && fp.getMonth() + 1 === +ym.slice(5)) restPP = Math.max(0, ht - habiles(ym, fp.getDate())); }
+  const rows = [];
+  if (M1){
+    const rc = new Map();
+    for (const [cli, m] of M1.cs){ const now = M0 && M0.cs.get(cli);
+      for (const [code, bu] of m){ if (bu <= 0 || (now && now.get(code) > 0)) continue; const x = rc.get(code) || rc.set(code, {cl:0, bu:0, set:new Set()}).get(code); x.cl++; x.bu += bu; x.set.add(cli); } }
+    for (const [code, r] of rc){
+      const s1 = M1.by.get(code); if (!s1 || s1.un !== U) continue;
+      const p = P && P[code], hb = p && p.ub && p.lt ? p.ub * p.lt / 100 : (s1.bu ? s1.hl / s1.bu : 0);
+      const ad = PL.adic.has(code) ? PL.adic.get(code) : adG, bu = PL.bu.has(code) ? PL.bu.get(code) : Math.round(r.bu * rec);
+      const hl = bu * hb, inv = p && p.pl ? ad / 100 * p.pl * bu : null, gan = p && p.sf ? (p.pnit - p.sf) * bu : null;
+      /* vencimientos: bultos que vencen en menos de 60 días */
+      const fr = frBy.get(code); let vto = null;
+      if (fr && fr.lt && f0){ const lim = f0.getTime() + 60 * 864e5, b = fr.lt.filter(x => new Date(x[0]).getTime() <= lim).reduce((s, x) => s + x[1], 0); if (b > 0) vto = {bu:b, dias:fr.dias}; }
+      else if (fr && fr.dias < 60) vto = {bu:null, dias:fr.dias};
+      /* stock: alcanza para la venta normal de lo que queda del mes + el plan? */
+      const pp = ppBy.get(code); let stk = null;
+      if (pp){ const [, , bxp, st, vc, ds, , yp, , , da] = pp; const disp = st + (da && da <= restPP ? yp : 0), need = vc * restPP + bu, falta = need - disp;
+        stk = {st, ds, yp, falta, pal: falta > 0 ? Math.ceil(falta / (bxp || 60)) : 0, bxp}; }
+      rows.push({code, desc:s1.desc || (p && p.d), clis:r.set, cl:r.cl, rbu:r.bu, bu, ad, hl, inv, gan, cph: inv != null && hl > 0 ? inv / hl : null, acc:accFor(code, "K+T").concat(accFor(code, "AS")), cb:combosFor(code), vto, stk});
+    }
+  }
+  /* acciones únicas por SKU */
+  rows.forEach(r => { const seen = new Set(); r.acc = r.acc.filter(a => !seen.has(a[1]) && seen.add(a[1])); });
+  C.rows = rows;
+  if (PL.auto !== U + C.ym){ PL.auto = U + C.ym; planAuto(true); }
+  planRender();
+}
+function planAuto(silent){
+  const C = PL.ctx; if (!C || !C.rows) return;
+  PL.sel.clear();
+  let acc = 0; const need = C.k.gap;
+  [...C.rows].filter(r => r.cph != null && r.hl > 0).sort((a, b) => a.cph - b.cph).forEach(r => { const on = need > 0 ? acc < need : false; PL.sel.set(r.code, on); if (on) acc += r.hl; });
+  if (!silent) planRender();
+}
+$("gpAuto").addEventListener("click", () => planAuto(false));
+
+function planRender(){
+  const C = PL.ctx; if (!C || !C.k) return;
+  const K = C.k, U = PL.un, sel = C.rows.filter(r => PL.sel.get(r.code));
+  /* el adicional lo puede poner Quilmes (TS, se reintegra por WAPI), EMCALA (sale de su ganancia) o los dos */
+  const sh = Math.min(100, Math.max(0, pnum($("gpDis").value))) / 100;
+  const adT = sel.reduce((s, r) => s + (r.inv || 0), 0), inv = adT * (1 - sh), dis = adT * sh, hl = sel.reduce((s, r) => s + r.hl, 0), gan = sel.reduce((s, r) => s + (r.gan || 0), 0) - dis, cl = new Set(sel.flatMap(r => [...r.clis])).size;
+  const uL = U === "UNG" ? "UNG" : "Aguas Eco", pctP = K.obj ? K.proj / K.obj * 100 : null, pctC = K.obj ? (K.proj + hl) / K.obj * 100 : null;
+  /* historia */
+  const st1 = !K.obj ? `<div class="gp-st"><span class="l">Objetivo</span><b>—</b><p>Cargá el objetivo de HL de ${uL} en ⬆ Subir base y objetivos.</p></div>`
+    : K.gap > 0 ? `<div class="gp-st bad"><span class="l">Falta para el objetivo</span><b>${fmtHL(K.gap)} <small>HL</small></b><div class="gp-bar2"><i style="width:${Math.min(100, K.act / K.obj * 100)}%;background:#7ee081"></i><i style="width:${Math.max(0, Math.min(100, K.proj / K.obj * 100) - Math.min(100, K.act / K.obj * 100))}%;background:#38c8ff"></i></div><p>Objetivo <strong>${fmtHL(K.obj)} HL</strong> · proyección <strong>${fmtHL(K.proj)} HL</strong> (${Math.round(pctP)}%)</p></div>`
+    : `<div class="gp-st okk"><span class="l">Proyección</span><b>${Math.round(pctP)}%</b><p>Objetivo <strong>${fmtHL(K.obj)} HL</strong> · proyección <strong>${fmtHL(K.proj)} HL</strong>: llegás sin inversión extra.</p></div>`;
+  $("gpStory").innerHTML = st1 + `<div class="gp-arr">→</div>
+    <div class="gp-st inv"><span class="l">Inversión que necesitamos</span><b>${m$(adT)}</b><p>Adicional en <strong>${sel.length} SKU${sel.length === 1 ? "" : "s"}</strong>${hl ? ` · <strong>${m$f(adT / hl)}</strong> por HL` : ""}<br>${sh === 0 ? "Lo pone todo <strong>Quilmes</strong> (TS)" : sh === 1 ? "Lo pone todo <strong>EMCALA</strong>" : `<strong>Quilmes ${m$(inv)}</strong> · <strong>EMCALA ${m$(dis)}</strong>`}</p></div><div class="gp-arr">→</div>
+    <div class="gp-st vol"><span class="l">Volumen que tracciona</span><b>+${fmtHL(hl)} <small>HL</small></b><p>${K.gap > 0 ? `Cubre el <strong>${Math.round(hl / K.gap * 100)}%</strong> de lo que falta` : "Volumen extra sobre la proyección"}${pctC ? ` · cerrás al <strong>${pct1(pctC)}</strong>` : ""}</p></div><div class="gp-arr">=</div>
+    <div class="gp-st ${gan >= 0 ? "gan" : "bad"}"><span class="l">Lo que gana EMCALA</span><b>${m$(gan)}</b><p>${dis ? `Ganancia distri del volumen <strong>menos ${m$(dis)}</strong> que pone EMCALA` : "Ganancia distri sobre ese volumen"}${dis ? ` · <strong>$${(gan / dis).toLocaleString("es-AR", {maximumFractionDigits:1})}</strong> por cada $1 que pone EMCALA` : inv ? ` · <strong>$${(gan / inv).toLocaleString("es-AR", {maximumFractionDigits:1})}</strong> por cada $1 de TS` : ""}</p></div>`;
+  const rAct = K.hd ? K.act / K.hd : 0, rNec = K.obj && K.rest ? Math.max(0, K.obj - K.act) / K.rest : null;
+  $("gpRitmo").innerHTML = `<span>Ritmo actual <b>${fmtHL(rAct)} HL/día</b></span>` + (rNec != null ? `<span>Ritmo necesario <b>${fmtHL(rNec)} HL/día</b>${rAct ? ` (${fpct(gpct(rNec, rAct))})` : ""}</span>` : "") +
+    (pctP ? `<span>Sin plan cerrás en <b>${pct1(pctP)}</b> · con plan <b>${pct1(pctC)}</b></span>` : "");
+  const names = sel.slice().sort((a, b) => b.hl - a.hl).map(r => skuShort(r.desc));
+  C.pitch = sel.length ? `Con ${sh < 1 ? m$(inv) + " de TS adicional" + (dis ? ` (EMCALA suma ${m$(dis)})` : "") : m$(dis) + " de adicional que pone EMCALA"} en ${names.length > 1 ? names.slice(0, -1).join(", ") + " y " + names.slice(-1) : names[0]} apuntamos a ${fmtN(cl)} clientes que compraron en ${MESES[+C.pv.slice(5) - 1].toLowerCase()} y este mes todavía no, traccionamos +${fmtHL(hl)} HL${pctC ? ` y cerramos ${uL} al ${pct1(pctC)}` : ""}. Para EMCALA son ${m$(gan)} de ganancia.` : "";
+  $("gpPitch").hidden = !sel.length;
+  $("gpPitch").innerHTML = "📣 <b>Para el pedido a Quilmes:</b> " + esc(C.pitch).replace(/(\$[\d.,]+(?: mil| M)?|\+[\d.,]+ HL|[\d.,]+%)/g, "<b>$1</b>");
+
+  /* ranking */
+  const R = C.rows.slice(), vb = r => r.vto ? (r.vto.bu ?? 1) : 0;
+  if (PL.sort === "hl") R.sort((a, b) => (a.cph ?? 1e12) - (b.cph ?? 1e12));
+  else if (PL.sort === "vto") R.sort((a, b) => vb(b) - vb(a) || (a.cph ?? 1e12) - (b.cph ?? 1e12));
+  else R.sort((a, b) => b.rbu - a.rbu);
+  const top = R.slice(0, 40);
+  $("gpRows").innerHTML = top.map((r, i) => { const on = !!PL.sel.get(r.code);
+    /* resumen corto: el % más alto de cada tipo (el detalle completo queda en el globito y en el Excel) */
+    const mx = k => Math.max(0, ...r.acc.filter(a => (k === "PTC") === (a[0] === "PTC")).flatMap(a => accTiers(a[3]).map(x => x[1])));
+    const pP = mx("PTC"), pD = mx("DROP"), pC = Math.max(0, ...r.cb.map(c => c[2]));
+    const acc = [pP && `<b>PTC ${pct1(pP)}</b>`, pD && `DROP hasta ${pct1(pD)}`, pC && `Combo ${pct1(pC)}`].filter(Boolean);
+    const tip = r.acc.map(a => a[2] + ": " + a[3]).concat(r.cb.map(c => "Combo " + c[0] + " " + c[1] + ": " + c[2] + "%")).join("\n");
+    const stk = r.stk ? `<span class="gp-stk ${r.stk.pal ? "bad" : r.stk.ds < 7 ? "mid" : ""}">${r.stk.ds >= 9999 ? "sin venta" : fmtN(r.stk.ds) + " días"}${r.stk.pal ? ` · pedir ${r.stk.pal} pal.` : ""}</span>` : `<span class="gp-stk">—</span>`;
+    return `<tr class="${on ? "" : "off"}" data-c="${esc(r.code)}"><td><input type="checkbox" class="gp-ck" ${on ? "checked" : ""} aria-label="Incluir"></td><td><span class="gp-rk">${i + 1}</span></td>
+      <td class="c1 gp-sk"><b>${esc(r.code)} · ${esc(r.desc)}</b>${r.vto ? `<span class="gp-vto">⚠ ${r.vto.bu != null ? fmtN(r.vto.bu) + " btos vencen" : "vence"} en ${r.vto.dias} días</span>` : ""}</td>
+      <td class="gp-bk" title="${esc(tip)}">${acc.join("<br>") || "Sin acción"}</td><td class="r">${fmtN(r.cl)}</td>
+      <td class="r"><input class="gp-in bu" data-k="bu" inputmode="numeric" value="${r.bu}"><small style="display:block;color:var(--muted)">de ${fmtN(Math.round(r.rbu))}</small></td>
+      <td class="r"><input class="gp-in" data-k="ad" inputmode="decimal" value="${String(r.ad).replace(".", ",")}">%</td>
+      <td class="r">${r.inv != null ? m$f(r.inv) : "—"}</td><td class="r">${fmtHL(r.hl)}</td><td class="r">${r.cph != null ? m$f(r.cph) : "—"}</td><td class="r">${r.gan != null ? m$f(r.gan - (r.inv || 0) * sh) : "—"}</td><td>${stk}</td></tr>`; }).join("") +
+    `<tr class="tot"><td></td><td></td><td>Plan elegido · ${sel.length} SKU${sel.length === 1 ? "" : "s"}</td><td></td><td class="r">${fmtN(cl)}<small style="display:block;color:var(--muted)">distintos</small></td><td class="r">${fmtN(sel.reduce((s, r) => s + r.bu, 0))}</td><td></td><td class="r">${m$f(inv)}</td><td class="r">${fmtHL(hl)}</td><td class="r">${hl ? m$f(inv / hl) : "—"}</td><td class="r">${m$f(gan)}</td><td></td></tr>`;
+  $("gpCount").textContent = C.rows.length ? `${C.rows.length} SKUs de ${uL} con clientes para recuperar${C.rows.length > 40 ? " · se muestran los 40 primeros" : ""}` : "Sin datos de recuperables todavía";
+  simFill(); tsRender(); caidosRender(); ganRender(); comprasRender(sel);
+}
+const skuShort = d => String(d).replace(/[*#]/g, " ").replace(/\b(TITAN|NF|2024|96 BUL)\b/gi, " ").replace(/\s+(PR.*|- \d+.*)$/i, "").replace(/\s+/g, " ").trim().toLowerCase().replace(/(^|\s)\S/g, s => s.toUpperCase());
+$("gpRows").addEventListener("change", e => {
+  const tr = e.target.closest("tr[data-c]"); if (!tr) return; const code = tr.dataset.c;
+  if (e.target.classList.contains("gp-ck")){ PL.sel.set(code, e.target.checked); planRender(); return; }
+  if (e.target.dataset.k === "bu") PL.bu.set(code, Math.max(0, Math.round(pnum(e.target.value))));
+  if (e.target.dataset.k === "ad") PL.adic.set(code, Math.max(0, pnum(e.target.value)));
+  planCalc();
+});
+$("gpCopyTxt").addEventListener("click", async () => { if (!PL.ctx || !PL.ctx.pitch) return; try { await navigator.clipboard.writeText(PL.ctx.pitch); toast("📋 Texto copiado"); } catch(e){ toast("No se pudo copiar"); } });
+$("gpCopy1").addEventListener("click", () => copyBlob(snapBlob($("gpSnap1"), c => c.querySelector(".acts") && c.querySelector(".acts").remove()), "plan_inversion.png", $("gpCopy1")));
+$("gpCopy2").addEventListener("click", () => copyBlob(snapBlob($("gpSnap2"), c => { c.querySelectorAll(".acts,#gpSort").forEach(x => x.remove()); c.querySelectorAll("tr.off").forEach(x => x.remove());
+  c.querySelectorAll("input.gp-in").forEach(i => { const s = document.createElement("b"); s.textContent = i.value; i.replaceWith(s); }); }), "ranking_inversion.png", $("gpCopy2")));
+$("gpXls").addEventListener("click", () => {
+  const C = PL.ctx; if (!C || !C.rows) return;
+  const head = ["Elegido", "Código", "SKU", "Acciones vigentes", "Clientes recuperables", "Bultos recuperables", "Bultos plan", "% adicional", "Inversión TS", "HL", "$ por HL", "Ganancia distri", "Bultos por vencer (<60 días)", "Días de stock", "Paletas a pedir"];
+  const data = C.rows.map(r => [PL.sel.get(r.code) ? "Sí" : "", r.code, r.desc, r.acc.map(a => a[2] + " " + a[3]).concat(r.cb.map(c => "Combo " + c[0] + " " + c[2] + "%")).join(" | "), r.cl, Math.round(r.rbu), r.bu, r.ad, r.inv != null ? Math.round(r.inv) : "", Math.round(r.hl * 100) / 100, r.cph != null ? Math.round(r.cph) : "", r.gan != null ? Math.round(r.gan) : "", r.vto && r.vto.bu != null ? r.vto.bu : "", r.stk ? r.stk.ds : "", r.stk ? r.stk.pal : ""]);
+  const ws = XLSX.utils.aoa_to_sheet([head, ...data]); ws["!cols"] = head.map((h, i) => ({wch: i === 2 || i === 3 ? 40 : 13}));
+  const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Plan de inversión"); XLSX.writeFile(wb, "plan_inversion_" + slug(PL.un) + "_" + C.ym + ".xlsx"); toast("⬇ Excel descargado");
+});
+
+/* ---- simulador ---- */
+function simFill(){
+  const P = PL.lp && PL.lp.precios && PL.lp.precios.p, s = $("gsSku"); if (!P) { s.innerHTML = "<option>Sin lista de precios</option>"; return; }
+  const want = PL.un === "UNG" ? "UNG" : "AGUAS", M0 = PL.ctx.M0, M1 = PL.ctx.M1, vol = c => ((M0 && M0.by.get(c)) || (M1 && M1.by.get(c)) || {bu:0}).bu;
+  const list = Object.entries(P).filter(([c, p]) => p.ng ? p.ng.startsWith(want) : true).sort((a, b) => vol(b[0]) - vol(a[0]));
+  const cur = s.value, ranked = PL.ctx.rows.filter(r => PL.sel.get(r.code)).map(r => r.code);
+  if (s.dataset.un !== PL.un){ s.innerHTML = list.map(([c, p]) => `<option value="${c}">${c} · ${esc(p.d)}</option>`).join(""); s.dataset.un = PL.un; s.value = ranked[0] || (list[0] || [])[0] || ""; PL.sim.acc = null; simAcc(); }
+  else if (cur) s.value = cur;
+  simCalc();
+}
+function simAcc(){
+  const code = $("gsSku").value, can = $("gsCan").value, A = accFor(code, can), cb = combosFor(code);
+  const ptc = A.filter(a => a[0] === "PTC").map(a => (accTiers(a[3])[0] || [0, 0])[1]).sort((a, b) => b - a)[0] || 0;
+  const drop = A.find(a => a[0] !== "PTC" && accTiers(a[3]).length);
+  $("gsPtc").value = String(ptc).replace(".", ",");
+  simTiers(drop);
+  $("gsAcc").innerHTML = (A.length ? A.map(a => `<button type="button" data-a="${esc(a[1])}" class="${drop && drop[1] === a[1] ? "on" : ""}"><b>${esc(a[0])} · ${esc(a[1])}</b>${esc(a[2])}: ${esc(a[3])}</button>`).join("") : `<p>Sin acciones del Book para este SKU en ${esc(can)}.</p>`) +
+    cb.map(c => `<button type="button" class="cb"><b>COMBO · ${esc(c[0])}</b>${esc(c[1])}: ${c[2]}%</button>`).join("");
+}
+function simTiers(a){
+  PL.sim.acc = a ? a[1] : null;
+  const t = a ? accTiers(a[3]) : []; let prev = 0;
+  const inc = t.slice(0, 4).map(x => { const v = Math.max(0, x[1] - prev); prev = Math.max(prev, x[1]); return Math.round(v * 100) / 100; });
+  ["gsE1", "gsE2", "gsE3", "gsE4"].forEach((id, i) => $(id).value = inc[i] != null ? String(inc[i]).replace(".", ",") : "");
+}
+$("gsSku").addEventListener("change", () => { simAcc(); simCalc(); });
+$("gsCan").addEventListener("change", () => { simAcc(); simCalc(); });
+$("gsAcc").addEventListener("click", e => { const b = e.target.closest("[data-a]"); if (!b) return; const a = (PL.lp.acc || []).find(x => x[1] === b.dataset.a);
+  if (a && a[0] === "PTC"){ $("gsPtc").value = String((accTiers(a[3])[0] || [0, 0])[1]).replace(".", ","); } else simTiers(a);
+  if (a && a[0] !== "PTC") document.querySelectorAll("#gsAcc [data-a]").forEach(x => { const y = (PL.lp.acc || []).find(z => z[1] === x.dataset.a); if (y && y[0] !== "PTC") x.classList.toggle("on", x === b); });
+  else b.classList.add("on");
+  simCalc(); });
+["gsPtc", "gsE1", "gsE2", "gsE3", "gsE4", "gsAd", "gsPal"].forEach(id => $(id).addEventListener("input", simCalc));
+function simCalc(){
+  const P = PL.lp && PL.lp.precios && PL.lp.precios.p, p = P && P[$("gsSku").value]; if (!p){ $("gsRes").innerHTML = ""; return; }
+  const v = id => pnum($(id).value) / 100, ptc = v("gsPtc"), e1 = v("gsE1"), e2 = v("gsE2"), e3 = v("gsE3"), e4 = v("gsE4"), ad = v("gsAd"), pal = pnum($("gsPal").value);
+  const tot = ptc + e1 + e2 + e3 + e4 + ad, M = p.f, J = p.pl || 0, ub = p.ub || 1, lt = p.lt || 0, bp = p.bp || 0;
+  const ptr = M * (1 - tot), ptrU = ptr / ub, ptcB = ptrU * 1.3, bu = pal * bp, hl = bu * ub * lt / 100, tsv = ad * J * bu, sh = Math.min(100, Math.max(0, pnum($("gpDis").value))) / 100, gan = p.sf ? (p.pnit - p.sf) * bu - tsv * sh : 0, gap = PL.ctx.k.gap;
+  const c = (l, val, cls) => `<div${cls ? ` class="${cls}"` : ""}><span>${l}</span><b>${val}</b></div>`;
+  $("gsRes").innerHTML = c("Precio lista bulto", J ? m$f(J) : "—") + c("PNFT bulto", m$f(M)) + c("PTR bulto nuevo", m$f(ptr)) + c("PTC botella", m$f(ptcB)) +
+    c("$ por litro", lt ? m$f(ptrU / lt) : "—") + c("Desc. total", pct1(tot * 100)) + c("Paletas · bultos", `${pal.toLocaleString("es-AR")} · ${fmtN(Math.round(bu))}`) + c("HL", fmtHL(hl)) +
+    c(sh === 0 ? "TS necesario (Quilmes)" : sh === 1 ? "Adicional (EMCALA)" : "Quilmes · EMCALA", J ? (sh > 0 && sh < 1 ? m$(tsv * (1 - sh)) + " · " + m$(tsv * sh) : m$f(tsv)) : "—", "hi") + c("$ por HL", J && hl ? m$f(tsv / hl) : "—", "hi") + c(sh ? "Ganancia neta distri" : "Ganancia distri", gan ? m$(gan) : "—", "ok") + c("Cubre de la brecha", gap > 0 ? Math.round(hl / gap * 100) + "%" : "—", "ok");
+}
+
+/* ---- TS ejecutado ---- */
+function tsOf(M){
+  const P = PL.lp && PL.lp.precios && PL.lp.precios.p; if (!M || !P) return null;
+  const r = {ts:0, hl:0, can:{}, sku:[]};
+  for (const x of M.by.values()){ if (x.un !== PL.un) continue; const p = P[x.code]; if (!p) continue;
+    const ts = Math.max(0, x.bu * p.f - x.fin); r.ts += ts; r.hl += x.hl; r.sku.push([x.code, x.desc, ts, x.hl]);
+    for (const [cn, c] of Object.entries(x.can)){ const k = /^AS/.test(cn) ? "AS" : /K\+?T/.test(cn) ? "K+T" : /MAY|REF/.test(cn) ? "MAY / REF" : "Otros"; const z = r.can[k] ||= {ts:0, hl:0}; z.ts += Math.max(0, c.bu * p.f - c.fin); z.hl += c.hl; } }
+  return r;
+}
+function tsRender(){
+  const a = tsOf(PL.ctx.M0), b = tsOf(PL.ctx.M1);
+  if (!a){ $("gpTs").innerHTML = `<p class="gp-sub">Falta la base del mes con detalle por SKU o la lista de precios.</p>`; return; }
+  const cph = a.hl ? a.ts / a.hl : 0, cphB = b && b.hl ? b.ts / b.hl : null;
+  const cans = Object.entries(a.can).filter(x => x[1].hl > 0).sort((x, y) => y[1].hl - x[1].hl), mx = Math.max(...cans.map(x => x[1].ts / x[1].hl), 1);
+  const sk = a.sku.sort((x, y) => y[2] - x[2]).slice(0, 5), mxs = Math.max(...sk.map(x => x[2]), 1);
+  $("gpTs").innerHTML = `<div class="gp-big"><div><span>TS ejecutado</span><b>${m$(a.ts)}</b></div><div><span>Costo por HL</span><b>${m$f(cph)}</b></div>${cphB ? `<div><span>$/HL vs ${MESES[+PL.ctx.pv.slice(5) - 1].slice(0, 3).toLowerCase()}</span><b style="color:${cph <= cphB ? "var(--lime)" : "#ff8fa3"}">${fpct(gpct(cph, cphB))}</b></div>` : ""}</div>
+    <p class="gp-sub" style="margin:6px 0 4px"><b>$ por HL por canal</b></p>` + cans.map(([k, z]) => `<div class="gp-hb"><span>${k}</span><div class="b"><i style="width:${z.ts / z.hl / mx * 100}%;background:#38c8ff"></i></div><span>${m$f(z.ts / z.hl)}</span></div>`).join("") +
+    `<p class="gp-sub" style="margin:12px 0 4px"><b>Dónde se fue la plata</b> (top 5 SKUs)</p>` + sk.map(x => `<div class="gp-hb"><span title="${esc(x[1])}">${esc(skuShort(x[1]))}</span><div class="b"><i style="width:${x[2] / mxs * 100}%;background:#2de0c5"></i></div><span>${m$(x[2])}</span></div>`).join("") +
+    `<p class="gp-note">Se calcula con la lista vigente, así que en meses con otra lista es aproximado.</p>`;
+}
+
+/* ---- clientes caídos ---- */
+function caidosRender(){
+  const C = PL.ctx, M0 = C.M0, M1 = C.M1, g1 = C.g1;
+  if (!M1 || !C.cl1){ $("gpCaidos").innerHTML = `<p class="gp-sub">Falta la base de ${ymLabel(C.pv)} con detalle por SKU.</p>`; return; }
+  const hlb = new Map([...M1.by.values()].filter(x => x.un === PL.un && x.bu).map(x => [x.code, x.hl / x.bu]));
+  let fdvOf = new Map(); try { fdvOf = new Map(C.cl1.cl.map(r => [String(r[0]), C.cl1.dims.fdv[r[2]]])); } catch(e){}
+  const by = new Map(); let n = 0, tot = 0;
+  for (const [cli, m] of M1.cs){ let h = 0; for (const [code, bu] of m) if (hlb.has(code)) h += bu * hlb.get(code); if (h <= 0) continue;
+    const now = M0 && M0.cs.get(cli); if (now && [...now.keys()].some(c => hlb.has(c) && now.get(c) > 0)) continue;
+    n++; tot += h; const f = fdvOf.get(cli) || "(sin dato)", z = by.get(f) || by.set(f, {n:0, h:0}).get(f); z.n++; z.h += h; }
+  const top = [...by.entries()].sort((a, b) => b[1].h - a[1].h).slice(0, 8);
+  $("gpCaidos").innerHTML = `<p class="gp-sub">Compraron ${PL.un === "UNG" ? "UNG" : "Aguas"} en ${MESES[+C.pv.slice(5) - 1].toLowerCase()} y este mes todavía no (por código de cliente; promotor de ${MESES[+C.pv.slice(5) - 1].toLowerCase()}).</p>
+    <div class="gp-big"><div><span>Clientes</span><b style="color:#ff8fa3">${fmtN(n)}</b></div><div><span>HL en riesgo</span><b>${fmtHL(tot)}</b></div></div>
+    <div class="tbl"><table class="gp-mini"><thead><tr><th>Promotor</th><th class="r">Clientes</th><th class="r">HL mes ant.</th></tr></thead><tbody>${top.map(([f, z]) => `<tr><td>${esc(tc(f))}</td><td class="r">${fmtN(z.n)}</td><td class="r">${fmtHL(z.h)}</td></tr>`).join("")}</tbody></table></div>`;
+}
+
+/* ---- ganancia por HL ---- */
+function ganRender(){
+  const yms = Object.keys(GER.idx.m).filter(k => k <= PL.ctx.ym).sort().slice(-6);
+  const v = yms.map(k => { let g = 0, h = 0; GER.idx.m[k].t.forEach(r => { if (r[3] === PL.un){ g += r[10] || 0; h += r[6]; } }); return h ? g / h : 0; });
+  const mx = Math.max(...v, 1), last = v[v.length - 1], prev = v[v.length - 2];
+  $("gpGan").innerHTML = `<div class="gp-big"><div><span>${ymLabel(yms[yms.length - 1])}</span><b>${m$f(last)} <small style="font:700 12px var(--body);color:${last >= prev ? "var(--lime)" : "#ff8fa3"}">${prev ? fpct(gpct(last, prev)) + " vs mes ant." : ""}</small></b></div></div>
+    <div class="gp-spark">${yms.map((k, i) => `<div class="${k === PL.ctx.ym ? "cur" : ""}"><em>${m$f(v[i])}</em><i style="height:${Math.max(4, v[i] / mx * 80)}px"></i>${MESES[+k.slice(5) - 1].slice(0, 3).toUpperCase()}</div>`).join("")}</div>`;
+}
+
+/* ---- compras ---- */
+function comprasRender(sel){
+  if (!PL.ppP){ $("gpCompras").innerHTML = `<p class="gp-sub">Subí el reporte de punto de pedido (⬆ Punto de pedido) para ver si el plan tiene stock.</p>`; return; }
+  const rows = PL.ctx.rows, need = sel.filter(r => r.stk && r.stk.pal), vto = rows.filter(r => r.vto && r.vto.bu).sort((a, b) => b.vto.bu - a.vto.bu).slice(0, 4);
+  const P = PL.lp && PL.lp.precios && PL.lp.precios.p || {}, want = PL.un === "UNG" ? "UNG" : "AGUAS";
+  const bajos = PL.ppP.rows.filter(r => (P[r[0]] ? (P[r[0]].ng || "").startsWith(want) : true) && r[4] > 0 && r[5] < 7).sort((a, b) => a[5] - b[5]).slice(0, 6);
+  $("gpCompras").innerHTML = `<p class="gp-sub">Punto de pedido al ${PL.ppP.fecha ? fdate(PL.ppP.fecha) : "?"}. Se pide si el stock (+ lo ya pedido que llega a tiempo) no alcanza para la venta normal de los días que quedan + los bultos del plan.</p>` +
+    `<div class="tbl"><table class="gp-mini"><thead><tr><th>SKU del plan</th><th class="r">Stock</th><th class="r">Pedir</th></tr></thead><tbody>` +
+    (sel.length ? sel.map(r => `<tr><td>${esc(skuShort(r.desc))}</td><td class="r">${r.stk ? fmtN(r.stk.st) + " btos" : "—"}</td><td class="r">${r.stk ? (r.stk.pal ? `<b style="color:#ff8fa3">${r.stk.pal} pal.</b>` : "✓ alcanza") : "—"}</td></tr>`).join("") : `<tr><td colspan="3">Tildá SKUs en el ranking</td></tr>`) + `</tbody></table></div>` +
+    (vto.length ? `<p class="gp-sub" style="margin:12px 0 4px"><b>Conviene empujar</b> (vencen en menos de 60 días)</p>` + vto.map(r => `<div class="gp-hb"><span>${esc(skuShort(r.desc))}</span><div class="b"><i style="width:${Math.min(100, r.vto.bu / Math.max(...vto.map(x => x.vto.bu)) * 100)}%;background:#ff4d6d"></i></div><span>${fmtN(r.vto.bu)} btos</span></div>`).join("") : "") +
+    (bajos.length ? `<p class="gp-sub" style="margin:12px 0 4px"><b>Stock bajo</b> (alcanza para menos de 7 días)</p>` + bajos.map(r => `<div class="gp-hb"><span>${esc(skuShort(r[1]))}</span><div class="b"><i style="width:${Math.max(3, r[5] / 7 * 100)}%;background:#ffc93c"></i></div><span>${r[3] > 0 ? fmtN(r[5]) + " días" : "sin stock"}${r[7] ? " · " + fmtN(r[7]) + " ped." : ""}</span></div>`).join("") : "");
+}
+
+/* ---- carga del punto de pedido ---- */
+$("gpPpBtn").addEventListener("click", () => { $("mPp").hidden = false; $("ppMsg").textContent = ""; $("ppMsg").className = "msg"; });
+$("ppClose").addEventListener("click", () => $("mPp").hidden = true);
+function parsePp(aoa){
+  const hi = aoa.findIndex(r => r.some(c => norm(c) === "articulo") && r.some(c => norm(c) === "stock"));
+  if (hi < 0) throw new Error("No encuentro las columnas ARTÍCULO y STOCK");
+  const N = aoa[hi].map(norm), f = n => N.indexOf(n);
+  const iA = f("articulo"), iD = f("descripcion"), iBp = f("bultos x pallets"), iS = f("stock"), iV = f("vta. calculada"), iDs = f("dias de stock"), iPo = f("politica"), iY = f("ya pedido"), iF = f("fecha ultimo pedido"), iW = f("dias ventana"), iR = f("dias para arribo"), iMp = f("min. pallets a pedir"), iP = f("pedir?");
+  const P = PL.lp && PL.lp.precios && PL.lp.precios.p;
+  const rows = [];
+  for (const r of aoa.slice(hi + 1)){
+    const cod = String(r[iA] ?? "").replace(/\.0$/, "").trim(); if (!/^\d+$/.test(cod)) continue;
+    const st = gnum(r[iS]), vc = gnum(r[iV]), yp = gnum(r[iY]);
+    if (!(st > 0 || vc > 0 || yp > 0)) continue;
+    if (P){ const p = P[cod]; if (!p || !/^(UNG|AGUAS)/.test(p.ng || "")) continue; }
+    const fp = r[iF] instanceof Date ? r[iF].toISOString().slice(0, 10) : "";
+    rows.push([cod, String(r[iD] ?? "").trim().replace(/\s+/g, " "), gnum(r[iBp]), st, Math.round(vc * 100) / 100, gnum(r[iDs]), gnum(r[iPo]), yp, fp, gnum(r[iW]), gnum(r[iR]), gnum(r[iMp]), String(r[iP] ?? "").trim()]);
+  }
+  if (!rows.length) throw new Error("El archivo no tiene SKUs de UNG o Aguas con stock o venta");
+  return rows;
+}
+$("ppGo").addEventListener("click", async () => {
+  const m = $("ppMsg"), f = $("ppFile").files[0], key = $("ppKey").value;
+  m.className = "msg";
+  if (!f){ m.className = "msg bad"; m.textContent = "Elegí el reporte de punto de pedido"; return; }
+  if (!key){ m.className = "msg bad"; m.textContent = "Escribí la clave de administradora"; return; }
+  $("ppGo").disabled = true;
+  try {
+    m.textContent = "Leyendo…";
+    if (PL.lp === undefined){ try { const p = await apiGet("combos"); PL.lp = p && p.data ? await openData(p) : null; } catch(e){ PL.lp = null; } }
+    const rows = parsePp(await readSheet(f));
+    const mf = f.name.match(/(\d{1,2})[-_.](\d{1,2})(?:[-_.](\d{2,4}))?/), now = new Date();
+    const fecha = mf ? new Date(mf[3] ? +(mf[3].length === 2 ? "20" + mf[3] : mf[3]) : now.getFullYear(), +mf[2] - 1, +mf[1]).toISOString() : now.toISOString();
+    const data = {fecha, rows}, stamp = {updated:new Date().toISOString()};
+    m.textContent = "Publicando…";
+    const res = await apiPut("ger_pp", key, Object.assign(await sealData(data, GER.cred), stamp));
+    if (!res.ok) throw new Error(res.error || "No se pudo guardar");
+    PL.ppP = data; m.className = "msg ok"; m.textContent = `¡Listo! ${fmtN(rows.length)} SKUs de UNG y Aguas con stock o venta`;
+    $("ppFile").value = ""; planCalc();
+  } catch(err){ m.className = "msg bad"; m.textContent = err.message || "Error al cargar"; }
+  $("ppGo").disabled = false;
 });
 
 /* ===== Clientes habilitados (combos CNC, listados REF, etc.) ===== */
