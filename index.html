@@ -425,6 +425,11 @@ td.hb{white-space:nowrap}
 .gp-ritmo{display:flex;gap:18px;margin-top:12px;font-size:13px;color:var(--muted);flex-wrap:wrap}.gp-ritmo b{color:var(--ink)}
 .gp-pitch{margin-top:12px;background:rgba(56,200,255,.1);border:1px solid rgba(56,200,255,.35);border-radius:14px;padding:12px 16px;font-size:14px;line-height:1.5}
 .gp-pitch b{color:var(--fizz)}
+.gp-sel{margin-top:14px}.gp-sel h3{font:800 11px var(--body);letter-spacing:.08em;color:var(--muted);margin:0 0 8px;text-transform:uppercase}
+.gp-sel .it{display:grid;grid-template-columns:minmax(0,1fr) 150px 100px 110px;gap:10px;align-items:center;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.04);margin-bottom:6px;font-size:13px}
+.gp-sel .it b{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.gp-sel .it span{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--muted)}.gp-sel .it span strong{color:var(--ink)}
+.gp-sel .go{margin-top:6px;font:800 12.5px var(--body);color:var(--fizz);background:none;border:0;cursor:pointer;padding:4px 0}
+@media (max-width:620px){.gp-sel .it{grid-template-columns:1fr 1fr}.gp-sel .it b{grid-column:1/-1}}
 .gp-tbl td{vertical-align:middle}
 .gp-tbl td.r,.gp-tbl th.r{text-align:right;font-variant-numeric:tabular-nums}
 .gp-tbl tr.off td{opacity:.55}.gp-tbl tr.off td:first-child{opacity:1}
@@ -438,11 +443,27 @@ td.hb{white-space:nowrap}
 .gp-vto{display:inline-block;margin-top:3px;font:800 10.5px var(--body);color:#ff8fa3;background:rgba(255,77,109,.14);border-radius:999px;padding:2px 8px}
 .gp-sk small{display:block;color:var(--muted);font-size:11px}
 .gp-stk{font-size:12px;white-space:nowrap}.gp-stk.bad{color:#ff8fa3;font-weight:800}.gp-stk.mid{color:var(--sun);font-weight:800}
-.gp-cols{display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
-.gp-cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.gp-cols,.gp-cols3{display:contents}
+#gerPlan [data-pt]{display:none}
+#gerPlan[data-t="caso"] [data-pt="caso"],#gerPlan[data-t="rank"] [data-pt="rank"],#gerPlan[data-t="sim"] [data-pt="sim"],#gerPlan[data-t="ts"] [data-pt="ts"],#gerPlan[data-t="cai"] [data-pt="cai"],#gerPlan[data-t="comp"] [data-pt="comp"]{display:block}
+#gerPlan[data-t="caso"] [data-pt="caso"]{display:block}
+.gp-tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:0 0 14px}
+.gp-tabs button{display:flex;align-items:center;justify-content:center;gap:8px;font:800 13px var(--body);color:var(--ink);background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;padding:12px 10px;cursor:pointer}
+.gp-tabs button b{font-size:18px}
+.gp-tabs button.on{background:#fff;color:#0a1430;border-color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.gp-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 12px}
+.gp-strip div{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:12px;padding:8px 12px;display:flex;align-items:baseline;gap:8px;min-width:0}
+.gp-strip span{font:800 10px var(--body);letter-spacing:.08em;color:var(--muted);text-transform:uppercase;white-space:nowrap}
+.gp-strip b{font:900 18px var(--display);font-variant-numeric:tabular-nums;white-space:nowrap}
+.gp-strip .r b{color:#ff8fa3}.gp-strip .i b{color:var(--fizz)}.gp-strip .v b{color:var(--aqua)}.gp-strip .g b{color:var(--lime)}
+#gerPlan[data-t="caso"] .gp-strip{display:none}
+#gpTs,#gpCaidos,#gpCompras,#gpGan{max-width:900px}
 .gp-simh{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 .gp-simh select{font:700 13.5px var(--body);color:var(--ink);background:rgba(255,255,255,.1);border:1px solid var(--line);border-radius:12px;padding:9px 12px;max-width:100%}
-.gp-simh select option{color:#0a1430}#gsSku{flex:1 1 260px}
+.gp-simh select option{color:#0a1430}
+.gs-cod{display:grid;gap:3px;font:800 10px var(--body);letter-spacing:.08em;color:var(--muted)}
+.gs-cod input{width:120px;font:800 16px var(--body);color:#0a1430;background:#fff;border:0;border-radius:10px;padding:8px 10px}
+.gs-desc{flex:1 1 220px;align-self:end;font:800 15px var(--body);padding:0 0 8px}.gs-desc small{display:block;font:600 12px var(--body);color:var(--muted)}.gs-desc.bad{color:#ff8fa3}
 .gp-acc{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .gp-acc button{font:700 11.5px var(--body);color:var(--ink);background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:10px;padding:6px 9px;cursor:pointer;text-align:left;line-height:1.3}
 .gp-acc button b{display:block;font-size:10px;letter-spacing:.06em;color:var(--muted)}
@@ -466,8 +487,8 @@ td.hb{white-space:nowrap}
 .gp-spark div{flex:1;display:grid;gap:3px;justify-items:center;font-size:10.5px;color:var(--muted);align-content:end}
 .gp-spark i{display:block;width:100%;border-radius:5px 5px 0 0;background:linear-gradient(#7ee081,#3aa86b)}.gp-spark .cur i{background:linear-gradient(#38c8ff,#1f7fb8)}
 .gp-spark em{font-style:normal;font-size:10px;color:var(--ink);font-variant-numeric:tabular-nums}
-@media (max-width:1100px){.gp-cols{grid-template-columns:1fr}.gp-cols3{grid-template-columns:1fr 1fr}}
-@media (max-width:900px){.gp-story{grid-template-columns:1fr 1fr;gap:8px}.gp-arr{display:none}.gp-esc{grid-template-columns:repeat(4,minmax(0,1fr))}.gp-res{grid-template-columns:1fr 1fr}.gp-cols3{grid-template-columns:1fr}}
+@media (max-width:1100px){.gp-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:900px){.gp-story{grid-template-columns:1fr 1fr;gap:8px}.gp-arr{display:none}.gp-esc{grid-template-columns:repeat(4,minmax(0,1fr))}.gp-res{grid-template-columns:1fr 1fr}.gp-strip{grid-template-columns:1fr 1fr}.gp-tabs button{flex-direction:column;gap:2px;font-size:11.5px;padding:9px 4px}}
 
 .gx-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
 .gx-sups{display:flex;flex-wrap:wrap;gap:6px}
@@ -634,7 +655,7 @@ td.hb{white-space:nowrap}
     </div>
 
     <div class="out"><button id="out">Cerrar sesión</button></div>
-    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 38 · 25/11</p>
+    <p id="ver" style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px">Versión 40 · 25/11</p>
   </section>
 
   <section id="vGrillas" class="view" hidden>
@@ -1024,29 +1045,39 @@ td.hb{white-space:nowrap}
           <div class="tbl"><table><thead id="gerHead"></thead><tbody id="gerRows"></tbody></table></div>
         </div>
       </div>
-      <div id="gerPlan" hidden>
+      <div id="gerPlan" data-t="caso" hidden>
         <div class="gp-bar">
           <div class="gx-sups" id="gpUn"><button data-u="UNG" class="on">UNG</button><button data-u="AGUAS ECO">Aguas Eco</button></div>
           <div class="gp-glob">
             <label>ADICIONAL<span><input id="gpAdic" inputmode="decimal" value="5">%</span></label>
             <label title="Qué parte del adicional pone EMCALA (0 = lo pone todo Quilmes, 100 = lo pone todo EMCALA)">EMCALA PONE<span><input id="gpDis" inputmode="decimal" value="0">% del adic.</span></label>
             <label title="Qué parte del volumen de los clientes caídos esperás recuperar">RECUPERO<span><input id="gpRec" inputmode="decimal" value="50">%</span></label>
-            <button class="btn-up ghost" id="gpPpBtn">⬆ Punto de pedido</button>
+            <button class="btn-up ghost" id="gpBkBtn">⬆ Book y lista</button><button class="btn-up ghost" id="gpPpBtn">⬆ Punto de pedido</button>
           </div>
         </div>
         <p class="ger-cut" id="gpCut"></p>
+        <div class="gp-strip" id="gpStrip"></div>
+        <div class="gp-tabs" id="gpTabs" role="tablist">
+          <button class="on" data-t="caso"><b>🎯</b>Caso de negocio</button>
+          <button data-t="rank"><b>📊</b>Dónde invertir</button>
+          <button data-t="sim"><b>🧮</b>Simulador</button>
+          <button data-t="ts"><b>💰</b>TS y ganancia</button>
+          <button data-t="cai"><b>👥</b>Clientes caídos</button>
+          <button data-t="comp"><b>📦</b>Stock y compras</button>
+        </div>
         <div id="gpWarn" class="gp-warn" hidden></div>
 
-        <div class="gp-sec" id="gpSnap1">
+        <div class="gp-sec" id="gpSnap1" data-pt="caso">
           <h2 class="gp-h">¿Llegamos al objetivo? <span class="gp-tag t1">Caso de negocio</span></h2>
           <p class="gp-sub">Lo que falta, lo que cuesta, lo que tracciona y lo que gana EMCALA, con los SKUs tildados abajo.</p>
           <div class="gp-story" id="gpStory"></div>
           <div class="gp-ritmo" id="gpRitmo"></div>
           <div class="gp-pitch" id="gpPitch"></div>
+          <div class="gp-sel" id="gpSel"></div>
           <div class="acts" style="justify-content:flex-end"><button class="act" id="gpCopyTxt">📋 Copiar texto</button><button class="act" id="gpCopy1">📋 Copiar imagen</button></div>
         </div>
 
-        <div class="gp-sec" id="gpSnap2">
+        <div class="gp-sec" id="gpSnap2" data-pt="rank">
           <h2 class="gp-h">¿Dónde conviene poner plata? <span class="gp-tag t3">Ranking por SKU</span></h2>
           <p class="gp-sub"><b>Recuperables</b> = clientes que compraron el SKU el mes pasado y este mes todavía no (por código de cliente). Los bultos del plan son esos bultos × el % de recupero. Podés cambiar el adicional y los bultos de cada SKU.</p>
           <div class="chips" id="gpSort"><button class="chip on" data-s="hl">Más HL por $</button><button class="chip" data-s="vto">Vencimientos primero</button><button class="chip" data-s="rec">Más recuperables</button></div>
@@ -1055,10 +1086,10 @@ td.hb{white-space:nowrap}
         </div>
 
         <div class="gp-cols">
-          <div class="gp-sec" id="gpSnap3">
+          <div class="gp-sec" id="gpSnap3" data-pt="sim">
             <h2 class="gp-h">Simulador TS <span class="gp-tag t1">Tu Excel, automático</span></h2>
             <p class="gp-sub">Elegís el SKU y el canal: la lista y las acciones del Book se completan solas. Tocá una acción para cargar sus escalas. Todo se puede editar.</p>
-            <div class="gp-simh"><select id="gsSku" aria-label="SKU"></select><select id="gsCan" aria-label="Canal"><option>K+T</option><option>AS</option><option>MAY</option></select></div>
+            <div class="gp-simh"><label class="gs-cod">CÓDIGO<input id="gsCod" inputmode="numeric" list="gsList" autocomplete="off" placeholder="Ej: 30645"></label><input type="hidden" id="gsSku"><datalist id="gsList"></datalist><div class="gs-desc" id="gsDesc"></div><select id="gsCan" aria-label="Canal"><option>K+T</option><option>AS</option><option>MAY</option></select></div>
             <div class="gp-acc" id="gsAcc"></div>
             <div class="gp-esc">
               <label>PTC<span><input id="gsPtc" inputmode="decimal">%</span></label>
@@ -1070,9 +1101,10 @@ td.hb{white-space:nowrap}
               <label>PALETAS<span><input id="gsPal" inputmode="decimal" value="1"></span></label>
             </div>
             <div class="gp-res" id="gsRes"></div>
+            <p class="gp-note" id="gsEst" style="color:var(--sun)"></p>
             <p class="gp-note">Mismas fórmulas que tu simulador: PTR = PNFT × (1 − descuentos) · PTC botella = PTR botella + 30% · Adicional $ = % adicional × precio lista bulto × bultos.</p>
           </div>
-          <div class="gp-sec" id="gpSnap4">
+          <div class="gp-sec" id="gpSnap4" data-pt="ts">
             <h2 class="gp-h">TS ejecutado del mes <span class="gp-tag t2">Lo que ya invertimos</span></h2>
             <p class="gp-sub">Lo que los clientes pagaron por debajo de la lista (bultos × PNFT − importe final), con la lista vigente.</p>
             <div id="gpTs"></div>
@@ -1080,15 +1112,32 @@ td.hb{white-space:nowrap}
         </div>
 
         <div class="gp-cols3">
-          <div class="gp-sec" id="gpSnap5"><h2 class="gp-h">Clientes caídos <span class="gp-tag t4">En riesgo</span></h2><div id="gpCaidos"></div></div>
-          <div class="gp-sec"><h2 class="gp-h">Ganancia por HL <span class="gp-tag t2">Mix</span></h2><p class="gp-sub">Si sube, el mix mejora; si baja, vendemos más barato.</p><div id="gpGan"></div></div>
-          <div class="gp-sec" id="gpSnap6"><h2 class="gp-h">Compras <span class="gp-tag t3">Stock y vencimientos</span></h2><div id="gpCompras"></div></div>
+          <div class="gp-sec" id="gpSnap5" data-pt="cai"><h2 class="gp-h">Clientes caídos <span class="gp-tag t4">En riesgo</span></h2><div id="gpCaidos"></div></div>
+          <div class="gp-sec" data-pt="ts"><h2 class="gp-h">Ganancia por HL <span class="gp-tag t2">Mix</span></h2><p class="gp-sub">Si sube, el mix mejora; si baja, vendemos más barato.</p><div id="gpGan"></div></div>
+          <div class="gp-sec" id="gpSnap6" data-pt="comp"><h2 class="gp-h">Compras <span class="gp-tag t3">Stock y vencimientos</span></h2><div id="gpCompras"></div></div>
         </div>
       </div>
     </div>
     <div class="empty" id="gerEmpty" hidden>Todavía no hay bases cargadas.<br>Tocá <b>⬆ Subir base y objetivos</b>, elegí el mes y cargá su base plana.</div>
   </section>
   <div class="ger-tip" id="gerTip" hidden></div>
+
+  <div class="modal" id="mBk" hidden>
+    <div class="sheet" role="dialog" aria-labelledby="bkTitle">
+      <div class="sheet-head"><h2 id="bkTitle">Book y lista de precios</h2><button class="x" id="bkClose" aria-label="Cerrar">×</button></div>
+      <div class="step">
+        <p class="hint">Con esto el simulador y el ranking se completan solos: del <b>Book de Acciones</b> salen el PTC, los DROP y las escalas; de la <b>lista de precios</b> salen el precio de lista, el PNSF, los bultos por paleta y los litros. Podés subir uno solo o los dos.</p>
+        <label class="fl" for="bkBook">BOOK DE ACCIONES GBA NABs</label>
+        <input id="bkBook" class="file" type="file" accept=".xlsx,.xls">
+        <label class="fl" for="bkLista">LISTA DE PRECIOS (Listas Accesorias DISTRIS)</label>
+        <input id="bkLista" class="file" type="file" accept=".xlsx,.xls">
+        <label class="fl" for="bkKey">CLAVE DE ADMINISTRADORA</label>
+        <input id="bkKey" type="password" autocomplete="off">
+        <button class="btn-in" id="bkGo" type="button">PUBLICAR</button>
+        <div class="msg" id="bkMsg"></div>
+      </div>
+    </div>
+  </div>
 
   <div class="modal" id="mPp" hidden>
     <div class="sheet" role="dialog" aria-labelledby="ppTitle">
@@ -3094,6 +3143,9 @@ $("gerView").addEventListener("click", e => {
   const plan = b.dataset.v === "plan"; $("gerBody").classList.toggle("plan", plan); $("gerPlan").hidden = !plan;
   if (plan) planLoad();
 });
+const gpTab = t => { $("gerPlan").dataset.t = t; document.querySelectorAll("#gpTabs button").forEach(x => x.classList.toggle("on", x.dataset.t === t)); };
+$("gpTabs").addEventListener("click", e => { const b = e.target.closest("[data-t]"); if (b) gpTab(b.dataset.t); });
+$("gpSel").addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) gpTab(b.dataset.go); });
 $("gpUn").addEventListener("click", e => { const b = e.target.closest("[data-u]"); if (!b) return; PL.un = b.dataset.u; PL.sel.clear();
   document.querySelectorAll("#gpUn button").forEach(x => x.classList.toggle("on", x === b)); planCalc(); });
 $("gpSort").addEventListener("click", e => { const b = e.target.closest("[data-s]"); if (!b) return; PL.sort = b.dataset.s;
@@ -3113,6 +3165,7 @@ async function planLoad(){
     const ym = GER.ym, pv = ymAdd(ym, -1);
     if (PL.lp === undefined){ try { const p = await apiGet("combos"); PL.lp = p && p.data ? await openData(p) : null; } catch(e){ PL.lp = null; } }
     if (PL.fr === undefined){ try { const p = await apiGet("frescura"); PL.fr = p && p.data ? await openData(p) : null; } catch(e){ PL.fr = null; } }
+    if (PL.bk === undefined){ try { const p = await apiGet("book_acc"); PL.bk = p && p.data ? await openData(p) : null; } catch(e){ PL.bk = null; } }
     if (PL.ppP === undefined){ try { const p = await apiGet("ger_pp"); PL.ppP = p && p.data ? await openData(p, GER.cred) : null; } catch(e){ PL.ppP = null; } }
     const [g0, g1, cl1] = await Promise.all([gerSk(ym), gerSk(pv), gerCl(pv)]);
     PL.ctx = {ym, pv, g0, g1, cl1};
@@ -3120,6 +3173,22 @@ async function planLoad(){
   } catch(e){ console.error(e); $("gpCut").textContent = "No se pudo armar el plan"; }
 }
 
+/* acciones del Book: las subidas desde el plan o, si no, las que se guardaron con los combos */
+const plAcc = () => (PL.bk && PL.bk.acc && PL.bk.acc.length ? PL.bk.acc : PL.lp && PL.lp.acc) || [];
+/* precio de un SKU con todo lo que usa el simulador; si la lista guardada es vieja, se estima lo que falta */
+function plP(code){
+  const P = PL.lp && PL.lp.precios && PL.lp.precios.p, p0 = P && P[code]; if (!p0) return null;
+  const p = Object.assign({}, p0), est = [];
+  const nm = p.d + " " + (PL.names && PL.names.get(String(code)) || "");
+  if (!p.lt){ let m = nm.match(/(\d+(?:[.,]\d+)?)\s*(?:CC|ML)\b/i), v = m ? pnum(m[1]) / 1000 : 0;
+    if (!v){ m = nm.match(/(\d+(?:[.,]\d+)?)\s*(?:L|LT|LTS)\b/i); v = m ? pnum(m[1]) : 0; }
+    if (!v){ m = nm.match(/PET\s*(\d{3,4})\b/i); v = m ? +m[1] / 1000 : 0; }
+    if (v){ p.lt = v; est.push("litros"); } }
+  if (!p.sf){ p.sf = p.pnit / (GAN_K[p.ma] || GAN_K_DEF); est.push("PNSF"); }
+  if (!p.pl){ p.pl = p.sf * 1.0114; est.push("precio de lista"); }
+  if (!p.bp){ const pp = PL.ppP && PL.ppP.rows.find(r => String(r[0]) === String(code)); if (pp && pp[2]){ p.bp = pp[2]; } else { p.bp = 60; est.push("bultos por paleta"); } }
+  p.est = est; return p;
+}
 /* ---- Book: qué acciones aplican a un SKU ---- */
 const SZ = [[3, /(?<![\d,.])3\s*l(?![a-z])|3000/i], [2.25, /2[,.]25/], [2, /(?<![\d,.])2\s*l(?![a-z])|(?<![\d,.])2(?![\d,.])|2000/i], [1.5, /1[,.]5(?!\d)|1500/], [1.25, /1[,.]25|1250/], [1, /(?<![\d,.])1\s*l(?![a-z])|1000/i],
   [0.75, /750|0[,.]75/], [0.5, /(?<!\d)500|0[,.]5(?!\d)/], [0.473, /473/], [0.4, /(?<!\d)400/], [0.354, /354|350/], [0.35, /(?<!\d)350|354/], [0.355, /355/], [0.269, /269/], [0.25, /(?<!\d)25[05]/], [0.7, /(?<!\d)700/]];
@@ -3139,11 +3208,12 @@ function skuInfo(code){
   if (/AWAFRUT/.test(d)) br.add("awafrut");
   if (/RECO/.test(d)) br.add("reco");
   const can = /CAN|LAT/.test(d), ns = /BLACK|FREE|ZERO|S\/AZ|SIN AZ|NS /.test(d);
-  return {p, br, can, ns, black:/BLACK/.test(d), lt:p.lt || 0};
+  const pf = plP(code);
+  return {p, br, can, ns, black:/BLACK/.test(d), lt:(pf && pf.lt) || p.lt || 0};
 }
 const ltOk = (txt, lt) => { const e = SZ.find(z => Math.abs(z[0] - lt) < 0.004); return e ? e[1].test(txt) : false; };
 function accFor(code, canal){
-  const I = skuInfo(code), A = PL.lp && PL.lp.acc || []; if (!I) return [];
+  const I = skuInfo(code), A = plAcc(); if (!I) return [];
   return A.filter(a => {
     const [cc, , , , can, mar, cal] = a;
     if (/COMBO/.test(cc) || /EST\. DE SERV/.test(can)) return false;
@@ -3181,8 +3251,8 @@ function planCalc(){
   if (!C.g0 || !C.g1) warn.push(`Para ver recuperables y TS ejecutado volvé a subir la base plana de <b>${[!C.g0 && ymLabel(ym), !C.g1 && ymLabel(pv)].filter(Boolean).join("</b> y <b>")}</b> (en ⬆ Subir base y objetivos). Las bases subidas antes no guardaban el detalle por SKU.`);
   const P = PL.lp && PL.lp.precios && PL.lp.precios.p;
   if (!P) warn.push("Falta la lista de precios: subila en Combos → 💲 Lista de precios.");
-  else if (!Object.values(P).some(p => p.pl)) warn.push("La lista de precios guardada es de la versión anterior: volvé a subirla en Combos → 💲 Lista de precios para tener precio de lista, PNSF y paletas.");
-  if (!(PL.lp && PL.lp.acc && PL.lp.acc.length)) warn.push("Para completar las acciones del Book, volvé a publicar los combos con el Book (Combos → ⬆ Actualizar combos).");
+  else if (!Object.values(P).some(p => p.pl)) warn.push("La lista de precios guardada es vieja: el precio de lista y el PNSF se están <b>estimando</b>. Subí la lista con <b>⬆ Book y lista</b> para tener los valores exactos.");
+  if (!plAcc().length) warn.push("Falta el Book: subilo con <b>⬆ Book y lista</b> y el PTC y las escalas se completan solos.");
   if (!PL.ppP) warn.push("Para ver stock y compras subí el reporte de punto de pedido (⬆ Punto de pedido).");
   if (PL.fr && PL.fr.rows && !PL.fr.rows.some(r => r.lt)) warn.push("Para ver bultos por vencimiento, volvé a subir el archivo de frescura.");
   $("gpWarn").hidden = !warn.length; $("gpWarn").innerHTML = warn.map(w => "⚠ " + w).join("<br>");
@@ -3211,7 +3281,7 @@ function planCalc(){
       for (const [code, bu] of m){ if (bu <= 0 || (now && now.get(code) > 0)) continue; const x = rc.get(code) || rc.set(code, {cl:0, bu:0, set:new Set()}).get(code); x.cl++; x.bu += bu; x.set.add(cli); } }
     for (const [code, r] of rc){
       const s1 = M1.by.get(code); if (!s1 || s1.un !== U) continue;
-      const p = P && P[code], hb = p && p.ub && p.lt ? p.ub * p.lt / 100 : (s1.bu ? s1.hl / s1.bu : 0);
+      const p = plP(code), hb = s1.bu ? s1.hl / s1.bu : (p && p.ub && p.lt ? p.ub * p.lt / 100 : 0);
       const ad = PL.adic.has(code) ? PL.adic.get(code) : adG, bu = PL.bu.has(code) ? PL.bu.get(code) : Math.round(r.bu * rec);
       const hl = bu * hb, inv = p && p.pl ? ad / 100 * p.pl * bu : null, gan = p && p.sf ? (p.pnit - p.sf) * bu : null;
       /* vencimientos: bultos que vencen en menos de 60 días */
@@ -3255,12 +3325,14 @@ function planRender(){
     <div class="gp-st inv"><span class="l">Inversión que necesitamos</span><b>${m$(adT)}</b><p>Adicional en <strong>${sel.length} SKU${sel.length === 1 ? "" : "s"}</strong>${hl ? ` · <strong>${m$f(adT / hl)}</strong> por HL` : ""}<br>${sh === 0 ? "Lo pone todo <strong>Quilmes</strong> (TS)" : sh === 1 ? "Lo pone todo <strong>EMCALA</strong>" : `<strong>Quilmes ${m$(inv)}</strong> · <strong>EMCALA ${m$(dis)}</strong>`}</p></div><div class="gp-arr">→</div>
     <div class="gp-st vol"><span class="l">Volumen que tracciona</span><b>+${fmtHL(hl)} <small>HL</small></b><p>${K.gap > 0 ? `Cubre el <strong>${Math.round(hl / K.gap * 100)}%</strong> de lo que falta` : "Volumen extra sobre la proyección"}${pctC ? ` · cerrás al <strong>${pct1(pctC)}</strong>` : ""}</p></div><div class="gp-arr">=</div>
     <div class="gp-st ${gan >= 0 ? "gan" : "bad"}"><span class="l">Lo que gana EMCALA</span><b>${m$(gan)}</b><p>${dis ? `Ganancia distri del volumen <strong>menos ${m$(dis)}</strong> que pone EMCALA` : "Ganancia distri sobre ese volumen"}${dis ? ` · <strong>$${(gan / dis).toLocaleString("es-AR", {maximumFractionDigits:1})}</strong> por cada $1 que pone EMCALA` : inv ? ` · <strong>$${(gan / inv).toLocaleString("es-AR", {maximumFractionDigits:1})}</strong> por cada $1 de TS` : ""}</p></div>`;
+  $("gpStrip").innerHTML = `<div class="r"><span>Falta</span><b>${K.obj ? fmtHL(K.gap) + " HL" : "—"}</b></div><div class="i"><span>Inversión</span><b>${m$(adT)}</b></div><div class="v"><span>Tracciona</span><b>+${fmtHL(hl)} HL</b></div><div class="g"><span>Gana EMCALA</span><b>${m$(gan)}</b></div>`;
   const rAct = K.hd ? K.act / K.hd : 0, rNec = K.obj && K.rest ? Math.max(0, K.obj - K.act) / K.rest : null;
   $("gpRitmo").innerHTML = `<span>Ritmo actual <b>${fmtHL(rAct)} HL/día</b></span>` + (rNec != null ? `<span>Ritmo necesario <b>${fmtHL(rNec)} HL/día</b>${rAct ? ` (${fpct(gpct(rNec, rAct))})` : ""}</span>` : "") +
     (pctP ? `<span>Sin plan cerrás en <b>${pct1(pctP)}</b> · con plan <b>${pct1(pctC)}</b></span>` : "");
   const names = sel.slice().sort((a, b) => b.hl - a.hl).map(r => skuShort(r.desc));
   C.pitch = sel.length ? `Con ${sh < 1 ? m$(inv) + " de TS adicional" + (dis ? ` (EMCALA suma ${m$(dis)})` : "") : m$(dis) + " de adicional que pone EMCALA"} en ${names.length > 1 ? names.slice(0, -1).join(", ") + " y " + names.slice(-1) : names[0]} apuntamos a ${fmtN(cl)} clientes que compraron en ${MESES[+C.pv.slice(5) - 1].toLowerCase()} y este mes todavía no, traccionamos +${fmtHL(hl)} HL${pctC ? ` y cerramos ${uL} al ${pct1(pctC)}` : ""}. Para EMCALA son ${m$(gan)} de ganancia.` : "";
   $("gpPitch").hidden = !sel.length;
+  $("gpSel").innerHTML = sel.length ? `<h3>SKUs del plan</h3>` + sel.slice().sort((a, b) => b.hl - a.hl).map(r => `<div class="it"><b>${esc(skuShort(r.desc))}</b><span>inversión <strong>${r.inv != null ? m$(r.inv) : "—"}</strong></span><span><strong>+${fmtHL(r.hl)}</strong> HL</span><span>${fmtN(r.cl)} clientes</span></div>`).join("") + `<button class="go" type="button" data-go="rank">Cambiar SKUs o adicional en 📊 Dónde invertir ›</button>` : `<p class="gp-sub">Todavía no hay SKUs elegidos: entrá a 📊 Dónde invertir.</p>`;
   $("gpPitch").innerHTML = "📣 <b>Para el pedido a Quilmes:</b> " + esc(C.pitch).replace(/(\$[\d.,]+(?: mil| M)?|\+[\d.,]+ HL|[\d.,]+%)/g, "<b>$1</b>");
 
   /* ranking */
@@ -3307,22 +3379,39 @@ $("gpXls").addEventListener("click", () => {
 });
 
 /* ---- simulador ---- */
+/* el simulador se maneja por código: se escribe el código y aparece la descripción */
 function simFill(){
-  const P = PL.lp && PL.lp.precios && PL.lp.precios.p, s = $("gsSku"); if (!P) { s.innerHTML = "<option>Sin lista de precios</option>"; return; }
-  const want = PL.un === "UNG" ? "UNG" : "AGUAS", M0 = PL.ctx.M0, M1 = PL.ctx.M1, vol = c => ((M0 && M0.by.get(c)) || (M1 && M1.by.get(c)) || {bu:0}).bu;
-  const list = Object.entries(P).filter(([c, p]) => p.ng ? p.ng.startsWith(want) : true).sort((a, b) => vol(b[0]) - vol(a[0]));
-  const cur = s.value, ranked = PL.ctx.rows.filter(r => PL.sel.get(r.code)).map(r => r.code);
-  if (s.dataset.un !== PL.un){ s.innerHTML = list.map(([c, p]) => `<option value="${c}">${c} · ${esc(p.d)}</option>`).join(""); s.dataset.un = PL.un; s.value = ranked[0] || (list[0] || [])[0] || ""; PL.sim.acc = null; simAcc(); }
-  else if (cur) s.value = cur;
-  simCalc();
+  const P = PL.lp && PL.lp.precios && PL.lp.precios.p, s = $("gsSku");
+  if (!P){ $("gsDesc").className = "gs-desc bad"; $("gsDesc").textContent = "Falta la lista de precios: subila con ⬆ Book y lista"; return; }
+  const M0 = PL.ctx.M0, M1 = PL.ctx.M1, vol = c => ((M0 && M0.by.get(c)) || (M1 && M1.by.get(c)) || {bu:0}).bu, want = PL.un === "UNG" ? "UNG" : "AGUAS";
+  /* SKUs de la unidad: los vendidos (base) y los de la lista con ese negocio */
+  const set = new Set(); [M0, M1].forEach(M => M && M.by.forEach((x, c) => { if (x.un === PL.un && P[c]) set.add(c); }));
+  Object.entries(P).forEach(([c, p]) => { if (p.ng && p.ng.startsWith(want)) set.add(c); });
+  const list = [...set].sort((a, b) => vol(b) - vol(a));
+  if (s.dataset.un !== PL.un){
+    $("gsList").innerHTML = list.map(c => `<option value="${c}">${esc((PL.names && PL.names.get(c)) || P[c].d)}</option>`).join("");
+    s.dataset.un = PL.un; const ranked = PL.ctx.rows.filter(r => PL.sel.get(r.code)).map(r => r.code);
+    simSet(ranked[0] || list[0] || "");
+  } else simCalc();
+}
+function simSet(code){
+  code = String(code || "").replace(/\D/g, "");
+  const P = PL.lp && PL.lp.precios && PL.lp.precios.p, p = P && P[code], d = $("gsDesc");
+  $("gsCod").value = code;
+  if (!code){ d.className = "gs-desc"; d.textContent = ""; $("gsSku").value = ""; $("gsRes").innerHTML = ""; $("gsAcc").innerHTML = ""; return; }
+  if (!p){ d.className = "gs-desc bad"; d.textContent = "Código no encontrado en la lista"; $("gsSku").value = ""; $("gsRes").innerHTML = ""; $("gsAcc").innerHTML = ""; return; }
+  const nm = (PL.names && PL.names.get(code)) || p.d, M0 = PL.ctx && PL.ctx.M0, v = M0 && M0.by.get(code);
+  d.className = "gs-desc"; d.innerHTML = esc(nm) + `<small>${p.ub || "?"} un. por bulto${v ? " · " + fmtN(Math.round(v.bu)) + " bultos vendidos este mes" : ""}</small>`;
+  $("gsSku").value = code; PL.sim.acc = null; simAcc(); simCalc();
 }
 function simAcc(){
   const code = $("gsSku").value, can = $("gsCan").value, A = accFor(code, can), cb = combosFor(code);
   const ptc = A.filter(a => a[0] === "PTC").map(a => (accTiers(a[3])[0] || [0, 0])[1]).sort((a, b) => b - a)[0] || 0;
-  const drop = A.find(a => a[0] !== "PTC" && accTiers(a[3]).length);
+  /* la acción con más escalas (y la que arranca con menos bultos) es la que se carga primero */
+  const drop = A.filter(a => a[0] !== "PTC" && accTiers(a[3]).length).sort((x, y) => accTiers(y[3]).length - accTiers(x[3]).length || accTiers(x[3])[0][0] - accTiers(y[3])[0][0])[0];
   $("gsPtc").value = String(ptc).replace(".", ",");
   simTiers(drop);
-  $("gsAcc").innerHTML = (A.length ? A.map(a => `<button type="button" data-a="${esc(a[1])}" class="${drop && drop[1] === a[1] ? "on" : ""}"><b>${esc(a[0])} · ${esc(a[1])}</b>${esc(a[2])}: ${esc(a[3])}</button>`).join("") : `<p>Sin acciones del Book para este SKU en ${esc(can)}.</p>`) +
+  $("gsAcc").innerHTML = (A.length ? A.map(a => `<button type="button" data-a="${esc(a[1])}" class="${drop && drop[1] === a[1] ? "on" : ""}"><b>${esc(a[0])} · ${esc(a[1])}</b>${esc(a[2])}: ${esc(a[3])}</button>`).join("") : (plAcc().length ? `<p>Sin acciones del Book para este SKU en ${esc(can)}.</p>` : `<p>⚠ Falta el Book: subilo con <b>⬆ Book y lista</b> y el PTC y las escalas se cargan solos.</p>`)) +
     cb.map(c => `<button type="button" class="cb"><b>COMBO · ${esc(c[0])}</b>${esc(c[1])}: ${c[2]}%</button>`).join("");
 }
 function simTiers(a){
@@ -3331,20 +3420,23 @@ function simTiers(a){
   const inc = t.slice(0, 4).map(x => { const v = Math.max(0, x[1] - prev); prev = Math.max(prev, x[1]); return Math.round(v * 100) / 100; });
   ["gsE1", "gsE2", "gsE3", "gsE4"].forEach((id, i) => $(id).value = inc[i] != null ? String(inc[i]).replace(".", ",") : "");
 }
-$("gsSku").addEventListener("change", () => { simAcc(); simCalc(); });
+$("gsCod").addEventListener("input", () => { const v = $("gsCod").value.replace(/\D/g, ""); const P = PL.lp && PL.lp.precios && PL.lp.precios.p; if (P && P[v]) simSet(v); else if (v.length >= 5 || !v) simSet(v); });
+$("gsCod").addEventListener("change", () => simSet($("gsCod").value));
 $("gsCan").addEventListener("change", () => { simAcc(); simCalc(); });
-$("gsAcc").addEventListener("click", e => { const b = e.target.closest("[data-a]"); if (!b) return; const a = (PL.lp.acc || []).find(x => x[1] === b.dataset.a);
+$("gsAcc").addEventListener("click", e => { const b = e.target.closest("[data-a]"); if (!b) return; const a = plAcc().find(x => x[1] === b.dataset.a);
   if (a && a[0] === "PTC"){ $("gsPtc").value = String((accTiers(a[3])[0] || [0, 0])[1]).replace(".", ","); } else simTiers(a);
-  if (a && a[0] !== "PTC") document.querySelectorAll("#gsAcc [data-a]").forEach(x => { const y = (PL.lp.acc || []).find(z => z[1] === x.dataset.a); if (y && y[0] !== "PTC") x.classList.toggle("on", x === b); });
+  if (a && a[0] !== "PTC") document.querySelectorAll("#gsAcc [data-a]").forEach(x => { const y = plAcc().find(z => z[1] === x.dataset.a); if (y && y[0] !== "PTC") x.classList.toggle("on", x === b); });
   else b.classList.add("on");
   simCalc(); });
 ["gsPtc", "gsE1", "gsE2", "gsE3", "gsE4", "gsAd", "gsPal"].forEach(id => $(id).addEventListener("input", simCalc));
 function simCalc(){
-  const P = PL.lp && PL.lp.precios && PL.lp.precios.p, p = P && P[$("gsSku").value]; if (!p){ $("gsRes").innerHTML = ""; return; }
+  const p = plP($("gsSku").value); if (!p){ $("gsRes").innerHTML = ""; return; }
+  if (!pnum($("gsPal").value)) $("gsPal").value = "1";
   const v = id => pnum($(id).value) / 100, ptc = v("gsPtc"), e1 = v("gsE1"), e2 = v("gsE2"), e3 = v("gsE3"), e4 = v("gsE4"), ad = v("gsAd"), pal = pnum($("gsPal").value);
   const tot = ptc + e1 + e2 + e3 + e4 + ad, M = p.f, J = p.pl || 0, ub = p.ub || 1, lt = p.lt || 0, bp = p.bp || 0;
   const ptr = M * (1 - tot), ptrU = ptr / ub, ptcB = ptrU * 1.3, bu = pal * bp, hl = bu * ub * lt / 100, tsv = ad * J * bu, sh = Math.min(100, Math.max(0, pnum($("gpDis").value))) / 100, gan = p.sf ? (p.pnit - p.sf) * bu - tsv * sh : 0, gap = PL.ctx.k.gap;
   const c = (l, val, cls) => `<div${cls ? ` class="${cls}"` : ""}><span>${l}</span><b>${val}</b></div>`;
+  $("gsEst").textContent = p.est.length ? "⚠ Estimado (la lista guardada no lo trae): " + p.est.join(", ") + ". Subí la lista con ⬆ Book y lista." : "";
   $("gsRes").innerHTML = c("Precio lista bulto", J ? m$f(J) : "—") + c("PNFT bulto", m$f(M)) + c("PTR bulto nuevo", m$f(ptr)) + c("PTC botella", m$f(ptcB)) +
     c("$ por litro", lt ? m$f(ptrU / lt) : "—") + c("Desc. total", pct1(tot * 100)) + c("Paletas · bultos", `${pal.toLocaleString("es-AR")} · ${fmtN(Math.round(bu))}`) + c("HL", fmtHL(hl)) +
     c(sh === 0 ? "TS necesario (Quilmes)" : sh === 1 ? "Adicional (EMCALA)" : "Quilmes · EMCALA", J ? (sh > 0 && sh < 1 ? m$(tsv * (1 - sh)) + " · " + m$(tsv * sh) : m$f(tsv)) : "—", "hi") + c("$ por HL", J && hl ? m$f(tsv / hl) : "—", "hi") + c(sh ? "Ganancia neta distri" : "Ganancia distri", gan ? m$(gan) : "—", "ok") + c("Cubre de la brecha", gap > 0 ? Math.round(hl / gap * 100) + "%" : "—", "ok");
@@ -3409,6 +3501,40 @@ function comprasRender(sel){
     (bajos.length ? `<p class="gp-sub" style="margin:12px 0 4px"><b>Stock bajo</b> (alcanza para menos de 7 días)</p>` + bajos.map(r => `<div class="gp-hb"><span>${esc(skuShort(r[1]))}</span><div class="b"><i style="width:${Math.max(3, r[5] / 7 * 100)}%;background:#ffc93c"></i></div><span>${r[3] > 0 ? fmtN(r[5]) + " días" : "sin stock"}${r[7] ? " · " + fmtN(r[7]) + " ped." : ""}</span></div>`).join("") : "");
 }
 
+/* ---- carga de Book y lista desde el plan ---- */
+$("gpBkBtn").addEventListener("click", () => { $("mBk").hidden = false; $("bkMsg").textContent = ""; $("bkMsg").className = "msg"; });
+$("bkClose").addEventListener("click", () => $("mBk").hidden = true);
+$("bkGo").addEventListener("click", async () => {
+  const m = $("bkMsg"), fb = $("bkBook").files[0], fl = $("bkLista").files[0], key = $("bkKey").value, done = [];
+  m.className = "msg";
+  if (!fb && !fl){ m.className = "msg bad"; m.textContent = "Elegí el Book, la lista o los dos"; return; }
+  if (!key){ m.className = "msg bad"; m.textContent = "Escribí la clave de administradora"; return; }
+  $("bkGo").disabled = true;
+  try {
+    const stamp = {updated:new Date().toISOString()};
+    if (fb){
+      m.textContent = "Leyendo el Book… es pesado, puede tardar un minuto"; await new Promise(r => setTimeout(r, 30));
+      const B = parseBook(XLSX.read(await fb.arrayBuffer(), {type:"array"}));
+      if (!B.acc.length) throw new Error("No encontré acciones en la solapa Book Acciones");
+      const mf = fb.name.match(/(\d{1,2})[._-](\d{1,2})[._-](\d{4})/), data = {acc:B.acc, fecha: mf ? mf[1].padStart(2, "0") + "/" + mf[2].padStart(2, "0") + "/" + mf[3] : ""};
+      const res = await apiPut("book_acc", key, Object.assign(await sealData(data), stamp)); if (!res.ok) throw new Error(res.error || "No se pudo guardar el Book");
+      PL.bk = data; done.push(`Book${data.fecha ? " " + data.fecha : ""}: ${fmtN(B.acc.length)} acciones`);
+    }
+    if (fl){
+      m.textContent = "Leyendo la lista…"; await new Promise(r => setTimeout(r, 30));
+      const precios = parseLista(XLSX.read(await fl.arrayBuffer(), {type:"array", cellDates:true}));
+      const p = await apiGet("combos"), saved = p && p.data ? await openData(p) : {};
+      if (saved.precios){ precios.perc = saved.precios.perc; precios.percIva = saved.precios.percIva; }
+      const data = Object.assign({}, saved, {precios});
+      const res = await apiPut("combos", key, Object.assign(await sealData(data), stamp)); if (!res.ok) throw new Error(res.error || "No se pudo guardar la lista");
+      PL.lp = data; CB.data = null; done.push(`lista${precios.fecha ? " al " + precios.fecha : ""}: ${fmtN(Object.keys(precios.p).length)} SKUs`);
+    }
+    m.className = "msg ok"; m.textContent = "¡Listo! " + done.join(" · ");
+    $("bkBook").value = ""; $("bkLista").value = ""; $("gsSku").dataset.un = ""; planCalc();
+  } catch(err){ console.error(err); m.className = "msg bad"; m.textContent = err.message || "Error al cargar"; }
+  $("bkGo").disabled = false;
+});
+
 /* ---- carga del punto de pedido ---- */
 $("gpPpBtn").addEventListener("click", () => { $("mPp").hidden = false; $("ppMsg").textContent = ""; $("ppMsg").className = "msg"; });
 $("ppClose").addEventListener("click", () => $("mPp").hidden = true);
@@ -3417,13 +3543,16 @@ function parsePp(aoa){
   if (hi < 0) throw new Error("No encuentro las columnas ARTÍCULO y STOCK");
   const N = aoa[hi].map(norm), f = n => N.indexOf(n);
   const iA = f("articulo"), iD = f("descripcion"), iBp = f("bultos x pallets"), iS = f("stock"), iV = f("vta. calculada"), iDs = f("dias de stock"), iPo = f("politica"), iY = f("ya pedido"), iF = f("fecha ultimo pedido"), iW = f("dias ventana"), iR = f("dias para arribo"), iMp = f("min. pallets a pedir"), iP = f("pedir?");
-  const P = PL.lp && PL.lp.precios && PL.lp.precios.p;
+  /* qué SKUs son de UNG o Aguas: por el negocio de la lista o, si la lista no lo trae, por lo que se vende en las bases */
+  const P = PL.lp && PL.lp.precios && PL.lp.precios.p, hasNg = P && Object.values(P).some(p => p.ng);
+  const base = new Set(); [PL.ctx && PL.ctx.M0, PL.ctx && PL.ctx.M1].forEach(M => M && M.by.forEach((x, c) => { if (/^(UNG|AGUAS)/.test(x.un)) base.add(c); }));
+  const okCod = c => hasNg ? (P[c] && /^(UNG|AGUAS)/.test(P[c].ng || "")) || base.has(c) : base.size ? base.has(c) : true;
   const rows = [];
   for (const r of aoa.slice(hi + 1)){
     const cod = String(r[iA] ?? "").replace(/\.0$/, "").trim(); if (!/^\d+$/.test(cod)) continue;
     const st = gnum(r[iS]), vc = gnum(r[iV]), yp = gnum(r[iY]);
     if (!(st > 0 || vc > 0 || yp > 0)) continue;
-    if (P){ const p = P[cod]; if (!p || !/^(UNG|AGUAS)/.test(p.ng || "")) continue; }
+    if (!okCod(cod)) continue;
     const fp = r[iF] instanceof Date ? r[iF].toISOString().slice(0, 10) : "";
     rows.push([cod, String(r[iD] ?? "").trim().replace(/\s+/g, " "), gnum(r[iBp]), st, Math.round(vc * 100) / 100, gnum(r[iDs]), gnum(r[iPo]), yp, fp, gnum(r[iW]), gnum(r[iR]), gnum(r[iMp]), String(r[iP] ?? "").trim()]);
   }
