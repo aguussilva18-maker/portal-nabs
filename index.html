@@ -3452,9 +3452,9 @@ function simCalc(){
   const sh = Math.min(100, Math.max(0, pnum($("gpDis").value))) / 100, gan = p.sf ? (p.pnit - p.sf) * bu - tsv * sh : 0, gap = PL.ctx.k.gap;
   /* detalle de cómo se llega al descuento total, como el panel de CHESS */
   const det = [["PTC", $("gsPtcN").textContent || "PTC", ptc], ...["gsE1", "gsE2", "gsE3", "gsE4"].map((id, i) => ["Escala " + (i + 1), $(id + "N").textContent || "Escala " + (i + 1), v(id)]), ["Adicional", sh === 1 ? "lo pone EMCALA" : sh ? `Quilmes ${Math.round((1 - sh) * 100)}% · EMCALA ${Math.round(sh * 100)}%` : "TS Quilmes", ad]].filter(x => x[2] > 0);
-  $("gsDet").innerHTML = `<div class="tot"><span>DESCUENTO TOTAL</span><b>${pct1(tot * 100)}</b><small>${fmtN(Math.round(bu))} bultos · bonif. ${m$f(U * tot)} por bulto</small></div>
-    <table><tbody>${det.map(x => `<tr><td><b>${esc(x[0])}</b> <small>${esc(x[1])}</small></td><td class="r">${pct1(x[2] * 100)}</td><td class="r">${m$f(U * x[2])} /bulto</td></tr>`).join("") || `<tr><td>Sin descuentos para este pedido</td></tr>`}
-    <tr class="sum"><td>Total</td><td class="r">${pct1(tot * 100)}</td><td class="r">${m$f(U * tot * bu)} en el pedido</td></tr></tbody></table>`;
+  $("gsDet").innerHTML = `<div class="tot"><span>DESCUENTO TOTAL</span><b>${pct1(tot * 100)}</b><small>sobre el precio unitario de ${m$f(U)} por bulto: el bulto queda en ${m$f(U * (1 - tot))} + impuestos</small></div>
+    <table><thead><tr><td><small>Acción</small></td><td class="r"><small>%</small></td><td class="r"><small>Se descuenta por cada bulto</small></td><td class="r"><small>En los ${fmtN(Math.round(bu))} bultos</small></td></tr></thead><tbody>${det.map(x => `<tr><td><b>${esc(x[0])}</b> <small>${esc(x[1])}</small></td><td class="r">${pct1(x[2] * 100)}</td><td class="r">${m$f(U * x[2])}</td><td class="r">${m$f(U * x[2] * bu)}</td></tr>`).join("") || `<tr><td colspan="4">Sin descuentos para este pedido</td></tr>`}
+    <tr class="sum"><td>Total</td><td class="r">${pct1(tot * 100)}</td><td class="r">${m$f(U * tot)}</td><td class="r">${m$f(U * tot * bu)}</td></tr></tbody></table>`;
   $("gsPalN").textContent = bp ? (bu / bp).toLocaleString("es-AR", {maximumFractionDigits:2}) + " paleta" + (bu / bp === 1 ? "" : "s") + ` (${bp}/pal.)` : "";
   const c = (l, val, cls) => `<div${cls ? ` class="${cls}"` : ""}><span>${l}</span><b>${val}</b></div>`;
   $("gsEst").textContent = p.est.length ? "⚠ Estimado (la lista guardada no lo trae): " + p.est.join(", ") + ". Subí la lista con ⬆ Book y lista." : "";
